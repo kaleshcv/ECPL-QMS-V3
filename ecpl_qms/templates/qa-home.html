@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<section id="profile">
+    <div class="container-lg">
+        <h6>Employee Name : {{user.profile.emp_name}}</h6>
+        <h6>Department : {{user.profile.team}}</h6>
+        <h6>Employee ID : <span>{{user.profile.emp_id}}</span></h6>
+        <h6>Email ID : <span>{{user.profile.email}}</span></h6>
+    </div>
+</section>
+
+<section id="coaching">
+    <div class="container-lg">
+        <h2>Coachings</h2>
+        <div class="row">
+
+            <div class="col-md-6">
+                <p><a href="addcoaching">Add Coaching</a></p>
+            </div>
+            <div class="col-md-6">
+                {% for coaching in coachings %}
+                    {{coaching.feedback}} - {{coaching.agent}} <br>
+                {% endfor %}
+            </div>
+        </div>
+        <h2>Total Coachings Added</h2>
+        {{counts}}
+    </div>
+
+</section>
+
+
+
+
+{% endblock %}

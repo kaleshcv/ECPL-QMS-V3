@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="container-lg">
+    <div class="row">
+         <div class="col-md-7">
+
+         </div>
+        <div class="col-md-5">
+            {% load crispy_forms_tags %}
+            <div class="signupform">
+                <h2 class="form-header">Register Employee</h2>
+                <form class="login-form" action="/employees/signup" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form|crispy}}
+                {{profile_form|crispy}}
+                <input class="btn btn-info" type="submit" value="Signup">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

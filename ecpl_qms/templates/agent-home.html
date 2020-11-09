@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<section id="profile">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <p>Employee Name : <strong>{{user.profile.emp_name}}</strong></p>
+                <p>Department    : <strong>{{user.profile.team}}</strong></p>
+                <p>Employee ID   : <strong>{{user.profile.emp_id}}</strong></p>
+                <p>Email ID      : <strong>{{user.profile.email}}</strong></p>
+            </div>
+            <div class="col-md-6">
+                <p>QA Email ID      : <strong>{{team.qa.profile.email}}</strong></p>
+                <p>Manager Email ID : <strong>{{team.mgr.profile.email}}</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section>
+    <div class="container-lg">
+        <h6>Total Coachings</h6>
+        {{count}}
+        <h2>Open Coaching List</h2>
+        {% for oc in open_coachings %}
+        <p> {{oc.ticket_no}}</p>
+        {% endfor %}
+
+    </div>
+
+</section>
+{% endblock %}
