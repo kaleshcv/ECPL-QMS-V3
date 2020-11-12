@@ -6,27 +6,26 @@
 body
 {
     font-family: 'Maven Pro', sans-serif;
-    background: #bafbc9;
+    
 
 }
-#navigation{
-        background: #03380f;
+
+#navigation img
+{
+
+    width: 270px;
+    height: 70px;
+
+}
+.navbar-nav li a
+{
+
+    color:black!important;
 }
 
-.nav-link{
-    color:#00ffc4!important;
-}
 
 #profile {
     padding: 40px;
-    background: #024411;
-    color: #fff;
+
 }
 
-#profile p{
-    color:darkgrey;
-}
-
-#profile strong{
-    color:gold;
-}

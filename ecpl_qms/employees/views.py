@@ -42,7 +42,7 @@ def login_view(request):
             print('user desi is -------',user.profile.emp_desi)
 
 
-            if user.profile.emp_desi=='manager':
+            if user.profile.emp_desi=='Manager':
                 form=AddCoaching()
                 coaching = Coaching.objects.filter(agent=user)
                 data = {'coaching': coaching,'form':form}
@@ -98,7 +98,8 @@ def addcoaching(request):
         agent = request.POST['agent']
         feedback = request.POST['feedback']
         qa = request.POST['qa']
-        coaching = Coaching(ticket_no=ticket_no,agent=agent,feedback=feedback,qa=qa)
+        date=request.POST['date']
+        coaching = Coaching(ticket_no=ticket_no,agent=agent,feedback=feedback,qa=qa,date=date)
         coaching.save()
 
         return redirect('/employees/qahome')
@@ -108,12 +109,28 @@ def addcoaching(request):
         data={'users':users}
         return render(request, 'add-coaching.html',data)
 
+def empCoachingView(request,pk):
+    coaching=Coaching.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'emp-coaching-view.html',data)
+
+def signCoaching(request,pk):
+
+    coaching=Coaching.objects.get(id=pk)
+    coaching.status=True
+    coaching.save()
+    return redirect('/employees/agenthome')
+
+
 def qahome(request):
     user=request.user.profile.emp_name
-    coachings=Coaching.objects.filter(qa=user)
+    coachings=Coaching.objects.filter(qa=user).order_by('id').reverse()[:10]
 
     counts=Coaching.objects.filter(qa=user).count()
 
     data={'coachings':coachings,'counts':counts}
 
     return render(request,'qa-home.html',data)
+
+def outboundCoachingform(request):
+    return render(request,'outbound-coaching-form.html')

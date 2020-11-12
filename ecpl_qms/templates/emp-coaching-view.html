@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block main %}
+
+<div class="container-lg">
+    <h2>Coaching Details</h2>
+
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table" style="text-align:center">
+              <thead>
+                <tr>
+                    <th scope="col">Ticket Number</th>
+                    <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>{{coaching.ticket_no}}</td>
+                    <td>{{coaching.date}}</td>
+                </tr>
+              </tbody>
+              <thead>
+                <tr>
+                    <th scope="col">Added By</th>
+                    <th scope="col">Feedback</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>{{coaching.qa}}</td>
+                    <td>{{coaching.feedback}}</td>
+                </tr>
+              </tbody>
+
+            </table>
+        </div>
+    </div>
+
+
+    <form class="login-form" action="/employees/coaching/signcoaching/{{coaching.id}}" method="post">
+                  {% csrf_token %}
+        <label for="emp_comments">Employee Comments</label><br>
+        <input type="text" name="emp_comments" id="emp_comments">
+        <input class="btn btn-info" type="submit" value="Sign">
+    </form>
+</div>
+
+{% endblock %}

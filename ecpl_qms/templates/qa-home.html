@@ -12,20 +12,25 @@
 
 <section id="coaching">
     <div class="container-lg">
-        <h2>Coachings</h2>
+        <h2 class="text-center">Coachings</h2>
         <div class="row">
 
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <p><a href="addcoaching">Add Coaching</a></p>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+                <h4>Last 10 Coaching </h4>
+
                 {% for coaching in coachings %}
-                    {{coaching.feedback}} - {{coaching.agent}} <br>
+                    {{coaching.date}} - {{coaching.agent}} <br>
                 {% endfor %}
             </div>
+            <div class="col-md-4">
+                 <h4>Total Coachings Added</h4>
+                {{counts}}
+            </div>
         </div>
-        <h2>Total Coachings Added</h2>
-        {{counts}}
+
     </div>
 
 </section>

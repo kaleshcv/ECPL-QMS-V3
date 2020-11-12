@@ -25,7 +25,7 @@
         {{count}}
         <h2>Open Coaching List</h2>
         {% for oc in open_coachings %}
-        <p> {{oc.ticket_no}}</p>
+        <p><a href="coaching/{{oc.id}}">{{oc.feedback}}</a> </p>
         {% endfor %}
 
     </div>

@@ -14,28 +14,23 @@
 <body>
     <!------------Navigation-------------->
 
-         <section id="navigation">
-            <nav class="navbar navbar-expand-lg">
-              <a class="navbar-brand" href="#">ECPL</a>
-              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
+        <section>
+            <div class="container-fluid">
+                <ul class="nav justify-content-end">
 
                     {% if user.is_authenticated %}
-                         <li class="nav-item"><a class="nav-link" href="logout">logout</a></li>
-
+                    <li class="nav-item"><a class="nav-link" href="/employees/logout">logout</a></li>
                     {% else %}
 
-                         <li class="nav-item"><a class="nav-link" href="login">login</a></li>
-                         <li class="nav-item"><a class="nav-link" href="signup">sign-up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login">login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="signup">sign-up</a></li>
                     {% endif %}
 
                 </ul>
-              </div>
-            </nav>
-         </section>
+            </div>
+        </section>
+
+    <!---------end Navigation--------------->
 
     {% block main %}
     {% endblock %}

@@ -4,9 +4,9 @@
     {% load crispy_forms_tags %}
 
     <div class="container-lg">
-        <div class="col-md-6">
 
-            <div class="loginform">
+
+            <div class="addcoaching">
                 <h2 class="form-header">Feedback Form</h2>
                 <h4>{{user.profile.emp_name}}</h4>
                 <form class="login-form" action="/employees/addcoaching" method="post">
@@ -23,16 +23,11 @@
                             <option value="{{user.profile.emp_name}}">{{user.profile.emp_name}}({{user.profile.emp_id}})</option>
                             {% endfor %}
                     </select><br>
+                    <input type="date" name="date">
                     <input class="btn btn-info" type="submit" value="Submit">
 
                 </form>
             </div>
-        </div>
-        <div class="col-md-6">
 
-
-
-
-        </div>
     </div>
 {% endblock %}
