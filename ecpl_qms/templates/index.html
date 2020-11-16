@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block main %}
+{% load static %}
+<section id="header">
+    <div class="container-fluid">
+        <div class="row" style="height:700px">
+            <div class="col-md-6" style="background: #011c38;padding:0px;">
+                <div class="heading">
+                    <h1 style="font-size: 70px">ECPL</h1>
+                    <p>Quality Management System</p>
+                </div>
+                <div>
+                    <img src="{% static 'images/header1.jpg' %}" alt="" class="img-fluid">
+                </div>
 
-<h2>Home Page</h2>
+            </div>
+            <div class="col-md-6" style="background: #011c38e0">
+
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

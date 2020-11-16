@@ -3,48 +3,232 @@
 
     <section id="outboundform">
         <div class="container-lg">
-            <form action="">
-                <div class="row">
-                    <div class="col-md-4">
-                        <label for="empname">Associate Name</label>
-                        <input type="text" class="form-control" id="empname">
-                        <label for="empid">Employee ID</label>
-                        <input type="number" class="form-control" id="empid">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="qa">Quality Analyst</label>
-                        <input type="text" class="form-control" id="qa">
-                        <label for="tl">Team Lead</label>
-                        <input type="text" class="form-control" id="tl">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="customername">Customer Name</label>
-                        <input type="text" class="form-control" id="customername">
-                        <label for="customercontact">Customer Contact Number</label>
-                        <input type="text" class="form-control" id="customercontact">
-                    </div>
-                    <div class="col-md-4">
-                        <label for="calldate">Call Date</label>
-                        <input type="date" class="form-control" id="calldate">
-                        <label for="auditdate">Audit Date</label>
-                        <input type="date" class="form-control" id="auditdate">
-                    </div>
-                     <div class="col-md-4">
-                        <label for="campaign">Campaign</label>
-                        <input type="text" class="form-control" id="campaign">
-                        <label for="zone">Zone</label>
-                        <input type="text" class="form-control" id="zone">
-                    </div>
-                     <div class="col-md-4">
-                        <label for="concept">Concept</label>
-                        <input type="text" class="form-control" id="concept">
-                        <label for="callduration">Call Duration</label>
-                        <input type="text" class="form-control" id="callduration">
+            <form action="/employees/outbound-coaching-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h3 class="text-center">Outbound Monitoring Form</h3>
+                <div class="basic">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="empname">Associate Name</label>
+                            <select class="form-control" id="empname" required="required" name="empname">
+                                {% for user in users %}
+                                <option value="{{user.profile.emp_name}}">{{user.profile.emp_name}}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="empid">Employee ID</label>
+                            <input type="number" class="form-control" id="empid" name="empid" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="qa">Quality Analyst</label>
+                            <input type="text" class="form-control" id="qa" name="qa" value="{{team.qa}}" required>
+                            <label for="tl">Team Lead</label>
+                            <input type="text" class="form-control" id="tl" name="tl" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="customername">Customer Name</label>
+                            <input type="text" class="form-control" id="customername" name="cname" required>
+                            <label for="customercontact">Customer Contact Number</label>
+                            <input type="text" class="form-control" id="customercontact" name="ccontact" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="calldate">Call Date</label>
+                            <input type="date" class="form-control" id="calldate" name="calldate" required>
+                            <label for="auditdate">Audit Date</label>
+                            <input type="date" class="form-control" id="auditdate" name="auditdate" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label for="campaign">Campaign</label>
+                            <input type="text" class="form-control" id="campaign" name="campaign" required>
+                            <label for="zone">Zone</label>
+                            <input type="text" class="form-control" id="zone" name="zone" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label for="concept">Concept</label>
+                            <input type="text" class="form-control" id="concept" name="concept" required>
+                            <label for="callduration">Call Duration</label>
+                            <input type="text" class="form-control" id="callduration" name="callduration" required>
+                        </div>
                     </div>
                 </div>
-                <h2>Opening</h2>
-                <label for="">Used standard Opening protocol within 3 seconds</label>
-                <input type="number">
+                <hr>
+                <div class="opening">
+                    <div>
+                        <h2>Opening</h2>
+                        <label class="qn">Used standard Opening protocol within 3 seconds</label>
+                        <input type="radio" name="opening_1" value="good" id="good4" required>
+                        <label for="good4">Good</label>
+                        <input type="radio" name="opening_1" value="average" id="avg4" required>
+                        <label for="avg4">Average</label>
+                        <input type="radio" name="opening_1" value="poor" id="poor4" required>
+                        <label for="poor4">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Introduction done as per format (Client requirement)</label>
+                        <input type="radio" name="opening_2" value="good" id="good" required>
+                        <label for="good">Good</label>
+                        <input type="radio" name="opening_2" value="average" id="avg">
+                        <label for="avg">Average</label>
+                        <input type="radio" name="opening_2" value="poor" id="poor">
+                        <label for="poor">Poor</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="softskills">
+                    <div>
+                        <h2>Soft Skill</h2>
+                        <label class="qn">Followed Hold Procedure appropriately</label>
+                        <input type="radio" name="softskill_1" value="good" id="good1" required>
+                        <label for="good1">Good</label>
+                        <input type="radio" name="softskill_1" value="average" id="avg1">
+                        <label for="avg1">Average</label>
+                        <input type="radio" name="softskill_1" value="poor" id="poor1">
+                        <label for="poor1">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Used Empathetic Statements whenever required</label>
+                        <input type="radio" name="softskill_2" value="good" id="good2" required>
+                        <label for="good2">Good</label>
+                        <input type="radio" name="softskill_2" value="average" id="avg2">
+                        <label for="avg2">Average</label>
+                        <input type="radio" name="softskill_2" value="poor" id="poor2">
+                        <label for="poor2">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Assured assistance for the customer's query</label>
+                        <input type="radio" name="softskill_3" value="good" id="good3" required>
+                        <label for="good3">Good</label>
+                        <input type="radio" name="softskill_3" value="average" id="avg3">
+                        <label for="avg3">Average</label>
+                        <input type="radio" name="softskill_3" value="poor" id="poor3">
+                        <label for="poor3">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Rate of Speech and Tone of Speech Moderate</label>
+                        <input type="radio" name="softskill_4" value="good" id="good5" required>
+                        <label for="good5">Good</label>
+                        <input type="radio" name="softskill_4" value="average" id="avg5">
+                        <label for="avg5">Average</label>
+                        <input type="radio" name="softskill_4" value="poor" id="poor5">
+                        <label for="poor5">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">No Dead Air</label>
+                        <input type="radio" name="softskill_5" value="good" id="good6" required>
+                        <label for="good6">Good</label>
+                        <input type="radio" name="softskill_5" value="average" id="avg6">
+                        <label for="avg6">Average</label>
+                        <input type="radio" name="softskill_5" value="poor" id="poor6">
+                        <label for="poor6">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Active Listening without interruption</label>
+                        <input type="radio" name="softskill_6" value="good" id="good7" required>
+                        <label for="good7">Good</label>
+                        <input type="radio" name="softskill_6" value="average" id="avg7">
+                        <label for="avg7">Average</label>
+                        <input type="radio" name="softskill_6" value="poor" id="poor7">
+                        <label for="poor7">Poor</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="business">
+                    <div>
+                        <h2>Business</h2>
+                        <label class="qn">Good understanding of process exhibited</label>
+                        <input type="radio" name="business_1" value="good" id="good8" required>
+                        <label for="good8">Good</label>
+                        <input type="radio" name="business_1" value="average" id="avg8">
+                        <label for="avg8">Average</label>
+                        <input type="radio" name="business_1" value="poor" id="poor8">
+                        <label for="poor8">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Accurate Documentation</label>
+                        <input type="radio" name="business_2" value="good" id="good9" required>
+                        <label for="good9">Good</label>
+                        <input type="radio" name="business_2" value="average" id="avg9">
+                        <label for="avg9">Average</label>
+                        <input type="radio" name="business_2" value="poor" id="poor9">
+                        <label for="poor9">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Complete Information Provided</label>
+                        <input type="radio" name="business_3" value="good" id="good10" required>
+                        <label for="good10">Good</label>
+                        <input type="radio" name="business_3" value="average" id="avg10">
+                        <label for="avg10">Average</label>
+                        <input type="radio" name="business_3" value="poor" id="poor10">
+                        <label for="poor10">Poor</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="callclosing">
+                    <div>
+                        <h2>Call Closing</h2>
+                        <label class="qn">Call Closing as per the protocol</label>
+                        <input type="radio" name="closing_1" value="good" id="good11" required>
+                        <label for="good11">Good</label>
+                        <input type="radio" name="closing_1" value="average" id="avg11">
+                        <label for="avg11">Average</label>
+                        <input type="radio" name="closing_1" value="poor" id="poor11">
+                        <label for="poor11">Poor</label>
+                    </div>
+                    <div>
+                        <label class="qn">Additional assistance offered</label>
+                        <input type="radio" name="closing_2" value="good" id="good12" required>
+                        <label for="good12">Good</label>
+                        <input type="radio" name="closing_2" value="average" id="avg12">
+                        <label for="avg12">Average</label>
+                        <input type="radio" name="closing_2" value="poor" id="poor12">
+                        <label for="poor12">Poor</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="compliance">
+                    <div>
+                        <h2>Compliance</h2>
+                        <label class="qn">Incorrect Tagging</label>
+                        <input type="radio" name="compliance_1" value="yes" id="yes1" required>
+                        <label for="yes1">Yes</label>
+                        <input type="radio" name="compliance_1" value="no" id="no1">
+                        <label for="no1">No</label>
+                        <input type="radio" name="compliance_1" value="na" id="na1">
+                        <label for="na1">NA</label>
+                    </div>
+                    <div>
+                        <label class="qn">Associate was not rude with the customer</label>
+                        <input type="radio" name="compliance_2" value="yes" id="yes2" required>
+                        <label for="yes2">Yes</label>
+                        <input type="radio" name="compliance_2" value="no" id="no2">
+                        <label for="no2">No</label>
+                        <input type="radio" name="compliance_2" value="na" id="na2">
+                        <label for="na2">NA</label>
+                    </div>
+                    <div>
+                        <label class="qn">Provided Inaccurate Information</label>
+                        <input type="radio" name="compliance_3" value="yes" id="yes3" required>
+                        <label for="yes3">Yes</label>
+                        <input type="radio" name="compliance_3" value="no" id="no3">
+                        <label for="no3">No</label>
+                        <input type="radio" name="compliance_3" value="na" id="na3">
+                        <label for="na3">NA</label>
+                    </div>
+                </div>
+                <hr>
+                <div class="other">
+                    <h2>Areas of improvement</h2>
+                    <textarea name="areaimprovement" id="areaimp" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h2>Positives</h2>
+                    <textarea name="positives" id="positives" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h2>Comments</h2>
+                    <textarea name="comments" id="comments" cols="30" rows="5" class="form-control" required></textarea>
+                </div>
+                <div style="padding: 30px 30px">
+                    <button class="btn btn-info"> Submit </button>
+                </div>
+
             </form>
         </div>
     </section>

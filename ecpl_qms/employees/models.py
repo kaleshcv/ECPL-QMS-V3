@@ -8,21 +8,11 @@ class Profile(models.Model):
     emp_id=models.IntegerField()
     emp_desi=models.CharField(max_length=50)
     team=models.CharField(max_length=50)
-    email=models.EmailField()
-
+    email=models.EmailField(default='test@ecpl.com')
 
 
     def __str__(self):
         return self.user.username
-
-class Coaching(models.Model):
-    ticket_no=models.IntegerField()
-    feedback=models.TextField()
-    agent=models.CharField(max_length=50)
-    qa=models.CharField(max_length=50)
-    status=models.BooleanField(default=False)
-    date=models.DateField(default="2020-01-01")
-
 
 
 
@@ -30,6 +20,7 @@ class Team(models.Model):
     name=models.CharField(max_length=50)
     mgr=models.ForeignKey(User,on_delete=models.CASCADE,related_name='mgr')
     qa=models.ForeignKey(User,on_delete=models.CASCADE,related_name='qa')
+
 
 
 class OutboundMonitoringForm(models.Model):
@@ -45,32 +36,44 @@ class OutboundMonitoringForm(models.Model):
     zone=models.CharField(max_length=60)
     concept=models.CharField(max_length=60)
     call_duration=models.IntegerField()
-    opening_1=models.IntegerField()
-    opening_2=models.IntegerField()
-    softskill_1=models.IntegerField()
-    softskill_2 = models.IntegerField()
-    softskill_3 = models.IntegerField()
-    softskill_4 = models.IntegerField()
-    softskill_5 = models.IntegerField()
-    softskill_6 = models.IntegerField()
-    business_1=models.IntegerField()
-    business_2 = models.IntegerField()
-    business_3 = models.IntegerField()
-    closing_1=models.IntegerField()
-    closing_2 = models.IntegerField()
-    compliance_1=models.IntegerField()
-    compliance_2 = models.IntegerField()
-    compliance_3 = models.IntegerField()
-    total_score=models.IntegerField()
-    compliance=models.IntegerField()
-    areas_improvement=models.TextField()
-    opening_total=models.IntegerField()
-    softskill_total=models.IntegerField()
-    business_total=models.IntegerField()
-    closing_total=models.IntegerField()
-    compliance_total=models.IntegerField()
+
+    opening_1=models.CharField(max_length=10)
+    opening_2=models.CharField(max_length=10)
+
+    softskill_1=models.CharField(max_length=10)
+    softskill_2 = models.CharField(max_length=10)
+    softskill_3 = models.CharField(max_length=10)
+    softskill_4 = models.CharField(max_length=10)
+    softskill_5 = models.CharField(max_length=10)
+    softskill_6 = models.CharField(max_length=10)
+
+    business_1=models.CharField(max_length=10)
+    business_2 = models.CharField(max_length=10)
+    business_3 = models.CharField(max_length=10)
+
+    closing_1=models.CharField(max_length=10)
+    closing_2 = models.CharField(max_length=10)
+
+    compliance_1=models.CharField(max_length=10)
+    compliance_2 = models.CharField(max_length=10)
+    compliance_3 = models.CharField(max_length=10)
+
+    total_score=models.IntegerField(null=True)
+    compliance=models.IntegerField(null=True)
+
+    opening_total=models.IntegerField(null=True)
+    softskill_total=models.IntegerField(null=True)
+    business_total=models.IntegerField(null=True)
+    closing_total=models.IntegerField(null=True)
+    compliance_total=models.IntegerField(null=True)
+
+    areas_improvement = models.TextField()
     positives=models.TextField()
     comments=models.TextField()
+    added_by=models.CharField(max_length=30)
+    status=models.BooleanField(default=False)
+
+
 
 
 

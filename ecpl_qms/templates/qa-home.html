@@ -2,39 +2,46 @@
 {% block main %}
 
 <section id="profile">
-    <div class="container-lg">
-        <h6>Employee Name : {{user.profile.emp_name}}</h6>
-        <h6>Department : {{user.profile.team}}</h6>
-        <h6>Employee ID : <span>{{user.profile.emp_id}}</span></h6>
-        <h6>Email ID : <span>{{user.profile.email}}</span></h6>
-    </div>
-</section>
-
-<section id="coaching">
-    <div class="container-lg">
-        <h2 class="text-center">Coachings</h2>
+    <div class="container-fluid">
         <div class="row">
-
-            <div class="col-md-4">
-                <p><a href="addcoaching">Add Coaching</a></p>
+            <div class="col-md-3 emparea">
+                <div class="empinfo">
+                    <i class="fa fa-user-circle-o" style="color:#adadff;font-size:22px;"></i>
+                    <hr>
+                    <small>Employee Name :</small> <span>{{user.profile.emp_name}}</span>
+                    <hr>
+                    <small>Department :</small> <span>{{user.profile.team}}</span>
+                    <hr>
+                    <small>Employee ID :</small> <span>{{user.profile.emp_id}}</span>
+                    <hr>
+                    <small>Email ID :</small> <span>{{user.profile.email}}</span>
+                </div>
             </div>
-            <div class="col-md-4">
-                <h4>Last 10 Coaching </h4>
+            <div class="col-md-9">
 
-                {% for coaching in coachings %}
-                    {{coaching.date}} - {{coaching.agent}} <br>
-                {% endfor %}
-            </div>
-            <div class="col-md-4">
-                 <h4>Total Coachings Added</h4>
-                {{counts}}
+                <div class="row">
+
+                            <div class="col-md-4">
+                                <p><a href="addcoaching">Add Coaching</a></p>
+                                <p><a href="/employees/outbound-coaching-form">Outbound Monitoring Form</a></p>
+                            </div>
+                            <div class="col-md-4">
+                                <h4>Last 10 Coaching </h4>
+
+                                {% for coaching in coachings %}
+                                    {{coaching.audit_date}} - {{coaching.associate_name}} <br>
+                                {% endfor %}
+                            </div>
+                            <div class="col-md-4">
+                                 <h4>Total Coachings Added</h4>
+                                {{counts}}
+                            </div>
+                </div>
             </div>
         </div>
 
     </div>
-
 </section>
-
 
 
 

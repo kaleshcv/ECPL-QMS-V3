@@ -23,9 +23,94 @@ body
     color:black!important;
 }
 
-
-#profile {
-    padding: 40px;
-
+#outboundform input[type=radio]
+{
+    margin-left:50px;
 }
 
+#outboundform .qn
+{
+    min-width:500px;
+}
+
+#outboundform .opening,.softskills,.business,.callclosing,.compliance,.other,.basic
+{
+
+    padding: 20px 30px;
+}
+#outboundform h2
+{
+    font-size: 22px;
+    font-weight: 600
+}
+#outboundform .col-md-4
+{
+    margin:20px 0px;
+}
+
+#coachingciew td
+{
+    width:25%;
+}
+
+
+
+#header .heading
+{
+    display: flex;
+    align-items: center;
+    color: white;
+    height: 50vh;
+    justify-content: center;
+}
+#nav{
+    background: #011c38;
+    height: 60px;
+    padding: 10px 10px;
+}
+#nav .nav-link{
+    color:white!important;
+    letter-spacing:1px;
+}
+#nav .nav-link1{
+    color:#adadff!important;
+    letter-spacing:1px;
+    display: block;
+    padding: .5rem 1rem;
+}
+
+.loginform
+{
+    margin:150px 150px;
+}
+.btn-info {
+    color: grey;
+    background-color: #011c38!important;
+    border-color: #011c38!important;
+    padding:3px 30px;
+}
+
+.btn-info:hover {
+    color: #011c38;
+    background-color: grey!important;
+    border-color: grey!important;
+}
+.loginform .requiredField
+{
+    color:grey;
+}
+#profile .emparea{
+    height: 400px;
+    background: #011c38;
+    color: white;
+}
+#profile .empinfo{
+    margin-left:50px;
+    position:relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#profile .empinfo small{
+    color:#adadff;
+
+}

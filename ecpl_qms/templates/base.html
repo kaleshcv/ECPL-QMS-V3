@@ -9,24 +9,31 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
 </head>
 <body>
     <!------------Navigation-------------->
 
-        <section>
+        <section id="nav">
             <div class="container-fluid">
+
                 <ul class="nav justify-content-end">
 
                     {% if user.is_authenticated %}
+
+                    <li class="nav-item"><a href="" class="nav-link1" style="color:blue"><small>Welcome</small>,{{user.profile.emp_name}}</a></li>
                     <li class="nav-item"><a class="nav-link" href="/employees/logout">logout</a></li>
+
                     {% else %}
 
                     <li class="nav-item"><a class="nav-link" href="login">login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="signup">sign-up</a></li>
                     {% endif %}
 
                 </ul>
+                <div>
+
+                </div>
             </div>
         </section>
 
