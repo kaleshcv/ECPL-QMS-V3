@@ -1,34 +1,81 @@
 {% extends 'base.html' %}
 {% block main %}
-
 <section id="profile">
     <div class="container-lg">
         <div class="row">
-            <div class="col-md-6">
-                <p>Employee Name : <strong>{{user.profile.emp_name}}</strong></p>
-                <p>Department    : <strong>{{user.profile.team}}</strong></p>
-                <p>Employee ID   : <strong>{{user.profile.emp_id}}</strong></p>
-                <p>Email ID      : <strong>{{user.profile.email}}</strong></p>
-            </div>
-            <div class="col-md-6">
-                <p>QA Email ID      : <strong>{{team.qa.profile.email}}</strong></p>
-                <p>Manager Email ID : <strong>{{team.mgr.profile.email}}</strong></p>
-            </div>
+
+                            <div class="col-md-8" style="padding: 50px 30px">
+                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 200px">Emp Profile</h2>
+                                <br>
+                                <div style="margin-left:10px" class="agentinfo">
+                                    <small>Employee Name : </small><span>{{user.profile.emp_name}}</span><br>
+                                    <small>Department : </small><span>{{user.profile.team}}</span><br>
+                                    <small>Employee ID : </small><span>{{user.profile.emp_id}}</span><br>
+                                    <small>QA Email ID : </small><span>{{team.qa.profile.email}}</span><br>
+                                    <small>Manager Email ID :</small><span>{{team.mgr.profile.email}}</span>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4" style="padding: 50px 30px">
+                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 231px">Total Coachings</h2>
+                                <br>
+                                <p><a href="">{{count}}</a></p>
+                                <small style="color:grey">Open status</small><span style="color:White;margin-left:10px">{{opencounts}}</span>
+
+                            </div>
+        </div>
+    </div>
+
+</section>
+
+
+<section style="padding-top:70px">
+    <div class="container-lg">
+        <h2 class="text-center">All Coachings </h2><br>
+        <div class="row">
+
+                {% for coaching in coachings %}
+                <div class="col-md-6">
+                <div class="card" style="background:#203850; margin-bottom:20px">
+                  <div class="card-body">
+                    <h5 class="card-title">{{coaching.associate_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                    <p class="card-text">{{coaching.snippet}}</p>
+                    <a href="#" class="card-link">View</a>
+
+                  </div>
+                </div>
+                </div>
+                {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+<section style="padding-top:70px">
+    <div class="container-lg">
+        <h2 class="text-center">Open Coachings </h2><br>
+        <div class="row">
+
+                {% for coaching in open_coachings %}
+                <div class="col-md-6">
+                <div class="card" style="background:#203850; margin-bottom:20px">
+                  <div class="card-body">
+                    <h5 class="card-title">{{coaching.associate_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                    <p class="card-text">{{coaching.comments}}</p>
+                    <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+
+                  </div>
+                </div>
+                </div>
+                {% endfor %}
+
+
+
         </div>
     </div>
 </section>
 
 
-<section>
-    <div class="container-lg">
-        <h6>Total Coachings</h6>
-        {{count}}
-        <h2>Open Coaching List</h2>
-        {% for oc in open_coachings %}
-        <p><a href="coaching/{{oc.id}}">{{oc.id}}</a> </p>
-        {% endfor %}
-
-    </div>
-
-</section>
 {% endblock %}

@@ -88,11 +88,13 @@ def signCoaching(request,pk):
 
 def qahome(request):
     user=request.user.profile.emp_name
-    coachings=OutboundMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:10]
+    coachings=OutboundMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
 
     counts=OutboundMonitoringForm.objects.filter(added_by=user).count()
 
-    data={'coachings':coachings,'counts':counts}
+    opencounts = OutboundMonitoringForm.objects.filter(added_by=user,status=False).count()
+
+    data={'coachings':coachings,'counts':counts,'opencounts':opencounts}
 
     return render(request,'qa-home.html',data)
 

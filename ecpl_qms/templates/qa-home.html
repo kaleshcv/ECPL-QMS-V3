@@ -1,47 +1,60 @@
 {% extends 'base.html' %}
 {% block main %}
-
+{% load static %}
 <section id="profile">
-    <div class="container-fluid">
+    <div class="container-lg">
         <div class="row">
-            <div class="col-md-3 emparea">
-                <div class="empinfo">
-                    <i class="fa fa-user-circle-o" style="color:#adadff;font-size:22px;"></i>
-                    <hr>
-                    <small>Employee Name :</small> <span>{{user.profile.emp_name}}</span>
-                    <hr>
-                    <small>Department :</small> <span>{{user.profile.team}}</span>
-                    <hr>
-                    <small>Employee ID :</small> <span>{{user.profile.emp_id}}</span>
-                    <hr>
-                    <small>Email ID :</small> <span>{{user.profile.email}}</span>
-                </div>
-            </div>
-            <div class="col-md-9">
 
-                <div class="row">
+                            <div class="col-md-8" style="padding: 50px 30px">
+                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 256px">Monitoring Forms</h2>
+                                <br>
+                                <div style="margin-left:10px">
+                                    <p><a href="/employees/outbound-coaching-form">Outbound Monitoring Form</a></p>
 
-                            <div class="col-md-4">
-                                <p><a href="addcoaching">Add Coaching</a></p>
-                                <p><a href="/employees/outbound-coaching-form">Outbound Monitoring Form</a></p>
-                            </div>
-                            <div class="col-md-4">
-                                <h4>Last 10 Coaching </h4>
+                                    <p><a href="/employees/outbound-coaching-form">Email Monitoring Form</a></p>
 
-                                {% for coaching in coachings %}
-                                    {{coaching.audit_date}} - {{coaching.associate_name}} <br>
-                                {% endfor %}
+                                    <p><a href="/employees/outbound-coaching-form">Chat Monitoring Form</a></p>
+
+                                    <p><a href="/employees/outbound-coaching-form">Inbound Monitoring Form</a></p>
+                                </div>
                             </div>
-                            <div class="col-md-4">
-                                 <h4>Total Coachings Added</h4>
-                                {{counts}}
+
+                            <div class="col-md-4" style="padding: 50px 30px">
+                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 231px">Total Coachings</h2>
+                                <br>
+                                <p><a href="">{{counts}}</a></p>
+                                <small style="color:grey">Open status</small><span style="color:White;margin-left:10px">{{opencounts}}</span>
+
                             </div>
-                </div>
-            </div>
         </div>
+    </div>
 
+</section>
+
+<section style="padding-top:70px">
+    <div class="container-lg">
+        <h2 class="text-center">Recent Coachings </h2><br>
+        <div class="row">
+
+                {% for coaching in coachings %}
+                <div class="col-md-6">
+                <div class="card" style="background:#203850; margin-bottom:20px">
+                  <div class="card-body">
+                    <h5 class="card-title">{{coaching.associate_name}}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                    <p class="card-text">{{coaching.snippet}}</p>
+                    <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+
+                  </div>
+                </div>
+                </div>
+                {% endfor %}
+
+        </div>
     </div>
 </section>
+
+
 
 
 

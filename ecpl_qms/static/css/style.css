@@ -6,17 +6,11 @@
 body
 {
     font-family: 'Maven Pro', sans-serif;
+    background:#c3ccd5;
     
 
 }
 
-#navigation img
-{
-
-    width: 270px;
-    height: 70px;
-
-}
 .navbar-nav li a
 {
 
@@ -64,7 +58,7 @@ body
     justify-content: center;
 }
 #nav{
-    background: #011c38;
+    background: black;
     height: 60px;
     padding: 10px 10px;
 }
@@ -99,18 +93,26 @@ body
 {
     color:grey;
 }
-#profile .emparea{
-    height: 400px;
+#profile {
     background: #011c38;
-    color: white;
-}
-#profile .empinfo{
-    margin-left:50px;
-    position:relative;
-    top: 50%;
-    transform: translateY(-50%);
-}
-#profile .empinfo small{
-    color:#adadff;
 
+}
+
+.card-title,.card-text
+{
+    color:lightgrey;
+    text-align:justify;
+}
+
+#profile .agentinfo small{
+
+color:grey;
+}
+#profile .agentinfo span{
+    margin-left:20px;
+    color:#87a6c7;
+}
+.card
+{
+    height:190px;
 }
