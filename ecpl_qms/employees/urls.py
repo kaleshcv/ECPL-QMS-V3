@@ -12,6 +12,7 @@ urlpatterns = [
     path('coaching/<int:pk>',empCoachingView),
     path('coaching/signcoaching/<int:pk>',signCoaching),
     path('outbound-coaching-form',outboundCoachingform),
+    path('inbound-coaching-form',inboundCoachingform),
 
 
 ]

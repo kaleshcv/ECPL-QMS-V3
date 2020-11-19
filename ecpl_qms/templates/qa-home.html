@@ -11,11 +11,11 @@
                                 <div style="margin-left:10px">
                                     <p><a href="/employees/outbound-coaching-form">Outbound Monitoring Form</a></p>
 
-                                    <p><a href="/employees/outbound-coaching-form">Email Monitoring Form</a></p>
+                                    <p><a href="/employees/inbound-coaching-form">Email Monitoring Form</a></p>
 
                                     <p><a href="/employees/outbound-coaching-form">Chat Monitoring Form</a></p>
 
-                                    <p><a href="/employees/outbound-coaching-form">Inbound Monitoring Form</a></p>
+                                    <p><a href="/employees/inbound-coaching-form">Inbound Monitoring Form</a></p>
                                 </div>
                             </div>
 
@@ -31,13 +31,41 @@
 
 </section>
 
+<section id="guidelines" style="padding-top:70px">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">
+
+            </div>
+            <div class="col-md-6">
+                <h4>Monitoring Form Guidelines</h4>
+                <ul>
+                    <li><a href="">Outbound </a></li>
+                    <li><a href="">Inbound </a></li>
+                    <li><a href="">Chat </a></li>
+                    <li><a href="">Email </a></li>
+                </ul>
+                  <h4>Active Campaignes</h4>
+                <ul>
+                    <li><a href="">name1 </a></li>
+                    <li><a href="">name2 </a></li>
+                    <li><a href="">name3 </a></li>
+                    <li><a href="">name4 </a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 <section style="padding-top:70px">
     <div class="container-lg">
         <h2 class="text-center">Recent Coachings </h2><br>
         <div class="row">
 
                 {% for coaching in coachings %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                 <div class="card" style="background:#203850; margin-bottom:20px">
                   <div class="card-body">
                     <h5 class="card-title">{{coaching.associate_name}}</h5>

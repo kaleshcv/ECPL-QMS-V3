@@ -8,7 +8,7 @@ class Profile(models.Model):
     emp_id=models.IntegerField()
     emp_desi=models.CharField(max_length=50)
     team=models.CharField(max_length=50)
-    email=models.EmailField(default='test@ecpl.com')
+    email=models.EmailField(default='test@ecpl.com',null=True)
 
 
     def __str__(self):
