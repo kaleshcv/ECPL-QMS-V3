@@ -5,7 +5,7 @@
         <div class="container-lg">
             <form action="/employees/inbound-coaching-form" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h3 class="text-center">Inbound Monitoring Form</h3>
+                <h2 class="text-center">Inbound Monitoring Form</h2>
                 <div class="basic">
                     <div class="row">
                         <div class="col-md-4">
@@ -53,7 +53,7 @@
                 <hr>
                 <div class="opening">
                     <div>
-                        <h2>Opening</h2>
+                        <h4>Opening</h4>
                         <label class="qn">Used standard Opening protocol within 3 seconds</label>
                         <input type="radio" name="opening_1" value="good" id="good4" required>
                         <label for="good4">Good</label>
@@ -75,7 +75,7 @@
                 <hr>
                 <div class="softskills">
                     <div>
-                        <h2>Soft Skill</h2>
+                        <h4>Soft Skill</h4>
                         <label class="qn">Followed Hold Procedure appropriately</label>
                         <input type="radio" name="softskill_1" value="good" id="good1" required>
                         <label for="good1">Good</label>
@@ -133,7 +133,7 @@
                 <hr>
                 <div class="business">
                     <div>
-                        <h2>Business</h2>
+                        <h4>Business</h4>
                         <label class="qn">Good understanding of process exhibited</label>
                         <input type="radio" name="business_1" value="good" id="good8" required>
                         <label for="good8">Good</label>
@@ -164,7 +164,7 @@
                 <hr>
                 <div class="callclosing">
                     <div>
-                        <h2>Call Closing</h2>
+                        <h4>Call Closing</h4>
                         <label class="qn">Call Closing as per the protocol</label>
                         <input type="radio" name="closing_1" value="good" id="good11" required>
                         <label for="good11">Good</label>
@@ -186,8 +186,8 @@
                 <hr>
                 <div class="compliance">
                     <div>
-                        <h2>Compliance</h2>
-                        <label class="qn">Incorrect Tagging</label>
+                        <h4>Compliance</h4>
+                        <label class="qn">Correct Tagging</label>
                         <input type="radio" name="compliance_1" value="yes" id="yes1" required>
                         <label for="yes1">Yes</label>
                         <input type="radio" name="compliance_1" value="no" id="no1">
@@ -216,13 +216,13 @@
                 </div>
                 <hr>
                 <div class="other">
-                    <h2>Areas of improvement</h2>
+                    <h4>Areas of improvement</h4>
                     <textarea name="areaimprovement" id="areaimp" cols="30" rows="5" class="form-control" required></textarea>
                     <br>
-                    <h2>Positives</h2>
+                    <h4>Positives</h4>
                     <textarea name="positives" id="positives" cols="30" rows="5" class="form-control" required></textarea>
                     <br>
-                    <h2>Comments</h2>
+                    <h4>Comments</h4>
                     <textarea name="comments" id="comments" cols="30" rows="5" class="form-control" required></textarea>
                 </div>
                 <div style="padding: 30px 30px">

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm
+from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm,EmailMonitoringForm,ChatMonitorinForm
 from . import forms
 from django.contrib.auth.models import User
 
@@ -64,12 +64,31 @@ def logout_view(request):
 def agenthome(request):
     user = request.user.profile.emp_name
     team_name=request.user.profile.team
-    print(team_name)
-    coachings = OutboundMonitoringForm.objects.filter(associate_name=user)
+
+    out_coachings = OutboundMonitoringForm.objects.filter(associate_name=user)
+    out_counts = OutboundMonitoringForm.objects.filter(associate_name=user).count()
+    open_out = OutboundMonitoringForm.objects.filter(associate_name=user,status=False)
+
+    in_coachings=InboundMonitoringForm.objects.filter(associate_name=user)
+    in_counts=InboundMonitoringForm.objects.filter(associate_name=user).count()
+    open_in=InboundMonitoringForm.objects.filter(associate_name=user,status=False)
+
+    email_coachings=EmailMonitoringForm.objects.filter(associate_name=user)
+    email_counts=EmailMonitoringForm.objects.filter(associate_name=user).count()
+    open_email=EmailMonitoringForm.objects.filter(associate_name=user,status=False)
+
+    chat_coachings = ChatMonitorinForm.objects.filter(associate_name=user)
+    chat_counts = ChatMonitorinForm.objects.filter(associate_name=user).count()
+    open_chat = ChatMonitorinForm.objects.filter(associate_name=user, status=False)
+
+
     team=Team.objects.get(name=team_name)
-    counts = OutboundMonitoringForm.objects.filter(associate_name=user).count()
-    open_coachings = OutboundMonitoringForm.objects.filter(associate_name=user,status=False)
-    data={'coachings':coachings,'team':team,'count':counts,'open_coachings':open_coachings}
+
+    data={'out_coachings':out_coachings,'in_coachings':in_coachings,'email_coachings':email_coachings,'chat_coachings':chat_coachings,
+
+          'out_counts':out_counts,'in_counts':in_counts,'email_counts':email_counts,'chat_counts':chat_counts,
+          'open_out':open_out,'open_in':open_in,'open_email':open_email,'open_chat':open_chat,'team':team}
+
     return render(request, 'agent-home.html',data)
 
 
@@ -293,6 +312,64 @@ def inboundCoachingform(request):
         users = User.objects.all()
         data={'team':team,'users':users}
         return render(request, 'inbound-coaching-form.html',data)
+
+def emailmonitoringform(request):
+
+    if request.method== 'POST':
+
+        associate_name=request.POST['empname']
+        emp_id=request.POST['empid']
+        qa=request.POST['qa']
+        team_lead=request.POST['tl']
+        customer_name=request.POST['cname']
+        record_no=request.POST['recordnumber']
+
+        email_date=request.POST['emaildate']
+        audit_date=request.POST['auditdate']
+        campaign=request.POST['campaign']
+        zone=request.POST['zone']
+        concept=request.POST['concept']
+        ticket_no=request.POST['ticketnumber']
+
+        business_1=request.POST['business_1']
+        business_2 = request.POST['business_2']
+
+        ce_1=request.POST['ce_1']
+        ce_2 = request.POST['ce_2']
+        ce_3 = request.POST['ce_3']
+        ce_4 = request.POST['ce_4']
+        ce_5 = request.POST['ce_5']
+        ce_6 = request.POST['ce_6']
+
+        compliance_1=request.POST['compliance_1']
+        compliance_2 = request.POST['compliance_2']
+        compliance_3 = request.POST['compliance_3']
+
+        areas_improvement=request.POST['areaimprovement']
+        positives=request.POST['positives']
+        customer_feedback=request.POST['cfeedback']
+
+        #total_score=op_total+sf_total+bs_total+cl_total
+        added_by=request.user.profile.emp_name
+
+        email=EmailMonitoringForm(associate_name=associate_name,emp_id=emp_id,qa=qa,team_lead=team_lead,customer_name=customer_name,
+                                  record_no=record_no,email_date=email_date,audit_date=audit_date,campaign=campaign,zone=zone,
+                                  concept=concept,ticket_no=ticket_no,business_1=business_1,business_2=business_2,ce_1=ce_1,
+                                  ce_2=ce_2,ce_3=ce_3,ce_4=ce_4,ce_5=ce_5,ce_6=ce_6,compliance_1=compliance_1,compliance_2=compliance_2,
+                                  compliance_3=compliance_3,areas_improvement=areas_improvement,positives=positives,customer_feedback=customer_feedback,
+                                  added_by=added_by)
+        email.save()
+        return redirect('/employees/qahome')
+
+
+
+    else:
+
+        team_name = request.user.profile.team
+        team = Team.objects.get(name=team_name)
+        users = User.objects.all()
+        data={'team':team,'users':users}
+        return render(request, 'email-coaching-form.html',data)
 
 
 #calculation

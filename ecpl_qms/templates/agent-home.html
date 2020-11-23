@@ -19,7 +19,10 @@
                             <div class="col-md-4" style="padding: 50px 30px">
                                 <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 231px">Total Coachings</h2>
                                 <br>
-                                <p><a href="">{{count}}</a></p>
+                                <p><a href="">{{chat_counts}}</a></p>
+                                <p><a href="">{{email_counts}}</a></p>
+                                <p><a href="">{{in_counts}}</a></p>
+                                <p><a href="">{{out_counts}}</a></p>
                                 <small style="color:grey">Open status</small><span style="color:White;margin-left:10px">{{opencounts}}</span>
 
                             </div>
@@ -34,7 +37,7 @@
         <h2 class="text-center">All Coachings </h2><br>
         <div class="row">
 
-                {% for coaching in coachings %}
+                {% for coaching in out_coachings %}
                 <div class="col-md-6">
                 <div class="card" style="background:#203850; margin-bottom:20px">
                   <div class="card-body">
@@ -42,10 +45,10 @@
                     <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
                     <p class="card-text">{{coaching.snippet}}</p>
                     <a href="#" class="card-link">View</a>
-
                   </div>
                 </div>
                 </div>
+
                 {% endfor %}
 
         </div>
@@ -57,20 +60,58 @@
         <h2 class="text-center">Open Coachings </h2><br>
         <div class="row">
 
-                {% for coaching in open_coachings %}
+
+            {% for coaching in open_in %}
                 <div class="col-md-6">
-                <div class="card" style="background:#203850; margin-bottom:20px">
-                  <div class="card-body">
-                    <h5 class="card-title">{{coaching.associate_name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                    <p class="card-text">{{coaching.comments}}</p>
-                    <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
-
-                  </div>
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body">
+                        <h5 class="card-title">{{coaching.associate_name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                        <p class="card-text">{{coaching.comments}}</p>
+                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      </div>
+                    </div>
                 </div>
-                </div>
-                {% endfor %}
+            {% endfor %}
 
+            {% for coaching in open_out %}
+                <div class="col-md-6">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body">
+                        <h5 class="card-title">{{coaching.associate_name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                        <p class="card-text">{{coaching.comments}}</p>
+                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for coaching in open_email %}
+                <div class="col-md-6">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body">
+                        <h5 class="card-title">{{coaching.associate_name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                        <p class="card-text">{{coaching.comments}}</p>
+                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% for coaching in open_chat %}
+                <div class="col-md-6">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body">
+                        <h5 class="card-title">{{coaching.associate_name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
+                        <p class="card-text">{{coaching.comments}}</p>
+                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      </div>
+                    </div>
+                </div>
+            {% endfor %}
 
 
         </div>

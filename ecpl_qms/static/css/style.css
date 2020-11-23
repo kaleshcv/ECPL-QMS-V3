@@ -27,16 +27,12 @@ body
     min-width:500px;
 }
 
-#outboundform .opening,.softskills,.business,.callclosing,.compliance,.other,.basic
+#outboundform .opening,.softskills,.business,.callclosing,.compliance,.other,.basic,.customerexperience
 {
 
     padding: 20px 30px;
 }
-#outboundform h2
-{
-    font-size: 22px;
-    font-weight: 600
-}
+
 #outboundform .col-md-4
 {
     margin:20px 0px;
@@ -78,7 +74,7 @@ body
     margin:150px 150px;
 }
 .btn-info {
-    color: grey;
+    color: white;
     background-color: #011c38!important;
     border-color: #011c38!important;
     padding:3px 30px;
@@ -116,9 +112,44 @@ color:grey;
 {
     height:190px;
 }
-
+#outboundform {
+    margin:100px 0px;
+}
 #outboundform .container-lg {
     background: white;
     padding: 20px 30px;
     color: #010162;
+}
+#outboundform h4
+
+{
+    font-weight: 600;
+    font-size: 21px;
+}
+#guidelines ul
+{
+    position: relative;
+    width: 250px;
+    margin: 40px auto 0;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#guidelines ul li
+{
+    display: flex;
+    background:#273a44;
+    padding: 10px 20px;
+    color: #fff;
+    margin: 13px 0;
+    transition: .5s;
+    border-radius: 10px;
+}
+
+#guidelines ul li:hover
+{
+    transform: scale(1.06);
+    background:white;
+    color: black;
+
 }
