@@ -2,18 +2,23 @@
 {% block main %}
 
 <div class="container-lg" style="padding:100px 100px">
-
-
-            {% load crispy_forms_tags %}
-            <div class="signupform">
-                <h2 class="form-header">Register Employee</h2>
-                <form class="login-form" action="/employees/signup" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{form|crispy}}
-                {{profile_form|crispy}}
-                <input class="btn btn-info" type="submit" value="Signup">
-                </form>
+        <div class="row">
+            <div class="col-md-7" style="background:#fff; padding:30px 30px">
+                {% load crispy_forms_tags %}
+                <div class="signupform">
+                    <h2 class="form-header">Register Employee</h2>
+                    <form class="login-form" action="/employees/signup" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    {{profile_form|crispy}}
+                    <input class="btn btn-info" type="submit" value="Signup">
+                    </form>
+                </div>
             </div>
+            <div class="col-md-5">
+                <h2>Features</h2>
+            </div>
+        </div>
 
 </div>
 

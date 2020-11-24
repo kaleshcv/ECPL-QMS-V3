@@ -14,6 +14,7 @@ urlpatterns = [
     path('outbound-coaching-form',outboundCoachingform),
     path('inbound-coaching-form',inboundCoachingform),
     path('email-coaching-form',emailmonitoringform),
+    path('chat-coaching-form',chatmonitoringform),
 
 
 ]

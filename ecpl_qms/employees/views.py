@@ -37,13 +37,6 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
             # redirecting
-            print('user desi is -------',user.profile.emp_desi)
-
-
-            if user.profile.emp_desi=='Manager':
-
-
-                return render(request, 'qa-home.html')
 
             if user.profile.emp_desi=='qa':
                 return redirect('/employees/qahome')
@@ -58,7 +51,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('/employees/index')
+    return redirect('/employees/login')
 
 
 def agenthome(request):
@@ -370,6 +363,64 @@ def emailmonitoringform(request):
         users = User.objects.all()
         data={'team':team,'users':users}
         return render(request, 'email-coaching-form.html',data)
+
+def chatmonitoringform(request):
+
+    if request.method== 'POST':
+
+        associate_name=request.POST['empname']
+        emp_id=request.POST['empid']
+        qa=request.POST['qa']
+        team_lead=request.POST['tl']
+        customer_name=request.POST['cname']
+        record_no=request.POST['recordnumber']
+
+        chat_date=request.POST['chatdate']
+        audit_date=request.POST['auditdate']
+        campaign=request.POST['campaign']
+        zone=request.POST['zone']
+        concept=request.POST['concept']
+        ticket_no=request.POST['ticketnumber']
+
+        business_1=request.POST['business_1']
+        business_2 = request.POST['business_2']
+
+        ce_1=request.POST['ce_1']
+        ce_2 = request.POST['ce_2']
+        ce_3 = request.POST['ce_3']
+        ce_4 = request.POST['ce_4']
+        ce_5 = request.POST['ce_5']
+        ce_6 = request.POST['ce_6']
+
+        compliance_1=request.POST['compliance_1']
+        compliance_2 = request.POST['compliance_2']
+        compliance_3 = request.POST['compliance_3']
+
+        areas_improvement=request.POST['areaimprovement']
+        positives=request.POST['positives']
+        customer_feedback=request.POST['cfeedback']
+
+        #total_score=op_total+sf_total+bs_total+cl_total
+        added_by=request.user.profile.emp_name
+
+        chat=ChatMonitorinForm(associate_name=associate_name,emp_id=emp_id,qa=qa,team_lead=team_lead,customer_name=customer_name,
+                                  record_no=record_no,chat_date=chat_date,audit_date=audit_date,campaign=campaign,zone=zone,
+                                  concept=concept,ticket_no=ticket_no,business_1=business_1,business_2=business_2,ce_1=ce_1,
+                                  ce_2=ce_2,ce_3=ce_3,ce_4=ce_4,ce_5=ce_5,ce_6=ce_6,compliance_1=compliance_1,compliance_2=compliance_2,
+                                  compliance_3=compliance_3,areas_improvement=areas_improvement,positives=positives,customer_feedback=customer_feedback,
+                                  added_by=added_by)
+        chat.save()
+        return redirect('/employees/qahome')
+
+
+
+    else:
+
+        team_name = request.user.profile.team
+        team = Team.objects.get(name=team_name)
+        users = User.objects.all()
+        data={'team':team,'users':users}
+        return render(request, 'chat-coaching-form.html',data)
 
 
 #calculation
