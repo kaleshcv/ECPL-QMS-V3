@@ -4,115 +4,158 @@
     <div class="container-lg">
         <div class="row">
 
-                            <div class="col-md-8" style="padding: 50px 30px">
-                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 200px">Emp Profile</h2>
-                                <br>
-                                <div style="margin-left:10px" class="agentinfo">
-                                    <small>Employee Name : </small><span>{{user.profile.emp_name}}</span><br>
-                                    <small>Department : </small><span>{{user.profile.team}}</span><br>
-                                    <small>Employee ID : </small><span>{{user.profile.emp_id}}</span><br>
-                                    <small>QA Email ID : </small><span>{{team.qa.profile.email}}</span><br>
-                                    <small>Manager Email ID :</small><span>{{team.mgr.profile.email}}</span>
-                                </div>
+                            <div class="col-md-8" style="padding: 110px 30px">
+                              <h1 style="color:#fff">Quality Dashboard</h1>
                             </div>
 
                             <div class="col-md-4" style="padding: 50px 30px">
-                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 231px">Total Coachings</h2>
+                                <h4 style="color:grey;">Total Coachings</h4>
                                 <br>
-                                <p><a href="">{{chat_counts}}</a></p>
-                                <p><a href="">{{email_counts}}</a></p>
-                                <p><a href="">{{in_counts}}</a></p>
-                                <p><a href="">{{out_counts}}</a></p>
-                                <small style="color:grey">Open status</small><span style="color:White;margin-left:10px">{{opencounts}}</span>
 
+                                <table class="table table-dark">
+                                    <tr>
+                                        <td>Chat</td>
+                                        <td><a href="">{{chat_counts}}</a></td>
+                                        <td>Email</td>
+                                        <td><a href="">{{email_counts}}</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inbound</td>
+                                        <td><a href="">{{in_counts}}</a></td>
+                                        <td>Outbound</td>
+                                        <td><a href="">{{out_counts}}</a></td>
+                                    </tr>
+                                </table>
                             </div>
         </div>
     </div>
 
 </section>
 
-
-<section style="padding-top:70px">
-    <div class="container-lg">
-        <h2 class="text-center">All Coachings </h2><br>
-        <div class="row">
-
-                {% for coaching in out_coachings %}
-                <div class="col-md-6">
-                <div class="card" style="background:#203850; margin-bottom:20px">
-                  <div class="card-body">
-                    <h5 class="card-title">{{coaching.associate_name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                    <p class="card-text">{{coaching.snippet}}</p>
-                    <a href="#" class="card-link">View</a>
-                  </div>
-                </div>
-                </div>
-
-                {% endfor %}
-
-        </div>
-    </div>
-</section>
-
-<section style="padding-top:70px">
+<section style="padding-top:70px" id="empopencoachins">
     <div class="container-lg">
         <h2 class="text-center">Open Coachings </h2><br>
         <div class="row">
 
 
             {% for coaching in open_in %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
-                      <div class="card-body">
-                        <h5 class="card-title">{{coaching.associate_name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                        <p class="card-text">{{coaching.comments}}</p>
-                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Inbound</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                          <a href="/employees/coaching-view-inbound/{{coaching.id}}" class="card-link">View & Sign</a>
                       </div>
                     </div>
                 </div>
             {% endfor %}
 
             {% for coaching in open_out %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
-                      <div class="card-body">
-                        <h5 class="card-title">{{coaching.associate_name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                        <p class="card-text">{{coaching.comments}}</p>
-                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Outbound</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                          <a href="/employees/coaching-view-outbound/{{coaching.id}}" class="card-link">View & Sign</a>
                       </div>
                     </div>
                 </div>
             {% endfor %}
 
             {% for coaching in open_email %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
-                      <div class="card-body">
-                        <h5 class="card-title">{{coaching.associate_name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                        <p class="card-text">{{coaching.comments}}</p>
-                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Email</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                          <a href="/employees/coaching-view-email/{{coaching.id}}" class="card-link">View & Sign</a>
                       </div>
                     </div>
                 </div>
             {% endfor %}
 
             {% for coaching in open_chat %}
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
-                      <div class="card-body">
-                        <h5 class="card-title">{{coaching.associate_name}}</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                        <p class="card-text">{{coaching.comments}}</p>
-                        <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Chat</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                          <a href="/employees/coaching-view-chat/{{coaching.id}}" class="card-link">View & Sign</a>
                       </div>
                     </div>
                 </div>
             {% endfor %}
 
+
+        </div>
+    </div>
+</section>
+
+
+<section style="padding-top:70px" id="empopencoachins">
+    <div class="container-lg">
+        <h2 class="text-center">Recent Coachings </h2><br>
+        <div class="row">
+
+                {% for coaching in out_coachings %}
+                <div class="col-md-4">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Outbound</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% for coaching in in_coachings %}
+                <div class="col-md-4">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Inbound</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% for coaching in email_coachings %}
+                <div class="col-md-4">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Email</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% for coaching in chat_coachings %}
+                <div class="col-md-4">
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Chat</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
 
         </div>
     </div>

@@ -4,6 +4,7 @@ from django.contrib.auth import login, logout
 from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm,EmailMonitoringForm,ChatMonitorinForm
 from . import forms
 from django.contrib.auth.models import User
+from datetime import datetime
 
 def index(request):
     return render(request,'index.html')
@@ -85,17 +86,61 @@ def agenthome(request):
     return render(request, 'agent-home.html',data)
 
 
-def empCoachingView(request,pk):
+def empCoachingViewOutbound(request,pk):
     coaching=OutboundMonitoringForm.objects.get(id=pk)
     data={'coaching':coaching}
-    return render(request,'emp-coaching-view.html',data)
+    return render(request,'emp-coaching-view-outbound.html',data)
+
+def empCoachingViewInbound(request,pk):
+    coaching=InboundMonitoringForm.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'emp-coaching-view-inbound.html',data)
+def empCoachingViewEmail(request,pk):
+    coaching = EmailMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'emp-coaching-view-email.html', data)
+
+
+def empCoachingViewChat(request,pk):
+    coaching = OutboundMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'emp-coaching-view-chat.html', data)
+
+def qaCoachingView(request,pk):
+    coaching=OutboundMonitoringForm.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'qa-coaching-view.html',data)
+
 
 def signCoaching(request,pk):
+    now = datetime.now()
+    category=request.POST['category']
 
-    coaching=OutboundMonitoringForm.objects.get(id=pk)
-    coaching.status=True
-    coaching.save()
-    return redirect('/employees/agenthome')
+    if category == 'outbound':
+        coaching=OutboundMonitoringForm.objects.get(id=pk)
+        coaching.status=True
+        coaching.closed_date=now
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category=='inbound':
+        coaching = InboundMonitoringForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category=='chat':
+        coaching = ChatMonitorinForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category=='email':
+        coaching = EmailMonitoringForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.save()
+        return redirect('/employees/agenthome')
+
 
 
 def qahome(request):

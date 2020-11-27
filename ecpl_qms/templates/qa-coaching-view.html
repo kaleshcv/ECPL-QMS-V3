@@ -100,13 +100,7 @@
         </table>
     </div>
 
-    <form class="login-form" action="/employees/coaching/signcoaching/{{coaching.id}}" method="post">
-                  {% csrf_token %}
-        <label for="emp_comments">Employee Comments</label><br>
-        <input type="text" name="emp_comments" id="emp_comments" class="form-control" style="height: 140px">
-        <br>
-        <input class="btn btn-info" type="submit" value="Sign">
-    </form>
+
 </div>
 </section>
 {% endblock %}

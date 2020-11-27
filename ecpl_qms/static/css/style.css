@@ -38,7 +38,7 @@ body
     margin:20px 0px;
 }
 
-#coachingciew td
+#coachingview td
 {
     width:25%;
 }
@@ -152,4 +152,21 @@ color:grey;
     background:white;
     color: black;
 
+}
+#empopencoachins small
+{
+    color:grey;
+    font-size:14px;
+    margin-right:20px;
+}
+#empopencoachins h4
+{
+    color:white;
+    font-size:16px;
+}
+#coachingview h2{
+    text-align: center;
+    padding: 10px 10px;
+    font-size: 21px;
+    font-weight: 600;
 }

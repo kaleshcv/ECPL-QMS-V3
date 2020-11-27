@@ -54,22 +54,21 @@
     </div>
 </section>
 
-<section style="padding-top:70px">
+<section style="padding-top:70px" id="empopencoachins">
     <div class="container-lg">
         <h2 class="text-center">Recent Coachings </h2><br>
         <div class="row">
 
                 {% for coaching in coachings %}
                 <div class="col-md-4">
-                <div class="card" style="background:#203850; margin-bottom:20px">
-                  <div class="card-body">
-                    <h5 class="card-title">{{coaching.associate_name}}</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">{{coaching.audit_date}}</h6>
-                    <p class="card-text">{{coaching.snippet}}</p>
-                    <a href="/employees/coaching/{{coaching.id}}" class="card-link">View</a>
-
-                  </div>
-                </div>
+                    <div class="card" style="background:#203850; margin-bottom:20px">
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Outbound</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Audit By</small>{{coaching.qa}}</h4>
+                      </div>
+                    </div>
                 </div>
                 {% endfor %}
 

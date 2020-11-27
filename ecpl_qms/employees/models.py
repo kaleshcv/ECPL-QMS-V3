@@ -99,6 +99,8 @@ class Team(models.Model):
 
     )
     name=models.CharField(max_length=50,choices=team_list)
+    qa = models.OneToOneField(User, on_delete=models.CASCADE,related_name='qa',null=True)
+    manager = models.OneToOneField(User, on_delete=models.CASCADE,related_name='manager',null=True)
 
 
 
@@ -152,7 +154,7 @@ class OutboundMonitoringForm(models.Model):
     comments=models.TextField()
     added_by=models.CharField(max_length=30)
     status=models.BooleanField(default=False)
-    closed_date=models.DateField(null=True)
+    closed_date=models.DateTimeField(null=True)
 
 
     def __str__(self):
@@ -210,7 +212,7 @@ class InboundMonitoringForm(models.Model):
     comments=models.TextField()
     added_by=models.CharField(max_length=30)
     status=models.BooleanField(default=False)
-    closed_date=models.DateField(null=True)
+    closed_date=models.DateTimeField(null=True)
 
 
     def __str__(self):
@@ -253,7 +255,7 @@ class EmailMonitoringForm(models.Model):
 
     added_by = models.CharField(max_length=30)
     status = models.BooleanField(default=False)
-    closed_date = models.DateField(null=True)
+    closed_date = models.DateTimeField(null=True)
 
     ce_total=models.IntegerField(null=True)
     business_total=models.IntegerField(null=True)
@@ -300,7 +302,7 @@ class ChatMonitorinForm(models.Model):
 
     added_by = models.CharField(max_length=30)
     status = models.BooleanField(default=False)
-    closed_date = models.DateField(null=True)
+    closed_date = models.DateTimeField(null=True)
 
     ce_total = models.IntegerField(null=True)
     business_total = models.IntegerField(null=True)
