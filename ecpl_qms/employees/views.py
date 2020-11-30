@@ -39,7 +39,7 @@ def login_view(request):
             login(request, user)
             # redirecting
 
-            if user.profile.emp_desi=='qa':
+            if user.profile.emp_desi=='QA':
                 return redirect('/employees/qahome')
 
             else:
@@ -102,7 +102,7 @@ def empCoachingViewEmail(request,pk):
 
 
 def empCoachingViewChat(request,pk):
-    coaching = OutboundMonitoringForm.objects.get(id=pk)
+    coaching = ChatMonitorinForm.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'emp-coaching-view-chat.html', data)
 
@@ -115,29 +115,34 @@ def qaCoachingView(request,pk):
 def signCoaching(request,pk):
     now = datetime.now()
     category=request.POST['category']
+    emp_comments=request.POST['emp_comments']
 
     if category == 'outbound':
         coaching=OutboundMonitoringForm.objects.get(id=pk)
         coaching.status=True
         coaching.closed_date=now
+        coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
     elif category=='inbound':
         coaching = InboundMonitoringForm.objects.get(id=pk)
         coaching.status = True
         coaching.closed_date = now
+        coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
     elif category=='chat':
         coaching = ChatMonitorinForm.objects.get(id=pk)
         coaching.status = True
         coaching.closed_date = now
+        coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
     elif category=='email':
         coaching = EmailMonitoringForm.objects.get(id=pk)
         coaching.status = True
         coaching.closed_date = now
+        coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
 
@@ -145,13 +150,28 @@ def signCoaching(request,pk):
 
 def qahome(request):
     user=request.user.profile.emp_name
-    coachings=OutboundMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
 
-    counts=OutboundMonitoringForm.objects.filter(added_by=user).count()
+    out_coachings=OutboundMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
+    out_counts=OutboundMonitoringForm.objects.filter(added_by=user).count()
+    out_open_counts = OutboundMonitoringForm.objects.filter(added_by=user,status=False).count()
 
-    opencounts = OutboundMonitoringForm.objects.filter(added_by=user,status=False).count()
+    in_coachings=InboundMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
+    in_counts=InboundMonitoringForm.objects.filter(added_by=user).count()
+    in_open_counts=InboundMonitoringForm.objects.filter(added_by=user,status=False).count()
 
-    data={'coachings':coachings,'counts':counts,'opencounts':opencounts}
+    chat_coachings=ChatMonitorinForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
+    chat_counts=ChatMonitorinForm.objects.filter(added_by=user).count()
+    chat_open_counts=ChatMonitorinForm.objects.filter(added_by=user,status=False).count()
+
+    email_coachings=EmailMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
+    email_counts=EmailMonitoringForm.objects.filter(added_by=user).count()
+    email_open_counts=ChatMonitorinForm.objects.filter(added_by=user,status=False).count()
+
+    data={'out_coachings':out_coachings,'out_counts':out_counts,'out_open_counts':out_open_counts,
+          'in_coachings':in_coachings,'in_counts':in_counts,'in_open_counts':in_open_counts,
+          'chat_coachings':chat_coachings,'chat_counts':chat_counts,'chat_open_counts':chat_open_counts,
+          'email_coachings':email_coachings,'mail_counts':email_counts,'email_open_counts':email_open_counts
+          }
 
     return render(request,'qa-home.html',data)
 
@@ -179,7 +199,6 @@ def outboundCoachingform(request):
         x=categoryOne(opening_1)
         y=categoryOne(opening_2)
         op_total=x+y
-        print(op_total)
 
         softskill_1=request.POST['softskill_1']
         softskill_2 = request.POST['softskill_2']
@@ -197,7 +216,6 @@ def outboundCoachingform(request):
         n5=categoryTwo(softskill_5)
         n6=categoryTwo(softskill_6)
         sf_total=n1+n2+n3+n4+n5+n6
-        print(sf_total)
 
         business_1=request.POST['business_1']
         business_2 = request.POST['business_2']
@@ -207,7 +225,6 @@ def outboundCoachingform(request):
         b2=categoryTwo(business_2)
         b3=categoryTwo(business_3)
         bs_total=b1+b2+b3
-        print(bs_total)
 
         closing_1=request.POST['closing_1']
         closing_2 = request.POST['closing_2']
@@ -215,7 +232,6 @@ def outboundCoachingform(request):
         c1=categoryTwo(closing_1)
         c2=categoryTwo(closing_2)
         cl_total=c1+c2
-        print(cl_total)
 
         compliance_1=request.POST['compliance_1']
         compliance_2 = request.POST['compliance_2']
@@ -244,13 +260,11 @@ def outboundCoachingform(request):
         return redirect('/employees/qahome')
 
 
-
     else:
 
-        team_name = request.user.profile.team
-        team = Team.objects.get(name=team_name)
+        teams = Team.objects.all()
         users = User.objects.all()
-        data={'team':team,'users':users}
+        data={'teams':teams,'users':users}
         return render(request, 'outbound-coaching-form.html',data)
 
 def inboundCoachingform(request):
@@ -345,10 +359,10 @@ def inboundCoachingform(request):
 
     else:
 
-        team_name = request.user.profile.team
-        team = Team.objects.get(name=team_name)
+
+        teams = Team.objects.all()
         users = User.objects.all()
-        data={'team':team,'users':users}
+        data={'teams':teams,'users':users}
         return render(request, 'inbound-coaching-form.html',data)
 
 def emailmonitoringform(request):
@@ -403,10 +417,10 @@ def emailmonitoringform(request):
 
     else:
 
-        team_name = request.user.profile.team
-        team = Team.objects.get(name=team_name)
+
+        teams = Team.objects.all()
         users = User.objects.all()
-        data={'team':team,'users':users}
+        data={'teams':teams,'users':users}
         return render(request, 'email-coaching-form.html',data)
 
 def chatmonitoringform(request):
@@ -461,10 +475,10 @@ def chatmonitoringform(request):
 
     else:
 
-        team_name = request.user.profile.team
-        team = Team.objects.get(name=team_name)
+
+        teams = Team.objects.all()
         users = User.objects.all()
-        data={'team':team,'users':users}
+        data={'teams':teams,'users':users}
         return render(request, 'chat-coaching-form.html',data)
 
 

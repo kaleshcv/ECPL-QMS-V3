@@ -93,6 +93,10 @@ body
     background: #011c38;
 
 }
+#profile h4 {
+    color:#007bff;
+    font-size: 16px;
+}
 
 .card-title,.card-text
 {
@@ -161,7 +165,7 @@ color:grey;
 }
 #empopencoachins h4
 {
-    color:white;
+    color:#007bff;
     font-size:16px;
 }
 #coachingview h2{

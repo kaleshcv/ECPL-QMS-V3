@@ -100,7 +100,7 @@ class Team(models.Model):
     )
     name=models.CharField(max_length=50,choices=team_list)
     qa = models.OneToOneField(User, on_delete=models.CASCADE,related_name='qa',null=True)
-    manager = models.OneToOneField(User, on_delete=models.CASCADE,related_name='manager',null=True)
+    mgr=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager',null=True)
 
 
 
@@ -155,6 +155,7 @@ class OutboundMonitoringForm(models.Model):
     added_by=models.CharField(max_length=30)
     status=models.BooleanField(default=False)
     closed_date=models.DateTimeField(null=True)
+    emp_comments=models.TextField(null=True)
 
 
     def __str__(self):
@@ -213,7 +214,7 @@ class InboundMonitoringForm(models.Model):
     added_by=models.CharField(max_length=30)
     status=models.BooleanField(default=False)
     closed_date=models.DateTimeField(null=True)
-
+    emp_comments = models.TextField(null=True)
 
     def __str__(self):
         return self.associate_name
@@ -256,11 +257,13 @@ class EmailMonitoringForm(models.Model):
     added_by = models.CharField(max_length=30)
     status = models.BooleanField(default=False)
     closed_date = models.DateTimeField(null=True)
+    emp_comments = models.TextField(null=True)
 
     ce_total=models.IntegerField(null=True)
     business_total=models.IntegerField(null=True)
     compliance_total=models.IntegerField(null=True)
     overall_score=models.IntegerField(null=True)
+
 
     def __str__(self):
         return self.associate_name
@@ -303,6 +306,7 @@ class ChatMonitorinForm(models.Model):
     added_by = models.CharField(max_length=30)
     status = models.BooleanField(default=False)
     closed_date = models.DateTimeField(null=True)
+    emp_comments = models.TextField(null=True)
 
     ce_total = models.IntegerField(null=True)
     business_total = models.IntegerField(null=True)
