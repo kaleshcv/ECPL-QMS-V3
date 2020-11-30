@@ -5,6 +5,7 @@ from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm,Em
 from . import forms
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.contrib import messages
 
 def index(request):
     return render(request,'index.html')
@@ -44,7 +45,10 @@ def login_view(request):
 
             else:
                 return redirect('/employees/agenthome')
-
+        else:
+            form = AuthenticationForm()
+            messages.info(request,'Invalid Credentials !')
+            return render(request,'login.html',{'form':form})
     else:
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})

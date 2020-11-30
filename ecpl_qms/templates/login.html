@@ -30,6 +30,11 @@
                         <br>
                     <input class="btn btn-info" type="submit" value="Login">
                     </form>
+                    <div style="padding: 10px 0px;color: orangered;font-size: 20px;margin-top: 20px">
+                    {% for m in messages %}
+                        {{m}}
+                    {% endfor %}
+                    </div>
                 </div>
 
             </div>
