@@ -318,3 +318,63 @@ class ChatMonitorinForm(models.Model):
 
     def snippet(self):
         return self.comments[:100] + '...'
+
+class SurveyMonitorinForm(models.Model):
+
+    #Basic
+    associate_name = models.CharField(max_length=50)
+    emp_id = models.IntegerField()
+    qa = models.CharField(max_length=50)
+    team_lead = models.CharField(max_length=50)
+    customer_name = models.CharField(max_length=50)
+    customer_contact=models.IntegerField()
+    call_date = models.DateField()
+    audit_date = models.DateField()
+    campaign = models.CharField(max_length=100)
+    zone = models.CharField(max_length=60)
+    concept = models.CharField(max_length=60)
+    call_duration = models.IntegerField()
+
+    #opening and Closing
+    oc_1 = models.CharField(max_length=10)
+    oc_2 = models.CharField(max_length=10)
+    oc_3 = models.CharField(max_length=10)
+    oc_4 = models.CharField(max_length=10)
+    oc_5 = models.CharField(max_length=10)
+
+    #Soft Skill
+    sc_1 = models.CharField(max_length=10)
+    sc_2 = models.CharField(max_length=10)
+    sc_3 = models.CharField(max_length=10)
+    sc_4 = models.CharField(max_length=10)
+    sc_5 = models.CharField(max_length=10)
+
+    # Business and Compliance
+    bc_1 = models.CharField(max_length=10)
+    bc_2 = models.CharField(max_length=10)
+    bc_3 = models.CharField(max_length=10)
+    bc_4 = models.CharField(max_length=10)
+    bc_5 = models.CharField(max_length=10)
+    bc_6 = models.CharField(max_length=10)
+    bc_7 = models.CharField(max_length=10)
+    bc_8 = models.CharField(max_length=10)
+
+    areas_improvement = models.TextField()
+    positives = models.TextField()
+    comments = models.TextField()
+
+    added_by = models.CharField(max_length=30)
+    status = models.BooleanField(default=False)
+    closed_date = models.DateTimeField(null=True)
+    emp_comments = models.TextField(null=True)
+
+    oc_total = models.IntegerField(null=True)
+    sc_total = models.IntegerField(null=True)
+    bc_total = models.IntegerField(null=True)
+    total_score = models.IntegerField(null=True)
+
+    def __str__(self):
+        return self.associate_name
+
+    def snippet(self):
+        return self.comments[:100] + '...'

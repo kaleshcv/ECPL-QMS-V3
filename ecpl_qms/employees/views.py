@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm,EmailMonitoringForm,ChatMonitorinForm
+from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm,EmailMonitoringForm,ChatMonitorinForm,SurveyMonitorinForm
 from . import forms
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -496,15 +496,74 @@ def chatmonitoringform(request):
         chat.save()
         return redirect('/employees/qahome')
 
-
-
     else:
-
-
         teams = Team.objects.all()
         users = User.objects.all()
         data={'teams':teams,'users':users}
         return render(request, 'chat-coaching-form.html',data)
+
+
+# Survey Monitoring Form
+def surveyCoachingform(request):
+
+    if request.method== 'POST':
+
+        associate_name=request.POST['empname']
+        emp_id=request.POST['empid']
+        qa=request.POST['qa']
+        team_lead=request.POST['tl']
+        customer_name=request.POST['cname']
+        customer_contact=request.POST['ccontact']
+
+        call_date=request.POST['calldate']
+        audit_date=request.POST['auditdate']
+        campaign=request.POST['campaign']
+        zone=request.POST['zone']
+        concept=request.POST['concept']
+        call_duration=request.POST['callduration']
+
+
+        oc_1 = request.POST['opening_1']
+        oc_2 = request.POST['opening_2']
+        oc_3 = request.POST['opening_3']
+        oc_4 = request.POST['opening_4']
+        oc_5 = request.POST['opening_5']
+
+        sc_1 = request.POST['softskill_1']
+        sc_2 = request.POST['softskill_2']
+        sc_3 = request.POST['softskill_3']
+        sc_4 = request.POST['softskill_4']
+        sc_5 = request.POST['softskill_5']
+
+        bc_1 = request.POST['business_1']
+        bc_2 = request.POST['business_2']
+        bc_3 = request.POST['business_3']
+        bc_4 = request.POST['business_4']
+        bc_5 = request.POST['business_5']
+        bc_6 = request.POST['business_6']
+        bc_7 = request.POST['business_7']
+        bc_8 = request.POST['business_8']
+
+
+        areas_improvement=request.POST['areaimprovement']
+        positives=request.POST['positives']
+        customer_feedback=request.POST['cfeedback']
+        added_by=request.user.profile.emp_name
+
+        survey=SurveyMonitorinForm(associate_name=associate_name,emp_id=emp_id,qa=qa,team_lead=team_lead,customer_name=customer_name,
+                                  customer_contact=customer_contact,call_date=call_date,audit_date=audit_date,campaign=campaign,zone=zone,
+                                  concept=concept,call_duration=call_duration,oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,oc_4=oc_4,oc_5=oc_5,oc_6=oc_6,
+                                  sc_1=sc_1,sc_2=sc_2,sc_3=sc_3,sc_4=sc_4,sc_5=sc_5,bc_1=bc_1,bc_2=bc_2,bc_3=bc_3,bc_4=bc_4,bc_5=bc_5,
+                                   bc_6=bc_6,bc_7=bc_7,bc_8=bc_8,areas_improvement=areas_improvement,positives=positives,customer_feedback=customer_feedback,
+                                   added_by=added_by
+                                   )
+        survey.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data={'teams':teams,'users':users}
+        return render(request, 'survey-coaching-form.html',data)
 
 
 #calculation
