@@ -46,6 +46,10 @@
                                 </div>
                             </div>
         </div>
+        <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
+        <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
+        <span style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}</span>
+        <span style="color:white"><small style="color:grey">Team :</small>{{user.profile.team}}</span>
     </div>
 
 </section>
@@ -86,6 +90,7 @@
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
                           <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
+                          <a href="coaching-view-outbound-qa/{{coaching.id}}" style="color:greenyellow">View</a>
                       </div>
                     </div>
                 </div>
@@ -99,6 +104,7 @@
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
                           <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
+                          <a href="coaching-view-inbound-qa/{{coaching.id}}" style="color:greenyellow">View</a>
                       </div>
                     </div>
                 </div>
@@ -112,6 +118,7 @@
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
                           <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
+                          <a href="coaching-view-email-qa/{{coaching.id}}" style="color:greenyellow">View</a>
                       </div>
                     </div>
                 </div>
@@ -125,6 +132,7 @@
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
                           <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
+                          <a href="coaching-view-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a>
                       </div>
                     </div>
                 </div>

@@ -106,11 +106,25 @@ def empCoachingViewChat(request,pk):
     data = {'coaching': coaching}
     return render(request, 'emp-coaching-view-chat.html', data)
 
-def qaCoachingView(request,pk):
+def qaCoachingViewOutbound(request,pk):
     coaching=OutboundMonitoringForm.objects.get(id=pk)
     data={'coaching':coaching}
-    return render(request,'qa-coaching-view.html',data)
+    return render(request,'qa-coaching-view-outbound.html',data)
 
+def qaCoachingViewInbound(request,pk):
+    coaching=InboundMonitoringForm.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'qa-coaching-view-inbound.html',data)
+
+def qaCoachingViewEmail(request,pk):
+    coaching=EmailMonitoringForm.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'qa-coaching-view-email.html',data)
+
+def qaCoachingViewChat(request,pk):
+    coaching=ChatMonitorinForm.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'qa-coaching-view-chat.html',data)
 
 def signCoaching(request,pk):
     now = datetime.now()
