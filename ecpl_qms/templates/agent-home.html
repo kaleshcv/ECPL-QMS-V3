@@ -21,16 +21,43 @@
     </div>
 
 </section>
-
-
-<section id="guidelines" style="padding-top:70px">
+<section id="guidelines" style="padding-top:20px">
     <div class="container-lg">
         <div class="row">
-            <div class="col-md-6">
-                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">
+            <div class="col-md-6" style="padding: 50px 0px">
+                 <h4 style="color:Black;font-weight: 600;font-size: 25px;" class="text-center">Open Coachings</h4>
+                                <br>
+
+                                <table class="table info">
+                                    <tr>
+                                        <td>Chat</td>
+                                        <td>{{open_chat_count}}</td>
+                                        <td>Email</td>
+                                        <td>{{open_email_count}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inbound</td>
+                                        <td>{{open_in_count}}</td>
+                                        <td>Outbound</td>
+                                        <td>{{open_out_count}}</td>
+                                    </tr>
+                                </table>
 
             </div>
-            <div class="col-md-6" style="padding: 100px 0px">
+            <div class="col-md-6">
+                <!--<img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">-->
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="guidelines" style="padding-top:20px">
+    <div class="container-lg">
+        <div class="row">
+
+            <div class="col-md-6" style="padding: 50px 0px">
                  <h4 style="color:Black;font-weight: 600;font-size: 25px;" class="text-center">Total Coachings</h4>
                                 <br>
 
@@ -52,6 +79,10 @@
             </div>
 
         </div>
+        <div class="col-md-6">
+                <!--<img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">-->
+
+            </div>
     </div>
 </section>
 

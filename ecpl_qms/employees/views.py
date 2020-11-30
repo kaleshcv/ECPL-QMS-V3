@@ -66,18 +66,22 @@ def agenthome(request):
     out_coachings = OutboundMonitoringForm.objects.filter(associate_name=user)
     out_counts = OutboundMonitoringForm.objects.filter(associate_name=user).count()
     open_out = OutboundMonitoringForm.objects.filter(associate_name=user,status=False)
+    open_out_count = OutboundMonitoringForm.objects.filter(associate_name=user, status=False).count()
 
     in_coachings=InboundMonitoringForm.objects.filter(associate_name=user)
     in_counts=InboundMonitoringForm.objects.filter(associate_name=user).count()
     open_in=InboundMonitoringForm.objects.filter(associate_name=user,status=False)
+    open_in_count = InboundMonitoringForm.objects.filter(associate_name=user, status=False).count()
 
     email_coachings=EmailMonitoringForm.objects.filter(associate_name=user)
     email_counts=EmailMonitoringForm.objects.filter(associate_name=user).count()
     open_email=EmailMonitoringForm.objects.filter(associate_name=user,status=False)
+    open_email_count = EmailMonitoringForm.objects.filter(associate_name=user, status=False).count()
 
     chat_coachings = ChatMonitorinForm.objects.filter(associate_name=user)
     chat_counts = ChatMonitorinForm.objects.filter(associate_name=user).count()
     open_chat = ChatMonitorinForm.objects.filter(associate_name=user, status=False)
+    open_chat_count = ChatMonitorinForm.objects.filter(associate_name=user, status=False).count()
 
 
     team=Team.objects.get(name=team_name)
@@ -85,7 +89,10 @@ def agenthome(request):
     data={'out_coachings':out_coachings,'in_coachings':in_coachings,'email_coachings':email_coachings,'chat_coachings':chat_coachings,
 
           'out_counts':out_counts,'in_counts':in_counts,'email_counts':email_counts,'chat_counts':chat_counts,
-          'open_out':open_out,'open_in':open_in,'open_email':open_email,'open_chat':open_chat,'team':team}
+          'open_out':open_out,'open_in':open_in,'open_email':open_email,'open_chat':open_chat,'team':team,
+          'open_out_count':open_out_count,'open_in_count':open_in_count,'open_chat_count':open_chat_count,
+          'open_email_count':open_email_count
+          }
 
     return render(request, 'agent-home.html',data)
 
