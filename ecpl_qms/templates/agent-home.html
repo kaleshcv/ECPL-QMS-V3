@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% block main %}
+{% load static %}
 <section id="profile">
     <div class="container-lg">
         <div class="row">
@@ -9,7 +10,28 @@
                             </div>
 
                             <div class="col-md-4" style="padding: 50px 30px">
-                                <h4 style="color:grey;font-weight: 600;font-size: 25px;" class="text-center">Total Coachings</h4>
+
+                            </div>
+        </div>
+        <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
+        <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
+        <span style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}</span>
+        <span style="color:white"><small style="color:grey">Team :</small>{{user.profile.team}}</span>
+        <span style="color:white"><small style="color:grey">Designation :</small>{{user.profile.emp_desi}}</span>
+    </div>
+
+</section>
+
+
+<section id="guidelines" style="padding-top:70px">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">
+
+            </div>
+            <div class="col-md-6" style="padding: 100px 0px">
+                 <h4 style="color:Black;font-weight: 600;font-size: 25px;" class="text-center">Total Coachings</h4>
                                 <br>
 
                                 <table class="table info">
@@ -26,15 +48,11 @@
                                         <td>{{out_counts}}</td>
                                     </tr>
                                 </table>
-                            </div>
-        </div>
-        <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
-        <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
-        <span style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}</span>
-        <span style="color:white"><small style="color:grey">Team :</small>{{user.profile.team}}</span>
-        <span style="color:white"><small style="color:grey">Designation :</small>{{user.profile.emp_desi}}</span>
-    </div>
 
+            </div>
+
+        </div>
+    </div>
 </section>
 
 <section style="padding-top:70px" id="empopencoachins">
@@ -112,13 +130,14 @@
 
                 {% for coaching in out_coachings %}
                 <div class="col-md-4">
-                    <div class="card" style="background:#203850; margin-bottom:20px">
+                    <div class="card" style="background:#203850; margin-bottom:20px; height:230px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
                           <h4><small>Category</small>Outbound</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
+                          <p><a href="coaching-view-outbound-qa/{{coaching.id}}" style="color:greenyellow">View</a></p>
                       </div>
                     </div>
                 </div>
@@ -126,13 +145,14 @@
 
                 {% for coaching in in_coachings %}
                 <div class="col-md-4">
-                    <div class="card" style="background:#203850; margin-bottom:20px">
+                    <div class="card" style="background:#203850; margin-bottom:20px;height:230px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
                           <h4><small>Category</small>Inbound</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
+                          <p><a href="coaching-view-inbound-qa/{{coaching.id}}" style="color:greenyellow">View</a></p>
                       </div>
                     </div>
                 </div>
@@ -140,13 +160,14 @@
 
                 {% for coaching in email_coachings %}
                 <div class="col-md-4">
-                    <div class="card" style="background:#203850; margin-bottom:20px">
+                    <div class="card" style="background:#203850; margin-bottom:20px;height:230px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
                           <h4><small>Category</small>Email</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
+                          <p><a href="coaching-view-email-qa/{{coaching.id}}" style="color:greenyellow">View</a></p>
                       </div>
                     </div>
                 </div>
@@ -154,13 +175,14 @@
 
                 {% for coaching in chat_coachings %}
                 <div class="col-md-4">
-                    <div class="card" style="background:#203850; margin-bottom:20px">
+                    <div class="card" style="background:#203850; margin-bottom:20px;height:230px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
                           <h4><small>Category</small>Chat</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
+                          <p><a href="coaching-view-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a></p>
                       </div>
                     </div>
                 </div>
