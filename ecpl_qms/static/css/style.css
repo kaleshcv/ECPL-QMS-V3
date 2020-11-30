@@ -91,8 +91,14 @@ body
 }
 #profile {
     background: #011c38;
-
 }
+#profile .info td{
+    color: white;
+}
+#profile .info td{
+    border:none;
+}
+
 #profile h4 {
     color:#007bff;
     font-size: 16px;

@@ -5,25 +5,25 @@
         <div class="row">
 
                             <div class="col-md-8" style="padding: 110px 30px">
-                              <h1 style="color:#fff">Quality Dashboard</h1>
+                              <h1 style="color:darkgray">Quality Dashboard</h1>
                             </div>
 
                             <div class="col-md-4" style="padding: 50px 30px">
-                                <h4 style="color:grey;">Total Coachings</h4>
+                                <h4 style="color:grey;font-weight: 600;font-size: 25px;" class="text-center">Total Coachings</h4>
                                 <br>
 
-                                <table class="table table-dark">
+                                <table class="table info">
                                     <tr>
                                         <td>Chat</td>
-                                        <td><a href="">{{chat_counts}}</a></td>
+                                        <td>{{chat_counts}}</td>
                                         <td>Email</td>
-                                        <td><a href="">{{email_counts}}</a></td>
+                                        <td>{{email_counts}}</td>
                                     </tr>
                                     <tr>
                                         <td>Inbound</td>
-                                        <td><a href="">{{in_counts}}</a></td>
+                                        <td>{{in_counts}}</td>
                                         <td>Outbound</td>
-                                        <td><a href="">{{out_counts}}</a></td>
+                                        <td>{{out_counts}}</td>
                                     </tr>
                                 </table>
                             </div>
@@ -31,7 +31,8 @@
         <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
         <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
         <span style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}</span>
-        <span style="color:white"><small style="color:grey">Team :</small>{{team.name}}</span>
+        <span style="color:white"><small style="color:grey">Team :</small>{{user.profile.team}}</span>
+        <span style="color:white"><small style="color:grey">Designation :</small>{{user.profile.emp_desi}}</span>
     </div>
 
 </section>
