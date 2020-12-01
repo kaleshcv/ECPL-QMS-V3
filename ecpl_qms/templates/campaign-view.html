@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<section>
+    <div class="container-lg" style="padding: 0px 300px;margin-top:150px">
+        <h2>Campaign - {{team.name}}</h2><br>
+        <form action="/employees/add-coaching" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="agent">Select Employee</label>
+            <select name="agent" id="agent" class="form-control">
+                {% for agent in agents %}
+                <option value="{{agent.emp_name}}" class="form-control">{{agent.emp_name}}</option>
+                {% endfor %}
+            </select><br>
+            <label for="">Choose Audit Form</label>
+            <select name="audit_form" id="" class="form-control">
+                <option value="chat" class="form-control">Chat Monitoring Form</option>
+                <option value="outbound" class="form-control">Outbound Monitoring Form</option>
+            </select><br><br>
+            <input type="hidden" value="{{team.name}}" name="team">
+
+            <button class="btn btn-info">Add Coaching</button>
+        </form>
+    </div>
+</section>
+
+
+{% endblock %}

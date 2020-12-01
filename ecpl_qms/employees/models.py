@@ -26,7 +26,8 @@ class Profile(models.Model):
         ('Golden Eye Tech CCTV','Golden Eye Tech CCTV'),('MOVEMENT INSURANCE','MOVEMENT INSURANCE'),('Nucleus Media','Nucleus Media'),
         ('PSECU','PSECU'),('Tentamus','Tentamus'),('L&D','L&D'),('Get A Rate','Get A Rate'),('Mayfair Acct and Wealth','Mayfair Acct and Wealth'),
         ('Superking','Superking'),('Millionaires Group','Millionaires Group'),('PROTOSTAR','PROTOSTAR'),('MESSE FRANKFURT','MESSE FRANKFURT'),
-        ('System 4','System 4'),('Naffa Innovations Pvt Ltd','Naffa Innovations Pvt Ltd'),('Support Staff','Support Staff')
+        ('System 4','System 4'),('Naffa Innovations Pvt Ltd','Naffa Innovations Pvt Ltd'),('Support Staff','Support Staff'),
+        ('Quality Team', 'Quality Team')
 
                     )
 
@@ -95,12 +96,16 @@ class Team(models.Model):
         ('Superking', 'Superking'), ('Millionaires Group', 'Millionaires Group'), ('PROTOSTAR', 'PROTOSTAR'),
         ('MESSE FRANKFURT', 'MESSE FRANKFURT'),
         ('System 4', 'System 4'), ('Naffa Innovations Pvt Ltd', 'Naffa Innovations Pvt Ltd'),
-        ('Support Staff', 'Support Staff')
+        ('Support Staff', 'Support Staff'),('Quality Team','Quality Team')
 
     )
     name=models.CharField(max_length=50,choices=team_list)
-    qa = models.OneToOneField(User, on_delete=models.CASCADE,related_name='qa',null=True)
-    mgr=models.ForeignKey(User,on_delete=models.CASCADE,related_name='manager',null=True)
+    qa = models.ForeignKey(User,on_delete=models.CASCADE,related_name='qa',null=True)
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager', null=True)
+    tl = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tl', null=True)
+
+    def __str__(self):
+        return self.name
 
 
 

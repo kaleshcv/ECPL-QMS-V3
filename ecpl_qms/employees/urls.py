@@ -23,6 +23,8 @@ urlpatterns = [
     path('email-coaching-form',emailmonitoringform),
     path('chat-coaching-form',chatmonitoringform),
     path('survey-coaching-form',surveyCoachingform),
+    path('campaign-view/<int:pk>',campaignView),
+    path('add-coaching',selectCoachingForm)
 
 
 ]

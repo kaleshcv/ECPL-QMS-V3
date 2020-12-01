@@ -175,6 +175,10 @@ def signCoaching(request,pk):
 
 def qahome(request):
     user=request.user.profile.emp_name
+    user_id=int(request.user.id)
+    print(user_id)
+    teams=Team.objects.filter(qa=user_id)
+
 
     out_coachings=OutboundMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
     out_counts=OutboundMonitoringForm.objects.filter(added_by=user).count()
@@ -190,12 +194,18 @@ def qahome(request):
 
     email_coachings=EmailMonitoringForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
     email_counts=EmailMonitoringForm.objects.filter(added_by=user).count()
-    email_open_counts=ChatMonitorinForm.objects.filter(added_by=user,status=False).count()
+    email_open_counts=EmailMonitoringForm.objects.filter(added_by=user,status=False).count()
+
+    survey_coachings = SurveyMonitorinForm.objects.filter(added_by=user).order_by('id').reverse()[:8]
+    survey_counts=SurveyMonitorinForm.objects.filter(added_by=user).count()
+    survey_open_counts=SurveyMonitorinForm.objects.filter(added_by=user,status=False).count()
 
     data={'out_coachings':out_coachings,'out_counts':out_counts,'out_open_counts':out_open_counts,
           'in_coachings':in_coachings,'in_counts':in_counts,'in_open_counts':in_open_counts,
           'chat_coachings':chat_coachings,'chat_counts':chat_counts,'chat_open_counts':chat_open_counts,
-          'email_coachings':email_coachings,'mail_counts':email_counts,'email_open_counts':email_open_counts
+          'email_coachings':email_coachings,'email_counts':email_counts,'email_open_counts':email_open_counts,
+          'survey_coachings':survey_coachings,'survey_counts':survey_counts,'survey_open_counts':survey_open_counts,
+          'teams':teams
           }
 
     return render(request,'qa-home.html',data)
@@ -547,14 +557,14 @@ def surveyCoachingform(request):
 
         areas_improvement=request.POST['areaimprovement']
         positives=request.POST['positives']
-        customer_feedback=request.POST['cfeedback']
+        comments=request.POST['comments']
         added_by=request.user.profile.emp_name
 
         survey=SurveyMonitorinForm(associate_name=associate_name,emp_id=emp_id,qa=qa,team_lead=team_lead,customer_name=customer_name,
                                   customer_contact=customer_contact,call_date=call_date,audit_date=audit_date,campaign=campaign,zone=zone,
-                                  concept=concept,call_duration=call_duration,oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,oc_4=oc_4,oc_5=oc_5,oc_6=oc_6,
+                                  concept=concept,call_duration=call_duration,oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,oc_4=oc_4,oc_5=oc_5,
                                   sc_1=sc_1,sc_2=sc_2,sc_3=sc_3,sc_4=sc_4,sc_5=sc_5,bc_1=bc_1,bc_2=bc_2,bc_3=bc_3,bc_4=bc_4,bc_5=bc_5,
-                                   bc_6=bc_6,bc_7=bc_7,bc_8=bc_8,areas_improvement=areas_improvement,positives=positives,customer_feedback=customer_feedback,
+                                   bc_6=bc_6,bc_7=bc_7,bc_8=bc_8,areas_improvement=areas_improvement,positives=positives,comments=comments,
                                    added_by=added_by
                                    )
         survey.save()
@@ -566,7 +576,38 @@ def surveyCoachingform(request):
         return render(request, 'survey-coaching-form.html',data)
 
 
-#calculation
+#campaign View
+
+def campaignView(request,pk):
+    team=Team.objects.get(id=pk)
+    team_name=team.name
+    agents=Profile.objects.filter(team=team_name)
+
+    data = {'team': team,'agents':agents}
+    return render(request,'campaign-view.html',data)
+
+def selectCoachingForm(request):
+    if request.method == 'POST':
+        audit_form=request.POST['audit_form']
+        agent=request.POST['agent']
+        team=request.POST['team']
+
+        if audit_form=='chat':
+            agent=Profile.objects.get(emp_name=agent)
+            team=Team.objects.get(name=team)
+            data = {'agent':agent,'team':team}
+            return render(request, 'chat-coaching-form.html', data)
+
+        elif audit_form=='outbound':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'outbound-coaching-form.html', data)
+    else:
+        pass
+
+
+#calculation outbound
 
 def categoryOne(val):
 

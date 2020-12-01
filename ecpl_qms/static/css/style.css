@@ -118,6 +118,9 @@ color:grey;
     margin-left:20px;
     color:#87a6c7;
 }
+#profile span{
+    margin-left:20px;
+}
 .card
 {
     height:190px;
@@ -159,7 +162,7 @@ color:grey;
 #guidelines ul li:hover
 {
     transform: scale(1.06);
-    background:white;
+    background:#c3ccd5;
     color: black;
 
 }
@@ -179,4 +182,13 @@ color:grey;
     padding: 10px 10px;
     font-size: 21px;
     font-weight: 600;
+}
+.basic .form-control{
+    background: #ececf3;
+    margin: 10px 10px;
+}
+
+#coachingsummary h4{
+    color:#007bff;
+    font-size: 16px;
 }

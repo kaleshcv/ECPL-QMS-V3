@@ -5,45 +5,13 @@
     <div class="container-lg">
         <div class="row">
 
-                            <div class="col-md-6" style="padding: 50px 30px">
-                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 256px">Monitoring Forms</h2>
-                                <br>
-                                <div style="margin-left:10px">
-                                    <p><a href="/employees/outbound-coaching-form">Outbound Monitoring Form</a></p>
+                            <div class="col-md-12" style="padding: 50px 30px">
+                                <h2 style="color:grey">Campaigns</h2>
+                                {% for team in teams %}
+                                <span><a href="campaign-view/{{team.id}}">{{team.name}}</a></span>
+                                {% endfor %}
 
-                                    <p><a href="/employees/email-coaching-form">Email Monitoring Form</a></p>
 
-                                    <p><a href="/employees/chat-coaching-form">Chat Monitoring Form</a></p>
-
-                                    <p><a href="/employees/inbound-coaching-form">Inbound Monitoring Form</a></p>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6" style="padding: 50px 30px">
-                                <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 160px">Coachings</h2>
-                                        <br>
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <h4>Outbound</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{out_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{out_open_counts}}</span>
-                                        <hr>
-                                        <h4>Inbound</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{in_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{in_open_counts}}</span>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <h4>Email</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{out_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{out_open_counts}}</span>
-                                        <hr>
-                                        <h4>Chat</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{in_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{in_open_counts}}</span>
-                                    </div>
-                                </div>
                             </div>
         </div>
         <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
@@ -54,6 +22,7 @@
     </div>
 
 </section>
+
 
 <section id="guidelines" style="padding-top:70px">
     <div class="container-lg">
@@ -74,6 +43,40 @@
             </div>
 
         </div>
+    </div>
+</section>
+
+<section id="coachingsummary" style="background: #011c38;padding: 60px 100px;margin-top: 50px">
+    <div class="container-lg">
+         <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 287px">Coaching Summary</h2>
+                                        <br>
+                                <div class="row" style="padding:0px 100px;">
+
+                                    <div class="col-md-6">
+                                        <h4>Outbound</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{out_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{out_open_counts}}</span>
+                                        <hr>
+                                        <h4>Inbound</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{in_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{in_open_counts}}</span>
+                                        <hr>
+                                        <h4>Survey</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{survey_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{survey_open_counts}}</span>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <h4>Email</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{email_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{email_open_counts}}</span>
+                                        <hr>
+                                        <h4>Chat</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{chat_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{chat_open_counts}}</span>
+                                    </div>
+                                </div>
     </div>
 </section>
 
@@ -138,12 +141,38 @@
                     </div>
                 </div>
                 {% endfor %}
+                {% for coaching in survey_coachings %}
+                <div class="col-md-6">
+                    <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
+                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
+                          <h4><small>Category</small>Survey</h4>
+                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
+                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
+                          <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
+                          <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
+                          <a href="coaching-view-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a>
+                      </div>
+                    </div>
+                </div>
+                {% endfor %}
 
 
         </div>
     </div>
 </section>
 
+<h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 256px">Monitoring Forms</h2>
+                                <br>
+                                <div style="margin-left:10px">
+                                    <p><a href="/employees/outbound-coaching-form">Outbound Monitoring Form</a></p>
+
+                                    <p><a href="/employees/email-coaching-form">Email Monitoring Form</a></p>
+
+                                    <p><a href="/employees/chat-coaching-form">Chat Monitoring Form</a></p>
+
+                                    <p><a href="/employees/inbound-coaching-form">Inbound Monitoring Form</a></p>
+                                    <p><a href="/employees/survey-coaching-form">Survey Monitoring Form</a></p>
+                                </div>
 
 
 
