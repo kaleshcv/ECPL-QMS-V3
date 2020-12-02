@@ -185,8 +185,7 @@ def coachingDispute(request):
 
 def qahome(request):
     user=request.user.profile.emp_name
-    user_id=int(request.user.id)
-    print(user_id)
+    user_id=request.user.id
     teams=Team.objects.filter(qa=user_id)
 
 
