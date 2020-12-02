@@ -24,7 +24,9 @@ urlpatterns = [
     path('chat-coaching-form',chatmonitoringform),
     path('survey-coaching-form',surveyCoachingform),
     path('campaign-view/<int:pk>',campaignView),
-    path('add-coaching',selectCoachingForm)
-
+    path('add-coaching',selectCoachingForm),
+    path('coaching-summary-view',coachingSummaryView),
+    path('coaching-success',coachingSuccess),
+    path('coaching-dispute',coachingDispute),
 
 ]

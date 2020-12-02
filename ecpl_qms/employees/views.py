@@ -162,7 +162,7 @@ def signCoaching(request,pk):
         coaching.closed_date = now
         coaching.emp_comments=emp_comments
         coaching.save()
-        return redirect('/employees/agenthome')
+        return redirect('/employees/coaching-success')
     elif category=='email':
         coaching = EmailMonitoringForm.objects.get(id=pk)
         coaching.status = True
@@ -171,7 +171,13 @@ def signCoaching(request,pk):
         coaching.save()
         return redirect('/employees/agenthome')
 
+def coachingSuccess(request):
 
+    return render(request,'coaching-success-message.html')
+
+def coachingDispute(request):
+
+    return render(request,'coaching-dispute-message.html')
 
 def qahome(request):
     user=request.user.profile.emp_name
@@ -269,8 +275,15 @@ def outboundCoachingform(request):
         cl_total=c1+c2
 
         compliance_1=request.POST['compliance_1']
+        cm1=categoryThree(compliance_1)
+
         compliance_2 = request.POST['compliance_2']
+        cm2=categoryFour(compliance_2)
+
         compliance_3 = request.POST['compliance_3']
+        cm3=categoryThree(compliance_3)
+
+        compliance=cm1+cm2+cm3
 
         areas_improvement=request.POST['areaimprovement']
         positives=request.POST['positives']
@@ -278,6 +291,7 @@ def outboundCoachingform(request):
 
         total_score=op_total+sf_total+bs_total+cl_total
         added_by=request.user.profile.emp_name
+
 
         outbound=OutboundMonitoringForm(associate_name=associate_name,emp_id=emp_id,qa=qa,team_lead=team_lead,customer_name=customer_name,
                                         customer_contact=customer_contact,call_date=call_date,audit_date=audit_date,campaign=campaign,
@@ -288,7 +302,7 @@ def outboundCoachingform(request):
                                         compliance_2=compliance_2,compliance_3=compliance_3,areas_improvement=areas_improvement,
                                         positives=positives,comments=comments,
                                         opening_total=op_total,softskill_total=sf_total,business_total=bs_total,
-                                        closing_total=cl_total,total_score=total_score,added_by=added_by,
+                                        closing_total=cl_total,total_score=total_score,added_by=added_by,compliance=compliance
 
                                         )
         outbound.save()
@@ -477,19 +491,50 @@ def chatmonitoringform(request):
         ticket_no=request.POST['ticketnumber']
 
         business_1=request.POST['business_1']
+        bs1=categorySix(business_1)
+
         business_2 = request.POST['business_2']
+        bs2=categoryTwoChat(business_2)
+
+        bs_total=bs1+bs2
 
         ce_1=request.POST['ce_1']
+        ce1=categoryTwoChat(ce_1)
+        print(ce1)
+
         ce_2 = request.POST['ce_2']
+        ce2=categoryTwoChat(ce_2)
+        print(ce2)
+
         ce_3 = request.POST['ce_3']
+        ce3=categoryTwoChat(ce_3)
+        print(ce3)
+
         ce_4 = request.POST['ce_4']
+        ce4=categoryFive(ce_4)
+        print(ce4)
+
         ce_5 = request.POST['ce_5']
+        ce5=categorySix(ce_5)
+        print(ce5)
+
         ce_6 = request.POST['ce_6']
+        ce6=categoryTwoChat(ce_6)
+        print(ce6)
+
+        ce_total=ce1+ce2+ce3+ce4+ce5+ce6
 
         compliance_1=request.POST['compliance_1']
-        compliance_2 = request.POST['compliance_2']
-        compliance_3 = request.POST['compliance_3']
+        c1=categoryFour(compliance_1)
 
+        compliance_2 = request.POST['compliance_2']
+        c2=categoryThree(compliance_2)
+
+        compliance_3 = request.POST['compliance_3']
+        c3 = categoryThree(compliance_3)
+
+        compliance_total=c1+c2+c3
+        overall_score = ce_total + bs_total
         areas_improvement=request.POST['areaimprovement']
         positives=request.POST['positives']
         customer_feedback=request.POST['cfeedback']
@@ -502,7 +547,9 @@ def chatmonitoringform(request):
                                   concept=concept,ticket_no=ticket_no,business_1=business_1,business_2=business_2,ce_1=ce_1,
                                   ce_2=ce_2,ce_3=ce_3,ce_4=ce_4,ce_5=ce_5,ce_6=ce_6,compliance_1=compliance_1,compliance_2=compliance_2,
                                   compliance_3=compliance_3,areas_improvement=areas_improvement,positives=positives,customer_feedback=customer_feedback,
-                                  added_by=added_by)
+                                  added_by=added_by,compliance_total=compliance_total,ce_total=ce_total,business_total=bs_total,
+                                  overall_score=overall_score
+                               )
         chat.save()
         return redirect('/employees/qahome')
 
@@ -606,6 +653,8 @@ def selectCoachingForm(request):
     else:
         pass
 
+def coachingSummaryView(request):
+    return render(request,'coaching-summary-view.html')
 
 #calculation outbound
 
@@ -627,3 +676,43 @@ def categoryTwo(val):
     else:
         return 2
 
+def categoryThree(val):
+    if val=='yes':
+        return 30
+    elif val=='no':
+        return 6
+    else:
+        return 18
+
+def categoryFour(val):
+    if val=='yes':
+        return 40
+    elif val=='no':
+        return 8
+    else:
+        return 24
+def categoryFive(val):
+
+    if val=='good':
+        return 20
+    elif val=='average':
+        return 12
+    else:
+        return 4
+def categorySix(val):
+
+    if val=='good':
+        return 15
+    elif val=='average':
+        return 10
+    else:
+        return 3
+
+def categoryTwoChat(val):
+
+    if val=='yes':
+        return 10
+    elif val=='na':
+        return 6
+    else:
+        return 2

@@ -21,70 +21,7 @@
     </div>
 
 </section>
-<section id="guidelines" style="padding-top:20px">
-    <div class="container-lg">
-        <div class="row">
-            <div class="col-md-6" style="padding: 50px 0px">
-                 <h4 style="color:Black;font-weight: 600;font-size: 25px;" class="text-center">Open Status</h4>
-                                <br>
 
-                                <table class="table info">
-                                    <tr>
-                                        <td>Chat</td>
-                                        <td>{{open_chat_count}}</td>
-                                        <td>Email</td>
-                                        <td>{{open_email_count}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Inbound</td>
-                                        <td>{{open_in_count}}</td>
-                                        <td>Outbound</td>
-                                        <td>{{open_out_count}}</td>
-                                    </tr>
-                                </table>
-
-            </div>
-            <div class="col-md-6">
-                <!--<img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">-->
-
-            </div>
-
-        </div>
-    </div>
-</section>
-
-<section id="guidelines" style="padding-top:20px">
-    <div class="container-lg">
-        <div class="row">
-
-            <div class="col-md-6">
-                 <h4 style="color:Black;font-weight: 600;font-size: 25px;" class="text-center">Total</h4>
-                                <br>
-
-                                <table class="table info">
-                                    <tr>
-                                        <td>Chat</td>
-                                        <td>{{chat_counts}}</td>
-                                        <td>Email</td>
-                                        <td>{{email_counts}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Inbound</td>
-                                        <td>{{in_counts}}</td>
-                                        <td>Outbound</td>
-                                        <td>{{out_counts}}</td>
-                                    </tr>
-                                </table>
-
-            </div>
-
-        </div>
-        <div class="col-md-6">
-                <!--<img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">-->
-
-            </div>
-    </div>
-</section>
 
 <section style="padding-top:70px" id="empopencoachins">
     <div class="container-lg">
@@ -96,7 +33,7 @@
                 <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Category</small>Inbound</h4>
+                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
@@ -110,7 +47,7 @@
                 <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Category</small>Outbound</h4>
+                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
@@ -124,7 +61,7 @@
                 <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Category</small>Email</h4>
+                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
@@ -138,7 +75,7 @@
                 <div class="col-md-4">
                     <div class="card" style="background:#203850; margin-bottom:20px">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Category</small>Chat</h4>
+                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
                           <h4><small>Agent</small>{{coaching.associate_name}}</h4>
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Audit By</small>{{coaching.qa}}</h4>
@@ -153,6 +90,39 @@
     </div>
 </section>
 
+<section id="coachingsummary" style="background: #011c38;padding: 60px 100px;margin-top: 50px">
+    <div class="container-lg">
+         <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 287px">Coaching Summary</h2>
+                                        <br>
+                                <div class="row" style="padding:0px 100px;">
+
+                                    <div class="col-md-6">
+                                        <h4>Outbound</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{out_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{open_out_count}}</span>
+                                        <hr>
+                                        <h4>Inbound</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{in_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{open_in_count}}</span>
+                                        <hr>
+                                        <h4>Survey</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{survey_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{open_survey_count}}</span>
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        <h4>Email</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{email_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{open_email_count}}</span>
+                                        <hr>
+                                        <h4>Chat</h4>
+                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{chat_counts}}</span>
+                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{open_chat_count}}</span>
+                                    </div>
+                                </div>
+    </div>
+</section>
 
 <section style="padding-top:70px" id="empopencoachins">
     <div class="container-lg">
@@ -222,6 +192,7 @@
         </div>
     </div>
 </section>
+
 
 
 {% endblock %}
