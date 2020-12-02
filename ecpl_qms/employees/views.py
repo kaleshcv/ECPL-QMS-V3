@@ -176,8 +176,12 @@ def coachingSuccess(request):
     return render(request,'coaching-success-message.html')
 
 def coachingDispute(request):
-
-    return render(request,'coaching-dispute-message.html')
+    user = request.user.profile.emp_name
+    team= request.user.profile.team
+    print(user,team)
+    team=Team.objects.get(name=team)
+    data={'team':team}
+    return render(request,'coaching-dispute-message.html',data)
 
 def qahome(request):
     user=request.user.profile.emp_name
@@ -628,7 +632,7 @@ def surveyCoachingform(request):
 def campaignView(request,pk):
     team=Team.objects.get(id=pk)
     team_name=team.name
-    agents=Profile.objects.filter(team=team_name)
+    agents=Profile.objects.filter(team=team_name,emp_desi='CRO')
 
     data = {'team': team,'agents':agents}
     return render(request,'campaign-view.html',data)

@@ -6,6 +6,7 @@
     <div class="container-lg" style="background: white;padding: 30px 30px;">
 
             <h2>Audit Details</h2>
+            <p>campaign - {{coaching.campaign}}</p>
             <table class="table table-bordered">
                 <tr>
                     <td><b>Emp Name</b></td>
@@ -67,8 +68,13 @@
                 <input class="btn btn-success" type="submit" value="Accept & Sign" style="width: 150px">
             </form>
             <br>
+            <form action="/employees/coaching-dispute" method="POST">
+                {% csrf_token %}
+                <label for="emp_comments_d">Employee Comments *</label><br>
+                <textarea name="emp_comments_dispute" id="emp_comments_d" cols="30" rows="5" required class="form-control"></textarea>
+                <br><button class="btn btn-danger" style="width: 150px">Reject & Dispute</button>
+            </form>
 
-            <button class="btn btn-danger" style="width: 150px"><a href="/employees/coaching-dispute" style="color:white">Reject & Dispute</a></button>
         </div>
     </div>
 </section>

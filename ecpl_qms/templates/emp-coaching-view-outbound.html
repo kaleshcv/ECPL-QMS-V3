@@ -3,9 +3,11 @@
 
 
 <section id="coachingview" style="padding:100px 50px">
+
     <div class="container-lg" style="background: white;padding: 30px 30px;">
 
             <h2>Audit Details</h2>
+            <p>campaign - {{coaching.campaign}}</p>
             <table class="table table-bordered">
                 <tr>
                     <td><b>Emp Name</b></td>
@@ -53,7 +55,7 @@
                   <td><b>Total</b></td>
                   <td>{{coaching.total_score}}</td>
                   <td><b>Compliance</b></td>
-                  <td>{{coaching.compliance_total}}</td>
+                  <td>{{coaching.compliance}}</td>
                 </tr>
             </table>
 
@@ -64,7 +66,14 @@
                 <textarea name="emp_comments" id="emp_comments" cols="30" rows="5" required class="form-control"></textarea>
                 <input type="hidden" value="outbound" name="category">
                 <br>
-                <input class="btn btn-info" type="submit" value="Sign">
+                <input class="btn btn-success" type="submit" value="Accept and Sign">
+            </form>
+            <br>
+             <form action="/employees/coaching-dispute" method="POST">
+                {% csrf_token %}
+                <label for="emp_comments_d">Employee Comments *</label><br>
+                <textarea name="emp_comments_dispute" id="emp_comments_d" cols="30" rows="5" required class="form-control"></textarea>
+                <br><button class="btn btn-danger" style="width: 150px">Reject & Dispute</button>
             </form>
         </div>
     </div>
