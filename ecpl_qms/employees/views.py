@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
 from .models import Profile,Team,OutboundMonitoringForm,InboundMonitoringForm,EmailMonitoringForm,ChatMonitorinForm,SurveyMonitorinForm
+from .models import LeadSalesMonitoringForm
 from . import forms
 from django.contrib.auth.models import User
 from datetime import datetime
@@ -176,12 +177,16 @@ def coachingSuccess(request):
     return render(request,'coaching-success-message.html')
 
 def coachingDispute(request):
-    user = request.user.profile.emp_name
-    team= request.user.profile.team
-    print(user,team)
-    team=Team.objects.get(name=team)
-    data={'team':team}
-    return render(request,'coaching-dispute-message.html',data)
+    if request.method == 'POST':
+
+        user = request.user.profile.emp_name
+        team= request.user.profile.team
+        print(user,team)
+        team=Team.objects.get(name=team)
+        data={'team':team}
+        return render(request,'coaching-dispute-message.html',data)
+    else:
+        return redirect('/employees/agenthome')
 
 def qahome(request):
     user=request.user.profile.emp_name
@@ -626,6 +631,87 @@ def surveyCoachingform(request):
         return render(request, 'survey-coaching-form.html',data)
 
 
+#Lead Sales Coaching form
+
+def leadSalesCoachingForm(request):
+    if request.method== 'POST':
+
+        associate_name=request.POST['empname']
+        emp_id=request.POST['empid']
+        qa=request.POST['qa']
+        team_lead=request.POST['tl']
+        customer_name=request.POST['cname']
+        customer_contact=request.POST['ccontact']
+
+        call_date=request.POST['calldate']
+        audit_date=request.POST['auditdate']
+        campaign=request.POST['campaign']
+        zone=request.POST['zone']
+        concept=request.POST['concept']
+        call_duration=request.POST['callduration']
+
+
+        oc_1 = request.POST['opening_1']
+        oc_2 = request.POST['opening_2']
+        oc_3 = request.POST['opening_3']
+        #opening and closing calculation
+        oc1=yesTwonoZero(oc_1)
+        oc2=yesTwonoZero(oc_2)
+        oc3=yesTwonoZero(oc_3)
+        oc_total=oc1+oc2+oc3
+
+        sc_1 = request.POST['softskill_1']
+        sc_2 = request.POST['softskill_2']
+        sc_3 = request.POST['softskill_3']
+        sc_4 = request.POST['softskill_4']
+        sc_5 = request.POST['softskill_5']
+        # Soft Skills calculation
+        sc1=yesTwonoZero(sc_1)
+        sc2=yesTwonoZero(sc_2)
+        sc3=yesTwonoZero(sc_3)
+        sc4=yesTwonoZero(sc_4)
+        sc5=goodSix(sc_5)
+        sc_total=sc1+sc2+sc3+sc4+sc5
+
+
+        bc_1 = request.POST['business_1']
+        bc_2 = request.POST['business_2']
+        bc_3 = request.POST['business_3']
+        bc_4 = request.POST['business_4']
+        bc_5 = request.POST['business_5']
+        bc_6 = request.POST['business_6']
+        #Business Compliance calculation
+        bc1=passFifteen(bc_1)
+        bc2=passTen(bc_2)
+        bc3=passFifteen(bc_3)
+        bc4=passTen(bc_4)
+        bc5=passFifteen(bc_5)
+        bc6 = passFifteen(bc_6)
+        bc_total=bc1+bc2+bc3+bc4+bc5+bc6
+
+        total_score=oc_total+bc_total+sc_total
+
+        areas_improvement=request.POST['areaimprovement']
+        positives=request.POST['positives']
+        comments=request.POST['comments']
+        added_by=request.user.profile.emp_name
+
+        leadsales=LeadSalesMonitoringForm(associate_name=associate_name,emp_id=emp_id,qa=qa,team_lead=team_lead,customer_name=customer_name,
+                                  customer_contact=customer_contact,call_date=call_date,audit_date=audit_date,campaign=campaign,zone=zone,
+                                  concept=concept,call_duration=call_duration,oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+                                  sc_1=sc_1,sc_2=sc_2,sc_3=sc_3,sc_4=sc_4,sc_5=sc_5,bc_1=bc_1,bc_2=bc_2,bc_3=bc_3,bc_4=bc_4,bc_5=bc_5,
+                                   bc_6=bc_6,areas_improvement=areas_improvement,positives=positives,comments=comments,
+                                   added_by=added_by,oc_total=oc_total,bc_total=bc_total,sc_total=sc_total,total_score=total_score
+                                   )
+        leadsales.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data={'teams':teams,'users':users}
+        return render(request, 'lead-sales-coaching-form.html',data)
+
+
 #campaign View
 
 def campaignView(request,pk):
@@ -653,6 +739,11 @@ def selectCoachingForm(request):
             team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'outbound-coaching-form.html', data)
+        elif audit_form=='leadsales':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'lead-sales-coaching-form.html', data)
     else:
         pass
 
@@ -719,3 +810,28 @@ def categoryTwoChat(val):
         return 6
     else:
         return 2
+
+def yesTwonoZero(val):
+    if val=='yes':
+        return 2
+    elif val=='no':
+        return 0
+
+def goodSix(val):
+
+    if val=='good':
+        return 6
+    elif val=='average':
+        return 3
+    else:
+        return 0
+def passTen(val):
+    if val=='yes':
+        return 10
+    elif val=='no':
+        return 0
+def passFifteen(val):
+    if val=='yes':
+        return 15
+    elif val=='no':
+        return 0
