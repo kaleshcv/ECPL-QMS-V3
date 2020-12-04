@@ -181,7 +181,7 @@ def coachingDispute(request):
 
         user = request.user.profile.emp_name
         team= request.user.profile.team
-        print(user,team)
+
         team=Team.objects.get(name=team)
         data={'team':team}
         return render(request,'coaching-dispute-message.html',data)
@@ -348,7 +348,7 @@ def inboundCoachingform(request):
         x=categoryOne(opening_1)
         y=categoryOne(opening_2)
         op_total=x+y
-        print(op_total)
+
 
         softskill_1=request.POST['softskill_1']
         softskill_2 = request.POST['softskill_2']
@@ -366,7 +366,7 @@ def inboundCoachingform(request):
         n5=categoryTwo(softskill_5)
         n6=categoryTwo(softskill_6)
         sf_total=n1+n2+n3+n4+n5+n6
-        print(sf_total)
+
 
         business_1=request.POST['business_1']
         business_2 = request.POST['business_2']
@@ -376,7 +376,7 @@ def inboundCoachingform(request):
         b2=categoryTwo(business_2)
         b3=categoryTwo(business_3)
         bs_total=b1+b2+b3
-        print(bs_total)
+
 
         closing_1=request.POST['closing_1']
         closing_2 = request.POST['closing_2']
@@ -384,7 +384,7 @@ def inboundCoachingform(request):
         c1=categoryTwo(closing_1)
         c2=categoryTwo(closing_2)
         cl_total=c1+c2
-        print(cl_total)
+
 
         compliance_1=request.POST['compliance_1']
         compliance_2 = request.POST['compliance_2']
@@ -508,27 +508,27 @@ def chatmonitoringform(request):
 
         ce_1=request.POST['ce_1']
         ce1=categoryTwoChat(ce_1)
-        print(ce1)
+
 
         ce_2 = request.POST['ce_2']
         ce2=categoryTwoChat(ce_2)
-        print(ce2)
+
 
         ce_3 = request.POST['ce_3']
         ce3=categoryTwoChat(ce_3)
-        print(ce3)
+
 
         ce_4 = request.POST['ce_4']
         ce4=categoryFive(ce_4)
-        print(ce4)
+
 
         ce_5 = request.POST['ce_5']
         ce5=categorySix(ce_5)
-        print(ce5)
+
 
         ce_6 = request.POST['ce_6']
         ce6=categoryTwoChat(ce_6)
-        print(ce6)
+
 
         ce_total=ce1+ce2+ce3+ce4+ce5+ce6
 
