@@ -1,0 +1,163 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<section id="outbound" style="margin-top:100px">
+   <div class="container-lg">
+       <h2>Outbound Monitoring form - Audit Guidelines</h2>
+       <br>
+       <h4 class="text-center">Opening</h4>
+       <table class="table">
+           <tr>
+               <td>Parameters</td>
+               <td>Good</td>
+               <td>Average</td>
+               <td>Poor</td>
+           </tr>
+           <tr>
+               <td class="first">Used standard Opening protocol within 3 seconds</td>
+               <td class="guidelines">Call should be opened with the standard script (Greeting the customer, Introducing Self & the organization) within 3 seconds of the call getting active.</td>
+               <td class="guidelines">If the call is not opened as per the standard Script/missing any of these elements(Greeting the customer, Introducing Self & the organization)/If the call is opened between 3-5 seconds of call getting active</td>
+               <td class="guidelines">If none of the required call opening protocols are followed/ Call answered after more than 5 seconds</td>
+           </tr>
+           <tr>
+               <td class="first">Introduction is done as per for format (Client Requirement)</td>
+               <td class="guidelines">Has to mention the correct Campaign and concept name</td>
+               <td class="guidelines">Campaign & Concept name misrepresented</td>
+               <td class="guidelines">Campaign & Concept name omitted</td>
+           </tr>
+       </table>
+       <br>
+       <br>
+           <h4 class="text-center">Soft Skills</h4>
+           <table class="table">
+               <tr>
+                   <td>Parameters</td>
+                   <td>Good</td>
+                   <td>Average</td>
+                   <td>Poor</td>
+               </tr>
+               <tr>
+                   <td class="first">Followed Hold Procedure appropriately</td>
+                   <td class="guidelines">Permission to be asked before placing customer on hold. Hold time to not exceed 2 minutes. Customer to be thanked upon hold being released. In case of delys, customer to be notified and put on hold again.</td>
+                   <td class="guidelines">Placing the customer pn hold without taking permission, not following hold release protocol, extension protocol</td>
+                   <td class="guidelines">Using mute instead of hold</td>
+               </tr>
+               <tr>
+                   <td class="first">Used Empathetic Statements whenever required</td>
+                   <td class="guidelines">Empathy towards customer's issues displayed. Apology issued to validate concerns. Ownership taken to find resolution.</td>
+                   <td class="guidelines">Not enough empathy demonstrated.</td>
+                   <td class="guidelines">No empathy demonstrated.</td>
+               </tr>
+               <tr>
+                   <td class="first">Assured assistance for the customer query and request</td>
+                   <td class="guidelines">Customer's query understood and ownership to find resolution demonstrated</td>
+                   <td class="guidelines">Not enough commitment to find resolution demonstrated</td>
+                   <td class="guidelines">No commitment to find resolution demonstrated</td>
+               </tr>
+               <tr>
+                   <td class="first">Rate of Speech and Tone of Speech Moderate</td>
+                   <td class="guidelines">Rate of speech moderate, tone neither too loud, nor too soft</td>
+                   <td class="guidelines">Rate of speech fast, tone either loud or soft</td>
+                   <td class="guidelines">Rate of speech and tone unintelligible</td>
+               </tr>
+               <tr>
+                   <td class="first">No Dead Air</td>
+                   <td class="guidelines">Not allowing 5 seconds of silence in the call without customer's permission.</td>
+                   <td class="guidelines">If there is no communication between associate & customer for 5 seconds, without the knowledge the customer, this parameter would be rated down.</td>
+                   <td class="guidelines">Dead air exceeding 5 seconds</td>
+               </tr>
+               <tr>
+                   <td class="first">Active Listening without interruption</td>
+                   <td class="guidelines">Associate has to show alertness and listen to the customer without interruption. If the associate and the customer starts sentence at the same time, associate needs to stop allowing the customer to talk fist (without interruption)</td>
+                   <td class="guidelines">If the associate is not paying attention or interrupting the customer, this parameter will go down. However, voice overlapping is not considered. (Voice over lap: Associate and Customer starting sentence at the same time)</td>
+                   <td class="guidelines">Constantly interrupting the customer and cutting the customer short</td>
+               </tr>
+           </table>
+       <br>
+       <br>
+            <h4 class="text-center">Business</h4>
+               <table class="table">
+                   <tr>
+                       <td>Parameters</td>
+                       <td>Good</td>
+                       <td>Average</td>
+                       <td>Poor</td>
+                   </tr>
+                   <tr>
+                       <td class="first">Good Uderstanding of Process Exhibited</td>
+                       <td class="guidelines">Understands the customer's queries clearly and responds accurately and quickly. Understands escalations metrics and follows guidelines accurately.</td>
+                       <td class="guidelines">Unclear about how to respond to queries, unclear about whom to escate what to, protocols, etc.</td>
+                       <td class="guidelines">Associate responds wrongly to queries, wrong escalations, no clear process knowledge</td>
+                   </tr>
+                   <tr>
+                       <td class="first">Accurate Documentation</td>
+                       <td class="guidelines">\Has to document details of customer query on excel/application provided. Add Note done as required. Ticket status accurate.</td>
+                       <td class="guidelines">Partially inaccurate documentation.</td>
+                       <td class="guidelines">Largely inaccurate documentation/ Documentation not done.</td>
+                   </tr>
+                   <tr>
+                       <td class="first">Complete Information Provided</td>
+                       <td class="guidelines">Proactive about providing information to customers. Complete TAT to be explained to avoid repeat calls.</td>
+                       <td class="guidelines">Incomplete information given.</td>
+                       <td class="guidelines">No proactivity displayed in giving information</td>
+                   </tr>
+
+               </table>
+       <br>
+       <br>
+            <h4 class="text-center">Call Closing</h4>
+               <table class="table">
+                   <tr>
+                       <td>Parameters</td>
+                       <td>Good</td>
+                       <td>Average</td>
+                       <td>Poor</td>
+                   </tr>
+                   <tr>
+                       <td class="first">Additional assistance is asked</td>
+                       <td class="guidelines">Additional assistance offered before closing call.</td>
+                       <td class="guidelines"></td>
+                       <td class="guidelines">Additional Assistance not offered.</td>
+                   </tr>
+                   <tr>
+                       <td class="first">Call Closing is done as per the protocol</td>
+                       <td class="guidelines">Call should closed with the thanking note. Ex: Thank you for your time, have a great day</td>
+                       <td class="guidelines"></td>
+                       <td class="guidelines">Associate not using any thanking note before closing would be rated down</td>
+                   </tr>
+               </table>
+       <br>
+       <br>
+            <h4 class="text-center">Compliance</h4>
+               <table class="table">
+                   <tr>
+                       <td>Parameters</td>
+                       <td>Good</td>
+                       <td>Average</td>
+                       <td>Poor</td>
+                   </tr>
+                   <tr>
+                       <td class="first">Associate was not rude with the customer</td>
+                       <td class="guidelines">Associate polite on call and not raising voice (losing patience) at the customer on any circumstances.</td>
+                       <td class="guidelines">The act of using abusive language/ getting into argumentative mode/ hurting the customer ego/ using language of insulting (intentionally or unintentionally) would be treated as Fatal. This will bring down the Quality score to 'Zero'</td>
+                       <td class="guidelines"></td>
+                   </tr>
+                   <tr>
+                       <td class="first">Provided correct information</td>
+                       <td class="guidelines">Associate has to provide accurate/appropriate/complete information to the customer</td>
+                       <td class="guidelines">If the information/service rendered, which is unclear/incomplete, inappropriate and wrong/invalid, to the customer would be considered fatal as this will have an unpleasant impact on the Customer Satisfaction / experience. This will bring down the Quality score to 'Zero'</td>
+                       <td class="guidelines"></td>
+                   </tr>
+                   <tr>
+                       <td class="first">Tagging is done</td>
+                       <td class="guidelines">Has to raise a ticket/update information appropriately (Changing the status, esclating to the concerned team)</td>
+                       <td class="guidelines">If the tagging is not done/tagged wrongly, this would be fatal</td>
+                       <td class="guidelines"></td>
+                   </tr>
+               </table>
+   </div>
+</section>
+
+
+{% endblock %}

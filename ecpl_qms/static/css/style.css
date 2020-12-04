@@ -192,3 +192,11 @@ color:grey;
     color:#007bff;
     font-size: 16px;
 }
+#outbound .first{
+    width:300px;
+    font-weight: 600;
+    font-size: 14px
+}
+#outbound .guidelines{
+    width:275px;
+}

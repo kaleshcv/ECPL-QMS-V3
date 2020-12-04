@@ -4,6 +4,11 @@ from .views import *
 
 urlpatterns = [
     path('index',index),
+    #Guidelines
+    path('outbound-monitoring-guidelines',outboundGuidelines),
+    path('inbound-monitoring-guidelines',inboundGuidelines),
+
+
     path('agenthome',agenthome),
     path('signup',signup),
     path('login',login_view),

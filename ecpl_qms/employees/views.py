@@ -11,6 +11,11 @@ from django.contrib import messages
 def index(request):
     return render(request,'index.html')
 
+#Guidelines
+def outboundGuidelines(request):
+    return render(request,'guidelines/outbound.html')
+def inboundGuidelines(request):
+    return render(request,'guidelines/inbound.html')
 
 def signup(request):
     if request.method == 'POST':
