@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+{% block main %}
+
+    <section id="outboundform">
+        <div class="container-lg">
+            <form action="/employees/ECPL-EVA&NOVO-Monitoring-Form-chat" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">ECPL - EVA & NOVO Monitoring Form</h2>
+                <div class="basic">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="empname">Associate Name</label>
+                            <select class="form-control" id="empname" required="required" name="empname">
+
+                                <option value="{{agent.emp_name}}">{{agent.emp_name}}</option>
+
+                            </select>
+                            <label for="empid">Employee ID</label>
+                            <input type="number" class="form-control" id="empid" name="empid" required value="{{agent.emp_id}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="qa">Quality Analyst</label>
+                            <input type="text" class="form-control" id="qa" name="qa" value="{{user.profile.emp_name}}" required>
+                            <label for="tl">Team Lead</label>
+                            <input type="text" class="form-control" id="tl" name="tl" required value="{{team.tl.profile.emp_name}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="ticketnumber">Ticket Number</label>
+                            <input type="number" class="form-control" id="ticketnumber" name="ticketnumber" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="transdate">Transaction Handled Date</label>
+                            <input type="date" class="form-control" id="transdate" name="transdate" required>
+                            <label for="auditdate">Audit Date</label>
+                            <input type="date" class="form-control" id="auditdate" name="auditdate" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label for="campaign">Campaign</label>
+                             <select class="form-control" id="campaign" required="required" name="campaign">
+
+                                <option value="{{team.name}}">{{team.name}}</option>
+
+                            </select>
+
+                            <label for="evaluator">Evaluator Name</label>
+                            <input type="text" class="form-control" id="evaluator" name="evaluator" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label for="concept">Concept</label>
+                            <input type="text" class="form-control" id="concept" name="concept" required>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="customerexperience">
+                    <div>
+                        <h4>Customer Experience</h4>
+                        <label class="qn">NCE : If the user is missed to hit "finish" after sending the respective response.  If the response is added with unwanted space and
+                            Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.</label>
+                        <input type="radio" name="ce_1" value="10" id="yes4" required>
+                        <label for="yes4">Yes</label>
+                        <input type="radio" name="ce_1" value="0" id="no4">
+                        <label for="no4">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">NCE : If the "You last checked in" user is not sent with respective message or sent twice with the response.</label>
+                        <input type="radio" name="ce_2" value="10" id="yes5" required>
+                        <label for="yes5">Yes</label>
+                        <input type="radio" name="ce_2" value="0" id="no5">
+                        <label for="no5">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">NCE : If the user are not assigned in spreadsheet. Ex: If the user code is not added in the spreadsheet.</label>
+                        <input type="radio" name="ce_3" value="10" id="yes6" required>
+                        <label for="yes6">Yes</label>
+                        <input type="radio" name="ce_3" value="0" id="no6">
+                        <label for="no6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">NCE : If "was assigned to you" users are not hit finish.</label>
+                        <input type="radio" name="ce_4" value="10" id="yes7" required>
+                        <label for="yes7">Yes</label>
+                        <input type="radio" name="ce_4" value="0" id="no7">
+                        <label for="no7">No</label>
+                    </div>
+                    <br>
+                </div>
+                <hr>
+                <div class="compliance">
+                    <div>
+                        <h4>Compliance</h4>
+                        <label class="qn">CE : If a user's query is missed to answer and directly assigned to GS.</label>
+                        <input type="radio" name="compliance_1" value="10" id="yes1" required>
+                        <label for="yes1">Yes</label>
+                        <input type="radio" name="compliance_1" value="0" id="no1">
+                        <label for="no1">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">CE : If the user is directly assigned without an Acknowledgement. If the user is sent with irrelevant response. If user is missed to assign to a coach while user wish to be assigned.</label>
+                        <input type="radio" name="compliance_2" value="10" id="yes2" required>
+                        <label for="yes2">Yes</label>
+                        <input type="radio" name="compliance_2" value="0" id="no2">
+                        <label for="no2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">CE : If the response is sent with any irrelevant words or free handed messages. If the task is popped up as UU and YLCI the UU task should be our first priority.</label>
+                        <input type="radio" name="compliance_3" value="10" id="yes3" required>
+                        <label for="yes3">Yes</label>
+                        <input type="radio" name="compliance_3" value="0" id="no3">
+                        <label for="no3">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">CE : If the user has a System generated message of cancellation and CRO assigned to next GS. Negative empathy for user’s message!</label>
+                        <input type="radio" name="compliance_4" value="10" id="yes40" required>
+                        <label for="yes40">Yes</label>
+                        <input type="radio" name="compliance_4" value="0" id="no40">
+                        <label for="no40">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">CE : If the user is missed to send the survey response and assigned directly. If the survey messages are swapped.</label>
+                        <input type="radio" name="compliance_5" value="10" id="yes30" required>
+                        <label for="yes30">Yes</label>
+                        <input type="radio" name="compliance_5" value="0" id="no30">
+                        <label for="no30">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">CE : If the user has a question or information about Covid, that needs to addressed to coaches or Seek a help from the slack channels and then respond to it.</label>
+                        <input type="radio" name="compliance_6" value="10" id="yes31" required>
+                        <label for="yes31">Yes</label>
+                        <input type="radio" name="compliance_6" value="0" id="no31">
+                        <label for="no31">No</label>
+                    </div>
+                    <br>
+                </div>
+                <hr>
+                <div class="other">
+
+                    <h4>Areas of improvement</h4>
+                    <textarea name="areaimprovement" id="areaimp" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Positives</h4>
+                    <textarea name="positives" id="positives" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Comments</h4>
+                    <textarea name="comments" id="cfeedback" cols="30" rows="5" class="form-control" required></textarea>
+                </div>
+                <div style="padding: 30px 30px">
+                    <button class="btn btn-info"> Submit </button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+
+{% endblock %}

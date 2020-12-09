@@ -7,29 +7,20 @@ urlpatterns = [
     #Guidelines
     path('outbound-monitoring-guidelines',outboundGuidelines),
     path('inbound-monitoring-guidelines',inboundGuidelines),
+    path('chat-monitoring-guidelines',chatGuidelines),
+    path('email-monitoring-guidelines',emailGuidelines),
 
+    # Monitoring Forms
+    path('ECPL-EVA&NOVO-Monitoring-Form-chat',chatCoachingformEva),
 
     path('agenthome',agenthome),
     path('signup',signup),
     path('login',login_view),
     path('logout',logout_view),
     path('qahome',qahome),
-    path('coaching-view-outbound/<int:pk>',empCoachingViewOutbound),
-    path('coaching-view-inbound/<int:pk>',empCoachingViewInbound),
-    path('coaching-view-email/<int:pk>',empCoachingViewEmail),
-    path('coaching-view-chat/<int:pk>',empCoachingViewChat),
-    path('coaching-view-outbound-qa/<int:pk>',qaCoachingViewOutbound),
-    path('coaching-view-inbound-qa/<int:pk>',qaCoachingViewInbound),
-    path('coaching-view-email-qa/<int:pk>',qaCoachingViewEmail),
-    path('coaching-view-chat-qa/<int:pk>',qaCoachingViewChat),
+    path('coaching-view-eva-chat/<int:pk>',empCoachingViewEvachat),
+    path('coaching-view-eva-chat-qa/<int:pk>',qaCoachingViewEvachat),
     path('coaching/signcoaching/<int:pk>',signCoaching),
-    path('outbound-coaching-form',outboundCoachingform),
-    path('inbound-coaching-form',inboundCoachingform),
-    path('email-coaching-form',emailmonitoringform),
-    path('chat-coaching-form',chatmonitoringform),
-    path('survey-coaching-form',surveyCoachingform),
-    path('lead-sales-coaching-form',leadSalesCoachingForm),
-
 
     path('campaign-view/<int:pk>',campaignView),
     path('add-coaching',selectCoachingForm),

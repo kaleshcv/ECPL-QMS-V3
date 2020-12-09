@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<section id="outbound" style="margin-top:100px">
+   <div class="container-lg">
+       <h2>Chat Monitoring form - Audit Guidelines</h2>
+       <br>
+       <h4 class="text-center">Customer Experience</h4>
+       <table class="table">
+           <tr>
+               <td>Parameters</td>
+               <td>Yes</td>
+               <td>No</td>
+           </tr>
+           <tr>
+               <td class="first">Associate used the standard greeting format</td>
+               <td class="guidelines">Standard greeting format needs to be used. ( Client requirement)</td>
+               <td class="guidelines">If the standard greeting format not used, this parameter will be rated down</td>
+           </tr>
+           <tr>
+               <td class="first">Answered the chat within 3-5 seconds</td>
+               <td class="guidelines">Chat has to be answered within 3-5 seconds. The moment chat is assigned it has to be answered and cannot be inactive.</td>
+               <td class="guidelines">If the chat is not answered within the given timeframe, this parameter would be marked down.</td>
+           </tr>
+           <tr>
+               <td class="first">Addressed the customer appropriately</td>
+               <td class="guidelines">Addressed the customer correctly without shortening names (Eg., if the customer's name is 'Shivakumar', he should not be addressed as 'Shiv'). Also, honorifics like Mr., Mrs. to be used only with customer's full name or last name, never first name</td>
+               <td class="guidelines">Parameter will be marked down if the name of the Customer is not addressed appropriately</td>
+           </tr>
+           <tr>
+               <td class="first">Used appropriate grammar, spellings, punctuations and sentences with spacing</td>
+               <td class="guidelines">Grammer and spell check to be applied before sending out emails. No short cuts/abbreviations to be used. Punctuations to be used when needed. Spacing between sentences and paragraphs to be maintained.</td>
+               <td class="guidelines">If any of these parameters are not met, this will be marked down.</td>
+           </tr>
+            <tr>
+               <td class="first">Probing is done as whenever it is needed</td>
+               <td class="guidelines">Effective probing and questioning to extract relevant inforamtion from customers to be exhibited. Eg., alternate phone number, bank details, etc.</td>
+               <td class="guidelines">Not probing and responding only with existing templates will be marked down</td>
+           </tr>
+           <tr>
+               <td class="first">Associate used the standard closing format</td>
+               <td class="guidelines">Has to use the standard closing with respective Phone/email Id as per the format</td>
+               <td class="guidelines">Parameter will be marked down if standard closing format is not followed.</td>
+           </tr>
+       </table>
+       <br>
+       <br>
+           <h4 class="text-center">Business</h4>
+           <table class="table">
+               <tr>
+                   <td>Parameters</td>
+                   <td>Yes</td>
+                   <td>No</td>
+               </tr>
+               <tr>
+                   <td class="first">Accurate Resolution/Information is provided as per the process</td>
+                   <td class="guidelines">Associate to exhibit good understanding of the customer's query and process, resolution to be provided accordingly</td>
+                   <td class="guidelines">Not responding as per the query or providing misinformaton will be marked down</td>
+               </tr>
+               <tr>
+                   <td class="first">Specific format used to collect incomplete details</td>
+                   <td class="guidelines">Associate to use specific formats to collect incomplete details from customers.</td>
+                   <td class="guidelines">Not using appropriate formats will be marked down</td>
+               </tr>
+           </table>
+       <br>
+       <br>
+           <h4 class="text-center">Compliance</h4>
+           <table class="table">
+               <tr>
+                   <td>Parameters</td>
+                   <td>Yes</td>
+                   <td>No</td>
+               </tr>
+               <tr>
+                   <td class="first">Used standard and correct chat template in all chat communication</td>
+                   <td class="guidelines">Associate to use appropriate chat templates based on subject  matter</td>
+                   <td class="guidelines">Using wrong templates will be marked down</td>
+               </tr>
+               <tr>
+                   <td class="first">Resolution shared or moved ticket to the next level</td>
+                   <td class="guidelines">All communications must have relevant tickets that have been escalated to the right SPOCS or have been resolved</td>
+                   <td class="guidelines">Not creating tickets or not using the appropriate escalation metrics will be marked down</td>
+               </tr>
+               <tr>
+                   <td class="first">Disposed the ticket appropriately</td>
+                   <td class="guidelines">All tickets must be disposed based on resolution.</td>
+                   <td class="guidelines">Keeping tickets open will be marked down</td>
+               </tr>
+
+           </table>
+
+   </div>
+</section>
+
+
+{% endblock %}

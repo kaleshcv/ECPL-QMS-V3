@@ -6,6 +6,7 @@
     <div class="container-lg" style="background: white;padding: 30px 30px;">
 
             <h2>Audit Details</h2>
+            <p>campaign - {{coaching.campaign}}</p>
             <table class="table table-bordered">
                 <tr>
                     <td><b>Emp Name</b></td>
@@ -20,14 +21,8 @@
                   <td>{{coaching.team_lead}}</td>
                 </tr>
                 <tr>
-                  <td><b>Customer Name</b></td>
-                  <td>{{coaching.customer_name}}</td>
-                  <td><b>Record Number</b></td>
-                  <td>{{coaching.record_no}}</td>
-                </tr>
-                <tr>
-                  <td><b>Email Date</b></td>
-                  <td>{{coaching.email_date}}</td>
+                  <td><b>Transaction Date</b></td>
+                  <td>{{coaching.trans_date}}</td>
                   <td><b>Ticket Number</b></td>
                   <td>{{coaching.ticket_no}}</td>
                 </tr>
@@ -43,29 +38,23 @@
                   <td>{{coaching.positives}}</td>
                 </tr>
                 <tr style="height:110px">
-                  <td><b>Customer Feedback</b></td>
-                  <td>{{coaching.customer_feedback}}</td>
+                  <td><b>Comments</b></td>
+                  <td>{{coaching.comments}}</td>
                 </tr>
             </table>
             <h2>Audit Score</h2>
             <table class="table table-bordered">
                 <tr>
                   <td><b>Total</b></td>
-                  <td>{{coaching.total_score}}</td>
+                  <td>{{coaching.overall_score}}</td>
                   <td><b>Compliance</b></td>
                   <td>{{coaching.compliance_total}}</td>
                 </tr>
             </table>
 
         <div>
-            <form class="login-form" action="/employees/coaching/signcoaching/{{coaching.id}}" method="post">
-                          {% csrf_token %}
-                <label for="emp_comments">Employee Comments *</label><br>
-                <textarea name="emp_comments" id="emp_comments" cols="30" rows="5" required class="form-control"></textarea>
-                <input type="hidden" value="email" name="category">
-                <br>
-                <input class="btn btn-info" type="submit" value="Sign">
-            </form>
+
+
         </div>
     </div>
 </section>

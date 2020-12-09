@@ -109,212 +109,37 @@ class Team(models.Model):
 
 
 
+# Final Forms ----------------------- #
 
-class OutboundMonitoringForm(models.Model):
-    associate_name=models.CharField(max_length=50)
-    emp_id=models.IntegerField()
-    qa = models.CharField(max_length=50)
-    team_lead = models.CharField(max_length=50)
-    customer_name=models.CharField(max_length=50)
-    customer_contact=models.IntegerField()
-    call_date=models.DateField()
-    audit_date = models.DateField()
-    campaign=models.CharField(max_length=100)
-    zone=models.CharField(max_length=60)
-    concept=models.CharField(max_length=60)
-    call_duration=models.IntegerField()
-
-    opening_1=models.CharField(max_length=10)
-    opening_2=models.CharField(max_length=10)
-
-    softskill_1=models.CharField(max_length=10)
-    softskill_2 = models.CharField(max_length=10)
-    softskill_3 = models.CharField(max_length=10)
-    softskill_4 = models.CharField(max_length=10)
-    softskill_5 = models.CharField(max_length=10)
-    softskill_6 = models.CharField(max_length=10)
-
-    business_1=models.CharField(max_length=10)
-    business_2 = models.CharField(max_length=10)
-    business_3 = models.CharField(max_length=10)
-
-    closing_1=models.CharField(max_length=10)
-    closing_2 = models.CharField(max_length=10)
-
-    compliance_1=models.CharField(max_length=10)
-    compliance_2 = models.CharField(max_length=10)
-    compliance_3 = models.CharField(max_length=10)
-
-    total_score=models.IntegerField(null=True)
-    compliance=models.IntegerField(null=True)
-
-    opening_total=models.IntegerField(null=True)
-    softskill_total=models.IntegerField(null=True)
-    business_total=models.IntegerField(null=True)
-    closing_total=models.IntegerField(null=True)
-    compliance_total=models.IntegerField(null=True)
-
-    areas_improvement = models.TextField()
-    positives=models.TextField()
-    comments=models.TextField()
-    added_by=models.CharField(max_length=30)
-    status=models.BooleanField(default=False)
-    closed_date=models.DateTimeField(null=True)
-    emp_comments=models.TextField(null=True)
-
-
-    def __str__(self):
-        return self.associate_name
-    def snippet(self):
-        return self.comments[:100]+'...'
-
-
-class InboundMonitoringForm(models.Model):
-    associate_name=models.CharField(max_length=50)
-    emp_id=models.IntegerField()
-    qa = models.CharField(max_length=50)
-    team_lead = models.CharField(max_length=50)
-    customer_name=models.CharField(max_length=50)
-    customer_contact=models.IntegerField()
-    call_date=models.DateField()
-    audit_date = models.DateField()
-    campaign=models.CharField(max_length=100)
-    zone=models.CharField(max_length=60)
-    concept=models.CharField(max_length=60)
-    call_duration=models.IntegerField()
-
-    opening_1=models.CharField(max_length=10)
-    opening_2=models.CharField(max_length=10)
-
-    softskill_1=models.CharField(max_length=10)
-    softskill_2 = models.CharField(max_length=10)
-    softskill_3 = models.CharField(max_length=10)
-    softskill_4 = models.CharField(max_length=10)
-    softskill_5 = models.CharField(max_length=10)
-    softskill_6 = models.CharField(max_length=10)
-
-    business_1=models.CharField(max_length=10)
-    business_2 = models.CharField(max_length=10)
-    business_3 = models.CharField(max_length=10)
-
-    closing_1=models.CharField(max_length=10)
-    closing_2 = models.CharField(max_length=10)
-
-    compliance_1=models.CharField(max_length=10)
-    compliance_2 = models.CharField(max_length=10)
-    compliance_3 = models.CharField(max_length=10)
-
-    total_score=models.IntegerField(null=True)
-    compliance=models.IntegerField(null=True)
-
-    opening_total=models.IntegerField(null=True)
-    softskill_total=models.IntegerField(null=True)
-    business_total=models.IntegerField(null=True)
-    closing_total=models.IntegerField(null=True)
-    compliance_total=models.IntegerField(null=True)
-
-    areas_improvement = models.TextField()
-    positives=models.TextField()
-    comments=models.TextField()
-    added_by=models.CharField(max_length=30)
-    status=models.BooleanField(default=False)
-    closed_date=models.DateTimeField(null=True)
-    emp_comments = models.TextField(null=True)
-
-    def __str__(self):
-        return self.associate_name
-    def snippet(self):
-        return self.comments[:100]+'...'
-
-class EmailMonitoringForm(models.Model):
-    record_no=models.IntegerField()
-    associate_name = models.CharField(max_length=50)
+class ChatMonitoringFormEva(models.Model):
     emp_id = models.IntegerField()
-    qa = models.CharField(max_length=50)
-    team_lead = models.CharField(max_length=50)
-    customer_name = models.CharField(max_length=50)
-    email_date = models.DateField()
-    audit_date = models.DateField()
-    ticket_no=models.IntegerField()
-    campaign = models.CharField(max_length=100)
-    zone = models.CharField(max_length=60)
-    concept = models.CharField(max_length=60)
-
-    ce_1 = models.CharField(max_length=10)
-    ce_2 = models.CharField(max_length=10)
-    ce_3 = models.CharField(max_length=10)
-    ce_4 = models.CharField(max_length=10)
-    ce_5 = models.CharField(max_length=10)
-    ce_6 = models.CharField(max_length=10)
-
-    business_1 = models.CharField(max_length=10)
-    business_2 = models.CharField(max_length=10)
-
-    compliance_1 = models.CharField(max_length=10)
-    compliance_2 = models.CharField(max_length=10)
-    compliance_3 = models.CharField(max_length=10)
-
-    email_summary=models.TextField()
-    areas_improvement = models.TextField()
-    positives = models.TextField()
-    customer_feedback = models.TextField()
-
-    added_by = models.CharField(max_length=30)
-    status = models.BooleanField(default=False)
-    closed_date = models.DateTimeField(null=True)
-    emp_comments = models.TextField(null=True)
-
-    ce_total=models.IntegerField(null=True)
-    business_total=models.IntegerField(null=True)
-    compliance_total=models.IntegerField(null=True)
-    overall_score=models.IntegerField(null=True)
-
-
-    def __str__(self):
-        return self.associate_name
-    def snippet(self):
-        return self.comments[:100]+'...'
-
-class ChatMonitorinForm(models.Model):
-    record_no = models.IntegerField()
     associate_name = models.CharField(max_length=50)
-    emp_id = models.IntegerField()
     qa = models.CharField(max_length=50)
     team_lead = models.CharField(max_length=50)
-    customer_name = models.CharField(max_length=50)
-    chat_date = models.DateField()
-    audit_date = models.DateField()
     ticket_no = models.IntegerField()
+    trans_date = models.DateField()
+    audit_date = models.DateField()
     campaign = models.CharField(max_length=100)
-    zone = models.CharField(max_length=60)
+    evaluator = models.CharField(max_length=50)
     concept = models.CharField(max_length=60)
 
-    ce_1 = models.CharField(max_length=10)
-    ce_2 = models.CharField(max_length=10)
-    ce_3 = models.CharField(max_length=10)
-    ce_4 = models.CharField(max_length=10)
-    ce_5 = models.CharField(max_length=10)
-    ce_6 = models.CharField(max_length=10)
-    ce_7 = models.CharField(max_length=10)
-    ce_8 = models.CharField(max_length=10)
-    ce_9 = models.CharField(max_length=10)
-    ce_10 = models.CharField(max_length=10)
-    ce_11= models.CharField(max_length=10)
+    # Customer Experience
+    ce_1 = models.IntegerField()
+    ce_2 = models.IntegerField()
+    ce_3 = models.IntegerField()
+    ce_4 = models.IntegerField()
 
-    business_1 = models.CharField(max_length=10)
-    business_2 = models.CharField(max_length=10)
-    business_3 = models.CharField(max_length=10)
+    # Compliance
+    compliance_1 = models.IntegerField()
+    compliance_2 = models.IntegerField()
+    compliance_3 = models.IntegerField()
+    compliance_4 = models.IntegerField()
+    compliance_5 = models.IntegerField()
+    compliance_6 = models.IntegerField()
 
-    compliance_1 = models.CharField(max_length=10)
-    compliance_2 = models.CharField(max_length=10)
-    compliance_3 = models.CharField(max_length=10)
-    compliance_4 = models.CharField(max_length=10)
-    compliance_5 = models.CharField(max_length=10)
-
-    chat_summary = models.TextField()
     areas_improvement = models.TextField()
     positives = models.TextField()
-    customer_feedback = models.TextField()
+    comments = models.TextField()
 
     added_by = models.CharField(max_length=30)
     status = models.BooleanField(default=False)
@@ -322,127 +147,8 @@ class ChatMonitorinForm(models.Model):
     emp_comments = models.TextField(null=True)
 
     ce_total = models.IntegerField(null=True)
-    business_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
-
-    def __str__(self):
-        return self.associate_name
-
-    def snippet(self):
-        return self.comments[:100] + '...'
-
-class SurveyMonitorinForm(models.Model):
-
-    #Basic
-    associate_name = models.CharField(max_length=50)
-    emp_id = models.IntegerField()
-    qa = models.CharField(max_length=50)
-    team_lead = models.CharField(max_length=50)
-    customer_name = models.CharField(max_length=50)
-    customer_contact=models.IntegerField()
-    call_date = models.DateField()
-    audit_date = models.DateField()
-    campaign = models.CharField(max_length=100)
-    zone = models.CharField(max_length=60)
-    concept = models.CharField(max_length=60)
-    call_duration = models.IntegerField()
-
-    #opening and Closing
-    oc_1 = models.CharField(max_length=10)
-    oc_2 = models.CharField(max_length=10)
-    oc_3 = models.CharField(max_length=10)
-    oc_4 = models.CharField(max_length=10)
-    oc_5 = models.CharField(max_length=10)
-
-    #Soft Skill
-    sc_1 = models.CharField(max_length=10)
-    sc_2 = models.CharField(max_length=10)
-    sc_3 = models.CharField(max_length=10)
-    sc_4 = models.CharField(max_length=10)
-    sc_5 = models.CharField(max_length=10)
-
-    # Business and Compliance
-    bc_1 = models.CharField(max_length=10)
-    bc_2 = models.CharField(max_length=10)
-    bc_3 = models.CharField(max_length=10)
-    bc_4 = models.CharField(max_length=10)
-    bc_5 = models.CharField(max_length=10)
-    bc_6 = models.CharField(max_length=10)
-    bc_7 = models.CharField(max_length=10)
-    bc_8 = models.CharField(max_length=10)
-
-    areas_improvement = models.TextField()
-    positives = models.TextField()
-    comments = models.TextField()
-
-    added_by = models.CharField(max_length=30)
-    status = models.BooleanField(default=False)
-    closed_date = models.DateTimeField(null=True)
-    emp_comments = models.TextField(null=True)
-
-    oc_total = models.IntegerField(null=True)
-    sc_total = models.IntegerField(null=True)
-    bc_total = models.IntegerField(null=True)
-    total_score = models.IntegerField(null=True)
-
-    def __str__(self):
-        return self.associate_name
-
-    def snippet(self):
-        return self.comments[:100] + '...'
-
-# Lead Sales Form Model
-
-class LeadSalesMonitoringForm(models.Model):
-
-    #Basic
-    associate_name = models.CharField(max_length=50)
-    emp_id = models.IntegerField()
-    qa = models.CharField(max_length=50)
-    team_lead = models.CharField(max_length=50)
-    customer_name = models.CharField(max_length=50)
-    customer_contact=models.IntegerField()
-    call_date = models.DateField()
-    audit_date = models.DateField()
-    campaign = models.CharField(max_length=100)
-    zone = models.CharField(max_length=60)
-    concept = models.CharField(max_length=60)
-    call_duration = models.IntegerField()
-
-    #opening and Closing
-    oc_1 = models.CharField(max_length=10)
-    oc_2 = models.CharField(max_length=10)
-    oc_3 = models.CharField(max_length=10)
-
-    #Soft Skill
-    sc_1 = models.CharField(max_length=10)
-    sc_2 = models.CharField(max_length=10)
-    sc_3 = models.CharField(max_length=10)
-    sc_4 = models.CharField(max_length=10)
-    sc_5 = models.CharField(max_length=10)
-
-    # Business and Compliance
-    bc_1 = models.CharField(max_length=10)
-    bc_2 = models.CharField(max_length=10)
-    bc_3 = models.CharField(max_length=10)
-    bc_4 = models.CharField(max_length=10)
-    bc_5 = models.CharField(max_length=10)
-    bc_6 = models.CharField(max_length=10)
-
-    areas_improvement = models.TextField()
-    positives = models.TextField()
-    comments = models.TextField()
-
-    added_by = models.CharField(max_length=30)
-    status = models.BooleanField(default=False)
-    closed_date = models.DateTimeField(null=True)
-    emp_comments = models.TextField(null=True)
-
-    oc_total = models.IntegerField(null=True)
-    sc_total = models.IntegerField(null=True)
-    bc_total = models.IntegerField(null=True)
-    total_score = models.IntegerField(null=True)
 
     def __str__(self):
         return self.associate_name

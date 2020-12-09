@@ -36,8 +36,8 @@
                 <ul>
                     <li><a href="/employees/outbound-monitoring-guidelines">Outbound </a></li>
                     <li><a href="/employees/inbound-monitoring-guidelines">Inbound </a></li>
-                    <li><a href="">Chat </a></li>
-                    <li><a href="">Email </a></li>
+                    <li><a href="/employees/chat-monitoring-guidelines">Chat </a></li>
+                    <li><a href="/employees/email-monitoring-guidelines">Email </a></li>
                 </ul>
 
             </div>
@@ -82,10 +82,11 @@
 
 <section style="padding-top:70px" id="empopencoachins">
     <div class="container-lg">
-        <h2 class="text-center">Recent Coachings </h2><br>
+        <h2 class="text-center">Open Coachings </h2><br>
         <div class="row">
 
-                {% for coaching in out_coachings %}
+
+                {% for coaching in open_eva_chat %}
                 <div class="col-md-6">
                     <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
                       <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
@@ -94,63 +95,7 @@
                           <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
                           <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
                           <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
-                          <a href="coaching-view-outbound-qa/{{coaching.id}}" style="color:greenyellow">View</a>
-                      </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for coaching in in_coachings %}
-                <div class="col-md-6">
-                    <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
-                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
-                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
-                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
-                          <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
-                          <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
-                          <a href="coaching-view-inbound-qa/{{coaching.id}}" style="color:greenyellow">View</a>
-                      </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for coaching in email_coachings %}
-                <div class="col-md-6">
-                    <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
-                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
-                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
-                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
-                          <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
-                          <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
-                          <a href="coaching-view-email-qa/{{coaching.id}}" style="color:greenyellow">View</a>
-                      </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for coaching in chat_coachings %}
-                <div class="col-md-6">
-                    <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
-                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
-                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
-                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
-                          <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
-                          <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
-                          <a href="coaching-view-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a>
-                      </div>
-                    </div>
-                </div>
-                {% endfor %}
-                {% for coaching in survey_coachings %}
-                <div class="col-md-6">
-                    <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
-                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
-                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
-                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
-                          <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
-                          <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
-                          <a href="coaching-view-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a>
+                          <a href="coaching-view-eva-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a>
                       </div>
                     </div>
                 </div>

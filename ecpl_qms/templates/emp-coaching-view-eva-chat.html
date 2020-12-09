@@ -3,7 +3,6 @@
 
 
 <section id="coachingview" style="padding:100px 50px">
-
     <div class="container-lg" style="background: white;padding: 30px 30px;">
 
             <h2>Audit Details</h2>
@@ -22,16 +21,10 @@
                   <td>{{coaching.team_lead}}</td>
                 </tr>
                 <tr>
-                  <td><b>Customer Name</b></td>
-                  <td>{{coaching.customer_name}}</td>
-                  <td><b>Customer Contact</b></td>
-                  <td>{{coaching.customer_contact}}</td>
-                </tr>
-                <tr>
-                  <td><b>Call Date</b></td>
-                  <td>{{coaching.call_date}}</td>
-                  <td><b>Call Duration</b></td>
-                  <td>{{coaching.call_duration}}</td>
+                  <td><b>Transaction Date</b></td>
+                  <td>{{coaching.trans_date}}</td>
+                  <td><b>Ticket Number</b></td>
+                  <td>{{coaching.ticket_no}}</td>
                 </tr>
             </table>
             <h2>Auditor Comments</h2>
@@ -53,9 +46,9 @@
             <table class="table table-bordered">
                 <tr>
                   <td><b>Total</b></td>
-                  <td>{{coaching.total_score}}</td>
+                  <td>{{coaching.overall_score}}</td>
                   <td><b>Compliance</b></td>
-                  <td>{{coaching.compliance}}</td>
+                  <td>{{coaching.compliance_total}}</td>
                 </tr>
             </table>
 
@@ -64,17 +57,18 @@
                           {% csrf_token %}
                 <label for="emp_comments">Employee Comments *</label><br>
                 <textarea name="emp_comments" id="emp_comments" cols="30" rows="5" required class="form-control"></textarea>
-                <input type="hidden" value="outbound" name="category">
+                <input type="hidden" value="eva-chat" name="category">
                 <br>
-                <input class="btn btn-success" type="submit" value="Accept and Sign">
+                <input class="btn btn-success" type="submit" value="Accept & Sign" style="width: 150px">
             </form>
             <br>
-             <form action="/employees/coaching-dispute" method="POST">
+            <form action="/employees/coaching-dispute" method="POST">
                 {% csrf_token %}
                 <label for="emp_comments_d">Employee Comments *</label><br>
                 <textarea name="emp_comments_dispute" id="emp_comments_d" cols="30" rows="5" required class="form-control"></textarea>
                 <br><button class="btn btn-danger" style="width: 150px">Reject & Dispute</button>
             </form>
+
         </div>
     </div>
 </section>
