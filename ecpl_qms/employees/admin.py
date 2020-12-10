@@ -6,5 +6,7 @@ admin.site.register(Team)
 admin.site.register(Profile)
 
 admin.site.register(ChatMonitoringFormEva)
+admin.site.register(ChatMonitoringFormPodFather)
+admin.site.register(InboundMonitoringForm)
 
 

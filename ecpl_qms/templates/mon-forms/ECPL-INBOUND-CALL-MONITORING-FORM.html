@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+{% block main %}
+
+    <section id="outboundform">
+        <div class="container-lg">
+            <form action="/employees/ECPL-INBOUND-CALL-MONITORING-FORM" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">ECPL - INBOUND CALL MONITORING FORM</h2>
+                <div class="basic">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="empname">Associate Name</label>
+                            <select class="form-control" id="empname" required="required" name="empname">
+
+                                <option value="{{agent.emp_name}}">{{agent.emp_name}}</option>
+
+                            </select>
+                            <label for="empid">Employee ID</label>
+                            <input type="number" class="form-control" id="empid" name="empid" required value="{{agent.emp_id}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="qa">Quality Analyst</label>
+                            <input type="text" class="form-control" id="qa" name="qa" value="{{user.profile.emp_name}}" required>
+                            <label for="tl">Team Lead</label>
+                            <input type="text" class="form-control" id="tl" name="tl" required value="{{team.tl.profile.emp_name}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="customer">Customer Name</label>
+                            <input type="text" class="form-control" id="customer" name="customer" required>
+                            <label for="customercontact">Customer Contact</label>
+                            <input type="number" class="form-control" id="customercontact" name="customercontact" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="calldate">Call Date</label>
+                            <input type="date" class="form-control" id="calldate" name="calldate" required>
+                            <label for="auditdate">Audit Date</label>
+                            <input type="date" class="form-control" id="auditdate" name="auditdate" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label for="campaign">Campaign</label>
+                             <select class="form-control" id="campaign" required="required" name="campaign">
+
+                                <option value="{{team.name}}">{{team.name}}</option>
+
+                            </select>
+
+                            <label for="zone">Zone</label>
+                            <input type="text" class="form-control" id="zone" name="zone" required>
+                        </div>
+                         <div class="col-md-4">
+                            <label for="concept">Concept</label>
+                            <input type="text" class="form-control" id="concept" name="concept" required>
+                             <label for="duration">Call Duration</label>
+                            <input type="text" class="form-control" id="duration" name="duration" required>
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="customerexperience">
+                    <div>
+                        <h4>Customer Experience</h4>
+                        <br>
+                        <label class="qn">Used Standard Opening Protocol</label>
+                        <input type="radio" name="ce_1" value="2" id="yes4" required>
+                        <label for="yes4">Yes</label>
+                        <input type="radio" name="ce_1" value="0" id="no4">
+                        <label for="no4">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Personalization ( Report Building, Addressing by Name)</label>
+                        <input type="radio" name="ce_2" value="3" id="yes5" required>
+                        <label for="yes5">Yes</label>
+                        <input type="radio" name="ce_2" value="0" id="no5">
+                        <label for="no5">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Acknowledged Appropriately</label>
+                        <input type="radio" name="ce_3" value="3" id="yes6" required>
+                        <label for="yes6">Yes</label>
+                        <input type="radio" name="ce_3" value="0" id="no6">
+                        <label for="no6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Active Listening without Interruption / Paraphrasing</label>
+                        <input type="radio" name="ce_4" value="3" id="yes7" required>
+                        <label for="yes7">Yes</label>
+                        <input type="radio" name="ce_4" value="0" id="no7">
+                        <label for="no7">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Used Empathetic Statements whenever required</label>
+                        <input type="radio" name="ce_5" value="3" id="yes71" required>
+                        <label for="yes71">Yes</label>
+                        <input type="radio" name="ce_5" value="0" id="no71">
+                        <label for="no71">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Clear Grammar / Sentence Structure</label>
+                        <input type="radio" name="ce_6" value="3" id="yes72" required>
+                        <label for="yes72">Yes</label>
+                        <input type="radio" name="ce_6" value="0" id="no72">
+                        <label for="no72">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Tone & Intonation / Rate of Speech</label>
+                        <input type="radio" name="ce_7" value="3" id="yes73" required>
+                        <label for="yes73">Yes</label>
+                        <input type="radio" name="ce_7" value="0" id="no73">
+                        <label for="no73">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Diction/ Choice of Words / Phrase</label>
+                        <input type="radio" name="ce_8" value="3" id="yes74" required>
+                        <label for="yes74">Yes</label>
+                        <input type="radio" name="ce_8" value="0" id="no74">
+                        <label for="no74">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Took Ownership on the call</label>
+                        <input type="radio" name="ce_9" value="3" id="yes75" required>
+                        <label for="yes75">Yes</label>
+                        <input type="radio" name="ce_9" value="0" id="no75">
+                        <label for="no75">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Followed Hold Procedure Appropriately / Dead Air</label>
+                        <input type="radio" name="ce_10" value="2" id="yes76" required>
+                        <label for="yes76">Yes</label>
+                        <input type="radio" name="ce_10" value="0" id="no76">
+                        <label for="no76">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Offered Additional Assistance & Closed Call as per Protocol</label>
+                        <input type="radio" name="ce_11" value="2" id="yes77" required>
+                        <label for="yes77">Yes</label>
+                        <input type="radio" name="ce_11" value="0" id="no77">
+                        <label for="no77">No</label>
+                    </div>
+                    <br>
+                </div>
+                <hr>
+                <div class="business">
+                    <div>
+                        <h4>Business</h4>
+                        <br>
+                        <label class="qn">Probing / Tactful Finding / Rebuttal</label>
+                        <input type="radio" name="business_1" value="10" id="b1" required>
+                        <label for="b1">Yes</label>
+                        <input type="radio" name="business_1" value="0" id="b2">
+                        <label for="b2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Complete Information Provided</label>
+                        <input type="radio" name="business_2" value="15" id="b3" required>
+                        <label for="b3">Yes</label>
+                        <input type="radio" name="business_2" value="0" id="b4">
+                        <label for="b4">No</label>
+                    </div>
+                </div>
+                <div class="compliance">
+                    <div>
+                        <h4>Compliance</h4>
+                        <br>
+                        <label class="qn">Professional / Courtesy</label>
+                        <input type="radio" name="compliance_1" value="15" id="yes1" required>
+                        <label for="yes1">Yes</label>
+                        <input type="radio" name="compliance_1" value="0" id="no1">
+                        <label for="no1">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Process & Procedure Followed</label>
+                        <input type="radio" name="compliance_2" value="15" id="yes2" required>
+                        <label for="yes2">Yes</label>
+                        <input type="radio" name="compliance_2" value="0" id="no2">
+                        <label for="no2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">First Call Resolution</label>
+                        <input type="radio" name="compliance_3" value="15" id="yes3" required>
+                        <label for="yes3">Yes</label>
+                        <input type="radio" name="compliance_3" value="0" id="no3">
+                        <label for="no3">No</label>
+                    </div>
+                    <br>
+                </div>
+                <hr>
+                <div class="other">
+
+                    <h4>Areas of improvement</h4>
+                    <textarea name="areaimprovement" id="areaimp" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Positives</h4>
+                    <textarea name="positives" id="positives" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Comments</h4>
+                    <textarea name="comments" id="cfeedback" cols="30" rows="5" class="form-control" required></textarea>
+                </div>
+                <div style="padding: 30px 30px">
+                    <button class="btn btn-info"> Submit </button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+
+{% endblock %}
