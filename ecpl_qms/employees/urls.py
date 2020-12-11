@@ -21,12 +21,19 @@ urlpatterns = [
     path('login',login_view),
     path('logout',logout_view),
     path('qahome',qahome),
+    path('quality-dashboard',qualityDashboard),
 
     # Coaching Views
     path('coaching-view-eva-chat/<int:pk>',empCoachingViewEvachat),
     path('coaching-view-eva-chat-qa/<int:pk>',qaCoachingViewEvachat),
     path('coaching-view-pod-chat/<int:pk>',empCoachingViewPodchat),
     path('coaching-view-pod-chat-qa/<int:pk>',qaCoachingViewPodchat),
+    path('coaching-view-pod-inbound/<int:pk>',empCoachingViewInbound),
+    path('coaching-view-inbound-qa/<int:pk>',qaCoachingViewInbound),
+
+    path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
+
+    path('campaign-wise-coaching-view',campaignwiseCoachings),
 
 
     path('coaching/signcoaching/<int:pk>',signCoaching),

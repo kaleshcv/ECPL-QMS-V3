@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+<section style="margin-top:100px">
+    <div class="container-lg">
+
+            <table class="table">
+                <tr>
+                    <th>Emp Name</th>
+                    <th>Emp ID</th>
+                    <th>Audit Date</th>
+                    <th>Campaign</th>
+                    <th>Overall Score</th>
+                    <th></th>
+                </tr>
+                {% for c in coaching_inbound %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-inbound-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in coaching_eva_chat %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-eva-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in coaching_pod_chat %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </table>
+    </div>
+</section>
+
+
+{% endblock %}

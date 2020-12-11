@@ -81,14 +81,19 @@ def agenthome(request):
     open_eva_chat=ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False)
     open_eva_count = ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False).count()
 
+
     # Pod Father Chat Details
     open_pod_chat = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False)
     open_pod_count = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False).count()
 
+    # Inbound Details
+    open_inbound=InboundMonitoringForm.objects.filter(associate_name=agent_name, status=False)
+    open_inbound_count=InboundMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
 
     data={'team':team,
           'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
           'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
+          'open_inbound':open_inbound,'open_inbound_count':open_inbound_count,
           }
 
     return render(request, 'agent-home.html',data)
@@ -98,23 +103,71 @@ def agenthome(request):
 def empCoachingViewEvachat(request,pk):
     coaching=ChatMonitoringFormEva.objects.get(id=pk)
     data={'coaching':coaching}
-    return render(request,'emp-coaching-view-eva-chat.html',data)
+    return render(request,'coaching-views/emp-coaching-view-eva-chat.html',data)
 
 def qaCoachingViewEvachat(request,pk):
     coaching = ChatMonitoringFormEva.objects.get(id=pk)
     data = {'coaching': coaching}
-    return render(request, 'qa-coaching-view-eva-chat.html', data)
+    return render(request, 'coaching-views/qa-coaching-view-eva-chat.html', data)
 
 def empCoachingViewPodchat(request,pk):
     coaching=ChatMonitoringFormPodFather.objects.get(id=pk)
     data={'coaching':coaching}
-    return render(request,'emp-coaching-view-pod-chat.html',data)
+    return render(request,'coaching-views/emp-coaching-view-pod-chat.html',data)
 
 def qaCoachingViewPodchat(request,pk):
     coaching = ChatMonitoringFormPodFather.objects.get(id=pk)
     data = {'coaching': coaching}
-    return render(request, 'qa-coaching-view-pod-chat.html', data)
+    return render(request, 'coaching-views/qa-coaching-view-pod-chat.html', data)
 
+def empCoachingViewInbound(request,pk):
+    coaching=InboundMonitoringForm.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'coaching-views/emp-coaching-view-inbound.html',data)
+
+def qaCoachingViewInbound(request,pk):
+    coaching = InboundMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-inbound.html', data)
+
+
+# Open status Coaching View
+def qacoachingViewOpenAll(request,pk):
+    if pk>0:
+
+        qa_name=request.user.profile.emp_name
+        coaching_inbound=InboundMonitoringForm.objects.filter(added_by=qa_name,status=False)
+        coaching_chat_eva = ChatMonitoringFormEva.objects.filter(added_by=qa_name, status=False)
+        coaching_chat_pod = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
+        data={
+                'coaching_inbound':coaching_inbound,'coaching_chat_eva':coaching_chat_eva,'coaching_chat_pod':coaching_chat_pod,
+             }
+        return render(request,'qa-open-status-coachings-view.html',data)
+    else:
+        return redirect('/employees/qahome')
+
+# Campaign wise coaching view - qa - manager
+
+def campaignwiseCoachings(request):
+    if request.method == 'POST':
+        team_id = request.POST['team_id']
+        status=request.POST['status']
+        team_name=Team.objects.get(id=team_id)
+
+        if status=='all':
+            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name)
+            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name)
+            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name)
+        else:
+            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status)
+            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status)
+            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status)
+
+        data={
+                'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+             }
+
+        return render(request,'campaign-wise-coaching-view.html',data)
 
 def signCoaching(request,pk):
     now = datetime.now()
@@ -153,11 +206,26 @@ def qahome(request):
     user_id=request.user.id
     teams=Team.objects.filter(qa=user_id)
 
+    # Eva Chat Details
     open_eva_chat=ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False)
     open_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False).count()
 
+    # Pod Father Chat Details
+    open_pod_chat = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
+    open_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False).count()
 
-    data={'teams':teams,'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count
+    # Inbound Details
+    open_inbound = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False)
+    open_inbound_count = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
+
+    total_open=open_eva_count+open_inbound_count+open_pod_count
+
+
+    data={'teams':teams,
+          'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
+          'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
+          'open_inbound':open_inbound,'open_inbound_count':open_inbound_count,
+          'total_open':total_open,
           }
 
     return render(request,'qa-home.html',data)
@@ -418,4 +486,36 @@ def selectCoachingForm(request):
 def coachingSummaryView(request):
     return render(request,'coaching-summary-view.html')
 
+def qualityDashboard(request):
+    if request.user.profile.emp_desi=='QA':
 
+        qa_id=request.user.id
+        qa_name=request.user.profile.emp_name
+        teams=Team.objects.filter(qa=qa_id)
+
+        # Eva Chat Details
+        all_eva=ChatMonitoringFormEva.objects.filter(added_by=qa_name)
+        all_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name).count()
+        open_eva_chat = ChatMonitoringFormEva.objects.filter(added_by=qa_name, status=False)
+        open_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name, status=False).count()
+
+        # Pod Father Chat Details
+        all_pod=ChatMonitoringFormPodFather.objects.filter(added_by=qa_name).count()
+        all_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name)
+        open_pod_chat = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
+        open_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False).count()
+
+        # Inbound Details
+        all_inbound=InboundMonitoringForm.objects.filter(added_by=qa_name)
+        all_inbound_count = InboundMonitoringForm.objects.filter(added_by=qa_name).count
+        open_inbound = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False)
+        open_inbound_count = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
+
+        data={
+
+        }
+
+        return render(request,'quality-dashboard.html',data)
+
+    else:
+        pass

@@ -2,17 +2,14 @@
 {% block main %}
 {% load static %}
 <section id="profile">
-    <div class="container-lg">
+    <div class="container-lg" style="padding-bottom: 20px">
         <div class="row">
-
-                            <div class="col-md-12" style="padding: 50px 30px">
-                                <h2 style="color:grey">Campaigns</h2>
-                                {% for team in teams %}
-                                <span><a href="campaign-view/{{team.id}}">{{team.name}}</a></span>
-                                {% endfor %}
-
-
-                            </div>
+            <div class="col-md-12" style="padding: 50px 30px">
+                <h2 style="color:grey">Campaigns</h2>
+                {% for team in teams %}
+                <span><a href="campaign-view/{{team.id}}">{{team.name}}</a></span>
+                {% endfor %}
+            </div>
         </div>
         <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
         <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
@@ -48,66 +45,42 @@
 
 <section id="coachingsummary" style="background: #011c38;padding: 60px 100px;margin-top: 50px">
     <div class="container-lg">
-         <h2 style="color:grey;border-bottom: 1px solid darkslategrey;width: 287px">Coaching Summary</h2>
-                                        <br>
-                                <div class="row" style="padding:0px 100px;">
-
-                                    <div class="col-md-6">
-                                        <h4>Outbound</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{out_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{out_open_counts}}</span>
-                                        <hr>
-                                        <h4>Inbound</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{in_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{in_open_counts}}</span>
-                                        <hr>
-                                        <h4>Survey</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{survey_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{survey_open_counts}}</span>
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        <h4>Email</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{email_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{email_open_counts}}</span>
-                                        <hr>
-                                        <h4>Chat</h4>
-                                        <small style="color:grey">Total</small><span style="color:White;margin-left:10px">{{chat_counts}}</span>
-                                        <small style="color:grey;margin-left:30px;">Open status</small><span style="color:White;margin-left:10px">{{chat_open_counts}}</span>
-                                    </div>
-                                </div>
-    </div>
-</section>
-
-<section style="padding-top:70px" id="empopencoachins">
-    <div class="container-lg">
-        <h2 class="text-center">Open Coachings </h2><br>
-        <div class="row">
-
-
-                {% for coaching in open_eva_chat %}
-                <div class="col-md-6">
-                    <div class="card" style="background:#203850; margin-bottom:20px;height: fit-content;">
-                      <div class="card-body" style="margin-left: 25px;padding: 30px 40px;">
-                          <h4><small>Campaign</small>{{coaching.campaign}}</h4>
-                          <h4><small>Agent</small>{{coaching.associate_name}}</h4>
-                          <h4><small>Audit date</small>{{coaching.audit_date}}</h4>
-                          <h4><small>Closed Date</small>{{coaching.closed_date}}</h4>
-                          <h4><small>Emp Comments</small>{{coaching.emp_comments}}</h4>
-                          <a href="coaching-view-eva-chat-qa/{{coaching.id}}" style="color:greenyellow">View</a>
-                      </div>
+        <h2 style="color:grey" class="text-center">Coaching Details</h2>
+        <hr>
+            <div style="margin: 70px 41%">
+                <div>
+                    <div>
+                        <span style="color:white;">Open Status <a href="qa-open-status-coachings-view/{{user.id}}" style="background: #d39e00;padding: 13px 23px;border-radius: 50%;color: black;font-size: 32px;margin-left: 10px">{{total_open}}</a></span>
                     </div>
                 </div>
-                {% endfor %}
+            </div>
+        <hr>
+            <div style="margin: 70px 30%">
+                <h2 style="color:grey" class="text-center">Search</h2>
+                <br>
+                <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <label for="camp" style="color:gold">Select Campaign</label>
+                    <select name="team_id" id="camp" style="width: 120px;padding: 2px;font-size: 14px;">
+                        {% for team in teams %}
+                        <option value="{{team.id}}">{{team.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label for="" style="color:gold;margin-left:20px">Status</label>
+                    <select name="status" id="" style="width: 120px;padding: 2px;font-size: 14px;">
+                        <option value="all">All</option>
+                        <option value="False">Open status</option>
+                    </select><br><br>
 
+                    <button class="btn btn-primary" style="float:right;margin-right:5px">submit</button>
+                </form>
+            </div>
 
+        <br>
+        <hr>
+        <div>
+            <a href="/employees/quality-dashboard" style="float:right">View Quality Dashboard >></a>
         </div>
     </div>
 </section>
-
-
-
-
-
 {% endblock %}
