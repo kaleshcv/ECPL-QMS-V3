@@ -54,6 +54,8 @@ def login_view(request):
 
             if user.profile.emp_desi=='QA':
                 return redirect('/employees/qahome')
+            elif user.profile.emp_desi=='Manager':
+                return redirect('/employees/manager-home')
 
             else:
                 return redirect('/employees/agenthome')
@@ -70,6 +72,78 @@ def logout_view(request):
     logout(request)
     return redirect('/employees/login')
 
+def managerHome(request):
+    user_id = request.user.id
+    teams = Team.objects.filter(manager_id=user_id)
+    employees = Profile.objects.filter(emp_desi='CRO')
+
+    eva_total=ChatMonitoringFormEva.objects.all().count()
+    eva_open_total = ChatMonitoringFormEva.objects.filter(status=False).count()
+    closed_percentage_eva=int((eva_open_total/eva_total)*100)
+
+    pod_total = ChatMonitoringFormPodFather.objects.all().count()
+    pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
+    closed_percentage_pod = int((pod_open_total / pod_total) * 100)
+
+    inbound_total = InboundMonitoringForm.objects.all().count()
+    inbound_open_total = InboundMonitoringForm.objects.filter(status=False).count()
+    closed_percentage_inbound = int((inbound_open_total / inbound_total) * 100)
+
+    pod={'name':'Noom-POD','total':pod_total,'total_open':pod_open_total,'perc':closed_percentage_pod}
+    eva={'name':'Noom-EVA','total':eva_total,'total_open':eva_open_total,'perc':closed_percentage_eva}
+    nucleus = {'name': 'Nucleus-Inbound', 'total': inbound_total, 'total_open': inbound_open_total, 'perc': closed_percentage_inbound}
+
+    campaigns=[pod,eva,nucleus]
+
+
+    data = {'teams': teams,
+            'campaigns':campaigns,
+            'employees':employees,
+
+            }
+
+    return render(request,'manager-home.html',data)
+
+
+def employeeWiseReport(request):
+
+    return render(request,'employee-wise-report.html')
+
+def qualityDashboardManager(request):
+
+
+    user_id = request.user.id
+    teams = Team.objects.filter(manager_id=user_id)
+
+    # Eva Chat Details
+    eva_all = ChatMonitoringFormEva.objects.all()
+    eva_all_count = ChatMonitoringFormEva.objects.all().count()
+    open_eva_chat = ChatMonitoringFormEva.objects.filter(status=False)
+    open_eva_count = ChatMonitoringFormEva.objects.filter(status=False).count()
+
+    # Pod Father Chat Details
+    pod_all = ChatMonitoringFormPodFather.objects.all()
+    pod_all_count = ChatMonitoringFormPodFather.objects.all().count()
+    open_pod_chat = ChatMonitoringFormPodFather.objects.filter(status=False)
+    open_pod_count = ChatMonitoringFormPodFather.objects.filter(status=False).count()
+
+    # Inbound Details
+    inbound_all = InboundMonitoringForm.objects.all()
+    inbound_all_count = InboundMonitoringForm.objects.all().count()
+    open_inbound = InboundMonitoringForm.objects.filter(status=False)
+    open_inbound_count = InboundMonitoringForm.objects.filter(status=False).count()
+
+
+
+    data = {'teams': teams,
+
+            'open_eva_chat': open_eva_chat, 'open_eva_count': open_eva_count,'eva_all':eva_all,'eva_all_count':eva_all_count,
+            'open_pod_chat': open_pod_chat, 'open_pod_count': open_pod_count,'pod_all':pod_all,'pod_all_count':pod_all_count,
+            'open_inbound': open_inbound, 'open_inbound_count': open_inbound_count,'inbound_all':inbound_all,'inbound_all_count':inbound_all_count,
+
+            }
+
+    return render(request, 'quality-dashboard-management.html',data)
 
 def agenthome(request):
 
@@ -168,6 +242,8 @@ def campaignwiseCoachings(request):
              }
 
         return render(request,'campaign-wise-coaching-view.html',data)
+    else:
+        return redirect('/employees/qahome')
 
 def signCoaching(request,pk):
     now = datetime.now()
@@ -181,8 +257,23 @@ def signCoaching(request,pk):
         coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
+    elif category == 'pod-chat':
+        coaching=ChatMonitoringFormPodFather.objects.get(id=pk)
+        coaching.status=True
+        coaching.closed_date=now
+        coaching.emp_comments=emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'inbound-nucleus':
+        coaching = InboundMonitoringForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
     else:
-        pass
+        return redirect('/employees/agenthome')
 
 
 def coachingSuccess(request):
@@ -481,7 +572,7 @@ def selectCoachingForm(request):
             return render(request, 'mon-forms/ECPL-INBOUND-CALL-MONITORING-FORM.html', data)
 
     else:
-        pass
+        return redirect('/employees/qahome')
 
 def coachingSummaryView(request):
     return render(request,'coaching-summary-view.html')

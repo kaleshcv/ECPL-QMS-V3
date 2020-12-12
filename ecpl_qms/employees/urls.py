@@ -16,12 +16,19 @@ urlpatterns = [
     path('ECPL-INBOUND-CALL-MONITORING-FORM',inboundCoachingForm),
 
 
-    path('agenthome',agenthome),
+
     path('signup',signup),
     path('login',login_view),
     path('logout',logout_view),
+
+    path('agenthome',agenthome),
     path('qahome',qahome),
+    path('manager-home',managerHome),
+    path('quality-dashboard-mgt',qualityDashboardManager),
+
+
     path('quality-dashboard',qualityDashboard),
+    path('employee-wise-report',employeeWiseReport),
 
     # Coaching Views
     path('coaching-view-eva-chat/<int:pk>',empCoachingViewEvachat),

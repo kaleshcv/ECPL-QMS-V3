@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<section id="profile">
+    <div class="container-lg" style="padding-bottom: 20px">
+        <h2 style="color:white">Manager-home</h2>
+        {% for team in teams %}
+           <span style="color:gold">{{team.name}}</span>
+        {% endfor %}
+    </div>
+</section>
+
+<section style="margin-top:100px">
+    <div class="container-lg">
+        <h2>Campaign wise Coaching Status</h2><br>
+        <div class="row" style="margin-left: 50px">
+        {% for c in campaigns %}
+        <div class="col-md-3" style="background: darkgray;padding: 20px;margin-right: 40px">
+            <h4>{{c.name}}</h4>
+            <table class="table">
+                <tr>
+                    <th>Total Coachings </th>
+                    <td>{{c.total}}</td>
+                </tr>
+                <tr>
+                    <th>Open Status</th>
+                    <td>{{c.total_open}}</td>
+                </tr>
+                <tr>
+                    <th>Closed Percentage </th>
+                    <td>{{c.perc}}%</td>
+                </tr>
+
+            </table>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section style="margin:100px 100px">
+    <div class="container-lg">
+        <h2>Employee wise Quality Report</h2><br>
+        <div class="row" style="margin-left: 50px">
+                <form action="/employees/employee-wise-report" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                    <label for="agent">Select Employee</label>
+                    <select name="agent" id="agent" class="form-control">
+                        {% for employee in employees %}
+                        <option value="{{employee.emp_name}}" class="form-control">{{employee.emp_name}}</option>
+                        {% endfor %}
+                    </select><br>
+
+                    <input type="hidden" value="{{team.name}}" name="team">
+
+                    <button class="btn btn-info">View Report</button>
+                </form>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

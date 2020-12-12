@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<section>
+    <div class="container-lg">
+        <h2>Quality Dashboard Management</h2>
+    </div>
+</section>
+<section>
+    <div class="container-lg">
+        <div class="row">
+
+            {% for coaching in eva_all_count %}
+            <div class="col-md-4">
+                {{coaching.audit_date}}
+                {{coaching.campaign}}
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}
