@@ -13,7 +13,7 @@
 
 <section style="margin-top:100px">
     <div class="container-lg">
-        <h2>Campaign wise Coaching Status</h2><br>
+        <h2>Coaching Closure Status</h2><br>
         <div class="row" style="margin-left: 50px">
         {% for c in campaigns %}
         <div class="col-md-3" style="background: darkgray;padding: 20px;margin-right: 40px">
@@ -41,21 +41,23 @@
 
 <section style="margin:100px 100px">
     <div class="container-lg">
-        <h2>Employee wise Quality Report</h2><br>
-        <div class="row" style="margin-left: 50px">
-                <form action="/employees/employee-wise-report" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                    <label for="agent">Select Employee</label>
-                    <select name="agent" id="agent" class="form-control">
-                        {% for employee in employees %}
-                        <option value="{{employee.emp_name}}" class="form-control">{{employee.emp_name}}</option>
-                        {% endfor %}
-                    </select><br>
+        <div style="margin:0px 34%">
+            <h2>Employee wise Quality <br> Report</h2><br>
+            <div class="row" style="margin-left: 50px">
+                    <form action="/employees/employee-wise-report" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                        <label for="agent">Select Employee</label>
+                        <select name="emp_id" id="agent" class="form-control">
+                            {% for employee in employees %}
+                            <option value="{{employee.emp_id}}" class="form-control">{{employee.emp_name}}</option>
+                            {% endfor %}
+                        </select><br>
 
-                    <input type="hidden" value="{{team.name}}" name="team">
+                        <input type="hidden" value="{{team.name}}" name="team">
 
-                    <button class="btn btn-info">View Report</button>
-                </form>
+                        <button class="btn btn-info">View Report</button>
+                    </form>
+            </div>
         </div>
     </div>
 </section>

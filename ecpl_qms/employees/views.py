@@ -99,15 +99,118 @@ def managerHome(request):
     data = {'teams': teams,
             'campaigns':campaigns,
             'employees':employees,
-
             }
 
     return render(request,'manager-home.html',data)
 
 
 def employeeWiseReport(request):
+    if request.method == 'POST':
+        emp_id = request.POST['emp_id']
+        profile=Profile.objects.get(emp_id=emp_id)
 
-    return render(request,'employee-wise-report.html')
+        coaching_eva = ChatMonitoringFormEva.objects.filter(emp_id=emp_id)
+
+        ce_total = []
+        for i in coaching_eva:
+            ce_total.append(i.ce_total)
+        if len(ce_total) > 0:
+            ce_avg = sum(ce_total) / len(ce_total)
+            ce_perc = (ce_avg / 40) * 100
+        else:
+            ce_perc = 100
+
+        co_total = []
+        for i in coaching_eva:
+            co_total.append(i.compliance_total)
+        if len(co_total) > 0:
+            co_avg = sum(co_total) / len(co_total)
+            co_perc=(co_avg/60)*100
+
+        else:
+            co_perc = 100
+
+        overall_total = []
+        for i in coaching_eva:
+            overall_total.append(i.overall_score)
+        if len(overall_total) > 0:
+            ov_perc = sum(overall_total) / len(overall_total)
+
+        else:
+            ov_perc = 100
+
+        eva_details = {'name': 'EVA Chat', 'ce_avg': ce_perc, 'co_avg': co_perc,'ov_avg':ov_perc}
+
+        # --------------------
+
+        coaching_eva = ChatMonitoringFormPodFather.objects.filter(emp_id=emp_id)
+
+        ce_total = []
+        for i in coaching_eva:
+            ce_total.append(i.ce_total)
+        if len(ce_total) > 0:
+            ce_avg = sum(ce_total) / len(ce_total)
+            ce_perc = (ce_avg / 40) * 100
+        else:
+            ce_perc = 100
+
+        co_total = []
+        for i in coaching_eva:
+            co_total.append(i.compliance_total)
+        if len(co_total) > 0:
+            co_avg = sum(co_total) / len(co_total)
+            co_perc=(co_avg/60)*100
+        else:
+            co_perc = 100
+
+        overall_total = []
+        for i in coaching_eva:
+            overall_total.append(i.overall_score)
+        if len(overall_total) > 0:
+            ov_perc = sum(overall_total) / len(overall_total)
+        else:
+            ov_perc = 100
+
+        pod_details = {'name': 'POD Chat', 'ce_avg': ce_perc, 'co_avg': co_perc,'ov_avg':ov_perc}
+
+        # --------------------
+
+        coaching_inb = InboundMonitoringForm.objects.filter(emp_id=emp_id)
+
+        ce_total = []
+        for i in coaching_inb:
+            ce_total.append(i.ce_total)
+        if len(ce_total) > 0:
+            ce_avg = sum(ce_total) / len(ce_total)
+            ce_perc = (ce_avg / 40) * 100
+        else:
+            ce_perc = 100
+
+        co_total = []
+        for i in coaching_inb:
+            co_total.append(i.compliance_total)
+        if len(co_total) > 0:
+            co_avg = sum(co_total) / len(co_total)
+            co_perc = (co_avg / 60) * 100
+        else:
+            co_perc = 100
+
+        overall_total = []
+        for i in coaching_inb:
+            overall_total.append(i.overall_score)
+        if len(overall_total) > 0:
+            ov_perc = sum(overall_total) / len(overall_total)
+        else:
+            ov_perc = 100
+
+        inb_details = {'name': 'Inbound - Nucleus', 'ce_avg': ce_perc, 'co_avg': co_perc, 'ov_avg': ov_perc}
+
+        campaign_details=[eva_details,pod_details,inb_details
+                          ]
+
+        data={'campaign':campaign_details,'profile':profile}
+
+        return render(request,'employee-wise-report.html',data)
 
 def qualityDashboardManager(request):
 
