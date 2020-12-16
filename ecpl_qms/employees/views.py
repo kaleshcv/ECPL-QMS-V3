@@ -212,11 +212,20 @@ def employeeWiseReport(request):
 
         return render(request,'employee-wise-report.html',data)
 
-def qualityDashboardManager(request):
+def qualityDashboardMgt(request):
+    # Date Time
+    import datetime
+    d = datetime.datetime.now()
 
-
+    month = d.strftime("%m")
+    year = d.strftime("%Y")
+    print(month)
+    print('year', year)
     user_id = request.user.id
-    teams = Team.objects.filter(manager_id=user_id)
+
+    employees = Profile.objects.filter(emp_desi='CRO')
+    managers = Profile.objects.filter(emp_desi='Manager')
+
 
     # Eva Chat Details
     eva_all = ChatMonitoringFormEva.objects.all()
@@ -224,11 +233,31 @@ def qualityDashboardManager(request):
     open_eva_chat = ChatMonitoringFormEva.objects.filter(status=False)
     open_eva_count = ChatMonitoringFormEva.objects.filter(status=False).count()
 
+    eva_avg_score=ChatMonitoringFormEva.objects.filter(audit_date__year=year,audit_date__month=month)
+    eva_avg=[]
+    for i in eva_avg_score:
+        eva_avg.append(i.overall_score)
+    if len(eva_avg)>0:
+        eva_avg_score=sum(eva_avg)/len(eva_avg)
+    else:
+        eva_avg_score=100
+
+
+
     # Pod Father Chat Details
     pod_all = ChatMonitoringFormPodFather.objects.all()
     pod_all_count = ChatMonitoringFormPodFather.objects.all().count()
     open_pod_chat = ChatMonitoringFormPodFather.objects.filter(status=False)
     open_pod_count = ChatMonitoringFormPodFather.objects.filter(status=False).count()
+
+    pod_avg_score = ChatMonitoringFormPodFather.objects.filter(audit_date__year=year, audit_date__month=month)
+    pod_avg = []
+    for i in pod_avg_score:
+        pod_avg.append(i.overall_score)
+    if len(pod_avg) > 0:
+        pod_avg_score = sum(pod_avg) / len(pod_avg)
+    else:
+        pod_avg_score = 100
 
     # Inbound Details
     inbound_all = InboundMonitoringForm.objects.all()
@@ -236,13 +265,34 @@ def qualityDashboardManager(request):
     open_inbound = InboundMonitoringForm.objects.filter(status=False)
     open_inbound_count = InboundMonitoringForm.objects.filter(status=False).count()
 
+    inbound_avg_score = InboundMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    inbound_avg = []
+    for i in inbound_avg_score:
+        inbound_avg.append(i.overall_score)
+    if len(inbound_avg) > 0:
+        inbound_avg_score = sum(inbound_avg) / len(inbound_avg)
+    else:
+        inbound_avg_score = 100
 
 
-    data = {'teams': teams,
+    #Categorywise
+
+    inbound=inbound_avg_score
+    chat=(eva_avg_score+pod_avg_score)/2
+    outbound=100
+    email=100
+
+    data = {
 
             'open_eva_chat': open_eva_chat, 'open_eva_count': open_eva_count,'eva_all':eva_all,'eva_all_count':eva_all_count,
             'open_pod_chat': open_pod_chat, 'open_pod_count': open_pod_count,'pod_all':pod_all,'pod_all_count':pod_all_count,
             'open_inbound': open_inbound, 'open_inbound_count': open_inbound_count,'inbound_all':inbound_all,'inbound_all_count':inbound_all_count,
+
+            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'inbound_avg_score':inbound_avg_score,
+
+            'inbound':inbound,'chat':chat,'outbound':outbound,'email':email,
+
+            'employees':employees,'managers':managers
 
             }
 
@@ -253,6 +303,7 @@ def agenthome(request):
     agent_name = request.user.profile.emp_name
     team_name=request.user.profile.team
     team = Team.objects.get(name=team_name)
+
 
     # Chat Eva Details
     open_eva_chat=ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False)
@@ -347,6 +398,33 @@ def campaignwiseCoachings(request):
         return render(request,'campaign-wise-coaching-view.html',data)
     else:
         return redirect('/employees/qahome')
+
+# Campaign wise coaching view - Agent
+
+def campaignwiseCoachingsAgent(request):
+    if request.method == 'POST':
+        team_id = request.POST['team_id']
+        status=request.POST['status']
+        team_name=Team.objects.get(id=team_id)
+        emp_id=request.user.profile.emp_id
+
+
+        if status=='all':
+            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,emp_id=emp_id)
+            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,emp_id=emp_id)
+            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,emp_id=emp_id)
+        else:
+            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+
+        data={
+                'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+             }
+
+        return render(request,'campaign-wise-coaching-view-agent.html',data)
+    else:
+        return redirect('/employees/agenthome')
 
 def signCoaching(request,pk):
     now = datetime.now()

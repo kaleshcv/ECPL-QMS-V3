@@ -2,24 +2,121 @@
 {% block main %}
 {% load static %}
 
-<section>
+<section style="background: #011c38;padding: 70px;color: white">
     <div class="container-lg">
-        <h2>Quality Dashboard Management</h2>
+        <h2>Quality Dashboard</h2>
     </div>
 </section>
-<section>
-    <div class="container-lg">
-        <div class="row">
 
-            {% for coaching in eva_all_count %}
-            <div class="col-md-4">
-                {{coaching.audit_date}}
-                {{coaching.campaign}}
+<section style="padding: 75px">
+    <div class="container-lg">
+        <h2 class="text-center">Campaigns</h2>
+        <br>
+        <div class="row" style="margin-left: 120px">
+            <div class="col-md-3" style="padding: 30px;background: brown;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Noom-eva</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{eva_avg_score}}%</p>
             </div>
-            {% endfor %}
+            <div class="col-md-3" style="padding: 30px;background: brown;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Noom-Pod</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{pod_avg_score}}%</p>
+            </div>
+            <div class="col-md-3" style="padding: 30px;background: brown;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Nucleus</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{inbound_avg_score}}%</p>
+            </div>
+
+            <!--------------------------------------->
+
+            <div class="col-md-3" style="padding: 30px;background: brown;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Test</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">99%</p>
+            </div>
+            <div class="col-md-3" style="padding: 30px;background: brown;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Test1</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">98%</p>
+            </div>
+            <div class="col-md-3" style="padding: 30px;background: brown;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Test2</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">96.5%</p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="container-lg" style="margin-top:50px">
+        <h2 class="text-center">Category</h2>
+        <br>
+        <div class="row" style="margin-left: 120px">
+            <div class="col-md-3" style="padding: 30px;background: #333436;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Inbound</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{inbound}}%</p>
+            </div>
+            <div class="col-md-3" style="padding: 30px;background: #333436;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Outbound</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{outbound}}%</p>
+            </div>
+            <div class="col-md-3" style="padding: 30px;background: #333436;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Chat</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{chat}}%</p>
+            </div>
+            <div class="col-md-3" style="padding: 30px;background: #333436;border-radius: 12px;margin: 10px">
+                    <h5 style="color: darkorange">Email</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{email}}%</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container-fluid" style="margin-top:100px">
+        <div class="row">
+            <div class="col-md-6" style="background: cadetblue">
+                <section style="margin:100px 100px">
+                    <h4>Employee wise Quality Report</h4><br>
+                    <div class="row" style="margin-left: 50px">
+                                    <form action="/employees/employee-wise-report" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                        <label for="agent">Select Employee</label>
+                                        <select name="emp_id" id="agent" class="form-control">
+                                            {% for employee in employees %}
+                                            <option value="{{employee.emp_id}}" class="form-control">{{employee.emp_name}}</option>
+                                            {% endfor %}
+                                        </select><br>
+
+                                        <input type="hidden" value="{{team.name}}" name="team">
+
+                                        <button class="btn btn-info">View Report</button>
+                                    </form>
+                    </div>
+                </section>
+            </div>
+            <div class="col-md-6" style="background: cornflowerblue">
+                <section style="margin:100px 100px">
+                    <h4>Manager wise Quality Report</h4><br>
+                    <div class="row" style="margin-left: 50px">
+                                    <form action="/employees/manager-wise-report" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                        <label for="agent">Select Manager</label>
+                                        <select name="emp_id" id="agent" class="form-control">
+                                            {% for manager in managers %}
+                                            <option value="{{manager.emp_id}}" class="form-control">{{manager.emp_name}}</option>
+                                            {% endfor %}
+                                        </select><br>
+
+                                        <input type="hidden" value="{{team.name}}" name="team">
+
+                                        <button class="btn btn-info">View Report</button>
+                                    </form>
+                    </div>
+                </section>
+            </div>
 
         </div>
     </div>
 </section>
+
+
 
 {% endblock %}
