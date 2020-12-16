@@ -203,3 +203,11 @@ color:grey;
 #outboundform .qn{
     width:650px;
 }
+
+#dashboardcampaigns .col-md-3{
+
+    background: #4e0404;
+    padding: 20px;
+    border: 1px solid #5d1212;
+
+}
