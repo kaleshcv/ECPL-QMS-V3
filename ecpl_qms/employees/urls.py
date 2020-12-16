@@ -30,6 +30,7 @@ urlpatterns = [
     path('quality-dashboard',qualityDashboard),
 
     path('employee-wise-report',employeeWiseReport),
+    path('manager-wise-report',managerWiseReport),
 
 
 
