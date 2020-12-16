@@ -219,8 +219,7 @@ def qualityDashboardMgt(request):
 
     month = d.strftime("%m")
     year = d.strftime("%Y")
-    print(month)
-    print('year', year)
+
     user_id = request.user.id
 
     employees = Profile.objects.filter(emp_desi='CRO')
