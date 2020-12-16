@@ -23,7 +23,7 @@ urlpatterns = [
 
     path('agenthome',agenthome),
     path('qahome',qahome),
-    path('manager-home',managerHome),
+    path('manager-home',qualityDashboardMgt),
     path('quality-dashboard-mgt',qualityDashboardMgt),
 
 

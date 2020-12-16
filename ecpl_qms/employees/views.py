@@ -390,6 +390,33 @@ def qualityDashboardMgt(request):
     outbound=100
     email=100
 
+
+
+    # Coaching closure
+
+    user_id = request.user.id
+
+    employees = Profile.objects.filter(emp_desi='CRO')
+
+    eva_total = ChatMonitoringFormEva.objects.all().count()
+    eva_open_total = ChatMonitoringFormEva.objects.filter(status=False).count()
+    closed_percentage_eva = int((eva_open_total / eva_total) * 100)
+
+    pod_total = ChatMonitoringFormPodFather.objects.all().count()
+    pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
+    closed_percentage_pod = int((pod_open_total / pod_total) * 100)
+
+    inbound_total = InboundMonitoringForm.objects.all().count()
+    inbound_open_total = InboundMonitoringForm.objects.filter(status=False).count()
+    closed_percentage_inbound = int((inbound_open_total / inbound_total) * 100)
+
+    pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
+    eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
+    nucleus = {'name': 'Nucleus-Inbound', 'total': inbound_total, 'total_open': inbound_open_total,
+               'perc': closed_percentage_inbound}
+
+    campaigns = [pod, eva, nucleus]
+
     data = {
 
             'open_eva_chat': open_eva_chat, 'open_eva_count': open_eva_count,'eva_all':eva_all,'eva_all_count':eva_all_count,
@@ -400,7 +427,7 @@ def qualityDashboardMgt(request):
 
             'inbound':inbound,'chat':chat,'outbound':outbound,'email':email,
 
-            'employees':employees,'managers':managers
+            'employees':employees,'managers':managers,'campaigns':campaigns
 
             }
 
@@ -515,22 +542,41 @@ def campaignwiseCoachingsAgent(request):
         status=request.POST['status']
         team_name=Team.objects.get(id=team_id)
         emp_id=request.user.profile.emp_id
+        start_date=request.POST['start_date']
+        end_date = request.POST['end_date']
 
+        if start_date and end_date:
 
-        if status=='all':
-            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,emp_id=emp_id)
-            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,emp_id=emp_id)
-            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,emp_id=emp_id)
+            if status=='all':
+                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,emp_id=emp_id,audit_date__range=[start_date,end_date])
+                coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,emp_id=emp_id,audit_date__range=[start_date,end_date])
+                coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,emp_id=emp_id,audit_date__range=[start_date,end_date])
+            else:
+                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status,emp_id=emp_id,audit_date__range=[start_date,end_date])
+                coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status,emp_id=emp_id,audit_date__range=[start_date,end_date])
+                coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status,emp_id=emp_id,audit_date__range=[start_date,end_date])
+
+            data={
+                    'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+                 }
+
+            return render(request,'campaign-wise-coaching-view-agent.html',data)
         else:
-            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
-            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
-            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+            if status=='all':
+                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,emp_id=emp_id)
+                coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,emp_id=emp_id)
+                coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,emp_id=emp_id)
+            else:
+                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+                coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+                coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
 
-        data={
-                'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
-             }
+            data={
+                    'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+                 }
 
-        return render(request,'campaign-wise-coaching-view-agent.html',data)
+            return render(request,'campaign-wise-coaching-view-agent.html',data)
+
     else:
         return redirect('/employees/agenthome')
 

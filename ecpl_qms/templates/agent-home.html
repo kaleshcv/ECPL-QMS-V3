@@ -79,7 +79,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div>
-                    <h2 style="color:grey">Search by campaign</h2>
+                    <h2 style="color:grey">View Feedbacks</h2>
                     <br>
                     <form action="/employees/campaign-wise-coaching-view-agent" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -93,6 +93,11 @@
                             <option value="all">All</option>
                             <option value="False">Open status</option>
                         </select><br>
+                        <h5>Date</h5>
+                        <label for="">From</label>
+                        <input type="date" name="start_date">
+                        <label for="">To</label>
+                        <input type="date" name="end_date">
 
                         <button class="btn btn-primary" class="form-control">submit</button>
                     </form>

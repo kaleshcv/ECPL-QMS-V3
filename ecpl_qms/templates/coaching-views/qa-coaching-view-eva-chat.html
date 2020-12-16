@@ -42,6 +42,57 @@
                   <td>{{coaching.comments}}</td>
                 </tr>
             </table>
+
+            <h2>Parameter Scores</h2>
+            <p><b>Customer Experience</b></p>
+            <table class="table">
+                <tr>
+                    <td style="width: 55%;">NCE : If the user is missed to hit "finish" after sending the respective response.  If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard, we should use “Hey there!”.</td>
+                    <td>{{coaching.ce_1}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">NCE : If the "You last checked in" user is not sent with respective message or sent twice with the response.</td>
+                    <td>{{coaching.ce_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">NCE : If the user are not assigned in spreadsheet. Ex: If the user code is not added in the spreadsheet.</td>
+                    <td>{{coaching.ce_3}}</td>
+                </tr>
+                <tr style="width: 55%;">
+                    <td>NCE : If "was assigned to you" users are not hit finish.</td>
+                    <td>{{coaching.ce_4}}</td>
+                </tr>
+            </table>
+
+            <p><b>Compliance ( Fatal )</b></p>
+            <table>
+                <tr>
+                    <td style="width: 55%;">CE : If a user's query is missed to answer and directly assigned to GS.</td>
+                    <td>{{coaching.compliance_1}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the user is directly assigned without an Acknowledgement. If the user is sent with irrelevant response. If user is missed to assign to a coach while user wish to be assigned.</td>
+                    <td>{{coaching.compliance_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the response is sent with any irrelevant words or free handed messages. If the task is popped up as UU and YLCI the UU task should be our first priority.</td>
+                    <td>{{coaching.compliance_3}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the user has a System generated message of cancellation and CRO assigned to next GS. Negative empathy for user’s message!</td>
+                    <td>{{coaching.compliance_4}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the user is missed to send the survey response and assigned directly. If the survey messages are swapped.</td>
+                    <td>{{coaching.compliance_5}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the user has a question or information about Covid, that needs to addressed to coaches or Seek a help from the slack channels and then respond to it.</td>
+                    <td>{{coaching.compliance_6}}</td>
+                </tr>
+            </table>
+        <br>
+
             <h2>Audit Score</h2>
             <table class="table table-bordered">
                 <tr>

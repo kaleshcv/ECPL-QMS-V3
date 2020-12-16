@@ -9,7 +9,33 @@
 </section>
 
 <section style="padding: 75px" id="dashboardcampaigns">
-    <div class="container-lg">
+
+    <div class="container-lg" style="margin-top:50px">
+        <h2 class="text-center">Category</h2>
+        <br>
+        <div class="row" style="margin-left: 120px">
+            <div class="col-md-3">
+                    <h5 style="color: darkorange">Inbound</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{inbound}}%</p>
+            </div>
+            <div class="col-md-3">
+                    <h5 style="color: darkorange">Outbound</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{outbound}}%</p>
+            </div>
+            <div class="col-md-3">
+                    <h5 style="color: darkorange">Chat</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{chat}}%</p>
+            </div>
+            <div class="col-md-3">
+                    <h5 style="color: darkorange">Email</h5>
+                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{email}}%</p>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container-lg" style="margin-top:100px">
         <h2 class="text-center">Campaigns</h2>
         <br>
         <div class="row" style="margin-left: 120px">
@@ -41,30 +67,6 @@
                     <p style="font-size: 32px;color: lightgoldenrodyellow">96.5%</p>
             </div>
 
-
-        </div>
-    </div>
-
-    <div class="container-lg" style="margin-top:50px">
-        <h2 class="text-center">Category</h2>
-        <br>
-        <div class="row" style="margin-left: 120px">
-            <div class="col-md-3">
-                    <h5 style="color: darkorange">Inbound</h5>
-                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{inbound}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5 style="color: darkorange">Outbound</h5>
-                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{outbound}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5 style="color: darkorange">Chat</h5>
-                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{chat}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5 style="color: darkorange">Email</h5>
-                    <p style="font-size: 32px;color: lightgoldenrodyellow">{{email}}%</p>
-            </div>
 
         </div>
     </div>
@@ -117,6 +119,34 @@
     </div>
 </section>
 
+
+<section style="margin-top:100px">
+    <div class="container-lg">
+        <h2>Coaching Closure Status</h2><br>
+        <div class="row" style="margin-left: 50px">
+        {% for c in campaigns %}
+        <div class="col-md-3" style="background: darkgray;padding: 20px;margin-right: 40px">
+            <h4>{{c.name}}</h4>
+            <table class="table">
+                <tr>
+                    <th>Total Coachings </th>
+                    <td>{{c.total}}</td>
+                </tr>
+                <tr>
+                    <th>Open Status</th>
+                    <td>{{c.total_open}}</td>
+                </tr>
+                <tr>
+                    <th>Closed Percentage </th>
+                    <td>{{c.perc}}%</td>
+                </tr>
+
+            </table>
+        </div>
+        {% endfor %}
+        </div>
+    </div>
+</section>
 
 
 {% endblock %}

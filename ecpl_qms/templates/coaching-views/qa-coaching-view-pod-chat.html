@@ -27,6 +27,55 @@
                   <td>{{coaching.ticket_no}}</td>
                 </tr>
             </table>
+            <h2>Parameter Scores</h2>
+            <p><b>Customer Experience</b></p>
+            <table class="table">
+                <tr>
+                    <td style="width: 55%;">NCE : FCI & GCI: If the Messages are switched around. i,e Second message sent in the place of first message. If the task is not been cleared. If the user name is in alphanumeric then it should be used as "Hey there". If the canned response is sent twise. The CRO should make sure that #SCI 1 (FCI) is reflecting on task list. Make sure only one task due today is on the task list.</td>
+                    <td>{{coaching.ce_1}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">NCE : In YLCI ,second message is sent in the place of first message. Any unnecessary space in the FCI canned response will be a NCE.</td>
+                    <td>{{coaching.ce_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">NCE : In YLCI If the user is missed to Receive respective response for the SGM {Thanks for sticking in with noom}.</td>
+                    <td>{{coaching.ce_3}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">NCE : In YLCI if user receives the message twice. If user is missed to hit finish the task after sending the message.</td>
+                    <td>{{coaching.ce_4}}</td>
+                </tr>
+            </table>
+
+            <p><b>Compliance ( Fatal )</b></p>
+            <table class="table">
+                <tr>
+                    <td style="width: 55%;">CE : FCI/GCI : If the user receive irrespective message instead of respective message I.e., sending GCI message instead of FCI message. Only first name of the user should be sent with canned message. If there is any personal reply from the user that Particular users should be Skipped.</td>
+                    <td>{{coaching.compliance_1}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the user’s message was sent After or equal to 14 days irrespective of any task, those users should to be skipped to UU auto generate. Else if any irrelevant response is sent for a user.</td>
+                    <td>{{coaching.compliance_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If the user’s last message be like UU response those users should be mark as inactive or skip. If the last messages looks like an acknowledgement for a UU response, those users should be skipped or Mark as inactive.</td>
+                    <td>{{coaching.compliance_3}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : If any "Task due today" is popped up with YLC, that user need to be sent with appropriate "Task due today" canned message. If the TDT is repeated on task list with a different date and time or different task those users needs to be skipped.</td>
+                    <td>{{coaching.compliance_4}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : User should be sent with the response which is loaded on Canned response list, make sure not to add any extra contents in it! If the user is skipped without a valid reason.</td>
+                    <td>{{coaching.compliance_5}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">CE : In Group posting if the content/image  is missed in post. If the content/Image is swapped.</td>
+                    <td>{{coaching.compliance_6}}</td>
+                </tr>
+            </table>
+
             <h2>Auditor Comments</h2>
             <table class="table table-bordered">
                 <tr style="height:110px">
