@@ -14,6 +14,9 @@ urlpatterns = [
     path('ECPL-EVA&NOVO-Monitoring-Form-chat',chatCoachingformEva),
     path('ECPL-Pod-Father-Monitoring-Form-chat',chatCoachingformPodFather),
     path('ECPL-INBOUND-CALL-MONITORING-FORM',inboundCoachingForm),
+    path('ECPL-Fame-House-MONITORING-FORM',fameHouse),
+    path('ECPL-FLA-MONITORING_FORM',flaMonForm),
+    path('ECPL-Lead-sales-MONITORING_FORM',leadsandSalesMonForm),
 
 
 

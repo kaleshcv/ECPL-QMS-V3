@@ -215,10 +215,11 @@ def employeeWiseReport(request):
 
 def managerWiseReport(request):
     if request.method == 'POST':
-        emp_id = request.POST['emp_id']
-        profile=Profile.objects.get(emp_id=emp_id)
+        manager_emp_id=request.POST['emp_id']
+        profile=Profile.objects.get(emp_id=manager_emp_id)
+        manager_name=profile.emp_name
 
-        coaching_eva = ChatMonitoringFormEva.objects.filter(emp_id=emp_id)
+        coaching_eva = ChatMonitoringFormEva.objects.filter(manager_id=manager_emp_id)
 
         ce_total = []
         for i in coaching_eva:
@@ -252,7 +253,7 @@ def managerWiseReport(request):
 
         # --------------------
 
-        coaching_eva = ChatMonitoringFormPodFather.objects.filter(emp_id=emp_id)
+        coaching_eva = ChatMonitoringFormPodFather.objects.filter(manager_id=manager_emp_id)
 
         ce_total = []
         for i in coaching_eva:
@@ -284,7 +285,7 @@ def managerWiseReport(request):
 
         # --------------------
 
-        coaching_inb = InboundMonitoringForm.objects.filter(emp_id=emp_id)
+        coaching_inb = InboundMonitoringForm.objects.filter(manager_id=manager_emp_id)
 
         ce_total = []
         for i in coaching_inb:
@@ -317,7 +318,7 @@ def managerWiseReport(request):
         campaign_details=[eva_details,pod_details,inb_details
                           ]
 
-        data={'campaign':campaign_details,'profile':profile}
+        data={'campaign':campaign_details,'manager_name':manager_name}
 
         return render(request,'manager-wise-report.html',data)
 
@@ -673,6 +674,12 @@ def chatCoachingformEva(request):
         concept = request.POST['concept']
         evaluator=request.POST['evaluator']
 
+        team=Team.objects.get(name=campaign)
+        manager_id=team.manager
+        manager_emp_id=manager_id.profile.emp_id
+        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+
+
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
         ce_2 = int(request.POST['ce_2'])
@@ -702,6 +709,7 @@ def chatCoachingformEva(request):
         added_by = request.user.profile.emp_name
 
         chat = ChatMonitoringFormEva(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name,manager_id=manager_emp_id,
 
                                      trans_date=trans_date, audit_date=audit_date,ticket_no=ticket_no,
                                      campaign=campaign,concept=concept,evaluator=evaluator,
@@ -740,6 +748,11 @@ def chatCoachingformPodFather(request):
         concept = request.POST['concept']
         evaluator=request.POST['evaluator']
 
+        team = Team.objects.get(name=campaign)
+        manager_id = team.manager
+        manager_emp_id = manager_id.profile.emp_id
+        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
         ce_2 = int(request.POST['ce_2'])
@@ -769,6 +782,7 @@ def chatCoachingformPodFather(request):
         added_by = request.user.profile.emp_name
 
         chat = ChatMonitoringFormPodFather(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                           manager=manager_name,manager_id=manager_emp_id,
 
                                      trans_date=trans_date, audit_date=audit_date,ticket_no=ticket_no,
                                      campaign=campaign,concept=concept,evaluator=evaluator,
@@ -807,6 +821,11 @@ def inboundCoachingForm(request):
         concept = request.POST['concept']
         zone=request.POST['zone']
         call_duration=request.POST['duration']
+
+        team = Team.objects.get(name=campaign)
+        manager_id = team.manager
+        manager_emp_id = manager_id.profile.emp_id
+        manager_name = Profile.objects.get(emp_id=manager_emp_id)
 
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
@@ -847,6 +866,7 @@ def inboundCoachingForm(request):
         added_by = request.user.profile.emp_name
 
         inbound = InboundMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
 
                                            call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
                                            campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
@@ -872,6 +892,195 @@ def inboundCoachingForm(request):
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/ECPL-INBOUND-CALL-MONITORING-FORM.html', data)
 
+def fameHouse(request):
+    if request.method == 'POST':
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        ticket_no=request.POST['ticketnumber']
+        trans_date = request.POST['transdate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        service=request.POST['service']
+
+        team=Team.objects.get(name=campaign)
+        manager_id=team.manager
+        manager_emp_id=manager_id.profile.emp_id
+        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+
+
+        # Macros
+        macros_1 = int(request.POST['macros_1'])
+
+        reason_for_failure = request.POST['reason_for_failure']
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        famehouse = FameHouseMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name,manager_id=manager_emp_id,
+
+                                     trans_date=trans_date, audit_date=audit_date,ticket_no=ticket_no,
+                                     campaign=campaign,concept=concept,service=service,
+
+                                     macros_1=macros_1,
+
+                                     reason_for_failure=reason_for_failure,
+                                     areas_improvement=areas_improvement,
+                                     positives=positives, comments=comments,
+                                     added_by=added_by,
+
+                                     overall_score=macros_1
+                                     )
+        famehouse.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/Fame-house-mon-form.html', data)
+
+def flaMonForm(request):
+    if request.method == 'POST':
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        order_id=request.POST['order_id']
+        trans_date = request.POST['transdate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        service=request.POST['service']
+        check_list=request.POST['checklist']
+
+        team=Team.objects.get(name=campaign)
+        manager_id=team.manager
+        manager_emp_id=manager_id.profile.emp_id
+        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+
+
+        # Macros
+        checklist_1 = int(request.POST['checklist_1'])
+
+        reason_for_failure=request.POST['reason_for_failure']
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        fla = FLAMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name,manager_id=manager_emp_id,
+
+                                     trans_date=trans_date, audit_date=audit_date,order_id=order_id,
+                                     campaign=campaign,concept=concept,service=service,
+
+                                     check_list=check_list,
+                                     checklist_1=checklist_1,
+
+                                     reason_for_failure=reason_for_failure,
+                                     areas_improvement=areas_improvement,
+                                     positives=positives, comments=comments,
+                                     added_by=added_by,
+
+                                     overall_score=checklist_1
+                                     )
+        fla.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/FLA-mon-form.html', data)
+
+
+def leadsandSalesMonForm(request):
+    if request.method == 'POST':
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        call_duration=request.POST['duration']
+
+        team = Team.objects.get(name=campaign)
+        manager_id = team.manager
+        manager_emp_id = manager_id.profile.emp_id
+        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+
+        # Opening and Closing
+        oc_1 = int(request.POST['oc_1'])
+        oc_2 = int(request.POST['oc_2'])
+        oc_3 = int(request.POST['oc_3'])
+
+
+        oc_total = oc_1 + oc_2 + oc_3
+
+        # Softskills
+        softskill_1 = int(request.POST['softskill_1'])
+        softskill_2 = int(request.POST['softskill_2'])
+        softskill_3 = int(request.POST['softskill_3'])
+        softskill_4 = int(request.POST['softskill_4'])
+        softskill_5 = int(request.POST['softskill_5'])
+        softskill_6 = int(request.POST['softskill_6'])
+        softskill_7 = int(request.POST['softskill_7'])
+
+        softskill_total = softskill_1 + softskill_2+ softskill_3+ softskill_4+softskill_5+softskill_6+softskill_7
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
+            overall_score = 0
+        else:
+            overall_score = oc_total + softskill_total +compliance_total
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        leadsales = LeadsandSalesMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                           oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+
+                                           softskill_1=softskill_1,softskill_2=softskill_2,softskill_3=softskill_3,softskill_4=softskill_4,softskill_5=softskill_5,softskill_6=softskill_6,softskill_7=softskill_7,softskill_total=softskill_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score
+                                           )
+        leadsales.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/Lead-Sales-MONITORING-FORM.html', data)
 
 
 #campaign View
@@ -905,6 +1114,21 @@ def selectCoachingForm(request):
             team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-INBOUND-CALL-MONITORING-FORM.html', data)
+        elif audit_form=='fame-house':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/Fame-house-mon-form.html', data)
+        elif audit_form=='FLA':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/FLA-mon-form.html', data)
+        elif audit_form=='lead-sales':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/Lead-Sales-MONITORING-FORM.html', data)
 
     else:
         return redirect('/employees/qahome')
