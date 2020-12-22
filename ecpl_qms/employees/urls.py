@@ -17,6 +17,7 @@ urlpatterns = [
     path('ECPL-Fame-House-MONITORING-FORM',fameHouse),
     path('ECPL-FLA-MONITORING_FORM',flaMonForm),
     path('ECPL-Lead-sales-MONITORING_FORM',leadsandSalesMonForm),
+    path('ECPL-Email-chat-MONITORING_FORM',emailAndChatmonForm),
 
 
 

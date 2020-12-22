@@ -13,6 +13,7 @@ admin.site.register(InboundMonitoringForm)
 admin.site.register(FameHouseMonitoringForm)
 admin.site.register(FLAMonitoringForm)
 admin.site.register(LeadsandSalesMonForm)
+admin.site.register(ChatandEmailMonForm)
 
 
 
