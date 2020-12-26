@@ -59,4 +59,8 @@ urlpatterns = [
     path('coaching-success',coachingSuccess),
     path('coaching-dispute',coachingDispute),
 
+    # Summary
+    path('inbound-summary',inboundSummary)
+
+
 ]

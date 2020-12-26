@@ -368,25 +368,25 @@ def qualityDashboardMgt(request):
     else:
         pod_avg_score = 100
 
-    # Inbound Details
-    inbound_all = InboundMonitoringForm.objects.all()
-    inbound_all_count = InboundMonitoringForm.objects.all().count()
-    open_inbound = InboundMonitoringForm.objects.filter(status=False)
-    open_inbound_count = InboundMonitoringForm.objects.filter(status=False).count()
+    # Inbound Details Noom
+    inbound_all_noom = InboundMonitoringForm.objects.filter(campaign='Noom')
+    inbound_all_count_noom = InboundMonitoringForm.objects.filter(campaign='Noom').count()
+    open_inbound_noom = InboundMonitoringForm.objects.filter(status=False)
+    open_inbound_count_noom = InboundMonitoringForm.objects.filter(status=False,campaign='Noom').count()
 
-    inbound_avg_score = InboundMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    inbound_avg_score_noom = InboundMonitoringForm.objects.filter(campaign='Noom',audit_date__year=year, audit_date__month=month)
     inbound_avg = []
-    for i in inbound_avg_score:
+    for i in inbound_avg_score_noom:
         inbound_avg.append(i.overall_score)
     if len(inbound_avg) > 0:
-        inbound_avg_score = sum(inbound_avg) / len(inbound_avg)
+        inbound_avg_score_noom = sum(inbound_avg) / len(inbound_avg)
     else:
-        inbound_avg_score = 100
+        inbound_avg_score_noom = 100
 
 
     #Categorywise
 
-    inbound=inbound_avg_score
+    inbound=inbound_avg_score_noom
     chat=(eva_avg_score+pod_avg_score)/2
     outbound=100
     email=100
@@ -413,18 +413,18 @@ def qualityDashboardMgt(request):
 
     pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
     eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
-    nucleus = {'name': 'Nucleus-Inbound', 'total': inbound_total, 'total_open': inbound_open_total,
+    noom = {'name': 'Noom', 'total': inbound_total, 'total_open': inbound_open_total,
                'perc': closed_percentage_inbound}
 
-    campaigns = [pod, eva, nucleus]
+    campaigns = [pod, eva, noom]
 
     data = {
 
             'open_eva_chat': open_eva_chat, 'open_eva_count': open_eva_count,'eva_all':eva_all,'eva_all_count':eva_all_count,
             'open_pod_chat': open_pod_chat, 'open_pod_count': open_pod_count,'pod_all':pod_all,'pod_all_count':pod_all_count,
-            'open_inbound': open_inbound, 'open_inbound_count': open_inbound_count,'inbound_all':inbound_all,'inbound_all_count':inbound_all_count,
+            'open_inbound': open_inbound_noom, 'open_inbound_count': open_inbound_count_noom,'inbound_all':inbound_all_noom,'inbound_all_count':inbound_all_count_noom,
 
-            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'inbound_avg_score':inbound_avg_score,
+            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'inbound_avg_score':inbound_avg_score_noom,
 
             'inbound':inbound,'chat':chat,'outbound':outbound,'email':email,
 
@@ -1258,3 +1258,55 @@ def qualityDashboard(request):
 
     else:
         pass
+
+def inboundSummary(request):
+
+    #inbound Score
+
+    # Date Time
+    import datetime
+    d = datetime.datetime.now()
+
+    month = d.strftime("%m")
+    year = d.strftime("%Y")
+
+    # Inbound Details - Millionaires Group
+    inbound_all_count_millionaires = InboundMonitoringForm.objects.filter(campaign='Millionaires Group').count()
+    open_inbound_count_millionaires = InboundMonitoringForm.objects.filter(status=False,campaign='Millionaires Group').count()
+
+
+    inbound_avg_score_millionaires = InboundMonitoringForm.objects.filter(campaign='Millionaires Group',audit_date__year=year, audit_date__month=month)
+    inbound_avg = []
+    for i in inbound_avg_score_millionaires:
+        inbound_avg.append(i.overall_score)
+    if len(inbound_avg) > 0:
+        inbound_avg_score_millionaires = sum(inbound_avg) / len(inbound_avg)
+    else:
+        inbound_avg_score_millionaires = 100
+
+    # Inbound Details - Noom
+    inbound_all_count_noom = InboundMonitoringForm.objects.filter(campaign='Noom').count()
+    open_inbound_count_noom = InboundMonitoringForm.objects.filter(status=False,
+                                                                           campaign='Noom').count()
+
+    inbound_avg_score_noom = InboundMonitoringForm.objects.filter(campaign='Noom',
+                                                                          audit_date__year=year,
+                                                                          audit_date__month=month)
+    inbound_avg = []
+    for i in inbound_avg_score_noom:
+        inbound_avg.append(i.overall_score)
+    if len(inbound_avg) > 0:
+        inbound_avg_score_noom = sum(inbound_avg) / len(inbound_avg)
+    else:
+        inbound_avg_score_noom = 100
+
+
+    # Categorywise
+
+    millionaires={'name':'Millionaires Group','avg_score':inbound_avg_score_millionaires,'total_coachings':inbound_all_count_millionaires,'total_open_coachings':open_inbound_count_millionaires}
+    noom={'name':'Noom','avg_score':inbound_avg_score_noom,'total_coachings':inbound_all_count_noom,'total_open_coachings':open_inbound_count_noom}
+    inbound=[millionaires,noom]
+
+    data = {'inbound':inbound}
+
+    return render (request,'summary/inbound.html',data)

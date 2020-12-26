@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block main %}
+{% load static %}
+
+<section id="profile">
+    <div class="container-lg" style="padding-bottom: 20px;padding-top:50px;">
+       <h2 style="color:grey">Inbound</h2>
+
+    </div>
+</section>
+<section style="margin-top:100px">
+    <div class="container-lg">
+        {% for i in inbound %}
+        <h1>{{i.name}}</h1>
+        <h4>Average Score</h4>
+           <p> {{i.name}} - {{i.avg_score}}</p>
+        <h4>Coaching count</h4>
+        <p>Total - {{i.total_coachings}}</p>
+        <p>Open - {{i.total_open_coachings}}</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}
