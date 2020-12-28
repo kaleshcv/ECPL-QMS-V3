@@ -85,15 +85,13 @@ def managerHome(request):
     pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
     closed_percentage_pod = int((pod_open_total / pod_total) * 100)
 
-    inbound_total = InboundMonitoringForm.objects.all().count()
-    inbound_open_total = InboundMonitoringForm.objects.filter(status=False).count()
-    closed_percentage_inbound = int((inbound_open_total / inbound_total) * 100)
+
 
     pod={'name':'Noom-POD','total':pod_total,'total_open':pod_open_total,'perc':closed_percentage_pod}
     eva={'name':'Noom-EVA','total':eva_total,'total_open':eva_open_total,'perc':closed_percentage_eva}
-    nucleus = {'name': 'Nucleus-Inbound', 'total': inbound_total, 'total_open': inbound_open_total, 'perc': closed_percentage_inbound}
 
-    campaigns=[pod,eva,nucleus]
+
+    campaigns=[pod,eva,]
 
 
     data = {'teams': teams,
@@ -173,39 +171,9 @@ def employeeWiseReport(request):
 
         pod_details = {'name': 'POD Chat', 'ce_avg': ce_perc, 'co_avg': co_perc,'ov_avg':ov_perc}
 
-        # --------------------
 
-        coaching_inb = InboundMonitoringForm.objects.filter(emp_id=emp_id)
 
-        ce_total = []
-        for i in coaching_inb:
-            ce_total.append(i.ce_total)
-        if len(ce_total) > 0:
-            ce_avg = sum(ce_total) / len(ce_total)
-            ce_perc = (ce_avg / 40) * 100
-        else:
-            ce_perc = 100
-
-        co_total = []
-        for i in coaching_inb:
-            co_total.append(i.compliance_total)
-        if len(co_total) > 0:
-            co_avg = sum(co_total) / len(co_total)
-            co_perc = (co_avg / 60) * 100
-        else:
-            co_perc = 100
-
-        overall_total = []
-        for i in coaching_inb:
-            overall_total.append(i.overall_score)
-        if len(overall_total) > 0:
-            ov_perc = sum(overall_total) / len(overall_total)
-        else:
-            ov_perc = 100
-
-        inb_details = {'name': 'Inbound - Nucleus', 'ce_avg': ce_perc, 'co_avg': co_perc, 'ov_avg': ov_perc}
-
-        campaign_details=[eva_details,pod_details,inb_details
+        campaign_details=[eva_details,pod_details,
                           ]
 
         data={'campaign':campaign_details,'profile':profile}
@@ -283,39 +251,9 @@ def managerWiseReport(request):
 
         pod_details = {'name': 'POD Chat', 'ce_avg': ce_perc, 'co_avg': co_perc,'ov_avg':ov_perc}
 
-        # --------------------
 
-        coaching_inb = InboundMonitoringForm.objects.filter(manager_id=manager_emp_id)
 
-        ce_total = []
-        for i in coaching_inb:
-            ce_total.append(i.ce_total)
-        if len(ce_total) > 0:
-            ce_avg = sum(ce_total) / len(ce_total)
-            ce_perc = (ce_avg / 40) * 100
-        else:
-            ce_perc = 100
-
-        co_total = []
-        for i in coaching_inb:
-            co_total.append(i.compliance_total)
-        if len(co_total) > 0:
-            co_avg = sum(co_total) / len(co_total)
-            co_perc = (co_avg / 60) * 100
-        else:
-            co_perc = 100
-
-        overall_total = []
-        for i in coaching_inb:
-            overall_total.append(i.overall_score)
-        if len(overall_total) > 0:
-            ov_perc = sum(overall_total) / len(overall_total)
-        else:
-            ov_perc = 100
-
-        inb_details = {'name': 'Inbound - Nucleus', 'ce_avg': ce_perc, 'co_avg': co_perc, 'ov_avg': ov_perc}
-
-        campaign_details=[eva_details,pod_details,inb_details
+        campaign_details=[eva_details,pod_details,
                           ]
 
         data={'campaign':campaign_details,'manager_name':manager_name}
@@ -368,25 +306,12 @@ def qualityDashboardMgt(request):
     else:
         pod_avg_score = 100
 
-    # Inbound Details Noom
-    inbound_all_noom = InboundMonitoringForm.objects.filter(campaign='Noom')
-    inbound_all_count_noom = InboundMonitoringForm.objects.filter(campaign='Noom').count()
-    open_inbound_noom = InboundMonitoringForm.objects.filter(status=False)
-    open_inbound_count_noom = InboundMonitoringForm.objects.filter(status=False,campaign='Noom').count()
 
-    inbound_avg_score_noom = InboundMonitoringForm.objects.filter(campaign='Noom',audit_date__year=year, audit_date__month=month)
-    inbound_avg = []
-    for i in inbound_avg_score_noom:
-        inbound_avg.append(i.overall_score)
-    if len(inbound_avg) > 0:
-        inbound_avg_score_noom = sum(inbound_avg) / len(inbound_avg)
-    else:
-        inbound_avg_score_noom = 100
 
 
     #Categorywise
 
-    inbound=inbound_avg_score_noom
+
     chat=(eva_avg_score+pod_avg_score)/2
     outbound=100
     email=100
@@ -407,26 +332,23 @@ def qualityDashboardMgt(request):
     pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
     closed_percentage_pod = int((pod_open_total / pod_total) * 100)
 
-    inbound_total = InboundMonitoringForm.objects.all().count()
-    inbound_open_total = InboundMonitoringForm.objects.filter(status=False).count()
-    closed_percentage_inbound = int((inbound_open_total / inbound_total) * 100)
+
 
     pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
     eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
-    noom = {'name': 'Noom', 'total': inbound_total, 'total_open': inbound_open_total,
-               'perc': closed_percentage_inbound}
 
-    campaigns = [pod, eva, noom]
+
+    campaigns = [pod, eva,]
 
     data = {
 
             'open_eva_chat': open_eva_chat, 'open_eva_count': open_eva_count,'eva_all':eva_all,'eva_all_count':eva_all_count,
             'open_pod_chat': open_pod_chat, 'open_pod_count': open_pod_count,'pod_all':pod_all,'pod_all_count':pod_all_count,
-            'open_inbound': open_inbound_noom, 'open_inbound_count': open_inbound_count_noom,'inbound_all':inbound_all_noom,'inbound_all_count':inbound_all_count_noom,
 
-            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'inbound_avg_score':inbound_avg_score_noom,
 
-            'inbound':inbound,'chat':chat,'outbound':outbound,'email':email,
+            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,
+
+            'chat':chat,'outbound':outbound,'email':email,
 
             'employees':employees,'managers':managers,'campaigns':campaigns
 
@@ -450,14 +372,12 @@ def agenthome(request):
     open_pod_chat = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False)
     open_pod_count = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False).count()
 
-    # Inbound Details
-    open_inbound=InboundMonitoringForm.objects.filter(associate_name=agent_name, status=False)
-    open_inbound_count=InboundMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+
 
     data={'team':team,
           'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
           'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
-          'open_inbound':open_inbound,'open_inbound_count':open_inbound_count,
+
           }
 
     return render(request, 'agent-home.html',data)
@@ -484,15 +404,7 @@ def qaCoachingViewPodchat(request,pk):
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pod-chat.html', data)
 
-def empCoachingViewInbound(request,pk):
-    coaching=InboundMonitoringForm.objects.get(id=pk)
-    data={'coaching':coaching}
-    return render(request,'coaching-views/emp-coaching-view-inbound.html',data)
 
-def qaCoachingViewInbound(request,pk):
-    coaching = InboundMonitoringForm.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/qa-coaching-view-inbound.html', data)
 
 
 # Open status Coaching View
@@ -500,11 +412,11 @@ def qacoachingViewOpenAll(request,pk):
     if pk>0:
 
         qa_name=request.user.profile.emp_name
-        coaching_inbound=InboundMonitoringForm.objects.filter(added_by=qa_name,status=False)
+
         coaching_chat_eva = ChatMonitoringFormEva.objects.filter(added_by=qa_name, status=False)
         coaching_chat_pod = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
         data={
-                'coaching_inbound':coaching_inbound,'coaching_chat_eva':coaching_chat_eva,'coaching_chat_pod':coaching_chat_pod,
+                'coaching_chat_eva':coaching_chat_eva,'coaching_chat_pod':coaching_chat_pod,
              }
         return render(request,'qa-open-status-coachings-view.html',data)
     else:
@@ -519,16 +431,16 @@ def campaignwiseCoachings(request):
         team_name=Team.objects.get(id=team_id)
 
         if status=='all':
-            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name)
+
             coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name)
             coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name)
         else:
-            coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status)
+
             coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status)
             coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status)
 
         data={
-                'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+                'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
              }
 
         return render(request,'campaign-wise-coaching-view.html',data)
@@ -549,31 +461,31 @@ def campaignwiseCoachingsAgent(request):
         if start_date and end_date:
 
             if status=='all':
-                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,emp_id=emp_id,audit_date__range=[start_date,end_date])
+
                 coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,emp_id=emp_id,audit_date__range=[start_date,end_date])
                 coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,emp_id=emp_id,audit_date__range=[start_date,end_date])
             else:
-                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status,emp_id=emp_id,audit_date__range=[start_date,end_date])
+
                 coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status,emp_id=emp_id,audit_date__range=[start_date,end_date])
                 coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status,emp_id=emp_id,audit_date__range=[start_date,end_date])
 
             data={
-                    'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+                    'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
                  }
 
             return render(request,'campaign-wise-coaching-view-agent.html',data)
         else:
             if status=='all':
-                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,emp_id=emp_id)
+
                 coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,emp_id=emp_id)
                 coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,emp_id=emp_id)
             else:
-                coaching_inbound = InboundMonitoringForm.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
+
                 coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
                 coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status,emp_id=emp_id)
 
             data={
-                    'coaching_inbound':coaching_inbound,'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+                    'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
                  }
 
             return render(request,'campaign-wise-coaching-view-agent.html',data)
@@ -600,13 +512,7 @@ def signCoaching(request,pk):
         coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
-    elif category == 'inbound-nucleus':
-        coaching = InboundMonitoringForm.objects.get(id=pk)
-        coaching.status = True
-        coaching.closed_date = now
-        coaching.emp_comments = emp_comments
-        coaching.save()
-        return redirect('/employees/agenthome')
+
 
     else:
         return redirect('/employees/agenthome')
@@ -641,17 +547,15 @@ def qahome(request):
     open_pod_chat = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
     open_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False).count()
 
-    # Inbound Details
-    open_inbound = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False)
-    open_inbound_count = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
 
-    total_open=open_eva_count+open_inbound_count+open_pod_count
+
+    total_open=open_eva_count+open_pod_count
 
 
     data={'teams':teams,
           'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
           'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
-          'open_inbound':open_inbound,'open_inbound_count':open_inbound_count,
+
           'total_open':total_open,
           }
 
@@ -865,7 +769,7 @@ def inboundCoachingForm(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
-        inbound = InboundMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+        inbound = InboundMonitoringFormNucleusMedia(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
                                            call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
@@ -1056,7 +960,7 @@ def leadsandSalesMonForm(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
-        leadsales = LeadsandSalesMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+        leadsales = MasterMonitoringFormMTCosmetics(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
                                            call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
@@ -1140,7 +1044,7 @@ def emailAndChatmonForm(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
-        emailchat = ChatandEmailMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+        emailchat = MasterMonitoringFormTonnChatsEmail(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
                                            trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
@@ -1244,11 +1148,6 @@ def qualityDashboard(request):
         open_pod_chat = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
         open_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False).count()
 
-        # Inbound Details
-        all_inbound=InboundMonitoringForm.objects.filter(added_by=qa_name)
-        all_inbound_count = InboundMonitoringForm.objects.filter(added_by=qa_name).count
-        open_inbound = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False)
-        open_inbound_count = InboundMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
 
         data={
 
@@ -1259,54 +1158,3 @@ def qualityDashboard(request):
     else:
         pass
 
-def inboundSummary(request):
-
-    #inbound Score
-
-    # Date Time
-    import datetime
-    d = datetime.datetime.now()
-
-    month = d.strftime("%m")
-    year = d.strftime("%Y")
-
-    # Inbound Details - Millionaires Group
-    inbound_all_count_millionaires = InboundMonitoringForm.objects.filter(campaign='Millionaires Group').count()
-    open_inbound_count_millionaires = InboundMonitoringForm.objects.filter(status=False,campaign='Millionaires Group').count()
-
-
-    inbound_avg_score_millionaires = InboundMonitoringForm.objects.filter(campaign='Millionaires Group',audit_date__year=year, audit_date__month=month)
-    inbound_avg = []
-    for i in inbound_avg_score_millionaires:
-        inbound_avg.append(i.overall_score)
-    if len(inbound_avg) > 0:
-        inbound_avg_score_millionaires = sum(inbound_avg) / len(inbound_avg)
-    else:
-        inbound_avg_score_millionaires = 100
-
-    # Inbound Details - Noom
-    inbound_all_count_noom = InboundMonitoringForm.objects.filter(campaign='Noom').count()
-    open_inbound_count_noom = InboundMonitoringForm.objects.filter(status=False,
-                                                                           campaign='Noom').count()
-
-    inbound_avg_score_noom = InboundMonitoringForm.objects.filter(campaign='Noom',
-                                                                          audit_date__year=year,
-                                                                          audit_date__month=month)
-    inbound_avg = []
-    for i in inbound_avg_score_noom:
-        inbound_avg.append(i.overall_score)
-    if len(inbound_avg) > 0:
-        inbound_avg_score_noom = sum(inbound_avg) / len(inbound_avg)
-    else:
-        inbound_avg_score_noom = 100
-
-
-    # Categorywise
-
-    millionaires={'name':'Millionaires Group','avg_score':inbound_avg_score_millionaires,'total_coachings':inbound_all_count_millionaires,'total_open_coachings':open_inbound_count_millionaires}
-    noom={'name':'Noom','avg_score':inbound_avg_score_noom,'total_coachings':inbound_all_count_noom,'total_open_coachings':open_inbound_count_noom}
-    inbound=[millionaires,noom]
-
-    data = {'inbound':inbound}
-
-    return render (request,'summary/inbound.html',data)

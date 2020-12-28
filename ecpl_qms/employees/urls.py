@@ -43,8 +43,7 @@ urlpatterns = [
     path('coaching-view-eva-chat-qa/<int:pk>',qaCoachingViewEvachat),
     path('coaching-view-pod-chat/<int:pk>',empCoachingViewPodchat),
     path('coaching-view-pod-chat-qa/<int:pk>',qaCoachingViewPodchat),
-    path('coaching-view-inbound/<int:pk>',empCoachingViewInbound),
-    path('coaching-view-inbound-qa/<int:pk>',qaCoachingViewInbound),
+
 
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
 
@@ -60,7 +59,7 @@ urlpatterns = [
     path('coaching-dispute',coachingDispute),
 
     # Summary
-    path('inbound-summary',inboundSummary)
+
 
 
 ]

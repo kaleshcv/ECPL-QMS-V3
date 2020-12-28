@@ -7,13 +7,20 @@ admin.site.register(Profile)
 
 # Monitoring Forms
 
-admin.site.register(ChatMonitoringFormEva)
-admin.site.register(ChatMonitoringFormPodFather)
-admin.site.register(InboundMonitoringForm)
-admin.site.register(FameHouseMonitoringForm)
-admin.site.register(FLAMonitoringForm)
-admin.site.register(LeadsandSalesMonForm)
-admin.site.register(ChatandEmailMonForm)
+admin.site.register(ChatMonitoringFormEva)     # view done
+admin.site.register(ChatMonitoringFormPodFather)     # view done
+admin.site.register(InboundMonitoringFormNucleusMedia)     # view done
+admin.site.register(FameHouseMonitoringForm)    # view done
+admin.site.register(FLAMonitoringForm)     # view done
+admin.site.register(MasterMonitoringFormGetaRatesPSECU)
+admin.site.register(MasterMonitoringFormMovementInsurance)
+admin.site.register(MasterMonitoringFormMTCosmetics)      # view done
+admin.site.register(MasterMonitoringFormTonnChatsEmail)     # view done
+admin.site.register(MasterMonitoringFormTonnCoaInboundCalls)
+admin.site.register(MonitoringFormLeadsAadhyaSolution)
+admin.site.register(PrinterPixMasterMonitoringFormInboundCalls)
+admin.site.register(PrinterPixMasterMonitoringFormChatsEmail)
+admin.site.register(WitDigitalMasteringMonitoringForm)
 
 
 
