@@ -126,8 +126,7 @@ class ChatMonitoringFormEva(models.Model):
     # mgt
     manager=models.CharField(max_length=50)
     manager_id=models.IntegerField()
-    am=models.CharField(max_length=50)
-    am_id=models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -178,8 +177,7 @@ class ChatMonitoringFormPodFather(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -232,8 +230,7 @@ class InboundMonitoringFormNucleusMedia(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -294,8 +291,7 @@ class FameHouseMonitoringForm(models.Model):
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Macors
@@ -337,8 +333,7 @@ class FLAMonitoringForm(models.Model):
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Checklist
@@ -379,8 +374,7 @@ class MasterMonitoringFormGetaRatesPSECU(models.Model):
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Opening and Closing
@@ -442,8 +436,7 @@ class MasterMonitoringFormMovementInsurance(models.Model):
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Opening and Closing
@@ -504,8 +497,7 @@ class MasterMonitoringFormMTCosmetics(models.Model):
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Opening and Closing
@@ -567,8 +559,7 @@ class MasterMonitoringFormTonnChatsEmail(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -630,8 +621,7 @@ class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -695,8 +685,7 @@ class MonitoringFormLeadsAadhyaSolution(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Opening and Closing
@@ -757,8 +746,7 @@ class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -822,8 +810,7 @@ class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Customer Experience
@@ -889,8 +876,7 @@ class WitDigitalMasteringMonitoringForm(models.Model):
     # mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-    am = models.CharField(max_length=50)
-    am_id = models.IntegerField()
+
     category = models.CharField(max_length=20)
 
     # Tagging
