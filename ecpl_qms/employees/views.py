@@ -1154,6 +1154,238 @@ def movementInsurance(request):
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/Master-Monitoring-Form-Movement-Insurance.html', data)
 
+def witDigitel(request):
+    if request.method == 'POST':
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        order_id=request.POST['order_id']
+        trans_date = request.POST['transdate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        service=request.POST['service']
+        check_list=request.POST['checklist']
+
+        team=Team.objects.get(name=campaign)
+        manager_id=team.manager
+        manager_emp_id=manager_id.profile.emp_id
+        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+
+
+        # Macros
+        checklist_1 = int(request.POST['checklist_1'])
+
+        reason_for_failure=request.POST['reason_for_failure']
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        fla = FLAMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name,manager_id=manager_emp_id,
+
+                                     trans_date=trans_date, audit_date=audit_date,order_id=order_id,
+                                     campaign=campaign,concept=concept,service=service,
+
+                                     check_list=check_list,
+                                     checklist_1=checklist_1,
+
+                                     reason_for_failure=reason_for_failure,
+                                     areas_improvement=areas_improvement,
+                                     positives=positives, comments=comments,
+                                     added_by=added_by,
+
+                                     overall_score=checklist_1
+                                     )
+        fla.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/FLA-mon-form.html', data)
+
+def printerPixChatsEmails(request):
+    if request.method == 'POST':
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        trans_date = request.POST['trans_date']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        duration=request.POST['duration']
+
+        team = Team.objects.get(name=campaign)
+        manager_id = team.manager
+        manager_emp_id = manager_id.profile.emp_id
+        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+
+        # Customer Experience
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+        ce_6 = int(request.POST['ce_6'])
+        ce_7 = int(request.POST['ce_7'])
+        ce_8 = int(request.POST['ce_8'])
+        ce_9 = int(request.POST['ce_9'])
+        ce_10 = int(request.POST['ce_10'])
+        ce_11 = int(request.POST['ce_11'])
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
+
+        # Business
+        business_1 = int(request.POST['business_1'])
+        business_2 = int(request.POST['business_2'])
+
+        business_total = business_1 + business_2
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+
+
+
+        compliance_total = compliance_1 + compliance_2
+
+        if compliance_1 == 0 or compliance_2 == 0 :
+            overall_score = 0
+        else:
+            overall_score = ce_total + business_total +compliance_total
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        emailchat = PrinterPixMasterMonitoringFormChatsEmail(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,duration=duration,
+
+                                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7, ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
+                                           ce_total=ce_total,
+
+                                           business_1=business_1,business_2=business_2,business_total=business_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,
+                                           compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score
+                                           )
+        emailchat.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Chats-Email.html', data)
+
+def printerPixInboundCalls(request):
+    if request.method == 'POST':
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        call_duration=request.POST['duration']
+
+        team = Team.objects.get(name=campaign)
+        manager_id = team.manager
+        manager_emp_id = manager_id.profile.emp_id
+        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+
+        # Customer Experience
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+        ce_6 = int(request.POST['ce_6'])
+        ce_7 = int(request.POST['ce_7'])
+        ce_8 = int(request.POST['ce_8'])
+        ce_9 = int(request.POST['ce_9'])
+        ce_10 = int(request.POST['ce_10'])
+        ce_11 = int(request.POST['ce_11'])
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
+
+        # Business
+        business_1 = int(request.POST['business_1'])
+        business_2 = int(request.POST['business_2'])
+
+        business_total = business_1 + business_2
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
+            overall_score = 0
+        else:
+            overall_score = ce_total + business_total +compliance_total
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        inbound = PrinterPixMasterMonitoringFormInboundCalls(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7, ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
+                                           ce_total=ce_total,
+
+                                           business_1=business_1,business_2=business_2,business_total=business_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,
+                                           compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score
+                                           )
+        inbound.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Inbound-Calls.html', data)
+
 #campaign View
 
 def campaignView(request,pk):
@@ -1210,7 +1442,21 @@ def selectCoachingForm(request):
             team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Master-Monitoring-Form-Movement-Insurance.html', data)
-
+        elif audit_form=='wit-digital':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/Wit-Digital-Mastering-Monitoring-Form.html', data)
+        elif audit_form == 'pix-chat-email':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Chats-Email.html', data)
+        elif audit_form == 'pix-inbound':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Inbound-Calls.html', data)
     else:
         return redirect('/employees/qahome')
 

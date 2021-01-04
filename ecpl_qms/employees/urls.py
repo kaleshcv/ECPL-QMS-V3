@@ -19,7 +19,8 @@ urlpatterns = [
     path('ECPL-Lead-sales-MONITORING_FORM',leadsandSalesMonForm),
     path('ECPL-Email-chat-MONITORING_FORM',emailAndChatmonForm),
     path('Master-Monitoring-Form-Movement-Insurance',movementInsurance),
-
+    path('Printer-Pix-Master-Monitoring-Form-Chats-Email',printerPixChatsEmails),
+    path('Printer-Pix-Master-Monitoring-Form-Inbound-Calls',printerPixInboundCalls),
 
 
 

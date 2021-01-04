@@ -800,12 +800,12 @@ class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
     team_lead = models.CharField(max_length=50)
     customer_name = models.CharField(max_length=50)
     customer_contact = models.IntegerField()
-    call_date = models.DateField()
+    trans_date = models.DateField()
     audit_date = models.DateField()
     campaign = models.CharField(max_length=100)
     zone=models.CharField(max_length=50)
     concept = models.CharField(max_length=60)
-    call_duration=models.IntegerField()
+    duration=models.IntegerField()
 
     # mgt
     manager = models.CharField(max_length=50)
