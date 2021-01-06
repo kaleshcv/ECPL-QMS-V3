@@ -21,6 +21,7 @@ urlpatterns = [
     path('Master-Monitoring-Form-Movement-Insurance',movementInsurance),
     path('Printer-Pix-Master-Monitoring-Form-Chats-Email',printerPixChatsEmails),
     path('Printer-Pix-Master-Monitoring-Form-Inbound-Calls',printerPixInboundCalls),
+    path('Monitoring-Form-Leads-Aadhya-Solution',leadsandSalesAadya),
 
 
 

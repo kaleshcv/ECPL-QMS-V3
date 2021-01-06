@@ -720,6 +720,7 @@ class MonitoringFormLeadsAadhyaSolution(models.Model):
 
     ce_total = models.IntegerField(null=True)
     business_total=models.IntegerField(null=True)
+    softskill_total=models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
