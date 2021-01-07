@@ -799,7 +799,7 @@ def inboundCoachingForm(request):
 
 def fameHouse(request):
     if request.method == 'POST':
-
+        category='other'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -839,7 +839,7 @@ def fameHouse(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=macros_1
+                                     overall_score=macros_1,category=category
                                      )
         famehouse.save()
         return redirect('/employees/qahome')
@@ -851,7 +851,7 @@ def fameHouse(request):
 
 def flaMonForm(request):
     if request.method == 'POST':
-
+        category='other'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -893,7 +893,7 @@ def flaMonForm(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=checklist_1
+                                     overall_score=checklist_1,category=category
                                      )
         fla.save()
         return redirect('/employees/qahome')
@@ -906,6 +906,7 @@ def flaMonForm(request):
 
 def leadsandSalesMonForm(request):
     if request.method == 'POST':
+        category='leads'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -949,12 +950,12 @@ def leadsandSalesMonForm(request):
         compliance_3 = int(request.POST['compliance_3'])
         compliance_4 = int(request.POST['compliance_4'])
 
-        compliance_total = compliance_1 + compliance_2 + compliance_3
+        compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4
 
-        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0:
             overall_score = 0
         else:
-            overall_score = oc_total + softskill_total +compliance_total
+            overall_score = oc_total + softskill_total + compliance_total
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -977,7 +978,7 @@ def leadsandSalesMonForm(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score
+                                           overall_score=overall_score,category=category
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -989,6 +990,7 @@ def leadsandSalesMonForm(request):
 
 def emailAndChatmonForm(request):
     if request.method == 'POST':
+        category='chat'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -1038,7 +1040,7 @@ def emailAndChatmonForm(request):
         if compliance_1 == 0 or compliance_2 == 0 :
             overall_score = 0
         else:
-            overall_score = ce_total + business_total +compliance_total
+            overall_score = ce_total + business_total + compliance_total
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -1062,7 +1064,7 @@ def emailAndChatmonForm(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score
+                                           overall_score=overall_score,category=category
                                            )
         emailchat.save()
         return redirect('/employees/qahome')
@@ -1074,6 +1076,7 @@ def emailAndChatmonForm(request):
 
 def movementInsurance(request):
     if request.method == 'POST':
+        category='leads'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -1117,7 +1120,7 @@ def movementInsurance(request):
         compliance_3 = int(request.POST['compliance_3'])
         compliance_4 = int(request.POST['compliance_4'])
 
-        compliance_total = compliance_1 + compliance_2 + compliance_3
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4
 
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
             overall_score = 0
@@ -1145,7 +1148,7 @@ def movementInsurance(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score
+                                           overall_score=overall_score,category=category
                                            )
         moveins.save()
         return redirect('/employees/qahome')
@@ -1157,18 +1160,22 @@ def movementInsurance(request):
 
 def witDigitel(request):
     if request.method == 'POST':
-
+        category='other'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
         team_lead = request.POST['tl']
-        order_id=request.POST['order_id']
-        trans_date = request.POST['transdate']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customer_contact']
+
+        call_date = request.POST['calldate']
         audit_date = request.POST['auditdate']
+
         campaign = request.POST['campaign']
         concept = request.POST['concept']
         service=request.POST['service']
-        check_list=request.POST['checklist']
+        call_duration=request.POST['call_duration']
+        call_type=request.POST['call_type']
 
         team=Team.objects.get(name=campaign)
         manager_id=team.manager
@@ -1176,32 +1183,29 @@ def witDigitel(request):
         manager_name=Profile.objects.get(emp_id=manager_emp_id)
 
 
-        # Macros
-        checklist_1 = int(request.POST['checklist_1'])
+        # Tagging
+        tagging_1 = int(request.POST['tagging_1'])
 
-        reason_for_failure=request.POST['reason_for_failure']
+
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
-        fla = FLAMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+        wit = WitDigitalMasteringMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                      manager=manager_name,manager_id=manager_emp_id,
 
-                                     trans_date=trans_date, audit_date=audit_date,order_id=order_id,
+                                     call_date=call_date, audit_date=audit_date,customer_name=customer_name,customer_contact=customer_contact,
                                      campaign=campaign,concept=concept,service=service,
-
-                                     check_list=check_list,
-                                     checklist_1=checklist_1,
-
-                                     reason_for_failure=reason_for_failure,
+                                        call_duration=call_duration,call_type=call_type,
+                                     tagging_1=tagging_1,
                                      areas_improvement=areas_improvement,
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=checklist_1
+                                     overall_score=tagging_1,category=category
                                      )
-        fla.save()
+        wit.save()
         return redirect('/employees/qahome')
     else:
         teams = Team.objects.all()
@@ -1211,6 +1215,7 @@ def witDigitel(request):
 
 def printerPixChatsEmails(request):
     if request.method == 'POST':
+        category='chat'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -1259,12 +1264,12 @@ def printerPixChatsEmails(request):
 
 
 
-        compliance_total = compliance_1 + compliance_2
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 +compliance_5
 
-        if compliance_1 == 0 or compliance_2 == 0 :
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
             overall_score = 0
         else:
-            overall_score = ce_total + business_total +compliance_total
+            overall_score = ce_total + business_total + compliance_total
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -1289,7 +1294,7 @@ def printerPixChatsEmails(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score
+                                           overall_score=overall_score,category=category
                                            )
         emailchat.save()
         return redirect('/employees/qahome')
@@ -1301,6 +1306,7 @@ def printerPixChatsEmails(request):
 
 def printerPixInboundCalls(request):
     if request.method == 'POST':
+        category='inbound'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -1347,9 +1353,9 @@ def printerPixInboundCalls(request):
         compliance_4 = int(request.POST['compliance_4'])
         compliance_5 = int(request.POST['compliance_5'])
 
-        compliance_total = compliance_1 + compliance_2 + compliance_3
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
 
-        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0:
             overall_score = 0
         else:
             overall_score = ce_total + business_total +compliance_total
@@ -1377,7 +1383,7 @@ def printerPixInboundCalls(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score
+                                           overall_score=overall_score,category=category
                                            )
         inbound.save()
         return redirect('/employees/qahome')
@@ -1438,7 +1444,7 @@ def leadsandSalesAadya(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
-        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
         else:
             overall_score = oc_total + softskill_total +compliance_total
@@ -1475,6 +1481,90 @@ def leadsandSalesAadya(request):
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/Lead-Sales-MONITORING-FORM.html', data)
 
+
+def leadsandSalesMonFormPsecu(request):
+    if request.method == 'POST':
+        category='leads'
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        call_duration=request.POST['duration']
+
+        team = Team.objects.get(name=campaign)
+        manager_id = team.manager
+        manager_emp_id = manager_id.profile.emp_id
+        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+
+        # Opening and Closing
+        oc_1 = int(request.POST['oc_1'])
+        oc_2 = int(request.POST['oc_2'])
+        oc_3 = int(request.POST['oc_3'])
+
+
+        oc_total = oc_1 + oc_2 + oc_3
+
+        # Softskills
+        softskill_1 = int(request.POST['softskill_1'])
+        softskill_2 = int(request.POST['softskill_2'])
+        softskill_3 = int(request.POST['softskill_3'])
+        softskill_4 = int(request.POST['softskill_4'])
+        softskill_5 = int(request.POST['softskill_5'])
+        softskill_6 = int(request.POST['softskill_6'])
+        softskill_7 = int(request.POST['softskill_7'])
+
+        softskill_total = softskill_1 + softskill_2+ softskill_3+ softskill_4+softskill_5+softskill_6+softskill_7
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0:
+            overall_score = 0
+        else:
+            overall_score = oc_total + softskill_total + compliance_total
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        leadsales = MasterMonitoringFormGetaRatesPSECU(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                           oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+
+                                           softskill_1=softskill_1,softskill_2=softskill_2,softskill_3=softskill_3,softskill_4=softskill_4,softskill_5=softskill_5,softskill_6=softskill_6,softskill_7=softskill_7,softskill_total=softskill_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score,category=category
+                                           )
+        leadsales.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/PSECU-Lead-Sales-MONITORING-FORM.html', data)
 
 #campaign View
 
@@ -1552,6 +1642,11 @@ def selectCoachingForm(request):
             team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Aadhya-Solution.html', data)
+        elif audit_form == 'lead-psecu':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/PSECU-Lead-Sales-MONITORING-FORM.html', data)
     else:
         return redirect('/employees/qahome')
 

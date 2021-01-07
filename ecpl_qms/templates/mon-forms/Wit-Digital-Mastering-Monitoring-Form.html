@@ -3,7 +3,7 @@
 
     <section id="outboundform">
         <div class="container-lg">
-            <form action="/employees/ECPL-Fame-House-MONITORING-FORM" method="POST" enctype="multipart/form-data">
+            <form action="/employees/wit-digital" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 <h2 class="text-center">Wit Digital - Mastering Monitoring Form</h2>
                 <div class="basic">
@@ -25,12 +25,15 @@
                             <input type="text" class="form-control" id="tl" name="tl" required value="{{team.tl.profile.emp_name}}">
                         </div>
                         <div class="col-md-4">
-                            <label for="ticketnumber">Ticket Number</label>
-                            <input type="number" class="form-control" id="ticketnumber" name="ticketnumber" required>
+                            <label for="cu">Customer Name</label>
+                            <input type="text" class="form-control" id="cu" name="customer" required>
+                            <label for="co">Customer Contact</label>
+                            <input type="number" class="form-control" id="Co" name="customer_contact" required>
                         </div>
+
                         <div class="col-md-4">
-                            <label for="transdate">Transaction Handled Date</label>
-                            <input type="date" class="form-control" id="transdate" name="transdate" required>
+                            <label for="transdate">Call Date</label>
+                            <input type="date" class="form-control" id="transdate" name="calldate" required>
                             <label for="auditdate">Audit Date</label>
                             <input type="date" class="form-control" id="auditdate" name="auditdate" required>
                         </div>
@@ -48,33 +51,28 @@
                          <div class="col-md-4">
                             <label for="concept">Concept</label>
                             <input type="text" class="form-control" id="concept" name="concept" required>
+                             <label for="callduration">Call Duration</label>
+                            <input type="text" class="form-control" id="callduration" name="call_duration" required>
 
+                        </div>
+                         <div class="col-md-4">
+                            <label for="calltype">Call Type</label>
+                            <input type="text" class="form-control" id="calltype" name="call_type" required>
                         </div>
                     </div>
                 </div>
                 <hr>
                 <div class="customerexperience">
                     <div>
-                        <h4>Macros</h4>
-                        <label class="qn">Macros Used Correctly</label>
-                        <input type="radio" name="macros_1" value="100" id="yes4" required>
+                        <h4>Tagging</h4>
+                        <label class="qn">Tagging Done Correctly</label>
+                        <input type="radio" name="tagging_1" value="100" id="yes4" required>
                         <label for="yes4">Yes</label>
-                        <input type="radio" name="macros_1" value="0" id="no4">
+                        <input type="radio" name="tagging_1" value="0" id="no4">
                         <label for="no4">No</label>
                     </div>
                 </div>
                 <hr>
-                <div class="customerexperience">
-                    <div>
-                        <h4>Reason for Failure</h4>
-                        <select name="reason_for_failure" id="" class="form-control">
-                            <option value="Incorrect Response" class="form-control">Incorrect Response</option>
-                            <option value="Incomplete Information" class="form-control">Incomplete Information</option>
-                            <option value="Restricted Artist" class="form-control">Restricted Artist</option>
-                            <option value="Failed to Cancel & Refund" class="form-control">Failed to Cancel & Refund</option>
-                        </select>
-                    </div>
-                </div>
                 <div class="other">
 
                     <h4>Areas of improvement</h4>
