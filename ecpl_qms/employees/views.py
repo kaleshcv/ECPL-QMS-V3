@@ -362,23 +362,71 @@ def agenthome(request):
     team_name=request.user.profile.team
     team = Team.objects.get(name=team_name)
 
-
     # Chat Eva Details
     open_eva_chat=ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False)
     open_eva_count = ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False).count()
-
 
     # Pod Father Chat Details
     open_pod_chat = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False)
     open_pod_count = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False).count()
 
+    # Inbound Nucleus
+    open_nucleus=InboundMonitoringFormNucleusMedia.objects.filter(associate_name=agent_name, status=False)
+    open_nucleus_count=InboundMonitoringFormNucleusMedia.objects.filter(associate_name=agent_name, status=False).count()
 
+    # FameHouse
+    open_famehouse=FameHouseMonitoringForm.objects.filter(associate_name=agent_name, status=False)
+    open_famehouse_count=FameHouseMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+
+    # FLA
+    open_fla=FLAMonitoringForm.objects.filter(associate_name=agent_name, status=False)
+    open_fla_count=FLAMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+
+    #MT cosmetics
+    open_mt=MasterMonitoringFormMTCosmetics.objects.filter(associate_name=agent_name, status=False)
+    open_mt_count=MasterMonitoringFormMTCosmetics.objects.filter(associate_name=agent_name, status=False).count()
+
+    #Tonn Chat
+    open_tonchat=MasterMonitoringFormTonnChatsEmail.objects.filter(associate_name=agent_name, status=False)
+    open_tonchat_count=MasterMonitoringFormTonnChatsEmail.objects.filter(associate_name=agent_name, status=False).count()
+
+    #Movement Ins
+    open_mvins=MasterMonitoringFormMovementInsurance.objects.filter(associate_name=agent_name, status=False)
+    open_mvins_count=MasterMonitoringFormMovementInsurance.objects.filter(associate_name=agent_name, status=False).count()
+
+    #Wit digital Master
+    open_wit=WitDigitalMasteringMonitoringForm.objects.filter(associate_name=agent_name, status=False)
+    open_wit_count=WitDigitalMasteringMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+
+    #Pix Chat Email
+    open_pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(associate_name=agent_name, status=False)
+    open_pixchat_count=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(associate_name=agent_name, status=False).count()
+
+    #pix inbound
+    open_pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(associate_name=agent_name, status=False)
+    open_pixinbound_count=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(associate_name=agent_name, status=False).count()
+
+    #Leads AAdya
+    open_aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(associate_name=agent_name, status=False)
+    open_aadya_count=MonitoringFormLeadsAadhyaSolution.objects.filter(associate_name=agent_name, status=False).count()
 
     data={'team':team,
           'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
           'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
+          'open_nucleus':open_nucleus,'open_nucleus_count':open_nucleus_count,
+          'open_famehouse':open_famehouse,'open_famehouse_coun':open_famehouse_count,
+          'open_fla':open_fla,'open_fla_count':open_fla_count,
+          'open_mt':open_mt,'open_mt_count':open_mt_count,
+          'open_tonchat':open_tonchat,'open_tonchat_count':open_tonchat_count,
+            'open_mvins':open_mvins,'open_mvins_count':open_mvins_count,
+          'open_wit':open_wit,'open_wit_count':open_wit_count,
+          'open_pixchat':open_pixchat,'open_pixchat_count':open_pixchat_count,
+          'open_pixinbound':open_pixinbound,'open_pixinbound_count':open_pixinbound_count,
+          'open_aadya':open_aadya,'open_aadya_count':open_aadya_count
+
 
           }
+
 
     return render(request, 'agent-home.html',data)
 
