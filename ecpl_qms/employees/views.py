@@ -368,6 +368,38 @@ def qualityDashboardMgt(request):
     else:
         wit_avg_score=100
 
+    #Printer Pix chat Email
+    pixchat_avgs=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(audit_date__year=year, audit_date__month=month)
+    pixchat_avg=[]
+    for i in pixchat_avgs:
+        pixchat_avg.append(i.overall_score)
+    if len(pixchat_avg)>0:
+        pixchat_avg_score=sum(pixchat_avg)/len(pixchat_avg)
+    else:
+        pixchat_avg_score=100
+
+    #Printer Pix Inbound  #Ray - Reshmi
+    pixcall_avgs=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__year=year, audit_date__month=month)
+    pixcall_avg=[]
+    for i in pixcall_avgs:
+        pixcall_avg.append(i.overall_score)
+    if len(pixcall_avg)>0:
+        pixcall_avg_score=sum(pixcall_avg)/len(pixcall_avg)
+    else:
+        pixcall_avg_score=100
+
+    #Leads AAdya
+    aadya_avgs=MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__year=year, audit_date__month=month)
+    aadya_avg=[]
+    for i in aadya_avgs:
+        aadya_avg.append(i.overall_score)
+    if len(aadya_avg)>0:
+        aadya_avg_score=sum(aadya_avg)/len(aadya_avg)
+    else:
+        aadya_avg_score=100
+
+
+
 
     #Categorywise
 
@@ -432,6 +464,21 @@ def qualityDashboardMgt(request):
     wit_open_total=WitDigitalMasteringMonitoringForm.objects.filter(status=False).count()
     closed_percentage_wit=int((wit_closed_total/wit_total)*100)
 
+    pixchat_total=PrinterPixMasterMonitoringFormChatsEmail.objects.all().count()
+    pixchat_closed_total=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(status=True).count()
+    pixchat_open_total=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(status=False).count()
+    closed_percentage_pixchat=int((pixchat_closed_total/pixchat_total)*100)
+
+    pixcall_total=PrinterPixMasterMonitoringFormInboundCalls.objects.all().count()
+    pixcall_closed_total=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(status=True).count()
+    pixcall_open_total=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(status=False).count()
+    closed_percentage_pixcall=int((pixcall_closed_total/pixcall_total)*100)
+
+    aadya_total=MonitoringFormLeadsAadhyaSolution.objects.all().count()
+    aadya_closed_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=True).count()
+    aadya_open_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=False).count()
+    closed_percentage_aadya=int((aadya_closed_total/aadya_total)*100)
+
 
     pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
     eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
@@ -442,8 +489,11 @@ def qualityDashboardMgt(request):
     ton={'name':'Tonn Chat Email','total':ton_total,'total_open':ton_open_total,'perc':closed_percentage_ton}
     mov={'name':'Movement of Insurance','total':mov_total,'total_open':mov_open_total,'perc':closed_percentage_mov}
     wit={'name':'Wit Digital','total':wit_total,'total_open':wit_open_total,'perc':closed_percentage_wit}
+    pixchat={'name':'Printer Pix Chat Email','total':pixchat_total,'total_open':pixchat_open_total,'perc':closed_percentage_pixchat}
+    pixcall={'name':'Printer Pix Inbound','total':pixcall_total,'total_open':pixcall_open_total,'perc':closed_percentage_pixcall}
+    aadya={'name':'AAdya','total':aadya_total,'total_open':aadya_open_total,'perc':closed_percentage_aadya}
 
-    campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit]
+    campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya]
 
 
     data = {
@@ -451,6 +501,7 @@ def qualityDashboardMgt(request):
             'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'nuc_avg_score':nuc_avg_score,
             'fame_avg_score':fame_avg_score,'fla_avg_score':fla_avg_score,'mt_avg_score':mt_avg_score,
             'ton_avg_score':ton_avg_score,'mov_avg_score':mov_avg_score,'wit_avg_score':wit_avg_score,
+            'pixchat_avg_score':pixchat_avg_score,'pixcall_avg_score':pixcall_avg_score,'aadya_avg_score':aadya_avg_score,
 
             'chat':chat,'outbound':outbound,'email':email,'inbound':inbound,'other':other,'leads':leads,
 
