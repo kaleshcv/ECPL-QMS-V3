@@ -275,10 +275,6 @@ def qualityDashboardMgt(request):
 
 
     # Eva Chat Details
-    eva_all = ChatMonitoringFormEva.objects.all()
-    eva_all_count = ChatMonitoringFormEva.objects.all().count()
-    open_eva_chat = ChatMonitoringFormEva.objects.filter(status=False)
-    open_eva_count = ChatMonitoringFormEva.objects.filter(status=False).count()
 
     eva_avg_score=ChatMonitoringFormEva.objects.filter(audit_date__year=year,audit_date__month=month)
     eva_avg=[]
@@ -290,12 +286,7 @@ def qualityDashboardMgt(request):
         eva_avg_score=100
 
 
-
     # Pod Father Chat Details
-    pod_all = ChatMonitoringFormPodFather.objects.all()
-    pod_all_count = ChatMonitoringFormPodFather.objects.all().count()
-    open_pod_chat = ChatMonitoringFormPodFather.objects.filter(status=False)
-    open_pod_count = ChatMonitoringFormPodFather.objects.filter(status=False).count()
 
     pod_avg_score = ChatMonitoringFormPodFather.objects.filter(audit_date__year=year, audit_date__month=month)
     pod_avg = []
@@ -306,15 +297,87 @@ def qualityDashboardMgt(request):
     else:
         pod_avg_score = 100
 
+    #Inbound Nucleus
 
+    nucleus_avg_score=InboundMonitoringFormNucleusMedia.objects.filter(audit_date__year=year, audit_date__month=month)
+    nuc_avg=[]
+    for i in nucleus_avg_score:
+        nuc_avg.append(i.overall_score)
+    if len(nuc_avg)>0:
+        nuc_avg_score=sum(nuc_avg)/len(nuc_avg)
+    else:
+        nuc_avg_score=100
+
+    #Fame House
+    fameh_avg_score=FameHouseMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    fame_avg=[]
+    for i in fameh_avg_score:
+        fame_avg.append(i.overall_score)
+    if len(fame_avg)>0:
+        fame_avg_score=sum(fame_avg)/len(fame_avg)
+    else:
+        fame_avg_score=100
+
+    #FLA
+    fla_avgs=FLAMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    fla_avg=[]
+    for i in fla_avgs:
+        fla_avg.append(i.overall_score)
+    if len(fla_avg)>0:
+        fla_avg_score=sum(fla_avg)/len(fla_avg)
+    else:
+        fla_avg_score=100
+
+    #MT Cosmetics
+    mt_avgs=MasterMonitoringFormMTCosmetics.objects.filter(audit_date__year=year, audit_date__month=month)
+    mt_avg=[]
+    for i in mt_avgs:
+        mt_avg.append(i.overall_score)
+    if len(mt_avg)>0:
+        mt_avg_score=sum(mt_avg)/len(mt_avg)
+    else:
+        mt_avg_score=100
+
+    #Tonn Chats
+    ton_avgs=MasterMonitoringFormTonnChatsEmail.objects.filter(audit_date__year=year, audit_date__month=month)
+    ton_avg=[]
+    for i in ton_avgs:
+        ton_avg.append(i.overall_score)
+    if len(ton_avg)>0:
+        ton_avg_score=sum(ton_avg)/len(ton_avg)
+    else:
+        ton_avg_score=100
+
+    #Movement of Insurance
+    mov_avgs=MasterMonitoringFormMovementInsurance.objects.filter(audit_date__year=year, audit_date__month=month)
+    mov_avg=[]
+    for i in mov_avgs:
+        mov_avg.append(i.overall_score)
+    if len(mov_avg)>0:
+        mov_avg_score=sum(mov_avg)/len(mov_avg)
+    else:
+        mov_avg_score=100
+
+    #Wit Digital
+    wit_avgs=WitDigitalMasteringMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    wit_avg=[]
+    for i in wit_avgs:
+        wit_avg.append(i.overall_score)
+    if len(wit_avg)>0:
+        wit_avg_score=sum(wit_avg)/len(wit_avg)
+    else:
+        wit_avg_score=100
 
 
     #Categorywise
 
 
-    chat=(eva_avg_score+pod_avg_score)/2
+    chat=(eva_avg_score+pod_avg_score+ton_avg_score)/3
     outbound=100
     email=100
+    inbound=nuc_avg_score
+    other=(fame_avg_score+fla_avg_score)/2
+    leads=mt_avg_score
 
 
 
@@ -325,36 +388,79 @@ def qualityDashboardMgt(request):
     employees = Profile.objects.filter(emp_desi='CRO')
 
     eva_total = ChatMonitoringFormEva.objects.all().count()
+    eva_closed_total = ChatMonitoringFormEva.objects.filter(status=True).count()
     eva_open_total = ChatMonitoringFormEva.objects.filter(status=False).count()
-    closed_percentage_eva = int((eva_open_total / eva_total) * 100)
+    closed_percentage_eva = int((eva_closed_total / eva_total) * 100)
 
     pod_total = ChatMonitoringFormPodFather.objects.all().count()
+    pod_closed_total = ChatMonitoringFormPodFather.objects.filter(status=True).count()
     pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
-    closed_percentage_pod = int((pod_open_total / pod_total) * 100)
+    closed_percentage_pod = int((pod_closed_total / pod_total) * 100)
 
+    nuc_total=InboundMonitoringFormNucleusMedia.objects.all().count()
+    nuc_closed_total=InboundMonitoringFormNucleusMedia.objects.filter(status=True).count()
+    nuc_open_total = InboundMonitoringFormNucleusMedia.objects.filter(status=False).count()
+    closed_percentage_nuc=int((nuc_closed_total/nuc_total)*100)
+
+    fame_total=FameHouseMonitoringForm.objects.all().count()
+    fame_closed_total=FameHouseMonitoringForm.objects.filter(status=True).count()
+    fame_open_total=FameHouseMonitoringForm.objects.filter(status=False).count()
+    closed_percentage_fame=int((fame_closed_total/fame_total)*100)
+
+    fla_total=FLAMonitoringForm.objects.all().count()
+    fla_closed_total=FLAMonitoringForm.objects.filter(status=True).count()
+    fla_open_total=FLAMonitoringForm.objects.filter(status=False).count()
+    closed_percentage_fla=int((fla_closed_total/fla_total)*100)
+
+    mt_total=MasterMonitoringFormMTCosmetics.objects.all().count()
+    mt_closed_total=MasterMonitoringFormMTCosmetics.objects.filter(status=True).count()
+    mt_open_total=MasterMonitoringFormMTCosmetics.objects.filter(status=False).count()
+    closed_percentage_mt=int((mt_closed_total/mt_total)*100)
+
+    ton_total=MasterMonitoringFormTonnChatsEmail.objects.all().count()
+    ton_closed_total=MasterMonitoringFormTonnChatsEmail.objects.filter(status=True).count()
+    ton_open_total=MasterMonitoringFormTonnChatsEmail.objects.filter(status=False).count()
+    closed_percentage_ton=int((ton_closed_total/ton_total)*100)
+
+    mov_total=MasterMonitoringFormMovementInsurance.objects.all().count()
+    mov_closed_total=MasterMonitoringFormMovementInsurance.objects.filter(status=True).count()
+    mov_open_total=MasterMonitoringFormMovementInsurance.objects.filter(status=False).count()
+    closed_percentage_mov=int((mov_closed_total/mov_total)*100)
+
+    wit_total=WitDigitalMasteringMonitoringForm.objects.all().count()
+    wit_closed_total=WitDigitalMasteringMonitoringForm.objects.filter(status=True).count()
+    wit_open_total=WitDigitalMasteringMonitoringForm.objects.filter(status=False).count()
+    closed_percentage_wit=int((wit_closed_total/wit_total)*100)
 
 
     pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
     eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
+    nucleus={'name': 'Nucleus','total':nuc_total,'total_open':nuc_open_total,'perc':closed_percentage_nuc}
+    famehouse={'name':'Fame House','total':fame_total,'total_open':fame_open_total,'perc':closed_percentage_fame}
+    fla={'name':'FLA','total':fla_total,'total_open':fla_open_total,'perc':closed_percentage_fla}
+    mt={'name':'MT Cosmetic','total':mt_total,'total_open':mt_open_total,'perc':closed_percentage_mt}
+    ton={'name':'Tonn Chat Email','total':ton_total,'total_open':ton_open_total,'perc':closed_percentage_ton}
+    mov={'name':'Movement of Insurance','total':mov_total,'total_open':mov_open_total,'perc':closed_percentage_mov}
+    wit={'name':'Wit Digital','total':wit_total,'total_open':wit_open_total,'perc':closed_percentage_wit}
 
+    campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit]
 
-    campaigns = [pod, eva,]
 
     data = {
 
-            'open_eva_chat': open_eva_chat, 'open_eva_count': open_eva_count,'eva_all':eva_all,'eva_all_count':eva_all_count,
-            'open_pod_chat': open_pod_chat, 'open_pod_count': open_pod_count,'pod_all':pod_all,'pod_all_count':pod_all_count,
+            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'nuc_avg_score':nuc_avg_score,
+            'fame_avg_score':fame_avg_score,'fla_avg_score':fla_avg_score,'mt_avg_score':mt_avg_score,
+            'ton_avg_score':ton_avg_score,'mov_avg_score':mov_avg_score,'wit_avg_score':wit_avg_score,
 
-
-            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,
-
-            'chat':chat,'outbound':outbound,'email':email,
+            'chat':chat,'outbound':outbound,'email':email,'inbound':inbound,'other':other,'leads':leads,
 
             'employees':employees,'managers':managers,'campaigns':campaigns
 
             }
 
     return render(request, 'quality-dashboard-management.html',data)
+
+
 
 def agenthome(request):
 
@@ -423,7 +529,6 @@ def agenthome(request):
           'open_pixchat':open_pixchat,'open_pixchat_count':open_pixchat_count,
           'open_pixinbound':open_pixinbound,'open_pixinbound_count':open_pixinbound_count,
           'open_aadya':open_aadya,'open_aadya_count':open_aadya_count
-
 
           }
 
