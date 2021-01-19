@@ -407,7 +407,7 @@ def qualityDashboardMgt(request):
     chat=(eva_avg_score+pod_avg_score+ton_avg_score)/3
     outbound=100
     email=100
-    inbound=nuc_avg_score
+    inbound=(nuc_avg_score+pixcall_avg_score)/2
     other=(fame_avg_score+fla_avg_score)/2
     leads=mt_avg_score
 
@@ -513,6 +513,15 @@ def qualityDashboardMgt(request):
 
 
 
+# Categorywise
+
+def inboundSummary(request):
+
+
+    return render(request,'summary/inbound.html')
+
+
+
 def agenthome(request):
 
     agent_name = request.user.profile.emp_name
@@ -586,6 +595,9 @@ def agenthome(request):
 
     return render(request, 'agent-home.html',data)
 
+
+
+
 # Coaching View ---------------------------- !!!
 
 def empCoachingViewEvachat(request,pk):
@@ -608,6 +620,65 @@ def qaCoachingViewPodchat(request,pk):
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pod-chat.html', data)
 
+def empCoachingviewNucleus(request,pk):
+    coaching=InboundMonitoringFormNucleusMedia.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'coaching-views/emp-coaching-view-inbound.html',data)
+
+def qaCoachingviewNucleus(request,pk):
+    coaching=InboundMonitoringFormNucleusMedia.objects.get(id=pk)
+    data={'coaching':coaching}
+    return render(request,'coaching-views/qa-coaching-view-inbound.html',data)
+
+def empCoachingviewFamehouse(request,pk):
+    coaching=FameHouseMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-fame-house.html', data)
+def qaCoachingviewFamehouse(request,pk):
+    coaching=FameHouseMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-fame-house.html', data)
+
+def empCoachingviewFLA(request,pk):
+    coaching = FLAMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-fla.html', data)
+def qaCoachingviewFLA(request,pk):
+    coaching = FLAMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-fla.html', data)
+def empCoachingviewMt(request,pk):
+    coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-mt.html', data)
+def qaCoachingviewMt(request,pk):
+    coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-mt.html', data)
+def empCoachingviewMovIns(request,pk):
+    coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-mov-ins.html', data)
+def qaCoachingviewMovIns(request,pk):
+    coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-mov-ins.html', data)
+def empCoachingviewWit(request,pk):
+    coaching = WitDigitalMasteringMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-wit.html', data)
+def qaCoachingviewWit(request,pk):
+    coaching = WitDigitalMasteringMonitoringForm.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-wit.html', data)
+def empCoachingviewTonnchat(request,pk):
+    coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-tonn-chat.html', data)
+def qaCoachingviewTonnchat(request,pk):
+    coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-tonn-chat.html', data)
 
 
 
@@ -716,7 +787,56 @@ def signCoaching(request,pk):
         coaching.emp_comments=emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
+    elif category == 'nucleus':
+        coaching = InboundMonitoringFormNucleusMedia.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'fame-house':
+        coaching = FameHouseMonitoringForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'fla':
+        coaching = FLAMonitoringForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'mt':
+        coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'mov-ins':
+        coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
 
+    elif category == 'wit':
+        coaching = WitDigitalMasteringMonitoringForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'tonn-chat':
+        coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
 
     else:
         return redirect('/employees/agenthome')

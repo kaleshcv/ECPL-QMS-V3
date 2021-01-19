@@ -49,6 +49,21 @@ urlpatterns = [
     path('coaching-view-eva-chat-qa/<int:pk>',qaCoachingViewEvachat),
     path('coaching-view-pod-chat/<int:pk>',empCoachingViewPodchat),
     path('coaching-view-pod-chat-qa/<int:pk>',qaCoachingViewPodchat),
+    path('coaching-view-inbound/<int:pk>',empCoachingviewNucleus),
+    path('coaching-view-inbound-qa/<int:pk>',qaCoachingviewNucleus),
+    path('coaching-view-fame-house/<int:pk>',empCoachingviewFamehouse),
+    path('coaching-view-fame-house-qa/<int:pk>',qaCoachingviewFamehouse),
+    path('coaching-view-fla/<int:pk>',empCoachingviewFLA),
+    path('coaching-view-fla-qa/<int:pk>',qaCoachingviewFLA),
+    path('coaching-view-mt/<int:pk>',empCoachingviewMt),
+    path('coaching-view-mt-qa/<int:pk>',qaCoachingviewMt),
+    path('coaching-view-mov-ins/<int:pk>',empCoachingviewMovIns),
+    path('coaching-view-mov-ins-qa/<int:pk>',qaCoachingviewMovIns),
+    path('coaching-view-wit/<int:pk>',empCoachingviewWit),
+    path('coaching-view-wit-qa/<int:pk>',qaCoachingviewWit),
+    path('coaching-view-tonn-chat/<int:pk>',empCoachingviewTonnchat),
+    path('coaching-view-tonn-chat-qa/<int:pk>',qaCoachingviewTonnchat),
+
 
 
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
@@ -65,6 +80,8 @@ urlpatterns = [
     path('coaching-dispute',coachingDispute),
 
     # Summary
+    # categorywise
+    path('inbound-summary',inboundSummary),
 
 
 

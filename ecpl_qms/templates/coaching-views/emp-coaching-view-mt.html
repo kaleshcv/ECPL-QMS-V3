@@ -21,90 +21,84 @@
                   <td>{{coaching.team_lead}}</td>
                 </tr>
                 <tr>
-                  <td><b>Transaction Date</b></td>
-                  <td>{{coaching.trans_date}}</td>
-                  <td><b>Ticket Number</b></td>
-                  <td>{{coaching.ticket_no}}</td>
+                  <td><b>Call Date</b></td>
+                  <td>{{coaching.call_date}}</td>
+                  <td><b>Customer Name</b></td>
+                  <td>{{coaching.customer_name}}</td>
                 </tr>
             </table>
 
             <h2>Parameter Scores</h2>
-            <p><b>Customer Experience</b></p>
+            <p><b>Opening & Closing</b></p>
             <table class="table">
                 <tr>
                     <td style="width: 55%;">Used Standard Opening Protocol</td>
-                    <td>{{coaching.ce_1}}</td>
+                    <td>{{coaching.oc_1}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Personalization ( Raport Building, Addressing by Name)</td>
-                    <td>{{coaching.ce_2}}</td>
+                    <td style="width: 55%;">Introduction of Product / Branding</td>
+                    <td>{{coaching.oc_2}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Acknowledged Appropriately</td>
-                    <td>{{coaching.ce_3}}</td>
+                    <td style="width: 55%;">Call Closing as per the Protocol</td>
+                    <td>{{coaching.oc_3}}</td>
                 </tr>
+
+            </table>
+            <p><b>Soft Skills</b></p>
+            <table class="table">
                 <tr>
-                    <td style="width: 55%;">Active Listening without Interruption / Paraphrasing</td>
-                    <td>{{coaching.ce_4}}</td>
+                    <td style="width: 55%;">Followed Hold Procedure Appropriately/Dead Air</td>
+                    <td>{{coaching.softskill_1}}</td>
                 </tr>
                 <tr>
                     <td style="width: 55%;">Used Empathetic Statements whenever required</td>
-                    <td>{{coaching.ce_5}}</td>
+                    <td>{{coaching.softskill_2}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Clear Grammar / Sentence Structure</td>
-                    <td>{{coaching.ce_6}}</td>
+                    <td style="width: 55%;">Clear Grammar & Communication</td>
+                    <td>{{coaching.softskill_3}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Tone & Intonation / Rate of Speech</td>
-                    <td>{{coaching.ce_7}}</td>
+                    <td style="width: 55%;">Acknowledged Appropriately</td>
+                    <td>{{coaching.softskill_4}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Diction/ Choice of Words / Phrase</td>
-                    <td>{{coaching.ce_8}}</td>
+                    <td style="width: 55%;">Active Listening without Interruption</td>
+                    <td>{{coaching.softskill_5}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Took Ownership on the call</td>
-                    <td>{{coaching.ce_9}}</td>
+                    <td style="width: 55%;">Disposition done correctly</td>
+                    <td>{{coaching.softskill_6}}</td>
                 </tr>
-                <tr>
-                    <td style="width: 55%;">Followed Hold Procedure Appropriately / Dead Air</td>
-                    <td>{{coaching.ce_10}}</td>
+                 <tr>
+                    <td style="width: 55%;">Probing/Tactful finding/Rebuttal</td>
+                    <td>{{coaching.softskill_7}}</td>
                 </tr>
-                <tr>
-                    <td style="width: 55%;">Offered Additional Assistance & Closed Call as per Protocol</td>
-                    <td>{{coaching.ce_11}}</td>
-                </tr>
+
             </table>
 
-            <p><b>Business</b></p>
-            <table class="table">
-                <tr>
-                    <td style="width: 55%;">Probing / Tactful Finding / Rebuttal</td>
-                    <td>{{coaching.business_1}}</td>
-                </tr>
-                <tr>
-                    <td style="width: 55%;">Complete Information Provided</td>
-                    <td>{{coaching.business_2}}</td>
-                </tr>
-            </table>
 
-            <p><b>Compliance ( Fatal )</b></p>
+            <p><b>Business & Compliance</b></p>
             <table class="table">
                 <tr>
-                    <td style="width: 55%;">Professional / Courtesy</td>
+                    <td style="width: 55%;">Followed Policy & Procedure (Script)</td>
                     <td>{{coaching.compliance_1}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">Process & Procedure Followed</td>
+                    <td style="width: 55%;">Accurate Documentation</td>
                     <td>{{coaching.compliance_2}}</td>
                 </tr>
                 <tr>
-                    <td style="width: 55%;">First Call Resolution</td>
+                    <td style="width: 55%;">Inaccurate Information</td>
                     <td>{{coaching.compliance_3}}</td>
                 </tr>
-
+                <tr>
+                    <td style="width: 55%;">Advisor Sounding Rude / Proafinity Usage</td>
+                    <td>{{coaching.compliance_4}}</td>
+                </tr>
             </table>
+
             <h2>Auditor Comments</h2>
             <table class="table table-bordered">
                 <tr style="height:110px">
@@ -135,7 +129,7 @@
                           {% csrf_token %}
                 <label for="emp_comments">Employee Comments *</label><br>
                 <textarea name="emp_comments" id="emp_comments" cols="30" rows="5" required class="form-control"></textarea>
-                <input type="hidden" value="nucleus" name="category">
+                <input type="hidden" value="mt" name="category">
                 <br>
                 <input class="btn btn-success" type="submit" value="Accept & Sign" style="width: 150px">
             </form>
