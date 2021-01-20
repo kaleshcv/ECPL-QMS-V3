@@ -378,7 +378,7 @@ def qualityDashboardMgt(request):
     else:
         pixchat_avg_score=100
 
-    #Printer Pix Inbound  #Ray - Reshmi
+    #Printer Pix Inbound
     pixcall_avgs=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__year=year, audit_date__month=month)
     pixcall_avg=[]
     for i in pixcall_avgs:
@@ -516,9 +516,207 @@ def qualityDashboardMgt(request):
 # Categorywise
 
 def inboundSummary(request):
+    # Date Time
+    import datetime
+    d = datetime.datetime.now()
+
+    month = d.strftime("%m")
+    year = d.strftime("%Y")
+
+    print('month',month)
+    print('year',year)
+
+    nucleus_avg_score = InboundMonitoringFormNucleusMedia.objects.filter(audit_date__year=year, audit_date__month=month)
+    nuc_avg = []
+    for i in nucleus_avg_score:
+        nuc_avg.append(i.overall_score)
+    if len(nuc_avg) > 0:
+        nuc_avg_score = sum(nuc_avg) / len(nuc_avg)
+    else:
+        nuc_avg_score = 100
+
+    #Printer Pix Inbound
+    pixcall_avgs=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__year=year, audit_date__month=month)
+    pixcall_avg=[]
+    for i in pixcall_avgs:
+        pixcall_avg.append(i.overall_score)
+    if len(pixcall_avg)>0:
+        pixcall_avg_score=sum(pixcall_avg)/len(pixcall_avg)
+    else:
+        pixcall_avg_score=100
+
+    nucleus={'name':'Nucleus','avg_score':nuc_avg_score}
+    pix_inbound={'name':'Printer Pix Inbound','avg_score':pixcall_avg_score}
+
+    campaigns=[nucleus,pix_inbound]
+
+    data={'campaigns':campaigns,'month':month,'year':year}
 
 
-    return render(request,'summary/inbound.html')
+
+    return render(request,'summary/inbound.html',data)
+
+def chatSummary(request):
+    # Date Time
+    import datetime
+    d = datetime.datetime.now()
+
+    month = d.strftime("%m")
+    year = d.strftime("%Y")
+
+    # Eva Chat Details
+
+    eva_avg_score=ChatMonitoringFormEva.objects.filter(audit_date__year=year,audit_date__month=month)
+    eva_avg=[]
+    for i in eva_avg_score:
+        eva_avg.append(i.overall_score)
+    if len(eva_avg)>0:
+        eva_avg_score=sum(eva_avg)/len(eva_avg)
+    else:
+        eva_avg_score=100
+
+
+    # Pod Father Chat Details
+
+    pod_avg_score = ChatMonitoringFormPodFather.objects.filter(audit_date__year=year, audit_date__month=month)
+    pod_avg = []
+    for i in pod_avg_score:
+        pod_avg.append(i.overall_score)
+    if len(pod_avg) > 0:
+        pod_avg_score = sum(pod_avg) / len(pod_avg)
+    else:
+        pod_avg_score = 100
+
+    #Tonn Chats
+    ton_avgs=MasterMonitoringFormTonnChatsEmail.objects.filter(audit_date__year=year, audit_date__month=month)
+    ton_avg=[]
+    for i in ton_avgs:
+        ton_avg.append(i.overall_score)
+    if len(ton_avg)>0:
+        ton_avg_score=sum(ton_avg)/len(ton_avg)
+    else:
+        ton_avg_score=100
+
+    #Printer Pix chat Email
+    pixchat_avgs=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(audit_date__year=year, audit_date__month=month)
+    pixchat_avg=[]
+    for i in pixchat_avgs:
+        pixchat_avg.append(i.overall_score)
+    if len(pixchat_avg)>0:
+        pixchat_avg_score=sum(pixchat_avg)/len(pixchat_avg)
+    else:
+        pixchat_avg_score=100
+
+    eva={'name':'Eva Noom','avg_score':eva_avg_score}
+    pod={'name':'POD','avg_score':pod_avg_score}
+    tonn_chat={'name':'Tonn Chats','avg_score':ton_avg_score}
+    pix_chat={'name':'Printer Pix Chat','avg_score':pixchat_avg_score}
+
+    campaigns=[eva,pod,tonn_chat,pix_chat]
+
+    data = {'campaigns': campaigns, 'month': month, 'year': year}
+
+    return render(request, 'summary/chat.html', data)
+
+def leadsSummary(request):
+    # Date Time
+    import datetime
+    d = datetime.datetime.now()
+
+    month = d.strftime("%m")
+    year = d.strftime("%Y")
+
+    # MT Cosmetics
+    mt_avgs = MasterMonitoringFormMTCosmetics.objects.filter(audit_date__year=year, audit_date__month=month)
+    mt_avg = []
+    for i in mt_avgs:
+        mt_avg.append(i.overall_score)
+    if len(mt_avg) > 0:
+        mt_avg_score = sum(mt_avg) / len(mt_avg)
+    else:
+        mt_avg_score = 100
+
+    #Leads AAdya
+    aadya_avgs=MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__year=year, audit_date__month=month)
+    aadya_avg=[]
+    for i in aadya_avgs:
+        aadya_avg.append(i.overall_score)
+    if len(aadya_avg)>0:
+        aadya_avg_score=sum(aadya_avg)/len(aadya_avg)
+    else:
+        aadya_avg_score=100
+
+    #Movement of Insurance
+    mov_avgs=MasterMonitoringFormMovementInsurance.objects.filter(audit_date__year=year, audit_date__month=month)
+    mov_avg=[]
+    for i in mov_avgs:
+        mov_avg.append(i.overall_score)
+    if len(mov_avg)>0:
+        mov_avg_score=sum(mov_avg)/len(mov_avg)
+    else:
+        mov_avg_score=100
+
+    mt={'name':'MT Cosmetic','avg_score':mt_avg_score}
+    aadya={'name':'Aadya','avg_score':aadya_avg_score}
+    mov_ins={'name':'Movement of Insurance','avg_score':mov_avg_score}
+
+    campaigns=[mt,aadya,mov_ins]
+
+    data = {'campaigns': campaigns, 'month': month, 'year': year}
+
+    return render(request, 'summary/leads.html', data)
+
+def otherSummary(request):
+    # Date Time
+    import datetime
+    d = datetime.datetime.now()
+
+    month = d.strftime("%m")
+    year = d.strftime("%Y")
+
+    # Fame House
+    fameh_avg_score = FameHouseMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    fame_avg = []
+    for i in fameh_avg_score:
+        fame_avg.append(i.overall_score)
+    if len(fame_avg) > 0:
+        fame_avg_score = sum(fame_avg) / len(fame_avg)
+    else:
+        fame_avg_score = 100
+
+    # FLA
+    fla_avgs = FLAMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    fla_avg = []
+    for i in fla_avgs:
+        fla_avg.append(i.overall_score)
+    if len(fla_avg) > 0:
+        fla_avg_score = sum(fla_avg) / len(fla_avg)
+    else:
+        fla_avg_score = 100
+
+    #Wit Digital
+    wit_avgs=WitDigitalMasteringMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
+    wit_avg=[]
+    for i in wit_avgs:
+        wit_avg.append(i.overall_score)
+    if len(wit_avg)>0:
+        wit_avg_score=sum(wit_avg)/len(wit_avg)
+    else:
+        wit_avg_score=100
+
+    fame={'name':'Fame House','avg_score':fame_avg_score}
+    fla={'name':'FLA','avg_score':fla_avg_score}
+    wit={'name':'Wit Digital','avg_score':wit_avg_score}
+
+    campaigns=[fame,fla,wit]
+
+    data = {'campaigns': campaigns, 'month': month, 'year': year}
+
+    return render(request, 'summary/other.html', data)
+
+
+
+
 
 
 

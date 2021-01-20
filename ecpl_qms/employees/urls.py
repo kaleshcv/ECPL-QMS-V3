@@ -87,7 +87,10 @@ urlpatterns = [
     # Summary
     # categorywise
     path('inbound-summary',inboundSummary),
-
-
+    path('chat-summary',chatSummary),
+    path('leads-summary',leadsSummary),
+    path('outbound-summary',leadsSummary),  # Same as Leads
+    path('other-summary',otherSummary),
+    path('email-summary',chatSummary),  # same as chat
 
 ]

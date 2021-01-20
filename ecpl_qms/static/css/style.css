@@ -204,3 +204,8 @@ color:grey;
     width:650px;
 }
 
+#dashboardcampaigns .col-md-4 {
+    border: 1px solid grey;
+    margin: 20px;
+    padding: 20px;
+}
