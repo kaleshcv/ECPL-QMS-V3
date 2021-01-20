@@ -696,6 +696,15 @@ def qaCoachingviewPixinbound(request,pk):
     coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pix-inbound.html', data)
+def empCoachingviewAadya(request,pk):
+    coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-aadya.html', data)
+def qaCoachingviewAadya(request,pk):
+    coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-aadya.html', data)
+
 
 # Open status Coaching View
 def qacoachingViewOpenAll(request,pk):
@@ -867,7 +876,13 @@ def signCoaching(request,pk):
         coaching.emp_comments = emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
-
+    elif category == 'aadya':
+        coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
 
     else:
         return redirect('/employees/agenthome')

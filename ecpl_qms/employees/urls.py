@@ -67,6 +67,8 @@ urlpatterns = [
     path('coaching-view-pix-chat-qa/<int:pk>',qaCoachingviewPixchat),
     path('coaching-view-pix-inbound/<int:pk>',empCoachingviewPixinbound),
     path('coaching-view-pix-inbound-qa/<int:pk>',qaCoachingviewPixinbound),
+    path('coaching-view-aadya/<int:pk>',empCoachingviewAadya),
+    path('coaching-view-aadya-qa/<int:pk>',qaCoachingviewAadya),
 
 
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
