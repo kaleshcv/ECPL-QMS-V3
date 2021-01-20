@@ -400,16 +400,15 @@ def qualityDashboardMgt(request):
 
 
 
-
     #Categorywise
 
 
-    chat=(eva_avg_score+pod_avg_score+ton_avg_score)/3
-    outbound=100
-    email=100
+    chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
+    outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+    email=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
     inbound=(nuc_avg_score+pixcall_avg_score)/2
-    other=(fame_avg_score+fla_avg_score)/2
-    leads=mt_avg_score
+    other=(fame_avg_score+fla_avg_score+wit_avg_score)/3
+    leads=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
 
 
 
