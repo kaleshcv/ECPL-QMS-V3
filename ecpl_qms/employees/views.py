@@ -522,8 +522,6 @@ def inboundSummary(request):
     month = d.strftime("%m")
     year = d.strftime("%Y")
 
-    print('month',month)
-    print('year',year)
 
     nucleus_avg_score = InboundMonitoringFormNucleusMedia.objects.filter(audit_date__year=year, audit_date__month=month)
     nuc_avg = []
