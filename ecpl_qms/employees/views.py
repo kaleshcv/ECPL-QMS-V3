@@ -680,7 +680,22 @@ def qaCoachingviewTonnchat(request,pk):
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-tonn-chat.html', data)
 
-
+def empCoachingviewPixchat(request,pk):
+    coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-pix-chat.html', data)
+def qaCoachingviewPixchat(request,pk):
+    coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-pix-chat.html', data)
+def empCoachingviewPixinbound(request,pk):
+    coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-pix-inbound.html', data)
+def qaCoachingviewPixinbound(request,pk):
+    coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-pix-inbound.html', data)
 
 # Open status Coaching View
 def qacoachingViewOpenAll(request,pk):
@@ -837,6 +852,22 @@ def signCoaching(request,pk):
         coaching.emp_comments = emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
+
+    elif category == 'pix-inbound':
+        coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'pix-chat':
+        coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
 
     else:
         return redirect('/employees/agenthome')
@@ -1588,7 +1619,7 @@ def printerPixChatsEmails(request):
 
 
 
-        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 +compliance_5
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
 
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
             overall_score = 0
