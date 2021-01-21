@@ -13,7 +13,7 @@
                     <th>Overall Score</th>
                     <th></th>
                 </tr>
-                {% for c in coaching_inbound %}
+                {% for c in coaching_nucleus %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
@@ -36,6 +36,39 @@
                 {% endfor %}
 
                 {% for c in coaching_pod_chat %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                 {% for c in coaching_famehouse %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                 {% for c in coaching_fla %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                 {% for c in coaching_mt %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
