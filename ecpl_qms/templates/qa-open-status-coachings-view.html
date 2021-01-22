@@ -13,7 +13,7 @@
                     <th>Overall Score</th>
                     <th></th>
                 </tr>
-                {% for c in coaching_inbound %}
+                {% for c in nucleus %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
@@ -24,7 +24,7 @@
                 </tr>
                 {% endfor %}
 
-                {% for c in coaching_chat_eva %}
+                {% for c in eva %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
@@ -35,7 +35,7 @@
                 </tr>
                 {% endfor %}
 
-                {% for c in coaching_chat_pod %}
+                {% for c in pod %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>

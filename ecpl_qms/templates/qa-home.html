@@ -79,9 +79,155 @@
 
         <br>
         <hr>
+
+    </div>
+</section>
+
+<section style="margin-top:100px">
+
+    <h2 class="text-center">Open Coaching List</h2>
+    <div class="container-lg" style="margin-top:50px">
         <div>
-           <!-- <a href="/employees/quality-dashboard" style="float:right">View Quality Dashboard >></a> -->
+
+
+            <table class="table">
+                <tr>
+                    <th>Name</th>
+                    <th>Score</th>
+                    <th>Audit Date</th>
+                    <th>Ticket Number/customer NAme</th>
+                    <th>campaign</th>
+                </tr>
+
+
+                {% for c in open_eva_chat %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.ticket_no}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-eva-chat-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in open_pod_chat %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.ticket_no}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in open_nucleus %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-inbound-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_famehouse %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.ticket_no}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-fame-house-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_fla %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.order_id}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-fla-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_mt %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-mt-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_tonnchat %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-tonn-chat-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_mov %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-mov-ins-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_wit %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-wit-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_pixchat %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-pix-chat-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_pixinbound %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-pix-inbound-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in open_aadya %}
+                <tr>
+                    <td>{{c.associate_name}}</td>
+                    <td>{{c.overall_score}}</td>
+                    <td>{{c.audit_date}}</td>
+                    <td>{{c.customer_name}}</td>
+                    <td>{{c.campaign}}</td>
+                    <td><a href="/employees/coaching-view-aadya-qa/{{c.id}}">view</a></td>
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
         </div>
     </div>
 </section>
+
 {% endblock %}
