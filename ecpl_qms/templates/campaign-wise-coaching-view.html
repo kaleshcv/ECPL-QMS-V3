@@ -13,7 +13,7 @@
                     <th>Overall Score</th>
                     <th></th>
                 </tr>
-                {% for c in coaching_inbound %}
+                {% for c in nucleus %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
@@ -24,7 +24,7 @@
                 </tr>
                 {% endfor %}
 
-                {% for c in coaching_eva_chat %}
+                {% for c in eva_chat %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
@@ -35,7 +35,7 @@
                 </tr>
                 {% endfor %}
 
-                {% for c in coaching_pod_chat %}
+                {% for c in pod_chat %}
                 <tr>
                 <td>{{c.associate_name}}</td>
                 <td>{{c.emp_id}}</td>
@@ -43,6 +43,101 @@
                 <td>{{c.campaign}}</td>
                 <td>{{c.overall_score}}</td>
                 <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+                 {% for c in fame %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-fame-house-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+                 {% for c in fla %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-fla-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+                 {% for c in mt %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-mt-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in tonnchat %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-tonn-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in mov %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-mov-ins-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+                {% for c in wit %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-wit-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in pixchat %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-pix-chat-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in pixinbound %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-pix-inbound-qa/{{c.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+
+                {% for c in aadya %}
+                <tr>
+                <td>{{c.associate_name}}</td>
+                <td>{{c.emp_id}}</td>
+                <td>{{c.audit_date}}</td>
+                <td>{{c.campaign}}</td>
+                <td>{{c.overall_score}}</td>
+                <td><a href="/employees/coaching-view-aadya-qa/{{c.id}}">View</a></td>
                 </tr>
                 {% endfor %}
             </table>

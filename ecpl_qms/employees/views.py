@@ -941,20 +941,43 @@ def campaignwiseCoachings(request):
 
         if status=='all':
 
-            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name)
-            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name)
+            eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name)
+            pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name)
+            nucleus=InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name)
+            fame=FameHouseMonitoringForm.objects.filter(campaign=team_name)
+            fla=FLAMonitoringForm.objects.filter(campaign=team_name)
+            mt=MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name)
+            tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name)
+            mov=MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name)
+            wit=WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name)
+            pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name)
+            pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name)
+            aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name)
         else:
 
-            coaching_eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status)
-            coaching_pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status)
+
+            eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status)
+            pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status)
+            nucleus=InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name,status=status)
+            fame=FameHouseMonitoringForm.objects.filter(campaign=team_name,status=status)
+            fla=FLAMonitoringForm.objects.filter(campaign=team_name,status=status)
+            mt=MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name,status=status)
+            tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name,status=status)
+            mov=MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name,status=status)
+            wit=WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name,status=status)
+            pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name,status=status)
+            pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name,status=status)
+            aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name,status=status)
 
         data={
-                'coaching_eva_chat':coaching_eva_chat,'coaching_pod_chat':coaching_pod_chat,
+                'eva_chat':eva_chat,'pod_chat':pod_chat,'nucleus':nucleus,'fame':fame,'fla':fla,'mt':mt,
+                'tonnchat':tonnchat,'mov':mov,'wit':wit,'pixchat':pixchat,'pixinbound':pixinbound,'aadya':aadya,
              }
 
         return render(request,'campaign-wise-coaching-view.html',data)
     else:
-        return redirect('/employees/qahome')
+        pass
+
 
 # Campaign wise coaching view - Agent
 
