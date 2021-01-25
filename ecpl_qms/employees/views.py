@@ -273,6 +273,7 @@ def qualityDashboardMgt(request):
     employees = Profile.objects.filter(emp_desi='CRO')
     managers = Profile.objects.filter(emp_desi='Manager')
 
+    teams=Team.objects.all()
 
     # Eva Chat Details
 
@@ -504,7 +505,9 @@ def qualityDashboardMgt(request):
 
             'chat':chat,'outbound':outbound,'email':email,'inbound':inbound,'other':other,'leads':leads,
 
-            'employees':employees,'managers':managers,'campaigns':campaigns
+            'employees':employees,'managers':managers,'campaigns':campaigns,
+
+            'teams':teams,
 
             }
 
