@@ -934,40 +934,116 @@ def qacoachingViewOpenAll(request,pk):
 # Campaign wise coaching view - qa - manager
 
 def campaignwiseCoachings(request):
+
     if request.method == 'POST':
         team_id = request.POST['team_id']
         status=request.POST['status']
         team_name=Team.objects.get(id=team_id)
+        start_date = request.POST['start_date']
+        end_date = request.POST['end_date']
 
-        if status=='all':
+        if start_date and end_date:
 
-            eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name)
-            pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name)
-            nucleus=InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name)
-            fame=FameHouseMonitoringForm.objects.filter(campaign=team_name)
-            fla=FLAMonitoringForm.objects.filter(campaign=team_name)
-            mt=MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name)
-            tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name)
-            mov=MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name)
-            wit=WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name)
-            pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name)
-            pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name)
-            aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name)
+            if status=='all':
+
+                eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,
+                                                                audit_date__range=[start_date, end_date])
+                pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,
+                                                                      audit_date__range=[start_date, end_date])
+                nucleus = InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name,
+                                                                           audit_date__range=[start_date, end_date])
+                fame = FameHouseMonitoringForm.objects.filter(campaign=team_name,
+                                                              audit_date__range=[start_date, end_date])
+                fla = FLAMonitoringForm.objects.filter(campaign=team_name, audit_date__range=[start_date, end_date])
+                mt = MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name,
+                                                                    audit_date__range=[start_date, end_date])
+                tonnchat = MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name,
+                                                                             audit_date__range=[start_date, end_date])
+                mov = MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name,
+                                                                           audit_date__range=[start_date, end_date])
+                wit = WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name,
+                                                                       audit_date__range=[start_date, end_date])
+                pixchat = PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name,
+                                                                                  audit_date__range=[start_date,
+                                                                                                     end_date])
+                pixinbound = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name,
+                                                                                       audit_date__range=[start_date,
+                                                                                                          end_date])
+                aadya = MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name,
+                                                                         audit_date__range=[start_date, end_date])
+
+
+            else:
+
+                eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name, status=status,
+                                                                audit_date__range=[start_date, end_date])
+                pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name, status=status,
+                                                                      audit_date__range=[start_date, end_date])
+                nucleus = InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name, status=status,
+                                                                           audit_date__range=[start_date, end_date])
+                fame = FameHouseMonitoringForm.objects.filter(campaign=team_name, status=status,
+                                                              audit_date__range=[start_date, end_date])
+                fla = FLAMonitoringForm.objects.filter(campaign=team_name, status=status,
+                                                       audit_date__range=[start_date, end_date])
+                mt = MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name, status=status,
+                                                                    audit_date__range=[start_date, end_date])
+                tonnchat = MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name, status=status,
+                                                                             audit_date__range=[start_date, end_date])
+                mov = MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name, status=status,
+                                                                           audit_date__range=[start_date, end_date])
+                wit = WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name, status=status,
+                                                                       audit_date__range=[start_date, end_date])
+                pixchat = PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name, status=status,
+                                                                                  audit_date__range=[start_date,
+                                                                                                     end_date])
+                pixinbound = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name,
+                                                                                       status=status,
+                                                                                       audit_date__range=[start_date,
+                                                                                                          end_date])
+                aadya = MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name, status=status,
+                                                                         audit_date__range=[start_date, end_date])
+
+
+            data={
+                'eva_chat': eva_chat, 'pod_chat': pod_chat, 'nucleus': nucleus, 'fame': fame, 'fla': fla, 'mt': mt,
+                'tonnchat': tonnchat, 'mov': mov, 'wit': wit, 'pixchat': pixchat, 'pixinbound': pixinbound,
+                'aadya': aadya,
+                 }
+
+            return render(request,'campaign-wise-coaching-view.html',data)
+
+
         else:
 
+            if status=='all':
 
-            eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status)
-            pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status)
-            nucleus=InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name,status=status)
-            fame=FameHouseMonitoringForm.objects.filter(campaign=team_name,status=status)
-            fla=FLAMonitoringForm.objects.filter(campaign=team_name,status=status)
-            mt=MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name,status=status)
-            tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name,status=status)
-            mov=MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name,status=status)
-            wit=WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name,status=status)
-            pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name,status=status)
-            pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name,status=status)
-            aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name,status=status)
+                eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name)
+                pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name)
+                nucleus=InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name)
+                fame=FameHouseMonitoringForm.objects.filter(campaign=team_name)
+                fla=FLAMonitoringForm.objects.filter(campaign=team_name)
+                mt=MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name)
+                tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name)
+                mov=MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name)
+                wit=WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name)
+                pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name)
+                pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name)
+                aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name)
+            else:
+
+
+                eva_chat = ChatMonitoringFormEva.objects.filter(campaign=team_name,status=status)
+                pod_chat = ChatMonitoringFormPodFather.objects.filter(campaign=team_name,status=status)
+                nucleus=InboundMonitoringFormNucleusMedia.objects.filter(campaign=team_name,status=status)
+                fame=FameHouseMonitoringForm.objects.filter(campaign=team_name,status=status)
+                fla=FLAMonitoringForm.objects.filter(campaign=team_name,status=status)
+                mt=MasterMonitoringFormMTCosmetics.objects.filter(campaign=team_name,status=status)
+                tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(campaign=team_name,status=status)
+                mov=MasterMonitoringFormMovementInsurance.objects.filter(campaign=team_name,status=status)
+                wit=WitDigitalMasteringMonitoringForm.objects.filter(campaign=team_name,status=status)
+                pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(campaign=team_name,status=status)
+                pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(campaign=team_name,status=status)
+                aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(campaign=team_name,status=status)
 
         data={
                 'eva_chat':eva_chat,'pod_chat':pod_chat,'nucleus':nucleus,'fame':fame,'fla':fla,'mt':mt,
@@ -986,12 +1062,11 @@ def campaignwiseCoachingsAgent(request):
         team_id = request.POST['team_id']
         status=request.POST['status']
         team_name=Team.objects.get(id=team_id)
-        print(team_name)
+
         emp_id=request.user.profile.emp_id
         start_date=request.POST['start_date']
         end_date = request.POST['end_date']
-        print(start_date)
-        print(end_date)
+
 
         if start_date and end_date:
 

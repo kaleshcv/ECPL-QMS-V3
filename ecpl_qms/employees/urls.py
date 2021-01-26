@@ -39,8 +39,7 @@ urlpatterns = [
 
     path('quality-dashboard',qualityDashboard),
 
-    path('employee-wise-report',employeeWiseReport),
-    path('manager-wise-report',managerWiseReport),
+
 
 
 
@@ -75,6 +74,9 @@ urlpatterns = [
 
     path('campaign-wise-coaching-view',campaignwiseCoachings),
     path('campaign-wise-coaching-view-agent',campaignwiseCoachingsAgent),
+
+    path('employee-wise-report', employeeWiseReport),
+    path('manager-wise-report', managerWiseReport),
 
 
     path('coaching/signcoaching/<int:pk>',signCoaching),
