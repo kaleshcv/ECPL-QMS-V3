@@ -165,6 +165,8 @@ class ChatMonitoringFormEva(models.Model):
         return self.comments[:100] + '...'
 
 class ChatMonitoringFormPodFather(models.Model):
+    process = models.CharField(default='Pod Father', max_length=50)
+
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -216,6 +218,7 @@ class ChatMonitoringFormPodFather(models.Model):
         return self.comments[:100] + '...'
 
 class InboundMonitoringFormNucleusMedia(models.Model):
+    process = models.CharField(default='Nucleus', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -278,6 +281,7 @@ class InboundMonitoringFormNucleusMedia(models.Model):
         return self.comments[:100] + '...'
 
 class FameHouseMonitoringForm(models.Model):
+    process = models.CharField(default='Fame House', max_length=50)
 
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
@@ -319,6 +323,7 @@ class FameHouseMonitoringForm(models.Model):
 
 
 class FLAMonitoringForm(models.Model):
+    process = models.CharField(default='FLA', max_length=50)
 
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
@@ -360,6 +365,7 @@ class FLAMonitoringForm(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormGetaRatesPSECU(models.Model):
+    process = models.CharField(default='Get a Rates PSECU', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -422,6 +428,7 @@ class MasterMonitoringFormGetaRatesPSECU(models.Model):
 
 
 class MasterMonitoringFormMovementInsurance(models.Model):
+    process = models.CharField(default='Mov Insurance', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -483,6 +490,7 @@ class MasterMonitoringFormMovementInsurance(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormMTCosmetics(models.Model):
+    process = models.CharField(default='Mt Cosmetic', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -544,6 +552,7 @@ class MasterMonitoringFormMTCosmetics(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormTonnChatsEmail(models.Model):
+    process = models.CharField(default='Tonn Chat', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -607,6 +616,7 @@ class MasterMonitoringFormTonnChatsEmail(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
+    process = models.CharField(default='Tonn Coa', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -671,6 +681,7 @@ class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
         return self.comments[:100] + '...'
 
 class MonitoringFormLeadsAadhyaSolution(models.Model):
+    process = models.CharField(default='Aadya', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -733,6 +744,7 @@ class MonitoringFormLeadsAadhyaSolution(models.Model):
         return self.comments[:100] + '...'
 
 class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
+    process = models.CharField(default='Printer Pix Inbound', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -797,6 +809,7 @@ class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
         return self.comments[:100] + '...'
 
 class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
+    process = models.CharField(default='Printer Pix Chat', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -862,6 +875,7 @@ class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
 
 
 class WitDigitalMasteringMonitoringForm(models.Model):
+    process = models.CharField(default='Wit Digital', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)

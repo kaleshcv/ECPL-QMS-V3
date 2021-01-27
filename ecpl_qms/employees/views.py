@@ -107,17 +107,18 @@ def employeeWiseReport(request):
         emp_id = request.POST['emp_id']
         profile=Profile.objects.get(emp_id=emp_id)
 
-        # function to calcluate overall Score
+        # function to calcluate overall Score, process name
         def scoreCalculator(campaign):
             overall_total = []
+            name=[]
             for i in campaign:
                 overall_total.append(i.overall_score)
+                name.append(i.process)
             if len(overall_total) > 0:
                 ov_perc = sum(overall_total) / len(overall_total)
             else:
                 ov_perc = 100
-            return ov_perc
-
+            return ov_perc,name[0]
 
         # Mon Form List
         mon_forms = [ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,FameHouseMonitoringForm,
@@ -131,12 +132,9 @@ def employeeWiseReport(request):
         # Score in All forms
         for i in mon_forms:
             coaching=i.objects.filter(emp_id=emp_id)
-            coachingg=i.objects.get(emp_id=emp_id)
-            name=coachingg.process
-            print(name)
 
             if coaching.count()>0:
-                ov_perc=scoreCalculator(coaching)
+                ov_perc,name=scoreCalculator(coaching)
                 summary={'feedbacks_count':coaching.count(),'ov_avg':ov_perc,'name':name}
                 campaign_details.append(summary)
             else:
