@@ -10,12 +10,11 @@
 
             {% for c in campaign %}
             <div class="col-md-9" style="margin-top:50px;padding-left:30px;margin-left:300px">
-               <h4><span style="color: firebrick;font-weight: 600">{{c.name}}</span></h4>
+               <h4>Total Coachings - <span style="color: firebrick;font-weight: 600">{{c.feedbacks_count}}</span></h4>
                 <br>
                 <h6><b>Quality Score - {{c.ov_avg}}%</b></h6>
-                <hr>
-                <h5>Customer Experience - {{c.ce_avg}}%</h5>
-                <h5>Compliance - {{c.co_avg}}%</h5>
+                <h6>Process - {{c.name}}</h6>
+
 
             </div>
             {% endfor %}

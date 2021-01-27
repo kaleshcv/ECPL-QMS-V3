@@ -112,6 +112,8 @@ class Team(models.Model):
 # Final Forms ----------------------- #
 
 class ChatMonitoringFormEva(models.Model):
+    process=models.CharField(default='EVA Chat',max_length=50)
+
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
