@@ -150,74 +150,39 @@ def managerWiseReport(request):
         profile=Profile.objects.get(emp_id=manager_emp_id)
         manager_name=profile.emp_name
 
-        coaching_eva = ChatMonitoringFormEva.objects.filter(manager_id=manager_emp_id)
+        # function to calcluate overall Score, process name
+        def scoreCalculator(campaign):
+            overall_total = []
+            name=[]
+            for i in campaign:
+                overall_total.append(i.overall_score)
+                name.append(i.process)
+            if len(overall_total) > 0:
+                ov_perc = sum(overall_total) / len(overall_total)
+            else:
+                ov_perc = 100
+            return ov_perc,name[0]
 
-        ce_total = []
-        for i in coaching_eva:
-            ce_total.append(i.ce_total)
-        if len(ce_total) > 0:
-            ce_avg = sum(ce_total) / len(ce_total)
-            ce_perc = (ce_avg / 40) * 100
-        else:
-            ce_perc = 100
+        # Mon Form List
+        mon_forms = [ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,FameHouseMonitoringForm,
+                     FLAMonitoringForm,MasterMonitoringFormMTCosmetics,MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,
+                     WitDigitalMasteringMonitoringForm,PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,
+                     MonitoringFormLeadsAadhyaSolution]
 
-        co_total = []
-        for i in coaching_eva:
-            co_total.append(i.compliance_total)
-        if len(co_total) > 0:
-            co_avg = sum(co_total) / len(co_total)
-            co_perc=(co_avg/60)*100
+        #Campaign List
+        campaign_details = []
 
-        else:
-            co_perc = 100
+        # Score in All forms
+        for i in mon_forms:
+            coaching=i.objects.filter(manager_id=manager_emp_id)
 
-        overall_total = []
-        for i in coaching_eva:
-            overall_total.append(i.overall_score)
-        if len(overall_total) > 0:
-            ov_perc = sum(overall_total) / len(overall_total)
+            if coaching.count()>0:
+                ov_perc,name=scoreCalculator(coaching)
+                summary={'feedbacks_count':coaching.count(),'ov_avg':ov_perc,'name':name}
+                campaign_details.append(summary)
+            else:
+                pass
 
-        else:
-            ov_perc = 100
-
-        eva_details = {'name': 'EVA Chat', 'ce_avg': ce_perc, 'co_avg': co_perc,'ov_avg':ov_perc}
-
-        # --------------------
-
-        coaching_eva = ChatMonitoringFormPodFather.objects.filter(manager_id=manager_emp_id)
-
-        ce_total = []
-        for i in coaching_eva:
-            ce_total.append(i.ce_total)
-        if len(ce_total) > 0:
-            ce_avg = sum(ce_total) / len(ce_total)
-            ce_perc = (ce_avg / 40) * 100
-        else:
-            ce_perc = 100
-
-        co_total = []
-        for i in coaching_eva:
-            co_total.append(i.compliance_total)
-        if len(co_total) > 0:
-            co_avg = sum(co_total) / len(co_total)
-            co_perc=(co_avg/60)*100
-        else:
-            co_perc = 100
-
-        overall_total = []
-        for i in coaching_eva:
-            overall_total.append(i.overall_score)
-        if len(overall_total) > 0:
-            ov_perc = sum(overall_total) / len(overall_total)
-        else:
-            ov_perc = 100
-
-        pod_details = {'name': 'POD Chat', 'ce_avg': ce_perc, 'co_avg': co_perc,'ov_avg':ov_perc}
-
-
-
-        campaign_details=[eva_details,pod_details,
-                          ]
 
         data={'campaign':campaign_details,'manager_name':manager_name}
 

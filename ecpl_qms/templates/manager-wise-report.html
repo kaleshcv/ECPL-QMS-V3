@@ -6,16 +6,15 @@
     <div class="container-lg">
         <h4>Quality Report - <span style="color: darkblue;font-size: 28px;font-weight: 600">{{manager_name}}</span></h4>
         <hr>
-        <div class="row">
+       <div class="row">
 
             {% for c in campaign %}
-            <div class="col-md-9" style="margin-top:50px;padding-left:30px;margin-left:300px">
+            <div class="col-md-2" style="margin-top:50px;padding-left:30px;">
                <h4><span style="color: firebrick;font-weight: 600">{{c.name}}</span></h4>
                 <br>
                 <h6><b>Quality Score - {{c.ov_avg}}%</b></h6>
-                <hr>
-                <h5>Customer Experience - {{c.ce_avg}}%</h5>
-                <h5>Compliance - {{c.co_avg}}%</h5>
+                <h6>Total feedbacks - {{c.feedbacks_count}}</h6>
+
 
             </div>
             {% endfor %}
