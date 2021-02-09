@@ -46,6 +46,10 @@ class Profile(models.Model):
     team=models.CharField(max_length=50,choices=team_list)
     email=models.EmailField(default='emp@ecpl.com',null=True)
 
+    process = models.CharField(max_length=100,default='Training')
+    team_lead = models.CharField(max_length=50,default='Testlead')
+    manager = models.CharField(max_length=50,default='Testmanager')
+
 
     def __str__(self):
         return self.emp_name
