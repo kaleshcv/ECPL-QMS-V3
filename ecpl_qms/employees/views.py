@@ -1,14 +1,16 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-
-from .models import *
-
-from . import forms
 from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from .models import *
+from . import forms
 
+
+#Index
 def index(request):
     return render(request,'index.html')
 
@@ -71,6 +73,26 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('/employees/login')
+
+
+# Password Reset
+
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return render(request,'login.html')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'change_password.html', {
+        'form': form
+    })
+
 
 def managerHome(request):
     user_id = request.user.id

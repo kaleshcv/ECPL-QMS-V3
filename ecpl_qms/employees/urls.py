@@ -30,6 +30,7 @@ urlpatterns = [
     path('signup',signup),
     path('login',login_view),
     path('logout',logout_view),
+    path('change_password',change_password),
 
     path('agenthome',agenthome),
     path('qahome',qahome),

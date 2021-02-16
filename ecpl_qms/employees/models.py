@@ -920,3 +920,5 @@ class WitDigitalMasteringMonitoringForm(models.Model):
     def snippet(self):
         return self.comments[:100] + '...'
 
+class Test(models.Model):
+    test = models.IntegerField()
