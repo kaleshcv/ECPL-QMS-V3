@@ -464,7 +464,6 @@ def qualityDashboardMgt(request):
     return render(request, 'quality-dashboard-management.html',data)
 
 
-
 # Categorywise
 
 def inboundSummary(request):
