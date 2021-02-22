@@ -66,6 +66,7 @@ def login_view(request):
             messages.info(request,'Invalid Credentials !')
             return render(request,'login.html',{'form':form})
     else:
+        logout(request)
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
 
