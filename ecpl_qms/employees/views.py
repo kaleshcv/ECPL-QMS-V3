@@ -350,6 +350,36 @@ def qualityDashboardMgt(request):
     else:
         aadya_avg_score=100
 
+    # Display Chart
+
+    #from matplotlib import pyplot as plt
+    #import numpy as np
+
+    #scores = [eva_avg_score, pod_avg_score, ton_avg_score, pixchat_avg_score, mt_avg_score,mov_avg_score,
+    #          aadya_avg_score,nuc_avg_score,pixcall_avg_score,fame_avg_score,fla_avg_score,wit_avg_score
+    #          ]
+
+
+    # print(plt.style.available) # gives all available styles
+    # plt.style.use('ggplot')  # use this style
+
+    #process = ['Eva', 'pod', 'Tonn-chat', 'Pix-chat', 'Mt', 'Mov-Ins', 'Aadya', 'Nucleus', 'Pix-call', 'Fame', 'Fla',
+    #           'Wit']
+    #xaxis = np.arange(len(process))
+    #width = 0.25
+
+    #sal1 = scores
+    #plt.bar(xaxis, sal1, color='k', width=width)
+    #plt.xlabel('Process')
+    #plt.ylabel('Quality Scores')
+    #plt.xticks(ticks=xaxis, labels=process)
+
+    #plt.legend()
+    # plt.tight_layout() # make small size
+    #plt.grid(True)  # enable grid
+
+    #plt.savefig('static/charts/barchart.png')
+    #plt.close()
 
 
     #Categorywise
@@ -445,6 +475,7 @@ def qualityDashboardMgt(request):
     aadya={'name':'AAdya','total':aadya_total,'total_open':aadya_open_total,'perc':closed_percentage_aadya}
 
     campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya]
+
 
 
     data = {
@@ -663,10 +694,6 @@ def otherSummary(request):
     data = {'campaigns': campaigns, 'month': month, 'year': year}
 
     return render(request, 'summary/other.html', data)
-
-
-
-
 
 
 
@@ -2388,31 +2415,7 @@ def coachingSummaryView(request):
     return render(request,'coaching-summary-view.html')
 
 def qualityDashboard(request):
-    if request.user.profile.emp_desi=='QA':
-
-        qa_id=request.user.id
-        qa_name=request.user.profile.emp_name
-        teams=Team.objects.filter(qa=qa_id)
-
-        # Eva Chat Details
-        all_eva=ChatMonitoringFormEva.objects.filter(added_by=qa_name)
-        all_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name).count()
-        open_eva_chat = ChatMonitoringFormEva.objects.filter(added_by=qa_name, status=False)
-        open_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name, status=False).count()
-
-        # Pod Father Chat Details
-        all_pod=ChatMonitoringFormPodFather.objects.filter(added_by=qa_name).count()
-        all_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name)
-        open_pod_chat = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
-        open_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False).count()
 
 
-        data={
 
-        }
-
-        return render(request,'quality-dashboard.html',data)
-
-    else:
-        pass
-
+    return render(request,'quality-dashboard.html')

@@ -56,30 +56,41 @@
                 </div>
             </div>
         <hr>
-            <div style="margin: 70px 30%">
-                <h2 style="color:grey" class="text-center">Search</h2>
-                <br>
-                <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <label for="camp" style="color:gold">Select Campaign</label>
-                    <select name="team_id" id="camp" style="width: 120px;padding: 2px;font-size: 14px;">
-                        {% for team in teams %}
-                        <option value="{{team.id}}">{{team.name}}</option>
-                        {% endfor %}
-                    </select>
-                    <label for="" style="color:gold;margin-left:20px">Status</label>
-                    <select name="status" id="" style="width: 120px;padding: 2px;font-size: 14px;">
-                        <option value="all">All</option>
-                        <option value="False">Open status</option>
-                    </select><br><br>
+    </div>
+</section>
 
-                    <button class="btn btn-primary" style="float:right;margin-right:5px">submit</button>
-                </form>
+<section style="margin:100px">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <h2 style="color:grey">View Feedbacks</h2>
+                    <br>
+                    <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h5>Campaign</h5>
+                        <select name="team_id" id="camp" class="form-control">
+                            {% for team in teams %}
+                            <option value="{{team.id}}">{{team.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <h5>status</h5>
+                        <select name="status" id="" class="form-control">
+                            <option value="all">All</option>
+                            <option value="False">Open status</option>
+                        </select><br>
+                        <h5>Date</h5>
+                        <label for="">From</label>
+                        <input type="date" name="start_date">
+                        <label for="">To</label>
+                        <input type="date" name="end_date">
+
+                        <button class="btn btn-primary" class="form-control">submit</button>
+                    </form>
+                </div>
             </div>
-
-        <br>
-        <hr>
-
+        </div>
     </div>
 </section>
 
