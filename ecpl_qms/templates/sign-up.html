@@ -3,20 +3,31 @@
 
 <div class="container-lg" style="padding:100px 100px">
         <div class="row">
+            <div class="col-md-2">
+
+            </div>
             <div class="col-md-7" style="background:#fff; padding:30px 30px">
                 {% load crispy_forms_tags %}
                 <div class="signupform">
                     <h2 class="form-header">Register Employee</h2>
-                    <form class="login-form" action="/employees/signup" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    {{form|crispy}}
-                    {{profile_form|crispy}}
-                    <input class="btn btn-info" type="submit" value="Signup">
-                    </form>
+                    <div style="margin-top:50px">
+                        <form class="login-form" action="/employees/signup" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{form|crispy}}
+                        {{profile_form|crispy}}
+                            <p>Admin ID</p>
+                            <input type="text" name="admin-id">
+                            <p>Admin Password</p>
+                            <input type="password" name="admin-pwd"><br>
+                        <input class="btn btn-info" type="submit" value="Signup" style="margin-top:30px;">
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-5">
-
+                <div style="margin: 20px 0px;color: red;font-size: 21px">
+                    {% for m in messages %}
+                        {{m}}
+                    {% endfor %}
+                </div>
             </div>
         </div>
 
