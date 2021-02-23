@@ -24,20 +24,29 @@ def chatGuidelines(request):
 def emailGuidelines(request):
     return render(request,'guidelines/email.html')
 
+# Reistration, Sign up, Login, Logout, Change Password
 
 def signup(request):
+
     if request.method == 'POST':
+        admin_id = request.POST['admin-id']
+        admin_pwd = request.POST['admin-pwd']
+
         form = UserCreationForm(request.POST)  # form to create user
         profile_form = forms.ProfileCreation(request.POST, request.FILES)
 
         if form.is_valid() and profile_form.is_valid():
-            user = form.save()
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
-            # login(request,user)
-            return render(request,'index.html')
+            # Admin ID PWD validation
+            if admin_id=='ecpl-qms' and admin_pwd=='500199':
+                user = form.save()
+                profile = profile_form.save(commit=False)
+                profile.user = user
+                profile.save()
+                # login(request,user)
+                return render(request,'index.html')
+            else:
+                messages.info(request, 'Invalid Admin Credentials !')
+                return render(request,'sign-up.html',{'form': form, 'profile_form': profile_form})
     else:
         form = UserCreationForm()
         profile_form = forms.ProfileCreation()
@@ -49,16 +58,16 @@ def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)  # Login form
         if form.is_valid():
+
             # login the user
             user = form.get_user()
             login(request, user)
-            # redirecting
 
+            # redirecting
             if user.profile.emp_desi=='QA':
                 return redirect('/employees/qahome')
             elif user.profile.emp_desi=='Manager':
                 return redirect('/employees/manager-home')
-
             else:
                 return redirect('/employees/agenthome')
         else:
@@ -70,14 +79,11 @@ def login_view(request):
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
 
-
 def logout_view(request):
     logout(request)
     return redirect('/employees/login')
 
-
 # Password Reset
-
 def change_password(request):
     if request.method == 'POST':
         form = PasswordChangeForm(request.user, request.POST)
@@ -91,10 +97,7 @@ def change_password(request):
             messages.error(request, 'Please correct the error below.')
     else:
         form = PasswordChangeForm(request.user)
-    return render(request, 'change_password.html', {
-        'form': form
-    })
-
+    return render(request, 'change_password.html', {'form': form})
 
 def managerHome(request):
     user_id = request.user.id
@@ -109,14 +112,10 @@ def managerHome(request):
     pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
     closed_percentage_pod = int((pod_open_total / pod_total) * 100)
 
-
-
     pod={'name':'Noom-POD','total':pod_total,'total_open':pod_open_total,'perc':closed_percentage_pod}
     eva={'name':'Noom-EVA','total':eva_total,'total_open':eva_open_total,'perc':closed_percentage_eva}
 
-
     campaigns=[pod,eva,]
-
 
     data = {'teams': teams,
             'campaigns':campaigns,
@@ -124,7 +123,6 @@ def managerHome(request):
             }
 
     return render(request,'manager-home.html',data)
-
 
 def employeeWiseReport(request):
     if request.method == 'POST':
@@ -382,9 +380,7 @@ def qualityDashboardMgt(request):
     #plt.savefig('static/charts/barchart.png')
     #plt.close()
 
-
     #Categorywise
-
 
     chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
     outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
@@ -392,8 +388,6 @@ def qualityDashboardMgt(request):
     inbound=(nuc_avg_score+pixcall_avg_score)/2
     other=(fame_avg_score+fla_avg_score+wit_avg_score)/3
     leads=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
-
-
 
     # Coaching closure
 
@@ -461,7 +455,6 @@ def qualityDashboardMgt(request):
     aadya_open_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=False).count()
     closed_percentage_aadya=int((aadya_closed_total/aadya_total)*100)
 
-
     pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
     eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
     nucleus={'name': 'Nucleus','total':nuc_total,'total_open':nuc_open_total,'perc':closed_percentage_nuc}
@@ -476,8 +469,6 @@ def qualityDashboardMgt(request):
     aadya={'name':'AAdya','total':aadya_total,'total_open':aadya_open_total,'perc':closed_percentage_aadya}
 
     campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya]
-
-
 
     data = {
 
@@ -2416,7 +2407,5 @@ def coachingSummaryView(request):
     return render(request,'coaching-summary-view.html')
 
 def qualityDashboard(request):
-
-
 
     return render(request,'quality-dashboard.html')
