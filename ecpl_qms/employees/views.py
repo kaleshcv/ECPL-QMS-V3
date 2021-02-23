@@ -27,7 +27,8 @@ def emailGuidelines(request):
 # Reistration, Sign up, Login, Logout, Change Password
 
 def signup(request):
-
+    team_leaders=Profile.objects.filter(emp_desi='Team Leader')
+    managers=Profile.objects.filter(emp_desi='Manager')
     if request.method == 'POST':
         admin_id = request.POST['admin-id']
         admin_pwd = request.POST['admin-pwd']
@@ -38,9 +39,17 @@ def signup(request):
         if form.is_valid() and profile_form.is_valid():
             # Admin ID PWD validation
             if admin_id=='ecpl-qms' and admin_pwd=='500199':
+
+                manager=request.POST['manager']
+                team_lead=request.POST['team-leader']
+
                 user = form.save()
                 profile = profile_form.save(commit=False)
+
                 profile.user = user
+                profile.manager=manager
+                profile.team_lead=team_lead
+
                 profile.save()
                 # login(request,user)
                 return render(request,'index.html')
@@ -51,8 +60,9 @@ def signup(request):
         form = UserCreationForm()
         profile_form = forms.ProfileCreation()
 
-    return render(request, 'sign-up.html', {'form': form, 'profile_form': profile_form})
-
+    return render(request, 'sign-up.html', {'form': form, 'profile_form': profile_form,
+                                            'team_leaders':team_leaders,'managers':managers
+                                            })
 
 def login_view(request):
     if request.method == 'POST':
@@ -1240,7 +1250,7 @@ def qahome(request):
 
     qa_name=request.user.profile.emp_name
     user_id=request.user.id
-    teams=Team.objects.filter(qa=user_id)
+    teams=Team.objects.all()
 
     # Eva Chat Details
     open_eva_chat=ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False)

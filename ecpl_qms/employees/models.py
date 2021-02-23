@@ -39,6 +39,7 @@ class Profile(models.Model):
 
                    )
 
+
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     emp_name = models.CharField(max_length=30)
     emp_id=models.IntegerField()
@@ -105,12 +106,17 @@ class Team(models.Model):
     )
 
     name=models.CharField(max_length=50,choices=team_list)
-    qa = models.ForeignKey(User,on_delete=models.CASCADE,related_name='qa',null=True)
-    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager', null=True)
-    tl = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tl', null=True)
+    #qa = models.ForeignKey(User,on_delete=models.CASCADE,related_name='qa',null=True)
+    #manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name='manager', null=True)
+    #tl = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tl', null=True)
 
     def __str__(self):
         return self.name
+
+class Process(models.Model):
+
+    process_name=models.CharField(max_length=200)
+    team=models.ForeignKey(Team,on_delete=models.CASCADE)
 
 
 # Final Forms ----------------------- #
