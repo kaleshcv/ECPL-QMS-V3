@@ -4,6 +4,7 @@ from .models import *
 
 admin.site.register(Team)
 admin.site.register(Profile)
+admin.site.register(Process)
 
 # Monitoring Forms
 

@@ -15,6 +15,27 @@
                         {% csrf_token %}
                         {{form|crispy}}
                         {{profile_form|crispy}}
+
+                            <div>
+                                <p>Team Leader</p>
+                                <select class="form-control" required="required" name="team-leader">
+                                    {% for user in team_leaders %}
+                                    <option value="{{user.emp_name}}">{{user.emp_name}}</option>
+                                    {% endfor %}
+                                    <option value="NA">NA</option>
+                                </select>
+                            </div>
+                            <br>
+                            <div>
+                                <p>Manager</p>
+                                <select class="form-control" required="required" name="manager">
+                                    {% for user in managers %}
+                                    <option value="{{user.emp_name}}">{{user.emp_name}}</option>
+                                    {% endfor %}
+                                    <option value="NA">NA</option>
+                                </select>
+                            </div>
+                            <br>
                             <p>Admin ID</p>
                             <input type="text" name="admin-id">
                             <p>Admin Password</p>
