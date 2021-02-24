@@ -27,8 +27,7 @@
     <div class="container-lg">
         <div class="row">
             <div class="col-md-6">
-                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid">
-
+                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid" style="box-shadow:4px 4px 50px lightslategrey;">
             </div>
             <div class="col-md-6">
                 <h4 class="text-center" style="margin-top:20px">Monitoring Form Guidelines</h4>
@@ -83,10 +82,10 @@
                         </select><br>
                         <h5>Date</h5>
                         <label for="">From</label>
-                        <input type="date" name="start_date">
+                        <input type="date" name="start_date" class="form-control">
                         <label for="">To</label>
-                        <input type="date" name="end_date">
-
+                        <input type="date" name="end_date" class="form-control">
+                        <br>
                         <button class="btn btn-primary" class="form-control">submit</button>
                     </form>
                 </div>
@@ -270,5 +269,6 @@
 
 </div>
 </section>
+
 
 {% endblock %}

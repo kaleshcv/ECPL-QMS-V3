@@ -408,62 +408,98 @@ def qualityDashboardMgt(request):
     eva_total = ChatMonitoringFormEva.objects.all().count()
     eva_closed_total = ChatMonitoringFormEva.objects.filter(status=True).count()
     eva_open_total = ChatMonitoringFormEva.objects.filter(status=False).count()
-    closed_percentage_eva = int((eva_closed_total / eva_total) * 100)
+    if eva_total and eva_closed_total >0:
+        closed_percentage_eva = int((eva_closed_total / eva_total) * 100)
+    else:
+        closed_percentage_eva = 100
 
     pod_total = ChatMonitoringFormPodFather.objects.all().count()
     pod_closed_total = ChatMonitoringFormPodFather.objects.filter(status=True).count()
     pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
-    closed_percentage_pod = int((pod_closed_total / pod_total) * 100)
+    if pod_total and pod_closed_total >0:
+        closed_percentage_pod = int((pod_closed_total / pod_total) * 100)
+    else:
+        closed_percentage_pod = 100
 
     nuc_total=InboundMonitoringFormNucleusMedia.objects.all().count()
     nuc_closed_total=InboundMonitoringFormNucleusMedia.objects.filter(status=True).count()
     nuc_open_total = InboundMonitoringFormNucleusMedia.objects.filter(status=False).count()
-    closed_percentage_nuc=int((nuc_closed_total/nuc_total)*100)
+    if nuc_total and nuc_closed_total >0:
+        closed_percentage_nuc=int((nuc_closed_total/nuc_total)*100)
+    else:
+        closed_percentage_nuc=100
 
     fame_total=FameHouseMonitoringForm.objects.all().count()
     fame_closed_total=FameHouseMonitoringForm.objects.filter(status=True).count()
     fame_open_total=FameHouseMonitoringForm.objects.filter(status=False).count()
-    closed_percentage_fame=int((fame_closed_total/fame_total)*100)
+    if fame_total and fame_closed_total >0:
+        closed_percentage_fame=int((fame_closed_total/fame_total)*100)
+    else:
+        closed_percentage_fame=100
 
     fla_total=FLAMonitoringForm.objects.all().count()
     fla_closed_total=FLAMonitoringForm.objects.filter(status=True).count()
     fla_open_total=FLAMonitoringForm.objects.filter(status=False).count()
-    closed_percentage_fla=int((fla_closed_total/fla_total)*100)
+    if fla_total and fla_closed_total >0:
+        closed_percentage_fla=int((fla_closed_total/fla_total)*100)
+    else:
+        closed_percentage_fla=100
 
     mt_total=MasterMonitoringFormMTCosmetics.objects.all().count()
     mt_closed_total=MasterMonitoringFormMTCosmetics.objects.filter(status=True).count()
     mt_open_total=MasterMonitoringFormMTCosmetics.objects.filter(status=False).count()
-    closed_percentage_mt=int((mt_closed_total/mt_total)*100)
+    if mt_total and mt_closed_total >0:
+        closed_percentage_mt=int((mt_closed_total/mt_total)*100)
+    else:
+        closed_percentage_mt=100
 
     ton_total=MasterMonitoringFormTonnChatsEmail.objects.all().count()
     ton_closed_total=MasterMonitoringFormTonnChatsEmail.objects.filter(status=True).count()
     ton_open_total=MasterMonitoringFormTonnChatsEmail.objects.filter(status=False).count()
-    closed_percentage_ton=int((ton_closed_total/ton_total)*100)
+    if ton_total and ton_closed_total >0:
+        closed_percentage_ton=int((ton_closed_total/ton_total)*100)
+    else:
+        closed_percentage_ton=100
 
     mov_total=MasterMonitoringFormMovementInsurance.objects.all().count()
     mov_closed_total=MasterMonitoringFormMovementInsurance.objects.filter(status=True).count()
     mov_open_total=MasterMonitoringFormMovementInsurance.objects.filter(status=False).count()
-    closed_percentage_mov=int((mov_closed_total/mov_total)*100)
+    if mov_total and mov_closed_total >0:
+        closed_percentage_mov=int((mov_closed_total/mov_total)*100)
+    else:
+        closed_percentage_mov=100
 
     wit_total=WitDigitalMasteringMonitoringForm.objects.all().count()
     wit_closed_total=WitDigitalMasteringMonitoringForm.objects.filter(status=True).count()
     wit_open_total=WitDigitalMasteringMonitoringForm.objects.filter(status=False).count()
-    closed_percentage_wit=int((wit_closed_total/wit_total)*100)
+    if wit_total and wit_closed_total >0:
+        closed_percentage_wit=int((wit_closed_total/wit_total)*100)
+    else:
+        closed_percentage_wit=100
 
     pixchat_total=PrinterPixMasterMonitoringFormChatsEmail.objects.all().count()
     pixchat_closed_total=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(status=True).count()
     pixchat_open_total=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(status=False).count()
-    closed_percentage_pixchat=int((pixchat_closed_total/pixchat_total)*100)
+    if pixchat_total and pixchat_closed_total >0:
+        closed_percentage_pixchat=int((pixchat_closed_total/pixchat_total)*100)
+    else:
+        closed_percentage_pixchat=100
 
     pixcall_total=PrinterPixMasterMonitoringFormInboundCalls.objects.all().count()
     pixcall_closed_total=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(status=True).count()
     pixcall_open_total=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(status=False).count()
-    closed_percentage_pixcall=int((pixcall_closed_total/pixcall_total)*100)
+    if pixchat_total and pixcall_closed_total >0:
+        closed_percentage_pixcall=int((pixcall_closed_total/pixcall_total)*100)
+    else:
+        closed_percentage_pixcall=100
 
     aadya_total=MonitoringFormLeadsAadhyaSolution.objects.all().count()
     aadya_closed_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=True).count()
     aadya_open_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=False).count()
-    closed_percentage_aadya=int((aadya_closed_total/aadya_total)*100)
+    if aadya_total and aadya_closed_total >0:
+        closed_percentage_aadya=int((aadya_closed_total/aadya_total)*100)
+    else:
+        closed_percentage_aadya=100
 
     pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
     eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
@@ -1271,11 +1307,13 @@ def qahome(request):
     total_coaching=len(total_coaching_ids)
 
     # All coaching objects
+
     all_coaching_obj=[]
 
     for i in list_of_monforms:
         x=i.objects.filter(added_by=qa_name).order_by('audit_date')
         all_coaching_obj.append(x)
+
 
     # Eva Chat Details
     open_eva_chat=ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False)
