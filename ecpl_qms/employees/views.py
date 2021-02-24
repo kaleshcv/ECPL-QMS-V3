@@ -1252,6 +1252,31 @@ def qahome(request):
     user_id=request.user.id
     teams=Team.objects.all()
 
+    ######### List of All Coachings ##############3
+
+    list_of_monforms=[ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,
+                      FameHouseMonitoringForm,FLAMonitoringForm,MasterMonitoringFormMTCosmetics,
+                      MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,WitDigitalMasteringMonitoringForm,
+                      PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,MonitoringFormLeadsAadhyaSolution]
+
+    # Total NO of Coachings
+    total_coaching_ids=[]
+
+    for i in list_of_monforms:
+        x=i.objects.filter(added_by=qa_name)
+
+        for i in x:
+            total_coaching_ids.append(i.id)
+
+    total_coaching=len(total_coaching_ids)
+
+    # All coaching objects
+    all_coaching_obj=[]
+
+    for i in list_of_monforms:
+        x=i.objects.filter(added_by=qa_name).order_by('audit_date')
+        all_coaching_obj.append(x)
+
     # Eva Chat Details
     open_eva_chat=ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False)
     open_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False).count()
@@ -1319,7 +1344,9 @@ def qahome(request):
           'open_aadya':open_aadya,'open_aadya_count':open_aadya_count,
 
 
-          'total_open':total_open,
+          'total_open':total_open,'total_coaching':total_coaching,
+          'all_c_obj':all_coaching_obj
+
           }
 
     return render(request,'qa-home.html',data)
@@ -1341,10 +1368,15 @@ def chatCoachingformEva(request):
         concept = request.POST['concept']
         evaluator=request.POST['evaluator']
 
-        team=Team.objects.get(name=campaign)
-        manager_id=team.manager
-        manager_emp_id=manager_id.profile.emp_id
-        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
 
         # Customer Experience
@@ -1415,10 +1447,15 @@ def chatCoachingformPodFather(request):
         concept = request.POST['concept']
         evaluator=request.POST['evaluator']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
@@ -1490,10 +1527,15 @@ def inboundCoachingForm(request):
         zone=request.POST['zone']
         call_duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
@@ -1574,10 +1616,15 @@ def fameHouse(request):
         concept = request.POST['concept']
         service=request.POST['service']
 
-        team=Team.objects.get(name=campaign)
-        manager_id=team.manager
-        manager_emp_id=manager_id.profile.emp_id
-        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
 
         # Macros
@@ -1627,11 +1674,15 @@ def flaMonForm(request):
         service=request.POST['service']
         check_list=request.POST['checklist']
 
-        team=Team.objects.get(name=campaign)
-        manager_id=team.manager
-        manager_emp_id=manager_id.profile.emp_id
-        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj=Profile.objects.get(emp_id=emp_id)
+        manager=prof_obj.manager
 
+        manager_emp_id_obj=Profile.objects.get(emp_name=manager)
+
+        manager_emp_id=manager_emp_id_obj.emp_id
+        manager_name=manager
+        #########################################
 
         # Macros
         checklist_1 = int(request.POST['checklist_1'])
@@ -1683,10 +1734,15 @@ def leadsandSalesMonForm(request):
         zone=request.POST['zone']
         call_duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Opening and Closing
         oc_1 = int(request.POST['oc_1'])
@@ -1767,10 +1823,15 @@ def emailAndChatmonForm(request):
         zone=request.POST['zone']
         duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
@@ -1853,10 +1914,15 @@ def movementInsurance(request):
         zone=request.POST['zone']
         call_duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Opening and Closing
         oc_1 = int(request.POST['oc_1'])
@@ -1940,11 +2006,15 @@ def witDigitel(request):
         call_duration=request.POST['call_duration']
         call_type=request.POST['call_type']
 
-        team=Team.objects.get(name=campaign)
-        manager_id=team.manager
-        manager_emp_id=manager_id.profile.emp_id
-        manager_name=Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
 
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Tagging
         tagging_1 = int(request.POST['tagging_1'])
@@ -1992,10 +2062,15 @@ def printerPixChatsEmails(request):
         zone=request.POST['zone']
         duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
@@ -2083,10 +2158,15 @@ def printerPixInboundCalls(request):
         zone=request.POST['zone']
         call_duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Customer Experience
         ce_1 = int(request.POST['ce_1'])
@@ -2174,10 +2254,15 @@ def leadsandSalesAadya(request):
         zone=request.POST['zone']
         call_duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Opening and Closing
         oc_1 = int(request.POST['oc_1'])
@@ -2261,10 +2346,15 @@ def leadsandSalesMonFormPsecu(request):
         zone=request.POST['zone']
         call_duration=request.POST['duration']
 
-        team = Team.objects.get(name=campaign)
-        manager_id = team.manager
-        manager_emp_id = manager_id.profile.emp_id
-        manager_name = Profile.objects.get(emp_id=manager_emp_id)
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
 
         # Opening and Closing
         oc_1 = int(request.POST['oc_1'])
