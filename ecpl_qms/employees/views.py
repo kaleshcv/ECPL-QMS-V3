@@ -3482,6 +3482,7 @@ def leadsandSalesGetRates(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/Monitoring-Form-Leads-Get-A-Rates.html', data)
+
 def leadsandSalesAdvance(request):
     if request.method == 'POST':
 
