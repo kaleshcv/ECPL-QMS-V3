@@ -22,6 +22,20 @@ admin.site.register(MonitoringFormLeadsAadhyaSolution)
 admin.site.register(PrinterPixMasterMonitoringFormInboundCalls)
 admin.site.register(PrinterPixMasterMonitoringFormChatsEmail)
 admin.site.register(WitDigitalMasteringMonitoringForm)
+admin.site.register(MonitoringFormLeadsInsalvage)
+admin.site.register(MonitoringFormLeadsMedicare)
+admin.site.register(MonitoringFormLeadsCTS)
+admin.site.register(MonitoringFormLeadsTentamusFood)
+admin.site.register(MonitoringFormLeadsTentamusPet)
+admin.site.register(MonitoringFormLeadsCitySecurity)
+admin.site.register(MonitoringFormLeadsAllenConsulting)
+admin.site.register(MonitoringFormLeadsSystem4)
+admin.site.register(MonitoringFormLeadsLouisville)
+admin.site.register(MonitoringFormLeadsInfothinkLLC)
+admin.site.register(MonitoringFormLeadsPSECU)
+admin.site.register(MonitoringFormLeadsGetARates)
+admin.site.register(MonitoringFormLeadsAdvanceConsultants)
+
 
 
 

@@ -25,6 +25,23 @@ urlpatterns = [
     path('Printer-Pix-Master-Monitoring-Form-Inbound-Calls',printerPixInboundCalls),
     path('Monitoring-Form-Leads-Aadhya-Solution',leadsandSalesAadya),
 
+    path('Monitoring-Form-Leads-Insalvage',leadsandSalesInsalvage),
+    path('Monitoring-Form-Leads-Medicare',leadsandSalesMedicare),
+    path('Monitoring-Form-Leads-CTS',leadsandSalesCTS),
+    path('Monitoring-Form-Leads-Tentamus-Food',),
+    path('Monitoring-Form-Leads-Tentamus-Pet',),
+    path('Monitoring-Form-Leads-City-Security',),
+    path('Monitoring-Form-Leads-Allen-Consulting',),
+    path('Monitoring-Form-Leads-system4',),
+    path('Monitoring-Form-Leads-Louisville',),
+    path('Monitoring-Form-Leads-Info-Think-LLC',),
+    path('Monitoring-Form-Leads-PSECU',),
+    path('Monitoring-Form-Leads-Get-A-Rates',),
+    path('Monitoring-Form-Leads-Advance-Consultant',),
+
+
+
+
 
 
     path('signup',signup),
