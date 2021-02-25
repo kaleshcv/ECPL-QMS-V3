@@ -156,7 +156,10 @@ def employeeWiseReport(request):
         mon_forms = [ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,FameHouseMonitoringForm,
                      FLAMonitoringForm,MasterMonitoringFormMTCosmetics,MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,
                      WitDigitalMasteringMonitoringForm,PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,
-                     MonitoringFormLeadsAadhyaSolution]
+                     MonitoringFormLeadsAadhyaSolution,MonitoringFormLeadsInsalvage,MonitoringFormLeadsMedicare,MonitoringFormLeadsCTS,
+                     MonitoringFormLeadsTentamusFood,MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,
+                     MonitoringFormLeadsAllenConsulting,MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
+                     MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants]
 
         #Campaign List
         campaign_details = []
@@ -196,10 +199,18 @@ def managerWiseReport(request):
             return ov_perc,name[0]
 
         # Mon Form List
-        mon_forms = [ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,FameHouseMonitoringForm,
-                     FLAMonitoringForm,MasterMonitoringFormMTCosmetics,MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,
-                     WitDigitalMasteringMonitoringForm,PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,
-                     MonitoringFormLeadsAadhyaSolution]
+        mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                     FameHouseMonitoringForm,
+                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
+                     MasterMonitoringFormMovementInsurance,
+                     WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
+                     PrinterPixMasterMonitoringFormInboundCalls,
+                     MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
+                     MonitoringFormLeadsCTS,
+                     MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                     MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
+                     MonitoringFormLeadsInfothinkLLC,
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
 
         #Campaign List
         campaign_details = []
@@ -235,162 +246,46 @@ def qualityDashboardMgt(request):
 
     teams=Team.objects.all()
 
-    # Eva Chat Details
 
-    eva_avg_score=ChatMonitoringFormEva.objects.filter(audit_date__year=year,audit_date__month=month)
-    eva_avg=[]
-    for i in eva_avg_score:
-        eva_avg.append(i.overall_score)
-    if len(eva_avg)>0:
-        eva_avg_score=sum(eva_avg)/len(eva_avg)
-    else:
-        eva_avg_score=100
+    ############ Avg Score Calculator
 
+    def avgscoreCalculator(monform):
+        a=monform.objects.filter(audit_date__year=year, audit_date__month=month)
+        a_avg=[]
+        for i in a:
+            a_avg.append(i.overall_score)
+        if len(a_avg)>0:
+            a_avg_score=sum(a_avg)/len(a_avg)
+            return a_avg_score
+        else:
+            return 100
 
-    # Pod Father Chat Details
+    eva_avg_score=avgscoreCalculator(ChatMonitoringFormEva)
+    pod_avg_score=avgscoreCalculator(ChatMonitoringFormPodFather)
+    nuc_avg_score=avgscoreCalculator(InboundMonitoringFormNucleusMedia)
+    fame_avg_score=avgscoreCalculator(FameHouseMonitoringForm)
+    fla_avg_score=avgscoreCalculator(FLAMonitoringForm)
+    mt_avg_score=avgscoreCalculator(MasterMonitoringFormMTCosmetics)
+    ton_avg_score=avgscoreCalculator(MasterMonitoringFormTonnChatsEmail)
+    mov_avg_score=avgscoreCalculator(MasterMonitoringFormMovementInsurance)
+    wit_avg_score=avgscoreCalculator(WitDigitalMasteringMonitoringForm)
+    pixchat_avg_score=avgscoreCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+    pixcall_avg_score=avgscoreCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+    aadya_avg_score=avgscoreCalculator(MonitoringFormLeadsAadhyaSolution)
+    insalvage_avg_score=avgscoreCalculator(MonitoringFormLeadsInsalvage)
+    medicare_avg_score=avgscoreCalculator(MonitoringFormLeadsMedicare)
+    cts_avg_score=avgscoreCalculator(MonitoringFormLeadsCTS)
+    tfood_avg_score=avgscoreCalculator(MonitoringFormLeadsTentamusFood)
+    tpet_avg_score=avgscoreCalculator(MonitoringFormLeadsTentamusPet)
+    city_avg_score=avgscoreCalculator(MonitoringFormLeadsCitySecurity)
+    allen_avg_score=avgscoreCalculator(MonitoringFormLeadsAllenConsulting)
+    system4_avg_score=avgscoreCalculator(MonitoringFormLeadsSystem4)
+    louis_avg_score=avgscoreCalculator(MonitoringFormLeadsLouisville)
+    info_avg_score=avgscoreCalculator(MonitoringFormLeadsInfothinkLLC)
+    psecu_avg_score=avgscoreCalculator(MonitoringFormLeadsPSECU)
+    get_avg_score=avgscoreCalculator(MonitoringFormLeadsGetARates)
+    adv_avg_score=avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
-    pod_avg_score = ChatMonitoringFormPodFather.objects.filter(audit_date__year=year, audit_date__month=month)
-    pod_avg = []
-    for i in pod_avg_score:
-        pod_avg.append(i.overall_score)
-    if len(pod_avg) > 0:
-        pod_avg_score = sum(pod_avg) / len(pod_avg)
-    else:
-        pod_avg_score = 100
-
-    #Inbound Nucleus
-
-    nucleus_avg_score=InboundMonitoringFormNucleusMedia.objects.filter(audit_date__year=year, audit_date__month=month)
-    nuc_avg=[]
-    for i in nucleus_avg_score:
-        nuc_avg.append(i.overall_score)
-    if len(nuc_avg)>0:
-        nuc_avg_score=sum(nuc_avg)/len(nuc_avg)
-    else:
-        nuc_avg_score=100
-
-    #Fame House
-    fameh_avg_score=FameHouseMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
-    fame_avg=[]
-    for i in fameh_avg_score:
-        fame_avg.append(i.overall_score)
-    if len(fame_avg)>0:
-        fame_avg_score=sum(fame_avg)/len(fame_avg)
-    else:
-        fame_avg_score=100
-
-    #FLA
-    fla_avgs=FLAMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
-    fla_avg=[]
-    for i in fla_avgs:
-        fla_avg.append(i.overall_score)
-    if len(fla_avg)>0:
-        fla_avg_score=sum(fla_avg)/len(fla_avg)
-    else:
-        fla_avg_score=100
-
-    #MT Cosmetics
-    mt_avgs=MasterMonitoringFormMTCosmetics.objects.filter(audit_date__year=year, audit_date__month=month)
-    mt_avg=[]
-    for i in mt_avgs:
-        mt_avg.append(i.overall_score)
-    if len(mt_avg)>0:
-        mt_avg_score=sum(mt_avg)/len(mt_avg)
-    else:
-        mt_avg_score=100
-
-    #Tonn Chats
-    ton_avgs=MasterMonitoringFormTonnChatsEmail.objects.filter(audit_date__year=year, audit_date__month=month)
-    ton_avg=[]
-    for i in ton_avgs:
-        ton_avg.append(i.overall_score)
-    if len(ton_avg)>0:
-        ton_avg_score=sum(ton_avg)/len(ton_avg)
-    else:
-        ton_avg_score=100
-
-    #Movement of Insurance
-    mov_avgs=MasterMonitoringFormMovementInsurance.objects.filter(audit_date__year=year, audit_date__month=month)
-    mov_avg=[]
-    for i in mov_avgs:
-        mov_avg.append(i.overall_score)
-    if len(mov_avg)>0:
-        mov_avg_score=sum(mov_avg)/len(mov_avg)
-    else:
-        mov_avg_score=100
-
-    #Wit Digital
-    wit_avgs=WitDigitalMasteringMonitoringForm.objects.filter(audit_date__year=year, audit_date__month=month)
-    wit_avg=[]
-    for i in wit_avgs:
-        wit_avg.append(i.overall_score)
-    if len(wit_avg)>0:
-        wit_avg_score=sum(wit_avg)/len(wit_avg)
-    else:
-        wit_avg_score=100
-
-    #Printer Pix chat Email
-    pixchat_avgs=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(audit_date__year=year, audit_date__month=month)
-    pixchat_avg=[]
-    for i in pixchat_avgs:
-        pixchat_avg.append(i.overall_score)
-    if len(pixchat_avg)>0:
-        pixchat_avg_score=sum(pixchat_avg)/len(pixchat_avg)
-    else:
-        pixchat_avg_score=100
-
-    #Printer Pix Inbound
-    pixcall_avgs=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__year=year, audit_date__month=month)
-    pixcall_avg=[]
-    for i in pixcall_avgs:
-        pixcall_avg.append(i.overall_score)
-    if len(pixcall_avg)>0:
-        pixcall_avg_score=sum(pixcall_avg)/len(pixcall_avg)
-    else:
-        pixcall_avg_score=100
-
-    #Leads AAdya
-    aadya_avgs=MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__year=year, audit_date__month=month)
-    aadya_avg=[]
-    for i in aadya_avgs:
-        aadya_avg.append(i.overall_score)
-    if len(aadya_avg)>0:
-        aadya_avg_score=sum(aadya_avg)/len(aadya_avg)
-    else:
-        aadya_avg_score=100
-
-    # Display Chart
-
-    #from matplotlib import pyplot as plt
-    #import numpy as np
-
-    #scores = [eva_avg_score, pod_avg_score, ton_avg_score, pixchat_avg_score, mt_avg_score,mov_avg_score,
-    #          aadya_avg_score,nuc_avg_score,pixcall_avg_score,fame_avg_score,fla_avg_score,wit_avg_score
-    #          ]
-
-
-    # print(plt.style.available) # gives all available styles
-    # plt.style.use('ggplot')  # use this style
-
-    #process = ['Eva', 'pod', 'Tonn-chat', 'Pix-chat', 'Mt', 'Mov-Ins', 'Aadya', 'Nucleus', 'Pix-call', 'Fame', 'Fla',
-    #           'Wit']
-    #xaxis = np.arange(len(process))
-    #width = 0.25
-
-    #sal1 = scores
-    #plt.bar(xaxis, sal1, color='k', width=width)
-    #plt.xlabel('Process')
-    #plt.ylabel('Quality Scores')
-    #plt.xticks(ticks=xaxis, labels=process)
-
-    #plt.legend()
-    # plt.tight_layout() # make small size
-    #plt.grid(True)  # enable grid
-
-    #plt.savefig('static/charts/barchart.png')
-    #plt.close()
-
-    #Categorywise
 
     chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
     outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
@@ -405,123 +300,51 @@ def qualityDashboardMgt(request):
 
     employees = Profile.objects.filter(emp_desi='CRO')
 
-    eva_total = ChatMonitoringFormEva.objects.all().count()
-    eva_closed_total = ChatMonitoringFormEva.objects.filter(status=True).count()
-    eva_open_total = ChatMonitoringFormEva.objects.filter(status=False).count()
-    if eva_total and eva_closed_total >0:
-        closed_percentage_eva = int((eva_closed_total / eva_total) * 100)
-    else:
-        closed_percentage_eva = 100
+    ######## Coaching closed Percentage Calculator
 
-    pod_total = ChatMonitoringFormPodFather.objects.all().count()
-    pod_closed_total = ChatMonitoringFormPodFather.objects.filter(status=True).count()
-    pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
-    if pod_total and pod_closed_total >0:
-        closed_percentage_pod = int((pod_closed_total / pod_total) * 100)
-    else:
-        closed_percentage_pod = 100
+    def coachingClosureCalculator(monform):
 
-    nuc_total=InboundMonitoringFormNucleusMedia.objects.all().count()
-    nuc_closed_total=InboundMonitoringFormNucleusMedia.objects.filter(status=True).count()
-    nuc_open_total = InboundMonitoringFormNucleusMedia.objects.filter(status=False).count()
-    if nuc_total and nuc_closed_total >0:
-        closed_percentage_nuc=int((nuc_closed_total/nuc_total)*100)
-    else:
-        closed_percentage_nuc=100
+        total=monform.objects.all().count()
+        closed_total=monform.objects.filter(status=True).count()
 
-    fame_total=FameHouseMonitoringForm.objects.all().count()
-    fame_closed_total=FameHouseMonitoringForm.objects.filter(status=True).count()
-    fame_open_total=FameHouseMonitoringForm.objects.filter(status=False).count()
-    if fame_total and fame_closed_total >0:
-        closed_percentage_fame=int((fame_closed_total/fame_total)*100)
-    else:
-        closed_percentage_fame=100
+        if total>0:
+            closure=int((closed_total/total)*100)
+            return closure
+        else:
+            return 100
 
-    fla_total=FLAMonitoringForm.objects.all().count()
-    fla_closed_total=FLAMonitoringForm.objects.filter(status=True).count()
-    fla_open_total=FLAMonitoringForm.objects.filter(status=False).count()
-    if fla_total and fla_closed_total >0:
-        closed_percentage_fla=int((fla_closed_total/fla_total)*100)
-    else:
-        closed_percentage_fla=100
+    closed_percentage_eva=coachingClosureCalculator(ChatMonitoringFormEva)
+    closed_percentage_pod=coachingClosureCalculator(ChatMonitoringFormPodFather)
+    closed_percentage_nuc=coachingClosureCalculator(InboundMonitoringFormNucleusMedia)
+    closed_percentage_fame=coachingClosureCalculator(FameHouseMonitoringForm)
+    closed_percentage_fla=coachingClosureCalculator(FLAMonitoringForm)
+    closed_percentage_mt=coachingClosureCalculator(MasterMonitoringFormMTCosmetics)
+    closed_percentage_ton=coachingClosureCalculator(MasterMonitoringFormTonnChatsEmail)
+    closed_percentage_mov=coachingClosureCalculator(MasterMonitoringFormMovementInsurance)
+    closed_percentage_wit=coachingClosureCalculator(WitDigitalMasteringMonitoringForm)
+    closed_percentage_pixchat=coachingClosureCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+    closed_percentage_pixcall=coachingClosureCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+    closed_percentage_aadya=coachingClosureCalculator(MonitoringFormLeadsAadhyaSolution)
 
-    mt_total=MasterMonitoringFormMTCosmetics.objects.all().count()
-    mt_closed_total=MasterMonitoringFormMTCosmetics.objects.filter(status=True).count()
-    mt_open_total=MasterMonitoringFormMTCosmetics.objects.filter(status=False).count()
-    if mt_total and mt_closed_total >0:
-        closed_percentage_mt=int((mt_closed_total/mt_total)*100)
-    else:
-        closed_percentage_mt=100
 
-    ton_total=MasterMonitoringFormTonnChatsEmail.objects.all().count()
-    ton_closed_total=MasterMonitoringFormTonnChatsEmail.objects.filter(status=True).count()
-    ton_open_total=MasterMonitoringFormTonnChatsEmail.objects.filter(status=False).count()
-    if ton_total and ton_closed_total >0:
-        closed_percentage_ton=int((ton_closed_total/ton_total)*100)
-    else:
-        closed_percentage_ton=100
 
-    mov_total=MasterMonitoringFormMovementInsurance.objects.all().count()
-    mov_closed_total=MasterMonitoringFormMovementInsurance.objects.filter(status=True).count()
-    mov_open_total=MasterMonitoringFormMovementInsurance.objects.filter(status=False).count()
-    if mov_total and mov_closed_total >0:
-        closed_percentage_mov=int((mov_closed_total/mov_total)*100)
-    else:
-        closed_percentage_mov=100
-
-    wit_total=WitDigitalMasteringMonitoringForm.objects.all().count()
-    wit_closed_total=WitDigitalMasteringMonitoringForm.objects.filter(status=True).count()
-    wit_open_total=WitDigitalMasteringMonitoringForm.objects.filter(status=False).count()
-    if wit_total and wit_closed_total >0:
-        closed_percentage_wit=int((wit_closed_total/wit_total)*100)
-    else:
-        closed_percentage_wit=100
-
-    pixchat_total=PrinterPixMasterMonitoringFormChatsEmail.objects.all().count()
-    pixchat_closed_total=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(status=True).count()
-    pixchat_open_total=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(status=False).count()
-    if pixchat_total and pixchat_closed_total >0:
-        closed_percentage_pixchat=int((pixchat_closed_total/pixchat_total)*100)
-    else:
-        closed_percentage_pixchat=100
-
-    pixcall_total=PrinterPixMasterMonitoringFormInboundCalls.objects.all().count()
-    pixcall_closed_total=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(status=True).count()
-    pixcall_open_total=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(status=False).count()
-    if pixchat_total and pixcall_closed_total >0:
-        closed_percentage_pixcall=int((pixcall_closed_total/pixcall_total)*100)
-    else:
-        closed_percentage_pixcall=100
-
-    aadya_total=MonitoringFormLeadsAadhyaSolution.objects.all().count()
-    aadya_closed_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=True).count()
-    aadya_open_total=MonitoringFormLeadsAadhyaSolution.objects.filter(status=False).count()
-    if aadya_total and aadya_closed_total >0:
-        closed_percentage_aadya=int((aadya_closed_total/aadya_total)*100)
-    else:
-        closed_percentage_aadya=100
-
-    pod = {'name': 'Noom-POD', 'total': pod_total, 'total_open': pod_open_total, 'perc': closed_percentage_pod}
-    eva = {'name': 'Noom-EVA', 'total': eva_total, 'total_open': eva_open_total, 'perc': closed_percentage_eva}
-    nucleus={'name': 'Nucleus','total':nuc_total,'total_open':nuc_open_total,'perc':closed_percentage_nuc}
-    famehouse={'name':'Fame House','total':fame_total,'total_open':fame_open_total,'perc':closed_percentage_fame}
-    fla={'name':'FLA','total':fla_total,'total_open':fla_open_total,'perc':closed_percentage_fla}
-    mt={'name':'MT Cosmetic','total':mt_total,'total_open':mt_open_total,'perc':closed_percentage_mt}
-    ton={'name':'Tonn Chat Email','total':ton_total,'total_open':ton_open_total,'perc':closed_percentage_ton}
-    mov={'name':'Movement of Insurance','total':mov_total,'total_open':mov_open_total,'perc':closed_percentage_mov}
-    wit={'name':'Wit Digital','total':wit_total,'total_open':wit_open_total,'perc':closed_percentage_wit}
-    pixchat={'name':'Printer Pix Chat Email','total':pixchat_total,'total_open':pixchat_open_total,'perc':closed_percentage_pixchat}
-    pixcall={'name':'Printer Pix Inbound','total':pixcall_total,'total_open':pixcall_open_total,'perc':closed_percentage_pixcall}
-    aadya={'name':'AAdya','total':aadya_total,'total_open':aadya_open_total,'perc':closed_percentage_aadya}
+    pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod,'score':pod_avg_score}
+    eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva,'score':eva_avg_score}
+    nucleus={'name': 'Nucleus','perc':closed_percentage_nuc,'score':nuc_avg_score}
+    famehouse={'name':'Fame House','perc':closed_percentage_fame,'score':fame_avg_score}
+    fla={'name':'FLA','perc':closed_percentage_fla,'score':fla_avg_score}
+    mt={'name':'MT Cosmetic','perc':closed_percentage_mt,'score':mt_avg_score}
+    ton={'name':'Tonn Chat Email','perc':closed_percentage_ton,'score':ton_avg_score}
+    mov={'name':'Movement of Insurance','perc':closed_percentage_mov,'score':mov_avg_score}
+    wit={'name':'Wit Digital','perc':closed_percentage_wit,'score':wit_avg_score}
+    pixchat={'name':'Printer Pix Chat Email','perc':closed_percentage_pixchat,'score':pixchat_avg_score}
+    pixcall={'name':'Printer Pix Inbound','perc':closed_percentage_pixcall,'score':pixcall_avg_score}
+    aadya={'name':'AAdya','perc':closed_percentage_aadya,'score':aadya_avg_score}
 
     campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya]
 
-    data = {
 
-            'eva_avg_score':eva_avg_score,'pod_avg_score':pod_avg_score,'nuc_avg_score':nuc_avg_score,
-            'fame_avg_score':fame_avg_score,'fla_avg_score':fla_avg_score,'mt_avg_score':mt_avg_score,
-            'ton_avg_score':ton_avg_score,'mov_avg_score':mov_avg_score,'wit_avg_score':wit_avg_score,
-            'pixchat_avg_score':pixchat_avg_score,'pixcall_avg_score':pixcall_avg_score,'aadya_avg_score':aadya_avg_score,
+    data = {
 
             'chat':chat,'outbound':outbound,'email':email,'inbound':inbound,'other':other,'leads':leads,
 
@@ -532,6 +355,7 @@ def qualityDashboardMgt(request):
             }
 
     return render(request, 'quality-dashboard-management.html',data)
+
 
 
 # Categorywise
@@ -1293,7 +1117,12 @@ def qahome(request):
     list_of_monforms=[ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,
                       FameHouseMonitoringForm,FLAMonitoringForm,MasterMonitoringFormMTCosmetics,
                       MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,WitDigitalMasteringMonitoringForm,
-                      PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,MonitoringFormLeadsAadhyaSolution]
+                      PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,MonitoringFormLeadsAadhyaSolution,
+                      MonitoringFormLeadsInsalvage,MonitoringFormLeadsMedicare,MonitoringFormLeadsCTS,MonitoringFormLeadsTentamusFood,
+                      MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,MonitoringFormLeadsAllenConsulting,
+                      MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
+                      MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
+                      ]
 
     # Total NO of Coachings
     total_coaching_ids=[]
@@ -3728,3 +3557,4 @@ def coachingSummaryView(request):
 def qualityDashboard(request):
 
     return render(request,'quality-dashboard.html')
+

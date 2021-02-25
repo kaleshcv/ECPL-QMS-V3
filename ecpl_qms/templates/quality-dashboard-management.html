@@ -65,55 +65,14 @@
         <h2>Campaigns</h2>
         <br>
         <div class="row">
-            <div class="col-md-3">
-                    <h5>Noom-eva</h5>
-                    <p>{{eva_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Noom-Pod</h5>
-                    <p>{{pod_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Nucleus</h5>
-                    <p>{{nuc_avg_score}}%</p>
-            </div>
 
             <div class="col-md-3">
-                    <h5>Fame House</h5>
-                    <p>{{fame_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>FLA</h5>
-                    <p>{{fla_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>MT Cosmetics</h5>
-                    <p>{{mt_avg_score}}%</p>
-            </div>
+                {% for c in campaigns %}
 
-            <div class="col-md-3">
-                    <h5>Tonn Chats Email</h5>
-                    <p>{{ton_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Movement of Insurance</h5>
-                    <p>{{mov_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Wit Digital</h5>
-                    <p>{{wit_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Printer Pix- Chat Email</h5>
-                    <p>{{pixchat_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Printer Pix- Inbound</h5>
-                    <p>{{pixcall_avg_score}}%</p>
-            </div>
-            <div class="col-md-3">
-                    <h5>Aadya </h5>
-                    <p>{{aadya_avg_score}}%</p>
+                    <p>{{c.name}}</p>
+                    <p>{{c.score}}%</p>
+                {% endfor %}
+
             </div>
 
         </div>
@@ -218,14 +177,7 @@
         <div class="col-md-3" style="background: darkgray;padding: 20px;margin-right: 40px">
             <h4>{{c.name}}</h4>
             <table class="table">
-                <tr>
-                    <th>Total Coachings </th>
-                    <td>{{c.total}}</td>
-                </tr>
-                <tr>
-                    <th>Open Status</th>
-                    <td>{{c.total_open}}</td>
-                </tr>
+
                 <tr>
                     <th>Coaching Closure Percentage </th>
                     <td>{{c.perc}}%</td>
