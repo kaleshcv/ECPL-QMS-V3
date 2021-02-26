@@ -3,7 +3,7 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('index',index),
+    path('',index),
     #Guidelines
     path('outbound-monitoring-guidelines',outboundGuidelines),
     path('inbound-monitoring-guidelines',inboundGuidelines),
@@ -40,9 +40,7 @@ urlpatterns = [
     path('Monitoring-Form-Leads-Advance-Consultant',leadsandSalesAdvance),
 
 
-
-
-
+#### Credentials
 
     path('signup',signup),
     path('login',login_view),
@@ -56,9 +54,6 @@ urlpatterns = [
 
 
     path('quality-dashboard',qualityDashboard),
-
-
-
 
 
     # Coaching Views
@@ -84,10 +79,8 @@ urlpatterns = [
     path('coaching-view-pix-chat-qa/<int:pk>',qaCoachingviewPixchat),
     path('coaching-view-pix-inbound/<int:pk>',empCoachingviewPixinbound),
     path('coaching-view-pix-inbound-qa/<int:pk>',qaCoachingviewPixinbound),
-    path('coaching-view-aadya/<int:pk>',empCoachingviewAadya),
+
     path('coaching-view-aadya-qa/<int:pk>',qaCoachingviewAadya),
-
-
     path('coaching-view-insalvage-qa/<int:pk>',qaCoachingviewInsalvage),
     path('coaching-view-medicare-qa/<int:pk>',qaCoachingviewMedicare),
     path('coaching-view-cts-qa/<int:pk>',qaCoachingviewCts),
@@ -102,6 +95,21 @@ urlpatterns = [
     path('coaching-view-get-qa/<int:pk>',qaCoachingviewGet),
     path('coaching-view-advance-qa/<int:pk>',qaCoachingviewAdvance),
 
+
+    path('coaching-view-aadya/<int:pk>',empCoachingviewAadya),
+    path('coaching-view-insalvage/<int:pk>',empCoachingviewInsalvage),
+    path('coaching-view-medicare/<int:pk>',empCoachingviewMedicare),
+    path('coaching-view-cts/<int:pk>',empCoachingviewCts),
+    path('coaching-view-tfood/<int:pk>',empCoachingviewTfood),
+    path('coaching-view-tpet/<int:pk>',empCoachingviewTpet),
+    path('coaching-view-city/<int:pk>',empCoachingviewCity),
+    path('coaching-view-allen/<int:pk>',empCoachingviewAllen),
+    path('coaching-view-system4/<int:pk>',empCoachingviewSystem4),
+    path('coaching-view-louis/<int:pk>',empCoachingviewLouis),
+    path('coaching-view-info/<int:pk>',empCoachingviewInfo),
+    path('coaching-view-psecu/<int:pk>',empCoachingviewPsecu),
+    path('coaching-view-get/<int:pk>',empCoachingviewGet),
+    path('coaching-view-advance/<int:pk>',empCoachingviewAdvance),
 
 
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),

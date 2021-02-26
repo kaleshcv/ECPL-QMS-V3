@@ -597,68 +597,98 @@ def agenthome(request):
     team = Team.objects.get(name=team_name)
 
     # Chat Eva Details
-    open_eva_chat=ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False)
-    open_eva_count = ChatMonitoringFormEva.objects.filter(associate_name=agent_name, status=False).count()
 
-    # Pod Father Chat Details
-    open_pod_chat = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False)
-    open_pod_count = ChatMonitoringFormPodFather.objects.filter(associate_name=agent_name, status=False).count()
+    #################### open campaigns indevidual
 
-    # Inbound Nucleus
-    open_nucleus=InboundMonitoringFormNucleusMedia.objects.filter(associate_name=agent_name, status=False)
-    open_nucleus_count=InboundMonitoringFormNucleusMedia.objects.filter(associate_name=agent_name, status=False).count()
+    def openCampaigns(monforms):
+        open_obj = monforms.objects.filter(associate_name=agent_name, status=False)
+        return open_obj
 
-    # FameHouse
-    open_famehouse=FameHouseMonitoringForm.objects.filter(associate_name=agent_name, status=False)
-    open_famehouse_count=FameHouseMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+    open_eva = openCampaigns(ChatMonitoringFormEva)
+    open_pod = openCampaigns(ChatMonitoringFormPodFather)
+    open_nuc = openCampaigns(InboundMonitoringFormNucleusMedia)
+    open_fame = openCampaigns(FameHouseMonitoringForm)
+    open_fla = openCampaigns(FLAMonitoringForm)
+    open_mt = openCampaigns(MasterMonitoringFormMTCosmetics)
+    open_ton = openCampaigns(MasterMonitoringFormTonnChatsEmail)
+    open_mov = openCampaigns(MasterMonitoringFormMovementInsurance)
+    open_wit = openCampaigns(WitDigitalMasteringMonitoringForm)
+    open_pixchat = openCampaigns(PrinterPixMasterMonitoringFormChatsEmail)
+    open_pixcall = openCampaigns(PrinterPixMasterMonitoringFormInboundCalls)
+    open_aadya = openCampaigns(MonitoringFormLeadsAadhyaSolution)
+    open_insalvage = openCampaigns(MonitoringFormLeadsInsalvage)
+    open_medicare = openCampaigns(MonitoringFormLeadsMedicare)
+    open_cts = openCampaigns(MonitoringFormLeadsCTS)
+    open_tfood = openCampaigns(MonitoringFormLeadsTentamusFood)
+    open_tpet = openCampaigns(MonitoringFormLeadsTentamusPet)
+    open_city = openCampaigns(MonitoringFormLeadsCitySecurity)
+    open_allen = openCampaigns(MonitoringFormLeadsAllenConsulting)
+    open_system4 = openCampaigns(MonitoringFormLeadsSystem4)
+    open_louis = openCampaigns(MonitoringFormLeadsLouisville)
+    open_info = openCampaigns(MonitoringFormLeadsInfothinkLLC)
+    open_psecu = openCampaigns(MonitoringFormLeadsPSECU)
+    open_getarates = openCampaigns(MonitoringFormLeadsGetARates)
+    open_advance = openCampaigns(MonitoringFormLeadsAdvanceConsultants)
 
-    # FLA
-    open_fla=FLAMonitoringForm.objects.filter(associate_name=agent_name, status=False)
-    open_fla_count=FLAMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+    ################### opn_count #############
 
-    #MT cosmetics
-    open_mt=MasterMonitoringFormMTCosmetics.objects.filter(associate_name=agent_name, status=False)
-    open_mt_count=MasterMonitoringFormMTCosmetics.objects.filter(associate_name=agent_name, status=False).count()
+    list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                        FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        ]
 
-    #Tonn Chat
-    open_tonchat=MasterMonitoringFormTonnChatsEmail.objects.filter(associate_name=agent_name, status=False)
-    open_tonchat_count=MasterMonitoringFormTonnChatsEmail.objects.filter(associate_name=agent_name, status=False).count()
+    list_of_open_count = []
 
-    #Movement Ins
-    open_mvins=MasterMonitoringFormMovementInsurance.objects.filter(associate_name=agent_name, status=False)
-    open_mvins_count=MasterMonitoringFormMovementInsurance.objects.filter(associate_name=agent_name, status=False).count()
+    for i in list_of_monforms:
+        count = i.objects.filter(associate_name=agent_name, status=False).count()
+        list_of_open_count.append(count)
 
-    #Wit digital Master
-    open_wit=WitDigitalMasteringMonitoringForm.objects.filter(associate_name=agent_name, status=False)
-    open_wit_count=WitDigitalMasteringMonitoringForm.objects.filter(associate_name=agent_name, status=False).count()
+    total_open_coachings = sum(list_of_open_count)
 
-    #Pix Chat Email
-    open_pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(associate_name=agent_name, status=False)
-    open_pixchat_count=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(associate_name=agent_name, status=False).count()
+    data = {
+            'open_eva_chat': open_eva,
+            'open_pod_chat': open_pod,
+            'open_nucleus': open_nuc,
+            'open_famehouse': open_fame,
+            'open_fla': open_fla,
+            'open_mt': open_mt,
+            'open_tonnchat': open_ton,
+            'open_mov': open_mov,
+            'open_wit': open_wit,
+            'open_pixchat': open_pixchat,
+            'open_pixinbound': open_pixcall,
+            'open_aadya': open_aadya,
+            'open_insalvage': open_insalvage,
+            'open_medicare': open_medicare,
+            'open_cts': open_cts,
+            'open_tfood': open_tfood,
+            'open_tpet': open_tpet,
+            'open_city': open_city,
+            'open_allen': open_allen,
+            'open_system4': open_system4,
+            'open_louis': open_louis,
+            'open_info': open_info,
+            'open_psecu': open_psecu,
+            'open_get': open_getarates,
+            'open_advance': open_advance,
 
-    #pix inbound
-    open_pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(associate_name=agent_name, status=False)
-    open_pixinbound_count=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(associate_name=agent_name, status=False).count()
+            'total_open': total_open_coachings,
 
-    #Leads AAdya
-    open_aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(associate_name=agent_name, status=False)
-    open_aadya_count=MonitoringFormLeadsAadhyaSolution.objects.filter(associate_name=agent_name, status=False).count()
+            'team':team
+            }
 
-    data={'team':team,
-          'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
-          'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
-          'open_nucleus':open_nucleus,'open_nucleus_count':open_nucleus_count,
-          'open_famehouse':open_famehouse,'open_famehouse_coun':open_famehouse_count,
-          'open_fla':open_fla,'open_fla_count':open_fla_count,
-          'open_mt':open_mt,'open_mt_count':open_mt_count,
-          'open_tonchat':open_tonchat,'open_tonchat_count':open_tonchat_count,
-            'open_mvins':open_mvins,'open_mvins_count':open_mvins_count,
-          'open_wit':open_wit,'open_wit_count':open_wit_count,
-          'open_pixchat':open_pixchat,'open_pixchat_count':open_pixchat_count,
-          'open_pixinbound':open_pixinbound,'open_pixinbound_count':open_pixinbound_count,
-          'open_aadya':open_aadya,'open_aadya_count':open_aadya_count
 
-          }
+
+
 
 
     return render(request, 'agent-home.html',data)
@@ -764,10 +794,67 @@ def qaCoachingviewPixinbound(request,pk):
     coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pix-inbound.html', data)
+
 def empCoachingviewAadya(request,pk):
     coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/emp-coaching-view-aadya.html', data)
+
+def empCoachingviewInsalvage(request,pk):
+    coaching = MonitoringFormLeadsInsalvage.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-insalvage.html', data)
+def empCoachingviewMedicare(request,pk):
+    coaching = MonitoringFormLeadsMedicare.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-medicare.html', data)
+def empCoachingviewCts(request,pk):
+    coaching = MonitoringFormLeadsCTS.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-cts.html', data)
+def empCoachingviewTfood(request,pk):
+    coaching = MonitoringFormLeadsTentamusFood.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-tfood.html', data)
+def empCoachingviewTpet(request,pk):
+    coaching = MonitoringFormLeadsTentamusPet.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-tpet.html', data)
+def empCoachingviewCity(request,pk):
+    coaching = MonitoringFormLeadsCitySecurity.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-city.html', data)
+def empCoachingviewAllen(request,pk):
+    coaching = MonitoringFormLeadsAllenConsulting.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-allen.html', data)
+def empCoachingviewSystem4(request,pk):
+    coaching = MonitoringFormLeadsSystem4.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-system4.html', data)
+def empCoachingviewLouis(request,pk):
+    coaching = MonitoringFormLeadsLouisville.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-louis.html', data)
+def empCoachingviewInfo(request,pk):
+    coaching = MonitoringFormLeadsInfothinkLLC.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-info.html', data)
+def empCoachingviewPsecu(request,pk):
+    coaching = MonitoringFormLeadsPSECU.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-psecu.html', data)
+def empCoachingviewGet(request,pk):
+    coaching = MonitoringFormLeadsGetARates.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-get.html', data)
+def empCoachingviewAdvance(request,pk):
+    coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/emp-coaching-view-advance.html', data)
+
+
+
 def qaCoachingviewAadya(request,pk):
     coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
     data = {'coaching': coaching}
@@ -1180,6 +1267,100 @@ def signCoaching(request,pk):
         coaching.emp_comments = emp_comments
         coaching.save()
         return redirect('/employees/agenthome')
+    elif category == 'insalvage':
+        coaching = MonitoringFormLeadsInsalvage.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'medicare':
+        coaching = MonitoringFormLeadsMedicare.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'cts':
+        coaching = MonitoringFormLeadsCTS.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'tfood':
+        coaching = MonitoringFormLeadsTentamusFood.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'tpet':
+        coaching = MonitoringFormLeadsTentamusPet.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'city':
+        coaching = MonitoringFormLeadsCitySecurity.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
+    elif category == 'allen':
+        coaching = MonitoringFormLeadsAllenConsulting.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'system4':
+        coaching = MonitoringFormLeadsSystem4.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'louis':
+        coaching = MonitoringFormLeadsLouisville.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'info':
+        coaching = MonitoringFormLeadsInfothinkLLC.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'psecu':
+        coaching = MonitoringFormLeadsPSECU.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+    elif category == 'get':
+        coaching = MonitoringFormLeadsGetARates.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
+    elif category == 'advance':
+        coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
 
     else:
         return redirect('/employees/agenthome')
