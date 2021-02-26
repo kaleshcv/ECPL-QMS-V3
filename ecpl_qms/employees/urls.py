@@ -88,6 +88,22 @@ urlpatterns = [
     path('coaching-view-aadya-qa/<int:pk>',qaCoachingviewAadya),
 
 
+    path('coaching-view-insalvage-qa/<int:pk>',qaCoachingviewInsalvage),
+    path('coaching-view-medicare-qa/<int:pk>',qaCoachingviewMedicare),
+    path('coaching-view-cts-qa/<int:pk>',qaCoachingviewCts),
+    path('coaching-view-tfood-qa/<int:pk>',qaCoachingviewTfood),
+    path('coaching-view-tpet-qa/<int:pk>',qaCoachingviewTpet),
+    path('coaching-view-city-qa/<int:pk>',qaCoachingviewCity),
+    path('coaching-view-allen-qa/<int:pk>',qaCoachingviewAllen),
+    path('coaching-view-system4-qa/<int:pk>',qaCoachingviewSystem4),
+    path('coaching-view-louis-qa/<int:pk>',qaCoachingviewLouis),
+    path('coaching-view-info-qa/<int:pk>',qaCoachingviewInfo),
+    path('coaching-view-psecu-qa/<int:pk>',qaCoachingviewPsecu),
+    path('coaching-view-get-qa/<int:pk>',qaCoachingviewGet),
+    path('coaching-view-advance-qa/<int:pk>',qaCoachingviewAdvance),
+
+
+
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
 
     path('campaign-wise-coaching-view',campaignwiseCoachings),

@@ -172,18 +172,11 @@
 <section style="margin-top:100px">
     <div class="container-lg">
         <h2>Coaching Closure Status</h2><br>
-        <div class="row" style="margin-left: 50px">
+        <div class="row">
         {% for c in campaigns %}
-        <div class="col-md-3" style="background: darkgray;padding: 20px;margin-right: 40px">
+        <div class="col-md-3">
             <h4>{{c.name}}</h4>
-            <table class="table">
-
-                <tr>
-                    <th>Coaching Closure Percentage </th>
-                    <td>{{c.perc}}%</td>
-                </tr>
-
-            </table>
+            <p>{{c.perc}}%</p>
         </div>
         {% endfor %}
         </div>

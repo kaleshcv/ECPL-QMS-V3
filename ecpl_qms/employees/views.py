@@ -325,6 +325,20 @@ def qualityDashboardMgt(request):
     closed_percentage_pixchat=coachingClosureCalculator(PrinterPixMasterMonitoringFormChatsEmail)
     closed_percentage_pixcall=coachingClosureCalculator(PrinterPixMasterMonitoringFormInboundCalls)
     closed_percentage_aadya=coachingClosureCalculator(MonitoringFormLeadsAadhyaSolution)
+    closed_percentage_insalvage=coachingClosureCalculator(MonitoringFormLeadsInsalvage)
+    closed_percentage_medicare=coachingClosureCalculator(MonitoringFormLeadsMedicare)
+    closed_percentage_cts=coachingClosureCalculator(MonitoringFormLeadsCTS)
+    closed_percentage_tfood=coachingClosureCalculator(MonitoringFormLeadsTentamusFood)
+    closed_percentage_tpet=coachingClosureCalculator(MonitoringFormLeadsTentamusPet)
+    closed_percentage_city=coachingClosureCalculator(MonitoringFormLeadsCitySecurity)
+    closed_percentage_allen=coachingClosureCalculator(MonitoringFormLeadsAllenConsulting)
+    closed_percentage_system4=coachingClosureCalculator(MonitoringFormLeadsSystem4)
+    closed_percentage_louis=coachingClosureCalculator(MonitoringFormLeadsLouisville)
+    closed_percentage_info=coachingClosureCalculator(MonitoringFormLeadsInfothinkLLC)
+    closed_percentage_psecu=coachingClosureCalculator(MonitoringFormLeadsPSECU)
+    closed_percentage_getarates=coachingClosureCalculator(MonitoringFormLeadsGetARates)
+    closed_percentage_advance=coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
+
 
 
 
@@ -340,8 +354,25 @@ def qualityDashboardMgt(request):
     pixchat={'name':'Printer Pix Chat Email','perc':closed_percentage_pixchat,'score':pixchat_avg_score}
     pixcall={'name':'Printer Pix Inbound','perc':closed_percentage_pixcall,'score':pixcall_avg_score}
     aadya={'name':'AAdya','perc':closed_percentage_aadya,'score':aadya_avg_score}
+    insalvage={'name':'Insalvage','perc':closed_percentage_insalvage,'score':insalvage_avg_score}
+    medicare={'name':'Medicare','perc':closed_percentage_medicare,'score':medicare_avg_score}
+    cts={'name':'CTS','perc':closed_percentage_cts,'score':cts_avg_score}
+    tfood={'name':'Tentamus Food','perc':closed_percentage_tfood,'score':tfood_avg_score}
+    tpet={'name':'Tentamus Pet','perc':closed_percentage_tpet,'score':tpet_avg_score}
+    city={'name':'City Security','perc':closed_percentage_city,'score':city_avg_score}
+    allen={'name':'Allen Consulting','perc':closed_percentage_allen,'score':allen_avg_score}
+    system={'name':'System4','perc':closed_percentage_system4,'score':system4_avg_score}
+    louis={'name':'Louisville','perc':closed_percentage_louis,'score':louis_avg_score}
+    info={'name':'Info Think LLC','perc':closed_percentage_info,'score':info_avg_score}
+    psecu={'name':'PSECU','perc':closed_percentage_psecu,'score':psecu_avg_score}
+    getarates={'name':'Get A Rates','perc':closed_percentage_getarates,'score':get_avg_score}
+    advance={'name':'Advance Consultants','perc':closed_percentage_advance,'score':adv_avg_score}
 
-    campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya]
+
+
+    campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya,
+                 insalvage,medicare,cts,tfood,tpet,city,allen,system,louis,info,psecu,
+                 getarates,advance]
 
 
     data = {
@@ -741,6 +772,69 @@ def qaCoachingviewAadya(request,pk):
     coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-aadya.html', data)
+
+def qaCoachingviewInsalvage(request,pk):
+    coaching = MonitoringFormLeadsInsalvage.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-insalvage.html', data)
+
+def qaCoachingviewMedicare(request,pk):
+    coaching = MonitoringFormLeadsMedicare.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-medicare.html', data)
+
+def qaCoachingviewCts(request,pk):
+    coaching = MonitoringFormLeadsCTS.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-cts.html', data)
+
+def qaCoachingviewTfood(request,pk):
+    coaching = MonitoringFormLeadsTentamusFood.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-tfood.html', data)
+
+def qaCoachingviewTpet(request,pk):
+    coaching = MonitoringFormLeadsTentamusPet.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-tpet.html', data)
+
+def qaCoachingviewCity(request,pk):
+    coaching = MonitoringFormLeadsCitySecurity.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-city.html', data)
+def qaCoachingviewAllen(request,pk):
+    coaching = MonitoringFormLeadsAllenConsulting.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-allen.html', data)
+def qaCoachingviewSystem4(request,pk):
+    coaching = MonitoringFormLeadsSystem4.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-system4.html', data)
+def qaCoachingviewLouis(request,pk):
+    coaching = MonitoringFormLeadsLouisville.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-louis.html', data)
+def qaCoachingviewInfo(request,pk):
+    coaching = MonitoringFormLeadsInfothinkLLC.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-info.html', data)
+
+def qaCoachingviewPsecu(request,pk):
+    coaching = MonitoringFormLeadsPSECU.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-psecu.html', data)
+
+def qaCoachingviewGet(request,pk):
+    coaching = MonitoringFormLeadsGetARates.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-get.html', data)
+
+
+def qaCoachingviewAdvance(request,pk):
+    coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
+    data = {'coaching': coaching}
+    return render(request, 'coaching-views/qa-coaching-view-advance.html', data)
+
 
 
 # Open status Coaching View
@@ -1143,76 +1237,89 @@ def qahome(request):
         x=i.objects.filter(added_by=qa_name).order_by('audit_date')
         all_coaching_obj.append(x)
 
+    ##### Open_campaigns_objects  ###############
 
-    # Eva Chat Details
-    open_eva_chat=ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False)
-    open_eva_count = ChatMonitoringFormEva.objects.filter(added_by=qa_name,status=False).count()
+    list_open_campaigns=[]
 
-    # Pod Father Chat Details
-    open_pod_chat = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False)
-    open_pod_count = ChatMonitoringFormPodFather.objects.filter(added_by=qa_name, status=False).count()
-
-    #Nucleus
-    open_nucleus=InboundMonitoringFormNucleusMedia.objects.filter(added_by=qa_name, status=False)
-    open_nucleus_count=InboundMonitoringFormNucleusMedia.objects.filter(added_by=qa_name, status=False).count()
-
-    #Famehouse
-    open_famehouse=FameHouseMonitoringForm.objects.filter(added_by=qa_name, status=False)
-    open_famehouse_count=FameHouseMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
-
-    #FLA
-    open_fla=FLAMonitoringForm.objects.filter(added_by=qa_name, status=False)
-    open_fla_count=FLAMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
-
-    #MT
-    open_mt=MasterMonitoringFormMTCosmetics.objects.filter(added_by=qa_name, status=False)
-    open_mt_count=MasterMonitoringFormMTCosmetics.objects.filter(added_by=qa_name, status=False).count()
-
-    #Tonn chat
-    open_tonnchat=MasterMonitoringFormTonnChatsEmail.objects.filter(added_by=qa_name, status=False)
-    open_tonnchat_count=MasterMonitoringFormTonnChatsEmail.objects.filter(added_by=qa_name, status=False).count()
-
-    #mov
-    open_mov=MasterMonitoringFormMovementInsurance.objects.filter(added_by=qa_name, status=False)
-    open_mov_count=MasterMonitoringFormMovementInsurance.objects.filter(added_by=qa_name, status=False).count()
-
-    #Wit
-    open_wit=WitDigitalMasteringMonitoringForm.objects.filter(added_by=qa_name, status=False)
-    open_wit_count=WitDigitalMasteringMonitoringForm.objects.filter(added_by=qa_name, status=False).count()
-
-    #Pixchat
-    open_pixchat=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(added_by=qa_name, status=False)
-    open_pixchat_count=PrinterPixMasterMonitoringFormChatsEmail.objects.filter(added_by=qa_name, status=False).count()
-
-    #Pixinbound
-    open_pixinbound=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(added_by=qa_name, status=False)
-    open_pixinbound_count=PrinterPixMasterMonitoringFormInboundCalls.objects.filter(added_by=qa_name, status=False).count()
-
-    #AAdya
-    open_aadya=MonitoringFormLeadsAadhyaSolution.objects.filter(added_by=qa_name, status=False)
-    open_aadya_count=MonitoringFormLeadsAadhyaSolution.objects.filter(added_by=qa_name, status=False).count()
-
-    total_open=open_eva_count+open_pod_count+open_nucleus_count+open_famehouse_count+open_fla_count+open_mt_count+open_tonnchat_count+open_mov_count+open_wit_count+open_pixchat_count+open_pixinbound_count+open_aadya_count
+    for i in list_of_monforms:
+        opn_cmp_obj=i.objects.filter(status=False)
+        list_open_campaigns.append(opn_cmp_obj)
 
 
+    #################### open campaigns indevidual
+
+    def openCampaigns(monforms):
+        open_obj=monforms.objects.filter(added_by=qa_name,status=False)
+        return open_obj
+
+    open_eva=openCampaigns(ChatMonitoringFormEva)
+    open_pod=openCampaigns(ChatMonitoringFormPodFather)
+    open_nuc=openCampaigns(InboundMonitoringFormNucleusMedia)
+    open_fame=openCampaigns(FameHouseMonitoringForm)
+    open_fla=openCampaigns(FLAMonitoringForm)
+    open_mt=openCampaigns(MasterMonitoringFormMTCosmetics)
+    open_ton=openCampaigns(MasterMonitoringFormTonnChatsEmail)
+    open_mov=openCampaigns(MasterMonitoringFormMovementInsurance)
+    open_wit=openCampaigns(WitDigitalMasteringMonitoringForm)
+    open_pixchat=openCampaigns(PrinterPixMasterMonitoringFormChatsEmail)
+    open_pixcall=openCampaigns(PrinterPixMasterMonitoringFormInboundCalls)
+    open_aadya=openCampaigns(MonitoringFormLeadsAadhyaSolution)
+    open_insalvage=openCampaigns(MonitoringFormLeadsInsalvage)
+    open_medicare=openCampaigns(MonitoringFormLeadsMedicare)
+    open_cts=openCampaigns(MonitoringFormLeadsCTS)
+    open_tfood=openCampaigns(MonitoringFormLeadsTentamusFood)
+    open_tpet=openCampaigns(MonitoringFormLeadsTentamusPet)
+    open_city=openCampaigns(MonitoringFormLeadsCitySecurity)
+    open_allen=openCampaigns(MonitoringFormLeadsAllenConsulting)
+    open_system4=openCampaigns(MonitoringFormLeadsSystem4)
+    open_louis=openCampaigns(MonitoringFormLeadsLouisville)
+    open_info=openCampaigns(MonitoringFormLeadsInfothinkLLC)
+    open_psecu=openCampaigns(MonitoringFormLeadsPSECU)
+    open_getarates=openCampaigns(MonitoringFormLeadsGetARates)
+    open_advance=openCampaigns(MonitoringFormLeadsAdvanceConsultants)
+
+################### opn_count #############
+
+    list_of_open_count=[]
+
+    for i in list_of_monforms:
+
+        count=i.objects.filter(added_by=qa_name,status=False).count()
+        list_of_open_count.append(count)
+
+    total_open_coachings=sum(list_of_open_count)
 
     data={'teams':teams,
-          'open_eva_chat':open_eva_chat,'open_eva_count':open_eva_count,
-          'open_pod_chat':open_pod_chat,'open_pod_count':open_pod_count,
-          'open_nucleus':open_nucleus,'open_nucleus_count':open_nucleus_count,
-          'open_famehouse':open_famehouse,'open_famehouse_count':open_famehouse_count,
-          'open_fla':open_fla,'open_fla_count':open_fla_count,
-          'open_mt':open_mt,'open_mt_count':open_mt_count,
-          'open_tonnchat':open_tonnchat,'open_tonnchat_count':open_tonnchat_count,
-          'open_mov':open_mov,'open_mov_count':open_mov_count,
-          'open_wit':open_wit,'open_wit_count':open_wit_count,
-          'open_pixchat':open_pixchat,'open_pixchat_count':open_pixchat_count,
-          'open_pixinbound':open_pixinbound,'open_pixinbound_count':open_pixinbound_count,
-          'open_aadya':open_aadya,'open_aadya_count':open_aadya_count,
+          'open_eva_chat':open_eva,
+          'open_pod_chat':open_pod,
+          'open_nucleus':open_nuc,
+          'open_famehouse':open_fame,
+          'open_fla':open_fla,
+          'open_mt':open_mt,
+          'open_tonnchat':open_ton,
+          'open_mov':open_mov,
+          'open_wit':open_wit,
+          'open_pixchat':open_pixchat,
+          'open_pixinbound':open_pixcall,
+          'open_aadya':open_aadya,
+          'open_insalvage': open_insalvage,
+          'open_medicare':open_medicare,
+          'open_cts':open_cts,
+          'open_tfood':open_tfood,
+          'open_tpet':open_tpet,
+          'open_city':open_city,
+          'open_allen':open_allen,
+          'open_system4':open_system4,
+          'open_louis':open_louis,
+          'open_info':open_info,
+          'open_psecu':open_psecu,
+          'open_get':open_getarates,
+          'open_advance':open_advance,
 
+          'total_open':total_open_coachings,'total_coaching':total_coaching,
+          'all_c_obj':all_coaching_obj,
 
-          'total_open':total_open,'total_coaching':total_coaching,
-          'all_c_obj':all_coaching_obj
+          'open_campaigns':list_open_campaigns
 
           }
 
