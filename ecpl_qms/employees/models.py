@@ -40,6 +40,7 @@ class Profile(models.Model):
                    )
 
 
+
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     emp_name = models.CharField(max_length=30)
     emp_id=models.IntegerField()
@@ -50,6 +51,7 @@ class Profile(models.Model):
     process = models.CharField(max_length=100,default='Training')
     team_lead = models.CharField(max_length=50,default='Testlead')
     manager = models.CharField(max_length=50,default='Testmanager')
+    am = models.CharField(max_length=50,default='testam')
 
 
     def __str__(self):

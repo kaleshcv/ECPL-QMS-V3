@@ -27,6 +27,19 @@
                             </div>
                             <br>
                             <div>
+                                <div>
+                                <p>AM</p>
+                                    <select class="form-control" required="required" name="am">
+                                        {% for user in ams %}
+                                        <option value="{{user.emp_name}}">{{user.emp_name}}</option>
+                                        {% endfor %}
+                                        <option value="NA">NA</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <div>
+
+
                                 <p>Manager</p>
                                 <select class="form-control" required="required" name="manager">
                                     {% for user in managers %}

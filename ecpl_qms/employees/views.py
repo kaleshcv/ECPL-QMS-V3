@@ -29,6 +29,8 @@ def emailGuidelines(request):
 def signup(request):
     team_leaders=Profile.objects.filter(emp_desi='Team Leader')
     managers=Profile.objects.filter(emp_desi='Manager')
+    ams = Profile.objects.filter(emp_desi='AM')
+
     if request.method == 'POST':
         admin_id = request.POST['admin-id']
         admin_pwd = request.POST['admin-pwd']
@@ -42,6 +44,7 @@ def signup(request):
 
                 manager=request.POST['manager']
                 team_lead=request.POST['team-leader']
+                am=request.POST['am']
 
                 user = form.save()
                 profile = profile_form.save(commit=False)
@@ -49,6 +52,7 @@ def signup(request):
                 profile.user = user
                 profile.manager=manager
                 profile.team_lead=team_lead
+                profile.am=am
 
                 profile.save()
                 # login(request,user)
@@ -61,7 +65,7 @@ def signup(request):
         profile_form = forms.ProfileCreation()
 
     return render(request, 'sign-up.html', {'form': form, 'profile_form': profile_form,
-                                            'team_leaders':team_leaders,'managers':managers
+                                            'team_leaders':team_leaders,'managers':managers,'ams':ams
                                             })
 
 def login_view(request):
