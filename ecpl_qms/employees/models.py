@@ -32,8 +32,8 @@ class Profile(models.Model):
                     )
 
     emp_desi_list=(
-        ('CRO','CRO'),('Patrolling officer','Patrolling officer'),('TL','TL'),('AM','AM'),('Trainer','Trainer'),
-        ('AD','AD'),('Manager','Manager'),('Service Delivery Manager','Service Delivery Manager'),('Asst.Manager','Asst.Manager'),
+        ('CRO','CRO'),('Patrolling officer','Patrolling officer'),('AM','AM'),('Trainer','Trainer'),
+        ('AD','AD'),('Manager','Manager'),('Service Delivery Manager','Service Delivery Manager'),
         ('CC Team','CC Team'),('BD','BD'),('MIS','MIS'),('Data Analyst','Data Analyst'),('Team Leader','Team Leader'),('QA','QA'),
         ('ATL','ATL'),('SME','SME')
 
