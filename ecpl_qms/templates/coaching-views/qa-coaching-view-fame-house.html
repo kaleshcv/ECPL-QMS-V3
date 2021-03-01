@@ -29,20 +29,76 @@
             </table>
 
             <h2>Parameter Scores</h2>
-            <p><b>Macros</b></p>
+            <p><b>Customer Experience</b></p>
             <table class="table">
                 <tr>
-                    <td style="width: 55%;">Macros Used Correctly</td>
-                    <td>{{coaching.macros_1}}</td>
+                    <td style="width: 55%;">Standard Greeting & Closing format used</td>
+                    <td>{{coaching.ce_1}}</td>
                 </tr>
-
                 <tr>
-                    <td style="width: 55%;">Reason for Failure</td>
-                    <td>{{coaching.reason_for_failure}}</td>
+                    <td style="width: 55%;">Acknowledged the Customer Concern/s</td>
+                    <td>{{coaching.ce_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Empathy / Sympathy used where ever required</td>
+                    <td>{{coaching.ce_3}}</td>
+                </tr>
+                <tr style="width: 55%;">
+                    <td>Grammar (Tense, Noun, etc.)</td>
+                    <td>{{coaching.ce_4}}</td>
+                </tr>
+                <tr style="width: 55%;">
+                    <td>Probing done whenever necessary</td>
+                    <td>{{coaching.ce_5}}</td>
                 </tr>
             </table>
 
+            <p><b>ZENDESK</b></p>
+            <table class="table">
+                <tr>
+                    <td style="width: 55%;">Client Name / Order Number / Support Category is Updated Correctly</td>
+                    <td>{{coaching.ze_1}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">User Data was checked / Tickets were Merged</td>
+                    <td>{{coaching.ze_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Incorrect / Irrelevant Response (OS / ES) / Worked on Restricted Category( Fatal )</td>
+                    <td>{{coaching.ze_3}}</td>
+                </tr>
+                <tr style="width: 55%;">
+                    <td>Appropriate use of Macro / Dispositions( Fatal )</td>
+                    <td>{{coaching.ze_4}}</td>
+                </tr>
 
+            </table>
+
+
+            <p><b>SHIPHERO ( Fatal )</b></p>
+            <table class="table">
+                <tr>
+                    <td style="width: 55%;">Procedure Followed Appropriately on "SHIPHERO"</td>
+                    <td>{{coaching.sh_1}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Was Stock checked before Re-Shipment was processed</td>
+                    <td>{{coaching.sh_2}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Was Tagging done Appropriately (Re-Shipment / Refund)</td>
+                    <td>{{coaching.sh_3}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">Was the Procedure Followed (Refund / Exchange / Address Update)</td>
+                    <td>{{coaching.sh_4}}</td>
+                </tr>
+                <tr>
+                    <td style="width: 55%;">RMA - Address Validation (Address Update / Returns / Exchange / RTS)</td>
+                    <td>{{coaching.sh_5}}</td>
+                </tr>
+
+            </table>
         <br>
 
             <h2>Auditor Comments</h2>
@@ -65,11 +121,14 @@
                 <tr>
                   <td><b>Total</b></td>
                   <td>{{coaching.overall_score}}</td>
-                  <td><b>Compliance</b></td>
-                  <td>{{coaching.compliance_total}}</td>
+
                 </tr>
             </table>
 
+        <div>
+
+
+        </div>
     </div>
 </section>
 {% endblock %}

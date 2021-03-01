@@ -5,7 +5,7 @@
         <div class="container-lg">
             <form action="/employees/ECPL-Fame-House-MONITORING-FORM" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h2 class="text-center">ECPL - Fame House Monitoring Form</h2>
+                <h2 class="text-center">ECPL - Fame House Audit Form</h2>
                 <div class="basic">
                     <div class="row">
                         <div class="col-md-4">
@@ -25,29 +25,51 @@
                             <input type="text" class="form-control" id="tl" name="tl" required value="{{agent.team_lead}}">
                         </div>
                         <div class="col-md-4">
-                            <label for="ticketnumber">Ticket Number</label>
-                            <input type="number" class="form-control" id="ticketnumber" name="ticketnumber" required>
+                            <label for="am">AM</label>
+                            <input type="text" class="form-control" id="am" name="am" value="{{agent.am}}" required>
+
                         </div>
+
                         <div class="col-md-4">
-                            <label for="transdate">Transaction Handled Date</label>
-                            <input type="date" class="form-control" id="transdate" name="transdate" required>
+                            <label for="calldate">Ticket Date</label>
+                            <input type="date" class="form-control" id="calldate" name="ticketdate" required>
                             <label for="auditdate">Audit Date</label>
                             <input type="date" class="form-control" id="auditdate" name="auditdate" required>
                         </div>
                          <div class="col-md-4">
-                            <label for="campaign">Campaign</label>
-                             <select class="form-control" id="campaign" required="required" name="campaign">
+                            <label for="tickettype">Ticket Type</label>
+                             <select class="form-control" id="tickettype" required="required" name="ticket_type">
 
-                                <option value="{{team.name}}">{{team.name}}</option>
+                                <option value="Address update">Address update</option>
+                                <option value="Billing Inquiry">Billing Inquiry</option>
+                                <option value="Cancel/Order item">Cancel/Order item</option>
+                                 <option value="Change Order request">Change Order request</option>
+                                 <option value="Damage">Damage</option>
+                                 <option value="Digital Download">Digital Download</option>
+                                 <option value="Exchange Request">Exchange Request</option>
+                                 <option value="Incorrect item">Incorrect item</option>
+                                 <option value="Lost in Transit">Lost in Transit</option>
+                                 <option value="Missing Item">Missing Item</option>
+                                 <option value="Order Status">Order Status</option>
+                                 <option value="Pre-Order Delay">Pre-Order Delay</option>
+                                 <option value="Product inquiry">Product inquiry</option>
+                                 <option value="Quality Concern">Quality Concern</option>
+                                 <option value="Refund Inquiry">Refund Inquiry</option>
+                                 <option value="Return request">Return request</option>
+                                 <option value="Tracking and shipping Issues">Tracking and shipping Issues</option>
+                                 <option value="General Questions/ Others">General Questions/ Others</option>
+                                 <option value="Ticketing/Touring/Fan Request">Ticketing/Touring/Fan Request</option>
 
                             </select>
 
-                            <label for="Service">Service</label>
-                            <input type="text" class="form-control" id="Service" name="service" required>
+                            <label for="zone">Ticket Number</label>
+                            <input type="text" class="form-control" id="zone" name="ticket_no" required>
                         </div>
                          <div class="col-md-4">
-                            <label for="concept">Concept</label>
-                            <input type="text" class="form-control" id="concept" name="concept" required>
+                            <label for="campaign">Campaign</label>
+                            <select class="form-control" id="campaign" required="required" name="campaign">
+                                <option value="Fame House">Fame House</option>
+                            </select>
 
                         </div>
                     </div>
@@ -55,27 +77,132 @@
                 <hr>
                 <div class="customerexperience">
                     <div>
-                        <h4>Macros</h4>
-                        <label class="qn">Macros Used Correctly</label>
-                        <input type="radio" name="macros_1" value="100" id="yes4" required>
+                        <h4>Customer Experience</h4>
+                        <br>
+                        <label class="qn">Standard Greeting & Closing format used</label>
+                        <input type="radio" name="ce_1" value="2" id="yes4" required>
                         <label for="yes4">Yes</label>
-                        <input type="radio" name="macros_1" value="0" id="no4">
+                        <input type="radio" name="ce_1" value="0" id="no4">
                         <label for="no4">No</label>
                     </div>
+                    <br>
+                    <div>
+                        <label class="qn">Acknowledged the Customer Concern/s</label>
+                        <input type="radio" name="ce_2" value="2" id="yes5" required>
+                        <label for="yes5">Yes</label>
+                        <input type="radio" name="ce_2" value="0" id="no5">
+                        <label for="no5">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Empathy / Sympathy used where ever required</label>
+                        <input type="radio" name="ce_3" value="2" id="yes6" required>
+                        <label for="yes6">Yes</label>
+                        <input type="radio" name="ce_3" value="0" id="no6">
+                        <label for="no6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Grammar (Tense, Noun, etc.)</label>
+                        <input type="radio" name="ce_4" value="2" id="yes66" required>
+                        <label for="yes66">Yes</label>
+                        <input type="radio" name="ce_4" value="0" id="no66">
+                        <label for="no66">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Probing done whenever necessary</label>
+                        <input type="radio" name="ce_5" value="2" id="yes77" required>
+                        <label for="yes77">Yes</label>
+                        <input type="radio" name="ce_5" value="0" id="no77">
+                        <label for="no77">No</label>
+                    </div>
+                    <br>
+
                 </div>
                 <hr>
-                <div class="customerexperience">
+                <div class="business">
                     <div>
-                        <h4>Reason for Failure</h4>
-                        <select name="reason_for_failure" id="" class="form-control">
-                            <option value="NA">NA</option>
-                            <option value="Incorrect Response" class="form-control">Incorrect Response</option>
-                            <option value="Incomplete Information" class="form-control">Incomplete Information</option>
-                            <option value="Restricted Artist" class="form-control">Restricted Artist</option>
-                            <option value="Failed to Cancel & Refund" class="form-control">Failed to Cancel & Refund</option>
-                        </select>
+                        <h4>ZENDESK</h4>
+                        <br>
+                        <label class="qn">Client Name / Order Number / Support Category is Updated Correctly</label>
+                        <input type="radio" name="ze_1" value="10" id="b1" required>
+                        <label for="b1">Yes</label>
+                        <input type="radio" name="ze_1" value="0" id="b2">
+                        <label for="b2">No</label>
                     </div>
+                    <br>
+                    <div>
+                        <label class="qn">User Data was checked / Tickets were Merged</label>
+                        <input type="radio" name="ze_2" value="10" id="s3" required>
+                        <label for="s3">Yes</label>
+                        <input type="radio" name="ze_2" value="0" id="s4">
+                        <label for="s4">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Incorrect / Irrelevant Response (OS / ES) / Worked on Restricted Category</label>
+                        <input type="radio" name="ze_3" value="10" id="s5" required>
+                        <label for="s5">Pass</label>
+                        <input type="radio" name="ze_3" value="0" id="s6">
+                        <label for="s6">Fatal</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Appropriate use of Macro / Dispositions</label>
+                        <input type="radio" name="ze_4" value="10" id="s7" required>
+                        <label for="s7">Pass</label>
+                        <input type="radio" name="ze_4" value="0" id="s8">
+                        <label for="s8">Fatal</label>
+                    </div>
+                    <br>
+
                 </div>
+                <div class="compliance">
+                    <div>
+                        <h4>SHIPHERO</h4>
+                        <br>
+                        <label class="qn">Procedure Followed Appropriately on "SHIPHERO"</label>
+                        <input type="radio" name="sh_1" value="10" id="yes1" required>
+                        <label for="yes1">Pass</label>
+                        <input type="radio" name="sh_1" value="0" id="no1">
+                        <label for="no1">Fatal</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Was Stock checked before Re-Shipment was processed</label>
+                        <input type="radio" name="sh_2" value="10" id="yes2" required>
+                        <label for="yes2">Pass</label>
+                        <input type="radio" name="sh_2" value="0" id="no2">
+                        <label for="no2">Fatal</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Was Tagging done Appropriately (Re-Shipment / Refund)</label>
+                        <input type="radio" name="sh_3" value="10" id="yes3" required>
+                        <label for="yes3">Pass</label>
+                        <input type="radio" name="sh_3" value="0" id="no3">
+                        <label for="no3">Fatal</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Was the Procedure Followed (Refund / Exchange / Address Update)</label>
+                        <input type="radio" name="sh_4" value="10" id="c4" required>
+                        <label for="c4">Pass</label>
+                        <input type="radio" name="sh_4" value="0" id="c5">
+                        <label for="c5">Fatal</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">RMA - Address Validation (Address Update / Returns / Exchange / RTS)</label>
+                        <input type="radio" name="sh_5" value="10" id="c44" required>
+                        <label for="c44">Pass</label>
+                        <input type="radio" name="sh_5" value="0" id="c55">
+                        <label for="c55">Fatal</label>
+                    </div>
+                    <br>
+                </div>
+                <hr>
                 <div class="other">
 
                     <h4>Areas of improvement</h4>

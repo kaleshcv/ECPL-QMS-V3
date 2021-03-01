@@ -39,6 +39,7 @@ class Profile(models.Model):
 
                    )
 
+    process_list=(('Fame House','Fame House'),)
 
 
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -48,7 +49,7 @@ class Profile(models.Model):
     team=models.CharField(max_length=50,choices=team_list)
     email=models.EmailField(default='emp@ecpl.com',null=True)
 
-    process = models.CharField(max_length=100,default='Training')
+    process = models.CharField(max_length=100,choices=process_list)
     team_lead = models.CharField(max_length=50,default='Testlead')
     manager = models.CharField(max_length=50,default='Testmanager')
     am = models.CharField(max_length=50,default='testam')
@@ -300,22 +301,49 @@ class FameHouseMonitoringForm(models.Model):
     qa = models.CharField(max_length=50)
     team_lead = models.CharField(max_length=50)
     ticket_no = models.IntegerField()
+    ticket_type = models.CharField(max_length=50)
+
     trans_date = models.DateField()
     audit_date = models.DateField()
     campaign = models.CharField(max_length=100)
-    service = models.CharField(max_length=50)
-    concept = models.CharField(max_length=60)
+
 
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
 
+    am=models.CharField(max_length=50)
+
+
+
     category = models.CharField(max_length=20)
 
-    # Macors
-    macros_1 = models.IntegerField()
+    # Customer Experience
+    ce_1 = models.IntegerField()
+    ce_2 = models.IntegerField()
+    ce_3 = models.IntegerField()
+    ce_4 = models.IntegerField()
+    ce_5 = models.IntegerField()
 
-    reason_for_failure = models.TextField()
+    #ZENDESK
+
+    ze_1 = models.IntegerField()
+    ze_2 = models.IntegerField()
+    ze_3 = models.IntegerField()
+    ze_4 = models.IntegerField()
+
+    #SHIPHERO
+    sh_1 = models.IntegerField()
+    sh_2 = models.IntegerField()
+    sh_3 = models.IntegerField()
+    sh_4 = models.IntegerField()
+    sh_5 = models.IntegerField()
+
+    ce_total = models.IntegerField(null=True)
+    ze_total = models.IntegerField(null=True)
+    sh_total = models.IntegerField(null=True)
+    overall_score = models.IntegerField(null=True)
+
     areas_improvement = models.TextField()
     positives = models.TextField()
     comments = models.TextField()
@@ -325,7 +353,7 @@ class FameHouseMonitoringForm(models.Model):
     closed_date = models.DateTimeField(null=True)
     emp_comments = models.TextField(null=True)
 
-    overall_score = models.IntegerField()
+
 
     def __str__(self):
         return self.associate_name

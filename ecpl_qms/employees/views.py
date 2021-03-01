@@ -1763,17 +1763,21 @@ def inboundCoachingForm(request):
 
 def fameHouse(request):
     if request.method == 'POST':
-        category='other'
+        category='Chat'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
         team_lead = request.POST['tl']
-        ticket_no=request.POST['ticketnumber']
-        trans_date = request.POST['transdate']
+        am=request.POST['am']
+
+        ticket_no=request.POST['ticket_no']
+        ticket_type = request.POST['ticket_type']
+
+        trans_date = request.POST['ticketdate']
         audit_date = request.POST['auditdate']
+
         campaign = request.POST['campaign']
-        concept = request.POST['concept']
-        service=request.POST['service']
+
 
         #######################################
         prof_obj = Profile.objects.get(emp_id=emp_id)
@@ -1785,30 +1789,67 @@ def fameHouse(request):
         manager_name = manager
         #########################################
 
+        #Customer Experience
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
 
-        # Macros
-        macros_1 = int(request.POST['macros_1'])
+        ce_total=ce_1+ce_2+ce_3+ce_4+ce_5
 
-        reason_for_failure = request.POST['reason_for_failure']
+        #ZENDESK
+        ze_1 = int(request.POST['ze_1'])
+        ze_2 = int(request.POST['ze_2'])
+        ze_3 = int(request.POST['ze_3'])
+        ze_4 = int(request.POST['ze_4'])
+
+        ze_total = ze_1+ze_2+ze_3+ze_4
+
+        ###SHIPHERO
+        sh_1 = int(request.POST['sh_1'])
+        sh_2 = int(request.POST['sh_2'])
+        sh_3 = int(request.POST['sh_3'])
+        sh_4 = int(request.POST['sh_4'])
+        sh_5 = int(request.POST['sh_5'])
+
+        sh_total = sh_1+sh_2+sh_3+sh_4+sh_5
+        #################################################
+        if ze_3 == 0 or ze_4 ==0 or sh_1==0 or sh_2==0 or sh_3==0 or sh_4==0 or sh_5==0:
+            overall_score=0
+        else:
+            overall_score=ce_total+ze_total+sh_total
+
+
+
+        #################################################
+
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
         comments = request.POST['comments']
+
         added_by = request.user.profile.emp_name
 
         famehouse = FameHouseMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
-                                     manager=manager_name,manager_id=manager_emp_id,
+                                     manager=manager_name,manager_id=manager_emp_id,am=am,
 
                                      trans_date=trans_date, audit_date=audit_date,ticket_no=ticket_no,
-                                     campaign=campaign,concept=concept,service=service,
+                                     campaign=campaign,
 
-                                     macros_1=macros_1,
+                                    ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5,
+                                    ce_total=ce_total,
 
-                                     reason_for_failure=reason_for_failure,
+                                    ze_1=ze_1, ze_2=ze_2, ze_3=ze_3, ze_4=ze_4,
+                                    ze_total=ze_total,
+
+                                    sh_1=sh_1, sh_2=sh_2, sh_3=sh_3, sh_4=sh_4, sh_5=sh_5,
+                                    sh_total=sh_total,
+
                                      areas_improvement=areas_improvement,
                                      positives=positives, comments=comments,
-                                     added_by=added_by,
+                                     added_by=added_by,ticket_type=ticket_type,
 
-                                     overall_score=macros_1,category=category
+                                     category=category,overall_score=overall_score
                                      )
         famehouse.save()
         return redirect('/employees/qahome')
