@@ -1778,6 +1778,8 @@ def fameHouse(request):
 
         campaign = request.POST['campaign']
 
+        week = request.POST['week']
+
 
         #######################################
         prof_obj = Profile.objects.get(emp_id=emp_id)
@@ -1849,7 +1851,8 @@ def fameHouse(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,ticket_type=ticket_type,
 
-                                     category=category,overall_score=overall_score
+                                     category=category,overall_score=overall_score,
+                                            week=week
                                      )
         famehouse.save()
         return redirect('/employees/qahome')

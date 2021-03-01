@@ -353,6 +353,7 @@ class FameHouseMonitoringForm(models.Model):
     closed_date = models.DateTimeField(null=True)
     emp_comments = models.TextField(null=True)
 
+    week=models.CharField(max_length=20)
 
 
     def __str__(self):
