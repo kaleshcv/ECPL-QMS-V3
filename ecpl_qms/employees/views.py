@@ -1566,6 +1566,9 @@ def chatCoachingformEva(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         chat = ChatMonitoringFormEva(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                      manager=manager_name,manager_id=manager_emp_id,
 
@@ -1582,7 +1585,8 @@ def chatCoachingformEva(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=overall_score,category=category
+                                     overall_score=overall_score,category=category,
+                                     week=week,am=am
                                      )
         chat.save()
         return redirect('/employees/qahome')
@@ -1644,6 +1648,9 @@ def chatCoachingformPodFather(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         chat = ChatMonitoringFormPodFather(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                            manager=manager_name,manager_id=manager_emp_id,
 
@@ -1660,7 +1667,8 @@ def chatCoachingformPodFather(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=overall_score,category=category
+                                     overall_score=overall_score,category=category,
+                                           week=week,am=am
                                      )
         chat.save()
         return redirect('/employees/qahome')
@@ -1734,6 +1742,9 @@ def inboundCoachingForm(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         inbound = InboundMonitoringFormNucleusMedia(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -1751,7 +1762,8 @@ def inboundCoachingForm(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,week=week,
+                                                    am=am
                                            )
         inbound.save()
         return redirect('/employees/qahome')
@@ -1768,7 +1780,7 @@ def fameHouse(request):
         emp_id = request.POST['empid']
         qa = request.POST['qa']
         team_lead = request.POST['tl']
-        am=request.POST['am']
+
 
         ticket_no=request.POST['ticket_no']
         ticket_type = request.POST['ticket_type']
@@ -1779,6 +1791,7 @@ def fameHouse(request):
         campaign = request.POST['campaign']
 
         week = request.POST['week']
+        am = request.POST['am']
 
 
         #######################################
@@ -1831,6 +1844,7 @@ def fameHouse(request):
         comments = request.POST['comments']
 
         added_by = request.user.profile.emp_name
+
 
         famehouse = FameHouseMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                      manager=manager_name,manager_id=manager_emp_id,am=am,
@@ -1896,6 +1910,9 @@ def flaMonForm(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         fla = FLAMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                      manager=manager_name,manager_id=manager_emp_id,
 
@@ -1910,7 +1927,8 @@ def flaMonForm(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=checklist_1,category=category
+                                     overall_score=checklist_1,category=category,
+                                week=week,am=am
                                      )
         fla.save()
         return redirect('/employees/qahome')
@@ -1984,6 +2002,9 @@ def leadsandSalesMonForm(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MasterMonitoringFormMTCosmetics(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2000,7 +2021,8 @@ def leadsandSalesMonForm(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                    week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2073,7 +2095,8 @@ def emailAndChatmonForm(request):
         positives = request.POST['positives']
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
-
+        week = request.POST['week']
+        am = request.POST['am']
         emailchat = MasterMonitoringFormTonnChatsEmail(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2091,7 +2114,8 @@ def emailAndChatmonForm(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                       week=week,am=am
                                            )
         emailchat.save()
         return redirect('/employees/qahome')
@@ -2164,6 +2188,9 @@ def movementInsurance(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         moveins = MasterMonitoringFormMovementInsurance(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2180,7 +2207,8 @@ def movementInsurance(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                        week=week,am=am
                                            )
         moveins.save()
         return redirect('/employees/qahome')
@@ -2228,6 +2256,9 @@ def witDigitel(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         wit = WitDigitalMasteringMonitoringForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                      manager=manager_name,manager_id=manager_emp_id,
 
@@ -2239,7 +2270,8 @@ def witDigitel(request):
                                      positives=positives, comments=comments,
                                      added_by=added_by,
 
-                                     overall_score=tagging_1,category=category
+                                     overall_score=tagging_1,category=category,
+                                                week=week,am=am
                                      )
         wit.save()
         return redirect('/employees/qahome')
@@ -2317,6 +2349,9 @@ def printerPixChatsEmails(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         emailchat = PrinterPixMasterMonitoringFormChatsEmail(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2335,7 +2370,8 @@ def printerPixChatsEmails(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                             week=week,am=am
                                            )
         emailchat.save()
         return redirect('/employees/qahome')
@@ -2411,6 +2447,9 @@ def printerPixInboundCalls(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         inbound = PrinterPixMasterMonitoringFormInboundCalls(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2429,7 +2468,8 @@ def printerPixInboundCalls(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                             week=week,am=am
                                            )
         inbound.save()
         return redirect('/employees/qahome')
@@ -2505,6 +2545,9 @@ def leadsandSalesAadya(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsAadhyaSolution(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2522,7 +2565,8 @@ def leadsandSalesAadya(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                      week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2598,6 +2642,9 @@ def leadsandSalesInsalvage(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsInsalvage(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2615,7 +2662,8 @@ def leadsandSalesInsalvage(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                 week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2691,6 +2739,9 @@ def leadsandSalesMedicare(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsMedicare(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2708,7 +2759,8 @@ def leadsandSalesMedicare(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2784,6 +2836,9 @@ def leadsandSalesCTS(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsCTS(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2801,7 +2856,8 @@ def leadsandSalesCTS(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                           week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2877,6 +2933,9 @@ def leadsandSalesTenamusFood(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsTentamusFood(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -2894,7 +2953,8 @@ def leadsandSalesTenamusFood(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                    week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2969,6 +3029,8 @@ def leadsandSalesTenamusPet(request):
         positives = request.POST['positives']
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
+        week = request.POST['week']
+        am = request.POST['am']
 
         leadsales = MonitoringFormLeadsTentamusPet(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
@@ -2987,7 +3049,8 @@ def leadsandSalesTenamusPet(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                   week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3063,6 +3126,9 @@ def leadsandSalesCitySecurity(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsCitySecurity(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -3080,7 +3146,8 @@ def leadsandSalesCitySecurity(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                    week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3156,6 +3223,9 @@ def leadsandSalesAllenConsulting(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsAllenConsulting(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -3173,7 +3243,8 @@ def leadsandSalesAllenConsulting(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                       week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3248,6 +3319,8 @@ def leadsandSalesSystem4(request):
         positives = request.POST['positives']
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
+        week = request.POST['week']
+        am = request.POST['am']
 
         leadsales = MonitoringFormLeadsSystem4(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
@@ -3266,7 +3339,9 @@ def leadsandSalesSystem4(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                               week=week,am=am
+
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3341,6 +3416,8 @@ def leadsandSalesLouisville(request):
         positives = request.POST['positives']
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
+        week = request.POST['week']
+        am = request.POST['am']
 
         leadsales = MonitoringFormLeadsLouisville(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
@@ -3359,7 +3436,8 @@ def leadsandSalesLouisville(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                  week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3435,6 +3513,9 @@ def leadsandSalesInfoThink(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsInfothinkLLC(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -3452,7 +3533,8 @@ def leadsandSalesInfoThink(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                    week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3528,6 +3610,9 @@ def leadsandSalesPSECU(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsPSECU(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -3545,7 +3630,8 @@ def leadsandSalesPSECU(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                             week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3621,6 +3707,9 @@ def leadsandSalesGetRates(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsGetARates(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -3638,7 +3727,8 @@ def leadsandSalesGetRates(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                 week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3714,6 +3804,9 @@ def leadsandSalesAdvance(request):
         comments = request.POST['comments']
         added_by = request.user.profile.emp_name
 
+        week = request.POST['week']
+        am = request.POST['am']
+
         leadsales = MonitoringFormLeadsAdvanceConsultants(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
@@ -3731,7 +3824,8 @@ def leadsandSalesAdvance(request):
                                            positives=positives, comments=comments,
                                            added_by=added_by,
 
-                                           overall_score=overall_score,category=category
+                                           overall_score=overall_score,category=category,
+                                                          week=week,am=am
                                            )
         leadsales.save()
         return redirect('/employees/qahome')

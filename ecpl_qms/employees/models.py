@@ -171,6 +171,9 @@ class ChatMonitoringFormEva(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -223,6 +226,9 @@ class ChatMonitoringFormPodFather(models.Model):
     ce_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -287,6 +293,9 @@ class InboundMonitoringFormNucleusMedia(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -311,9 +320,6 @@ class FameHouseMonitoringForm(models.Model):
     # Mgt
     manager = models.CharField(max_length=50)
     manager_id = models.IntegerField()
-
-    am=models.CharField(max_length=50)
-
 
 
     category = models.CharField(max_length=20)
@@ -353,7 +359,8 @@ class FameHouseMonitoringForm(models.Model):
     closed_date = models.DateTimeField(null=True)
     emp_comments = models.TextField(null=True)
 
-    week=models.CharField(max_length=20)
+    am = models.CharField(max_length=50,null=True)
+    week=models.CharField(max_length=20,null=True)
 
 
     def __str__(self):
@@ -398,6 +405,9 @@ class FLAMonitoringForm(models.Model):
     emp_comments = models.TextField(null=True)
 
     overall_score = models.IntegerField()
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -460,6 +470,9 @@ class MasterMonitoringFormGetaRatesPSECU(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -524,6 +537,9 @@ class MasterMonitoringFormMovementInsurance(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -585,6 +601,9 @@ class MasterMonitoringFormMTCosmetics(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -649,6 +668,9 @@ class MasterMonitoringFormTonnChatsEmail(models.Model):
     ce_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -715,6 +737,9 @@ class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -778,6 +803,9 @@ class MonitoringFormLeadsAadhyaSolution(models.Model):
     softskill_total=models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -844,6 +872,9 @@ class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -909,6 +940,9 @@ class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -951,6 +985,9 @@ class WitDigitalMasteringMonitoringForm(models.Model):
     emp_comments = models.TextField(null=True)
 
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -1022,6 +1059,9 @@ class MonitoringFormLeadsInsalvage(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -1086,6 +1126,9 @@ class MonitoringFormLeadsMedicare(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -1152,6 +1195,9 @@ class MonitoringFormLeadsCTS(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -1216,6 +1262,9 @@ class MonitoringFormLeadsTentamusFood(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -1282,6 +1331,10 @@ class MonitoringFormLeadsTentamusPet(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
+
     def __str__(self):
         return self.associate_name
 
@@ -1346,6 +1399,9 @@ class MonitoringFormLeadsCitySecurity(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -1412,6 +1468,9 @@ class MonitoringFormLeadsAllenConsulting(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -1476,6 +1535,9 @@ class MonitoringFormLeadsSystem4(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -1542,6 +1604,9 @@ class MonitoringFormLeadsLouisville(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -1606,6 +1671,9 @@ class MonitoringFormLeadsInfothinkLLC(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
@@ -1672,6 +1740,9 @@ class MonitoringFormLeadsPSECU(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -1737,6 +1808,9 @@ class MonitoringFormLeadsGetARates(models.Model):
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+
     def __str__(self):
         return self.associate_name
 
@@ -1801,6 +1875,9 @@ class MonitoringFormLeadsAdvanceConsultants(models.Model):
     softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
 
     def __str__(self):
         return self.associate_name
