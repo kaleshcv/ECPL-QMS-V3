@@ -61,21 +61,18 @@
 
 <section style="padding: 75px">
 
-    <div class="container-fluid" style="margin-top:100px">
+    <div class="container-fluid" style="margin-top:20px">
         <h2>Campaigns</h2>
         <br>
-        <div class="row">
-
-            <div class="col-md-3">
+            <div class="row">
                 {% for c in campaigns %}
-
-                    <p>{{c.name}}</p>
+                <div class="col-md-3">
+                    <p><b>{{c.name}}</b></p>
                     <p>{{c.score}}%</p>
+                </div>
                 {% endfor %}
-
             </div>
 
-        </div>
     </div>
 
 </section>
