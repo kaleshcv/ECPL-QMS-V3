@@ -78,9 +78,9 @@ def login_view(request):
             login(request, user)
 
             # redirecting
-            if user.profile.emp_desi=='QA':
+            if user.profile.emp_desi=='QA' :
                 return redirect('/employees/qahome')
-            elif user.profile.emp_desi=='Manager':
+            elif user.profile.emp_desi=='Manager' or user.profile.emp_desi=='AM':
                 return redirect('/employees/manager-home')
             else:
                 return redirect('/employees/agenthome')
