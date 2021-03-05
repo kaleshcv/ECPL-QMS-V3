@@ -137,4 +137,8 @@ urlpatterns = [
     path('other-summary',otherSummary),
     path('email-summary',chatSummary),  # same as chat
 
+
+    ##############3
+    path('campaign-detailed-view',campaignwiseDetailedReport),
+
 ]

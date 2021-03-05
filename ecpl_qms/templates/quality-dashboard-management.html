@@ -65,10 +65,18 @@
         <h2>Campaigns</h2>
         <br>
             <div class="row">
+
                 {% for c in campaigns %}
                 <div class="col-md-3">
-                    <p><b>{{c.name}}</b></p>
-                    <p>{{c.score}}%</p>
+                    <form action="/campaign-detailed-view" method="POST">
+                        {% csrf_token %}
+
+                        <p><b>{{c.name}}</b></p>
+                        <p>{{c.score}}%</p>
+                        <input type="hidden" value="{{c.name}}" name="campaign">
+                        <button class="btn btn-primary">View</button>
+                    </form>
+
                 </div>
                 {% endfor %}
             </div>

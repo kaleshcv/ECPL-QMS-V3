@@ -361,6 +361,8 @@ class FameHouseMonitoringForm(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week=models.CharField(max_length=20,null=True)
+    ##############
+    fatal=models.BooleanField(default=False)
 
 
     def __str__(self):

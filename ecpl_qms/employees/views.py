@@ -114,6 +114,7 @@ def change_password(request):
     return render(request, 'change_password.html', {'form': form})
 
 def managerHome(request):
+
     user_id = request.user.id
     teams = Team.objects.filter(manager_id=user_id)
     employees = Profile.objects.filter(emp_desi='CRO')
@@ -390,7 +391,6 @@ def qualityDashboardMgt(request):
             }
 
     return render(request, 'quality-dashboard-management.html',data)
-
 
 
 # Categorywise
@@ -1180,6 +1180,12 @@ def campaignwiseCoachingsAgent(request):
     else:
         return redirect('/employees/agenthome')
 
+
+def campaignwiseDetailedReport(request):
+    pass
+
+
+
 def signCoaching(request,pk):
     now = datetime.now()
     category=request.POST['category']
@@ -1781,7 +1787,6 @@ def fameHouse(request):
         qa = request.POST['qa']
         team_lead = request.POST['tl']
 
-
         ticket_no=request.POST['ticket_no']
         ticket_type = request.POST['ticket_type']
 
@@ -1832,6 +1837,7 @@ def fameHouse(request):
         #################################################
         if ze_3 == 0 or ze_4 ==0 or sh_1==0 or sh_2==0 or sh_3==0 or sh_4==0 or sh_5==0:
             overall_score=0
+            fatal=True
         else:
             overall_score=ce_total+ze_total+sh_total
 
@@ -1866,8 +1872,9 @@ def fameHouse(request):
                                      added_by=added_by,ticket_type=ticket_type,
 
                                      category=category,overall_score=overall_score,
-                                            week=week
+                                            week=week,fatal=fatal
                                      )
+
         famehouse.save()
         return redirect('/employees/qahome')
     else:
