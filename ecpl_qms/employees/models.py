@@ -296,11 +296,16 @@ class InboundMonitoringFormNucleusMedia(models.Model):
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
 
+    ##############
+    fatal = models.BooleanField(default=False)
+
     def __str__(self):
         return self.associate_name
 
     def snippet(self):
         return self.comments[:100] + '...'
+
+
 
 class FameHouseMonitoringForm(models.Model):
     process = models.CharField(default='Fame House', max_length=50)

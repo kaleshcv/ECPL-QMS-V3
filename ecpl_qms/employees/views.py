@@ -735,11 +735,11 @@ def qaCoachingviewNucleus(request,pk):
 def empCoachingviewFamehouse(request,pk):
     coaching=FameHouseMonitoringForm.objects.get(id=pk)
     data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-fame-house.html', data)
+    return render(request, 'coaching-views/emp-coaching-view-detailed.html', data)
 def qaCoachingviewFamehouse(request,pk):
     coaching=FameHouseMonitoringForm.objects.get(id=pk)
     data = {'coaching': coaching}
-    return render(request, 'coaching-views/qa-coaching-view-fame-house.html', data)
+    return render(request, 'coaching-views/qa-coaching-view-detailed.html', data)
 
 def empCoachingviewFLA(request,pk):
     coaching = FLAMonitoringForm.objects.get(id=pk)
@@ -1182,7 +1182,55 @@ def campaignwiseCoachingsAgent(request):
 
 
 def campaignwiseDetailedReport(request):
-    pass
+
+    from django.db.models import Count,Avg
+    from datetime import datetime
+    currentMonth = datetime.now().month
+    currentYear = datetime.now().year
+    campaign=request.POST['campaign']
+
+    def campaignWiseCalculator(monform):
+
+        emp_wise = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Count('associate_name')).order_by('-dcount')
+        emp_wise_avg = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Avg('overall_score')).order_by('-dcount')
+        emp_wise_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Count('associate_name'))
+        fame_all = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth)
+        total_errors = monform.objects.filter(overall_score__lt=100, audit_date__year=currentYear,audit_date__month=currentMonth).count()
+        total_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).count()
+        total_audit_count = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).count()
+
+        avg=monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).aggregate(Avg('overall_score'))
+        processavg=avg['overall_score__avg']
+        process_avg = float("{:.2f}".format(processavg))
+
+        week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(dcount=Avg('overall_score'))
+
+
+        if total_audit_count>0:
+            error_percentage = (total_errors / total_audit_count) * 100
+        else:
+            error_percentage=0
+        error_perc = float("{:.2f}".format(error_percentage))
+
+        if total_audit_count>0:
+            error_percentage_fatal = (total_fatal / total_audit_count) * 100
+        else:
+            error_percentage_fatal=0
+        error_perc_fatal = float("{:.2f}".format(error_percentage_fatal))
+
+
+        data = {'fame_all': fame_all, 'emp_wise': emp_wise, 'emp_wise_fatal': emp_wise_fatal, 'emp_wise_avg': emp_wise_avg,
+                'total_errors': total_errors,'total_fatal':total_fatal, 'total_audit_count': total_audit_count, 'error_perc': error_perc,'error_perc_fatal':error_perc_fatal,'process_avg':process_avg,'week_wise_avg':week_wise_avg}
+
+        return data
+
+    if campaign=='Fame House':
+        data=campaignWiseCalculator(FameHouseMonitoringForm)
+        return render(request, 'campaign-report/detailed.html',data)
+    if campaign=='Nucleus':
+        data = campaignWiseCalculator(InboundMonitoringFormNucleusMedia)
+        return render(request, 'campaign-report/detailed.html', data)
+
 
 
 
@@ -1840,7 +1888,7 @@ def fameHouse(request):
             fatal=True
         else:
             overall_score=ce_total+ze_total+sh_total
-
+            fatal=False
 
 
         #################################################

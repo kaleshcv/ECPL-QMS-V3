@@ -209,3 +209,18 @@ color:grey;
     margin: 20px;
     padding: 20px;
 }
+
+.campwisedetailtables{
+
+    padding: 30px 30px;
+    font-size: 14px;
+    background: aliceblue;
+}
+
+#campaigndetailsid .col-md-3 {
+
+    padding: 10px 10px;
+    margin: 20px 20px;
+    background: aliceblue;
+    border-radius: 8px
+}
