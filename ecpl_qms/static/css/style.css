@@ -224,3 +224,17 @@ color:grey;
     background: aliceblue;
     border-radius: 8px
 }
+
+
+#qaweekly .weeks {
+    padding: 10px 10px;
+    background: aliceblue;
+    margin:10px 10px;
+    }
+#qaweekly h6{
+        font-size: 18px;
+    color: darkcyan;
+    font-weight: 600;
+    padding: 10px;
+    line-height: 24px;
+}
