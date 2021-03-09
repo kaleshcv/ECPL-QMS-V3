@@ -1183,7 +1183,7 @@ def campaignwiseCoachingsAgent(request):
 
 def campaignwiseDetailedReport(request):
 
-    from django.db.models import Count,Avg
+    from django.db.models import Count,Avg,Sum
     from datetime import datetime
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
@@ -1203,8 +1203,9 @@ def campaignwiseDetailedReport(request):
         processavg=avg['overall_score__avg']
         process_avg = float("{:.2f}".format(processavg))
 
-        week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(dcount=Avg('overall_score'))
+        week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('week'))
 
+        #week_wise_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True).values('week').annotate(dcount=Count('fatal'))
 
         if total_audit_count>0:
             error_percentage = (total_errors / total_audit_count) * 100
@@ -1218,9 +1219,39 @@ def campaignwiseDetailedReport(request):
             error_percentage_fatal=0
         error_perc_fatal = float("{:.2f}".format(error_percentage_fatal))
 
+        ########  -- Weekwise Calculations
+
+        week_list=['week1','week2','week3','week4','week5']
+        week_wise_report=[]
+        for i in week_list:
+            weekdict={}
+            week_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True,week=i).count()
+            week_nonfatal=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i,overall_score__lt=100).count()
+            week_total_audits=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).count()
+            if week_total_audits>0:
+                fatal_avg=round(float((week_fatal_count/week_total_audits)*100),2)
+                nonfatal_avg=round(float((week_nonfatal/week_total_audits)*100),2)
+
+            else:
+                fatal_avg='NA'
+                nonfatal_avg='NA'
+
+            weekdict['week']=i
+            weekdict['fatal_count']=week_fatal_count
+            weekdict['fatal_avg']=fatal_avg
+            weekdict['total_audits']=week_total_audits
+            weekdict['non_fatal_avg']=nonfatal_avg
+            weekdict['non_fatal_count']=week_nonfatal
+
+
+            week_wise_report.append(weekdict)
+
 
         data = {'fame_all': fame_all, 'emp_wise': emp_wise, 'emp_wise_fatal': emp_wise_fatal, 'emp_wise_avg': emp_wise_avg,
-                'total_errors': total_errors,'total_fatal':total_fatal, 'total_audit_count': total_audit_count, 'error_perc': error_perc,'error_perc_fatal':error_perc_fatal,'process_avg':process_avg,'week_wise_avg':week_wise_avg}
+                'total_errors': total_errors,'total_fatal':total_fatal, 'total_audit_count': total_audit_count, 'error_perc': error_perc,'error_perc_fatal':error_perc_fatal,'process_avg':process_avg,'week_wise_avg':week_wise_avg,
+                #'week_wise_fatal_count':week_wise_fatal_count
+                'week_wise_report':week_wise_report
+                }
 
         return data
 
