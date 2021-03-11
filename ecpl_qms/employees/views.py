@@ -6,6 +6,8 @@ from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
+from django_pivot.pivot import pivot
+
 from .models import *
 from . import forms
 
@@ -1201,7 +1203,12 @@ def campaignwiseDetailedReport(request):
 
         avg=monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).aggregate(Avg('overall_score'))
         processavg=avg['overall_score__avg']
-        process_avg = float("{:.2f}".format(processavg))
+        if processavg==None:
+
+            process_avg = 0
+        else:
+            process_avg = float("{:.2f}".format(processavg))
+
 
         week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('week'))
 
@@ -1254,7 +1261,10 @@ def campaignwiseDetailedReport(request):
             qa_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('added_by','week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('added_by'))
             qa_wise.append(qa_wise_avg)
 
+        #Week-wise Emp Fatal
+        pivot_test=pivot(monform.objects.filter(fatal=True),'associate_name','week','fatal',aggregation=Count)
 
+        # Parameter wise ########
 
 
         data = {'fame_all': fame_all, 'emp_wise': emp_wise, 'emp_wise_fatal': emp_wise_fatal,
@@ -1262,7 +1272,8 @@ def campaignwiseDetailedReport(request):
                 'total_errors': total_errors,'total_fatal':total_fatal, 'total_audit_count': total_audit_count, 'error_perc': error_perc,'error_perc_fatal':error_perc_fatal,'process_avg':process_avg,'week_wise_avg':week_wise_avg,
                 #'week_wise_fatal_count':week_wise_fatal_count
                 'week_wise_report':week_wise_report,
-                'qa_wise_avg':qa_wise
+                'qa_wise_avg':qa_wise,
+                'pivot_test':pivot_test
                 }
 
         return data
@@ -1273,8 +1284,45 @@ def campaignwiseDetailedReport(request):
     if campaign=='Nucleus':
         data = campaignWiseCalculator(InboundMonitoringFormNucleusMedia)
         return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Noom-POD':
+        data = campaignWiseCalculator(ChatMonitoringFormPodFather)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Noom-EVA':
+        data = campaignWiseCalculator(ChatMonitoringFormEva)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='FLA':
+        data = campaignWiseCalculator(FLAMonitoringForm)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='MT Cosmetic':
+        data = campaignWiseCalculator(MasterMonitoringFormMTCosmetics)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Tonn Chat Email':
+        data = campaignWiseCalculator(MasterMonitoringFormTonnChatsEmail)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Movement of Insurance':
+        data = campaignWiseCalculator(MasterMonitoringFormMovementInsurance)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Wit Digital':
+        data = campaignWiseCalculator(WitDigitalMasteringMonitoringForm)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Printer Pix Chat Email':
+        data = campaignWiseCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Printer Pix Inbound':
+        data = campaignWiseCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+        return render(request, 'campaign-report/detailed.html', data)
 
 
+
+def fameHouseFullReport(request):
+    from django.db.models import Count, Avg, Sum
+    from datetime import datetime
+    currentMonth = datetime.now().month
+    currentYear = datetime.now().year
+
+    ce_1=FameHouseMonitoringForm.objects.filter(ce_1__lt=100,audit_date__year=currentYear, audit_date__month=currentMonth)
+
+    return render(request,'campaign-report/fame-house-full-report.html')
 
 
 def signCoaching(request,pk):

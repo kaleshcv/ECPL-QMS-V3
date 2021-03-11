@@ -265,7 +265,41 @@
 
 </div>
 
+<div class="container-lg" style="margin-top:100px">
 
+    
+    <div class="row">
+        <div class="col-md-6">
+            <div class="campwisedetailtables">
+            <h4>Week-wise Fatal</h4><br>
+            <table class="table">
+                <tr>
+                    <th>Associate Name</th>
+                    <th>Week1</th>
+                    <th>Week2</th>
+                    <th>Week3</th>
+                    <th>Week4</th>
+                    <th>Week5</th>
+                </tr>
+
+            {% for p in pivot_test %}
+            <tr>
+                <td>{{p.associate_name}}</td>
+                <td>{{p.week1}}</td>
+                <td>{{p.week2}}</td>
+                <td>{{p.week3}}</td>
+                <td>{{p.week4}}</td>
+                <td>{{p.week5}}</td>
+            </tr>
+
+            {% endfor %}
+        </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
 

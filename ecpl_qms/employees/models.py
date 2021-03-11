@@ -173,7 +173,8 @@ class ChatMonitoringFormEva(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
-
+    ##############
+    fatal = models.BooleanField(default=False)
     def __str__(self):
         return self.associate_name
 
@@ -229,6 +230,8 @@ class ChatMonitoringFormPodFather(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -415,6 +418,8 @@ class FLAMonitoringForm(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -480,6 +485,8 @@ class MasterMonitoringFormGetaRatesPSECU(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -546,6 +553,8 @@ class MasterMonitoringFormMovementInsurance(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -611,6 +620,8 @@ class MasterMonitoringFormMTCosmetics(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -678,6 +689,8 @@ class MasterMonitoringFormTonnChatsEmail(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -746,6 +759,8 @@ class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -813,6 +828,8 @@ class MonitoringFormLeadsAadhyaSolution(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -881,6 +898,8 @@ class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -949,6 +968,8 @@ class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -995,6 +1016,8 @@ class WitDigitalMasteringMonitoringForm(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1068,6 +1091,8 @@ class MonitoringFormLeadsInsalvage(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1136,6 +1161,8 @@ class MonitoringFormLeadsMedicare(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1204,6 +1231,8 @@ class MonitoringFormLeadsCTS(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1272,6 +1301,8 @@ class MonitoringFormLeadsTentamusFood(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1340,6 +1371,8 @@ class MonitoringFormLeadsTentamusPet(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -1409,6 +1442,8 @@ class MonitoringFormLeadsCitySecurity(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1477,6 +1512,8 @@ class MonitoringFormLeadsAllenConsulting(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1545,6 +1582,8 @@ class MonitoringFormLeadsSystem4(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1613,6 +1652,8 @@ class MonitoringFormLeadsLouisville(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1681,6 +1722,8 @@ class MonitoringFormLeadsInfothinkLLC(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1749,6 +1792,8 @@ class MonitoringFormLeadsPSECU(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1817,6 +1862,8 @@ class MonitoringFormLeadsGetARates(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1885,6 +1932,8 @@ class MonitoringFormLeadsAdvanceConsultants(models.Model):
 
     am = models.CharField(max_length=50,null=True)
     week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
