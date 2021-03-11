@@ -1195,16 +1195,23 @@ def campaignwiseDetailedReport(request):
 
         emp_wise = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by('-dcount')
         #emp_wise_avg = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Avg('overall_score')).order_by('-dcount')
-        emp_wise_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Count('associate_name'))
+        emp_wise_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Sum('fatal_count'))
         fame_all = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth)
         total_errors = monform.objects.filter(overall_score__lt=100, audit_date__year=currentYear,audit_date__month=currentMonth).count()
-        total_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).count()
+        total_fatal_obj = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth)
+        total_fata_list=[]
+
+        for i in total_fatal_obj:
+            total_fata_list.append(i.fatal_count)
+
+        total_fatal = sum(total_fata_list)
+
         total_audit_count = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).count()
 
         avg=monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).aggregate(Avg('overall_score'))
         processavg=avg['overall_score__avg']
-        if processavg==None:
 
+        if processavg==None:
             process_avg = 0
         else:
             process_avg = float("{:.2f}".format(processavg))
@@ -1232,8 +1239,15 @@ def campaignwiseDetailedReport(request):
         week_wise_report=[]
         for i in week_list:
             weekdict={}
-            week_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True,week=i).count()
-            week_nonfatal=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i,overall_score__lt=100).count()
+
+            week_fatal_obj=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True,week=i)
+
+            week_fatal_list=[]
+            for j in week_fatal_obj:
+                week_fatal_list.append(j.fatal_count)
+            week_fatal_count=sum(week_fatal_list)
+
+            week_nonfatal=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i,overall_score__lt=100,fatal=False).count()
             week_total_audits=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).count()
             if week_total_audits>0:
                 fatal_avg=round(float((week_fatal_count/week_total_audits)*100),2)
@@ -1262,14 +1276,22 @@ def campaignwiseDetailedReport(request):
             qa_wise.append(qa_wise_avg)
 
         #Week-wise Emp Fatal
-        pivot_test=pivot(monform.objects.filter(fatal=True),'associate_name','week','fatal',aggregation=Count)
+        pivot_test=pivot(monform.objects.filter(fatal=True),'associate_name','week','fatal_count',aggregation=Sum)
 
         # Parameter wise ########
 
 
-        data = {'fame_all': fame_all, 'emp_wise': emp_wise, 'emp_wise_fatal': emp_wise_fatal,
+        data = {'fame_all': fame_all,
+                'emp_wise': emp_wise,
+                'emp_wise_fatal': emp_wise_fatal,
                 #'emp_wise_avg': emp_wise_avg,
-                'total_errors': total_errors,'total_fatal':total_fatal, 'total_audit_count': total_audit_count, 'error_perc': error_perc,'error_perc_fatal':error_perc_fatal,'process_avg':process_avg,'week_wise_avg':week_wise_avg,
+                'total_errors': total_errors,
+                'total_fatal':total_fatal,
+                'total_audit_count': total_audit_count,
+                'error_perc': error_perc,
+                'error_perc_fatal':error_perc_fatal,
+                'process_avg':process_avg,
+                'week_wise_avg':week_wise_avg,
                 #'week_wise_fatal_count':week_wise_fatal_count
                 'week_wise_report':week_wise_report,
                 'qa_wise_avg':qa_wise,
@@ -1311,7 +1333,48 @@ def campaignwiseDetailedReport(request):
     if campaign=='Printer Pix Inbound':
         data = campaignWiseCalculator(PrinterPixMasterMonitoringFormInboundCalls)
         return render(request, 'campaign-report/detailed.html', data)
-
+    if campaign=='AAdya':
+        data = campaignWiseCalculator(MonitoringFormLeadsAadhyaSolution)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Insalvage':
+        data = campaignWiseCalculator(MonitoringFormLeadsInsalvage)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Medicare':
+        data = campaignWiseCalculator(MonitoringFormLeadsMedicare)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='CTS':
+        data = campaignWiseCalculator(MonitoringFormLeadsCTS)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Tentamus Food':
+        data = campaignWiseCalculator(MonitoringFormLeadsTentamusFood)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='Tentamus Pet':
+        data = campaignWiseCalculator(MonitoringFormLeadsTentamusPet)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign=='City Security':
+        data = campaignWiseCalculator(MonitoringFormLeadsCitySecurity)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'Allen Consulting':
+        data = campaignWiseCalculator(MonitoringFormLeadsAllenConsulting)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'System4':
+        data = campaignWiseCalculator(MonitoringFormLeadsSystem4)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'Louisville':
+        data = campaignWiseCalculator(MonitoringFormLeadsLouisville)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'Info Think LLC':
+        data = campaignWiseCalculator(MonitoringFormLeadsInfothinkLLC)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'PSECU':
+        data = campaignWiseCalculator(MonitoringFormLeadsPSECU)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'Get A Rates':
+        data = campaignWiseCalculator(MonitoringFormLeadsGetARates)
+        return render(request, 'campaign-report/detailed.html', data)
+    if campaign == 'Advance Consultants':
+        data = campaignWiseCalculator(MonitoringFormLeadsAdvanceConsultants)
+        return render(request, 'campaign-report/detailed.html', data)
 
 
 def fameHouseFullReport(request):
@@ -1699,12 +1762,28 @@ def chatCoachingformEva(request):
         compliance_5 = int(request.POST['compliance_5'])
         compliance_6 = int(request.POST['compliance_6'])
 
+        #################################################
+
+        fatal_list = [compliance_1,compliance_2,compliance_3,compliance_4,compliance_5,compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+
+
         compliance_total=compliance_1+compliance_2+compliance_3+compliance_4+compliance_5+compliance_6
 
         if compliance_1==0 or compliance_2==0 or compliance_3==0 or compliance_4==0 or compliance_5==0 or compliance_6==0:
             overall_score=0
+            fatal=True
         else:
             overall_score=ce_total+compliance_total
+            fatal=False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -1731,7 +1810,7 @@ def chatCoachingformEva(request):
                                      added_by=added_by,
 
                                      overall_score=overall_score,category=category,
-                                     week=week,am=am
+                                     week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                      )
         chat.save()
         return redirect('/employees/qahome')
@@ -1781,12 +1860,27 @@ def chatCoachingformPodFather(request):
         compliance_5 = int(request.POST['compliance_5'])
         compliance_6 = int(request.POST['compliance_6'])
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+
         compliance_total=compliance_1+compliance_2+compliance_3+compliance_4+compliance_5+compliance_6
 
         if compliance_1==0 or compliance_2==0 or compliance_3==0 or compliance_4==0 or compliance_5==0 or compliance_6==0:
             overall_score=0
+            fatal =True
         else:
             overall_score=ce_total+compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -1813,7 +1907,7 @@ def chatCoachingformPodFather(request):
                                      added_by=added_by,
 
                                      overall_score=overall_score,category=category,
-                                           week=week,am=am
+                                           week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                      )
         chat.save()
         return redirect('/employees/qahome')
@@ -1877,10 +1971,24 @@ def inboundCoachingForm(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = ce_total + business_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -1908,7 +2016,7 @@ def inboundCoachingForm(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,week=week,
-                                                    am=am
+                                                    am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         inbound.save()
         return redirect('/employees/qahome')
@@ -1919,6 +2027,7 @@ def inboundCoachingForm(request):
         return render(request, 'mon-forms/ECPL-INBOUND-CALL-MONITORING-FORM.html', data)
 
 def fameHouse(request):
+
     if request.method == 'POST':
         category='Chat'
         associate_name = request.POST['empname']
@@ -1974,6 +2083,17 @@ def fameHouse(request):
 
         sh_total = sh_1+sh_2+sh_3+sh_4+sh_5
         #################################################
+
+        fatal_list=[ze_3,ze_4,sh_1,sh_2,sh_3,sh_4,sh_5]
+        fatal_list_count=[]
+        for i in fatal_list:
+            if i==0:
+                fatal_list_count.append(i)
+
+        no_of_fatals=len(fatal_list_count)
+
+        ####################################################
+
         if ze_3 == 0 or ze_4 ==0 or sh_1==0 or sh_2==0 or sh_3==0 or sh_4==0 or sh_5==0:
             overall_score=0
             fatal=True
@@ -2011,7 +2131,7 @@ def fameHouse(request):
                                      added_by=added_by,ticket_type=ticket_type,
 
                                      category=category,overall_score=overall_score,
-                                            week=week,fatal=fatal
+                                            week=week,fatal=fatal,fatal_count=no_of_fatals
                                      )
 
         famehouse.save()
@@ -2138,10 +2258,25 @@ def leadsandSalesMonForm(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total + compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2168,7 +2303,7 @@ def leadsandSalesMonForm(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                    week=week,am=am
+                                                    week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2232,10 +2367,24 @@ def emailAndChatmonForm(request):
 
         compliance_total = compliance_1 + compliance_2
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 :
             overall_score = 0
+            fatal = True
         else:
             overall_score = ce_total + business_total + compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2261,7 +2410,7 @@ def emailAndChatmonForm(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                       week=week,am=am
+                                                       week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         emailchat.save()
         return redirect('/employees/qahome')
@@ -2324,10 +2473,24 @@ def movementInsurance(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4
 
-        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0:
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2354,7 +2517,7 @@ def movementInsurance(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                        week=week,am=am
+                                                        week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         moveins.save()
         return redirect('/employees/qahome')
@@ -2417,7 +2580,7 @@ def witDigitel(request):
                                      added_by=added_by,
 
                                      overall_score=tagging_1,category=category,
-                                                week=week,am=am
+                                                week=week,am=am,
                                      )
         wit.save()
         return redirect('/employees/qahome')
@@ -2485,10 +2648,24 @@ def printerPixChatsEmails(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
             overall_score = 0
+            fatal = True
         else:
             overall_score = ce_total + business_total + compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2517,7 +2694,7 @@ def printerPixChatsEmails(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                             week=week,am=am
+                                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         emailchat.save()
         return redirect('/employees/qahome')
@@ -2583,10 +2760,24 @@ def printerPixInboundCalls(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = ce_total + business_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2615,7 +2806,7 @@ def printerPixInboundCalls(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                             week=week,am=am
+                                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         inbound.save()
         return redirect('/employees/qahome')
@@ -2681,10 +2872,24 @@ def leadsandSalesAadya(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5,compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2712,7 +2917,7 @@ def leadsandSalesAadya(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                      week=week,am=am
+                                                      week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2778,10 +2983,24 @@ def leadsandSalesInsalvage(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2809,7 +3028,7 @@ def leadsandSalesInsalvage(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                 week=week,am=am
+                                                 week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2875,10 +3094,24 @@ def leadsandSalesMedicare(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -2906,7 +3139,7 @@ def leadsandSalesMedicare(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                week=week,am=am
+                                                week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -2972,10 +3205,24 @@ def leadsandSalesCTS(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3003,7 +3250,7 @@ def leadsandSalesCTS(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                           week=week,am=am
+                                           week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3069,10 +3316,24 @@ def leadsandSalesTenamusFood(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3100,7 +3361,7 @@ def leadsandSalesTenamusFood(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                    week=week,am=am
+                                                    week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3166,10 +3427,24 @@ def leadsandSalesTenamusPet(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3196,7 +3471,7 @@ def leadsandSalesTenamusPet(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                   week=week,am=am
+                                                   week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3262,10 +3537,24 @@ def leadsandSalesCitySecurity(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3293,7 +3582,7 @@ def leadsandSalesCitySecurity(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                    week=week,am=am
+                                                    week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3359,10 +3648,24 @@ def leadsandSalesAllenConsulting(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3390,7 +3693,7 @@ def leadsandSalesAllenConsulting(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                       week=week,am=am
+                                                       week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3456,10 +3759,24 @@ def leadsandSalesSystem4(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3486,7 +3803,7 @@ def leadsandSalesSystem4(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                               week=week,am=am
+                                               week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
 
                                            )
         leadsales.save()
@@ -3553,10 +3870,24 @@ def leadsandSalesLouisville(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3583,7 +3914,7 @@ def leadsandSalesLouisville(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                  week=week,am=am
+                                                  week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3649,10 +3980,24 @@ def leadsandSalesInfoThink(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3680,7 +4025,7 @@ def leadsandSalesInfoThink(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                    week=week,am=am
+                                                    week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3746,10 +4091,24 @@ def leadsandSalesPSECU(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3777,7 +4136,7 @@ def leadsandSalesPSECU(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                             week=week,am=am
+                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3843,10 +4202,24 @@ def leadsandSalesGetRates(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3874,7 +4247,7 @@ def leadsandSalesGetRates(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                 week=week,am=am
+                                                 week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')
@@ -3940,10 +4313,24 @@ def leadsandSalesAdvance(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
 
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
         if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
             overall_score = 0
+            fatal = True
         else:
             overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3971,7 +4358,7 @@ def leadsandSalesAdvance(request):
                                            added_by=added_by,
 
                                            overall_score=overall_score,category=category,
-                                                          week=week,am=am
+                                                          week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
                                            )
         leadsales.save()
         return redirect('/employees/qahome')

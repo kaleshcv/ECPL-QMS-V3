@@ -210,6 +210,12 @@ color:grey;
     padding: 20px;
 }
 
+#dashboardcampaigns .col-md-2 {
+    padding: 20px 20px;
+    margin: 10px 10px;
+    background: aliceblue;
+}
+
 .campwisedetailtables{
 
     padding: 30px 30px;
@@ -220,7 +226,6 @@ color:grey;
 #campaigndetailsid .col-md-3 {
 
     padding: 10px 10px;
-    margin: 20px 20px;
     background: aliceblue;
     border-radius: 8px
 }
