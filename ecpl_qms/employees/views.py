@@ -1275,6 +1275,18 @@ def campaignwiseDetailedReport(request):
             qa_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('added_by','week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('added_by'))
             qa_wise.append(qa_wise_avg)
 
+        am_wise = []
+        for i in week_list:
+            am_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('am', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
+            am_wise.append(am_wise_avg)
+
+        tl_wise = []
+        for i in week_list:
+            tl_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('team_lead', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
+            tl_wise.append(tl_wise_avg)
+
+
+
         #Week-wise Emp Fatal
         pivot_test=pivot(monform.objects.filter(fatal=True),'associate_name','week','fatal_count',aggregation=Sum)
 
@@ -1295,6 +1307,8 @@ def campaignwiseDetailedReport(request):
                 #'week_wise_fatal_count':week_wise_fatal_count
                 'week_wise_report':week_wise_report,
                 'qa_wise_avg':qa_wise,
+                'am_wise_avg':am_wise,
+                'tl_wise_avg':tl_wise,
                 'pivot_test':pivot_test
                 }
 
