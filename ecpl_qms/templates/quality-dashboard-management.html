@@ -21,12 +21,14 @@
                         <p>{{inbound}}%</p>
                         <a href="/employees/inbound-summary">View More</a>
                     </div>
+                        <!--
                     <div class="col-md-2">
                         <h5>Outbound</h5>
                         <p>{{outbound}}%</p>
                         <a href="/employees/outbound-summary">View More</a>
 
                     </div>
+                    -->
                     <div class="col-md-2">
                         <h5>Chat</h5>
                         <p>{{chat}}%</p>
@@ -59,9 +61,9 @@
 
 </section>
 
-<section style="padding: 75px">
+<section>
 
-    <div class="container-fluid" style="margin-top:20px">
+    <div class="container-lg" style="margin-top:20px">
         <h2>Campaigns</h2>
         <br>
             <div class="row">
@@ -74,9 +76,20 @@
                         <p><b>{{c.name}}</b></p>
                         <p>{{c.score}}%</p>
                         <input type="hidden" value="{{c.name}}" name="campaign">
-                        <button class="btn btn-primary">View</button>
+                        <button class="btn btn-primary" style="width: 80px;height: 35px">View</button>
                     </form>
-
+                    <form action="/export-data/{{c.name}}" method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{c.name}}" name="campaign">
+                        <br>
+                        <h5>Export Report</h5>
+                        <label for="">Start Date</label>
+                        <input type="date" name="start_date" required class="form-control">
+                        <label for="">End Date</label>
+                        <input type="date" name="end_date" required class="form-control">
+                        <hr>
+                        <button class="btn btn-secondary" style="width: 80px;height: 35px">Export</button>
+                    </form>
                 </div>
                 {% endfor %}
             </div>

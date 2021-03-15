@@ -1,20 +1,23 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout
-from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django_pivot.pivot import pivot
 
+import xlwt
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
 from .models import *
 from . import forms
-
 
 #Index
 def index(request):
     return render(request,'index.html')
+#Okay
 
 #Guidelines
 def outboundGuidelines(request):
@@ -25,6 +28,7 @@ def chatGuidelines(request):
     return render(request,'guidelines/chat.html')
 def emailGuidelines(request):
     return render(request,'guidelines/email.html')
+#Okay
 
 # Reistration, Sign up, Login, Logout, Change Password
 
@@ -70,6 +74,8 @@ def signup(request):
                                             'team_leaders':team_leaders,'managers':managers,'ams':ams
                                             })
 
+#Okay
+
 def login_view(request):
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)  # Login form
@@ -94,10 +100,11 @@ def login_view(request):
         logout(request)
         form = AuthenticationForm()
         return render(request, 'login.html', {'form': form})
-
+#Okay
 def logout_view(request):
     logout(request)
     return redirect('/employees/login')
+#Okay
 
 # Password Reset
 def change_password(request):
@@ -115,34 +122,14 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
 
-def managerHome(request):
+#Done
 
-    user_id = request.user.id
-    teams = Team.objects.filter(manager_id=user_id)
-    employees = Profile.objects.filter(emp_desi='CRO')
-
-    eva_total=ChatMonitoringFormEva.objects.all().count()
-    eva_open_total = ChatMonitoringFormEva.objects.filter(status=False).count()
-    closed_percentage_eva=int((eva_open_total/eva_total)*100)
-
-    pod_total = ChatMonitoringFormPodFather.objects.all().count()
-    pod_open_total = ChatMonitoringFormPodFather.objects.filter(status=False).count()
-    closed_percentage_pod = int((pod_open_total / pod_total) * 100)
-
-    pod={'name':'Noom-POD','total':pod_total,'total_open':pod_open_total,'perc':closed_percentage_pod}
-    eva={'name':'Noom-EVA','total':eva_total,'total_open':eva_open_total,'perc':closed_percentage_eva}
-
-    campaigns=[pod,eva,]
-
-    data = {'teams': teams,
-            'campaigns':campaigns,
-            'employees':employees,
-            }
-
-    return render(request,'manager-home.html',data)
 
 def employeeWiseReport(request):
     if request.method == 'POST':
+
+        currentMonth = datetime.now().month
+        currentYear = datetime.now().year
         emp_id = request.POST['emp_id']
         profile=Profile.objects.get(emp_id=emp_id)
 
@@ -173,7 +160,7 @@ def employeeWiseReport(request):
 
         # Score in All forms
         for i in mon_forms:
-            coaching=i.objects.filter(emp_id=emp_id)
+            coaching=i.objects.filter(emp_id=emp_id,audit_date__year=currentYear,audit_date__month=currentMonth)
 
             if coaching.count()>0:
                 ov_perc,name=scoreCalculator(coaching)
@@ -185,9 +172,11 @@ def employeeWiseReport(request):
         data={'campaign':campaign_details,'profile':profile}
         return render(request,'employee-wise-report.html',data)
 
-
 def managerWiseReport(request):
     if request.method == 'POST':
+
+        currentMonth = datetime.now().month
+        currentYear = datetime.now().year
         manager_emp_id=request.POST['emp_id']
         profile=Profile.objects.get(emp_id=manager_emp_id)
         manager_name=profile.emp_name
@@ -224,7 +213,7 @@ def managerWiseReport(request):
 
         # Score in All forms
         for i in mon_forms:
-            coaching=i.objects.filter(manager_id=manager_emp_id)
+            coaching=i.objects.filter(manager_id=manager_emp_id,audit_date__year=currentYear,audit_date__month=currentMonth)
 
             if coaching.count()>0:
                 ov_perc,name=scoreCalculator(coaching)
@@ -311,8 +300,8 @@ def qualityDashboardMgt(request):
 
     def coachingClosureCalculator(monform):
 
-        total=monform.objects.all().count()
-        closed_total=monform.objects.filter(status=True).count()
+        total=monform.objects.filter(audit_date__year=year, audit_date__month=month).count()
+        closed_total=monform.objects.filter(status=True,audit_date__year=year, audit_date__month=month).count()
 
         if total>0:
             closure=int((closed_total/total)*100)
@@ -345,7 +334,6 @@ def qualityDashboardMgt(request):
     closed_percentage_psecu=coachingClosureCalculator(MonitoringFormLeadsPSECU)
     closed_percentage_getarates=coachingClosureCalculator(MonitoringFormLeadsGetARates)
     closed_percentage_advance=coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
-
 
 
 
@@ -602,12 +590,15 @@ def agenthome(request):
     team_name=request.user.profile.team
     team = Team.objects.get(name=team_name)
 
+    currentMonth = datetime.now().month
+    currentYear = datetime.now().year
+
     # Chat Eva Details
 
     #################### open campaigns indevidual
 
     def openCampaigns(monforms):
-        open_obj = monforms.objects.filter(associate_name=agent_name, status=False)
+        open_obj = monforms.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth,associate_name=agent_name, status=False)
         return open_obj
 
     open_eva = openCampaigns(ChatMonitoringFormEva)
@@ -655,7 +646,7 @@ def agenthome(request):
     list_of_open_count = []
 
     for i in list_of_monforms:
-        count = i.objects.filter(associate_name=agent_name, status=False).count()
+        count = i.objects.filter(associate_name=agent_name,audit_date__year=currentYear,audit_date__month=currentMonth,status=False).count()
         list_of_open_count.append(count)
 
     total_open_coachings = sum(list_of_open_count)
@@ -693,13 +684,7 @@ def agenthome(request):
             }
 
 
-
-
-
-
     return render(request, 'agent-home.html',data)
-
-
 
 
 # Coaching View ---------------------------- !!!
@@ -741,7 +726,7 @@ def empCoachingviewFamehouse(request,pk):
 def qaCoachingviewFamehouse(request,pk):
     coaching=FameHouseMonitoringForm.objects.get(id=pk)
     data = {'coaching': coaching}
-    return render(request, 'coaching-views/qa-coaching-view-detailed.html', data)
+    return render(request, 'coaching-views/qa-coaching-view-fame-house.html', data)
 
 def empCoachingviewFLA(request,pk):
     coaching = FLAMonitoringForm.objects.get(id=pk)
@@ -858,7 +843,6 @@ def empCoachingviewAdvance(request,pk):
     coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/emp-coaching-view-advance.html', data)
-
 
 
 def qaCoachingviewAadya(request,pk):
@@ -1284,7 +1268,6 @@ def campaignwiseDetailedReport(request):
         for i in week_list:
             tl_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('team_lead', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
             tl_wise.append(tl_wise_avg)
-
 
 
         #Week-wise Emp Fatal
@@ -4535,3 +4518,85 @@ def qualityDashboard(request):
 
     return render(request,'quality-dashboard.html')
 
+
+def exportFameHouse(request,campaign):
+
+    if request.method=='POST':
+
+        start_date=request.POST['start_date']
+        end_date = request.POST['end_date']
+
+        if campaign=='Fame House':
+
+
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data') # this will make a sheet named Users Data
+
+            # Sheet header, first row
+            row_num = 0
+
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+
+            columns = ['empID', 'Associate Name','transaction date', 'Audit Date', 'overall_score','Fatal Count','qa','am','team_lead','manager',
+                       'Standard Greeting & Closing format used',
+                       'Acknowledged the Customer Concern/s',
+                       'Empathy / Sympathy used where ever required',
+                       'Grammar (Tense, Noun, etc.)',
+                       'Probing done whenever necessary',
+
+                       'Client Name / Order Number / Support Category is Updated Correctly',
+                       'User Data was checked / Tickets were Merged',
+                       'Incorrect / Irrelevant Response (OS / ES) / Worked on Restricted Category',
+                       'Appropriate use of Macro / Dispositions',
+
+                       'Procedure Followed Appropriately on "SHIPHERO"',
+                       'Was Stock checked before Re-Shipment was processed',
+                       'Was Tagging done Appropriately (Re-Shipment / Refund)',
+                       'Was the Procedure Followed (Refund / Exchange / Address Update)',
+                       'RMA - Address Validation (Address Update / Returns / Exchange / RTS)',
+
+                       'status',
+                       'closed_date','fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style) # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+
+            rows = FameHouseMonitoringForm.objects.filter(audit_date__range = [start_date, end_date]).values_list('emp_id', 'associate_name','trans_date', 'audit_date', 'overall_score','fatal_count','qa','am','team_lead','manager',
+
+                                                                     'ce_1',
+                                                                     'ce_2',
+                                                                     'ce_3',
+                                                                     'ce_4',
+                                                                     'ce_5',
+
+                                                                     'ze_1',
+                                                                     'ze_2',
+                                                                     'ze_3',
+                                                                     'ze_4',
+
+                                                                     'sh_1',
+                                                                     'sh_1',
+                                                                     'sh_1',
+                                                                     'sh_1',
+                                                                     'sh_1',
+
+                                                                     'status','closed_date','fatal')
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+        else:
+            pass
+    
