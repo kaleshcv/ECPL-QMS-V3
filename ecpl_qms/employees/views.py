@@ -336,7 +336,6 @@ def qualityDashboardMgt(request):
     closed_percentage_advance=coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
 
 
-
     pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod,'score':pod_avg_score}
     eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva,'score':eva_avg_score}
     nucleus={'name': 'Nucleus','perc':closed_percentage_nuc,'score':nuc_avg_score}
@@ -2026,7 +2025,7 @@ def inboundCoachingForm(request):
 def fameHouse(request):
 
     if request.method == 'POST':
-        category='Chat'
+        category='Email'
         associate_name = request.POST['empname']
         emp_id = request.POST['empid']
         qa = request.POST['qa']
@@ -2042,7 +2041,6 @@ def fameHouse(request):
 
         week = request.POST['week']
         am = request.POST['am']
-
 
         #######################################
         prof_obj = Profile.objects.get(emp_id=emp_id)
@@ -2060,7 +2058,6 @@ def fameHouse(request):
         ce_3 = int(request.POST['ce_3'])
         ce_4 = int(request.POST['ce_4'])
         ce_5 = int(request.POST['ce_5'])
-
         ce_total=ce_1+ce_2+ce_3+ce_4+ce_5
 
         #ZENDESK
@@ -4599,4 +4596,3 @@ def exportFameHouse(request,campaign):
             return response
         else:
             pass
-    
