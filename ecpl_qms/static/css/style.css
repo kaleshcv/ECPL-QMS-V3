@@ -54,7 +54,7 @@ body
     justify-content: center;
 }
 #nav{
-    background: black;
+    background: #2f374e;
     height: 60px;
     padding: 10px 10px;
 }
@@ -209,13 +209,30 @@ color:grey;
     margin: 20px;
     padding: 20px;
 }
+#dashboardcampaigns a{
+    color:cadetblue;
+}
+
+#dashboardcampaigns h5{
+    font-weight: 600;
+    text-shadow: 1px 2px 9px slategrey;
+}
 
 #dashboardcampaigns .col-md-2 {
     padding: 20px 20px;
     margin: 10px 10px;
-    background: aliceblue;
-        box-shadow: 10px 10px 10px lightgrey;
+    background: #fdf7e4;
+    box-shadow: 10px 10px 10px lightgrey;
     border-radius: 7px;
+}
+
+#dashboardcampaigns .col-md-2:hover {
+    padding: 20px 20px;
+    margin: 10px 10px;
+    background: black;
+    box-shadow: 10px 10px 10px lightgrey;
+    border-radius: 7px;
+    color:white;
 }
 
 .campwisedetailtables{
@@ -225,12 +242,25 @@ color:grey;
     background: aliceblue;
 }
 
-#campaigndetailsid .col-md-3 {
-
-    padding: 10px 10px;
-    background: aliceblue;
-    border-radius: 8px
+.summary{
+    background: bisque;
+    padding: 18px;
+    margin: 10px
 }
+.summary:hover {
+    background: #944000;
+    padding: 18px;
+    margin: 10px
+
+    }
+
+.summary:hover h6{
+   color:white;
+    }
+.summary:hover h3{
+   color:Gold;
+    }
+
 
 
 #qaweekly .weeks {
@@ -245,3 +275,16 @@ color:grey;
     padding: 10px;
     line-height: 24px;
 }
+
+#campaignwisereport .dateinput
+{
+    width: 123px;
+    height: 23px;
+    font-size: 8px;
+}
+
+#campaignwisereport .datelabel
+{
+    font-size:12px;
+}
+

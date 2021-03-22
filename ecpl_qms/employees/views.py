@@ -1202,6 +1202,7 @@ def campaignwiseDetailedReport(request):
 
         week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('week'))
 
+        print(week_wise_avg)
         #week_wise_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True).values('week').annotate(dcount=Count('fatal'))
 
         if total_audit_count>0:
