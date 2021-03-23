@@ -2,27 +2,24 @@
 {% block main %}
 {% load static %}
 
-<section id="profile">
-    <div class="container-lg" style="padding-bottom: 20px;padding-top:50px;">
-       <h2 style="color:grey">Leads,Outbound</h2>
-    </div>
-</section>
-
-
 <div class="container-lg">
-    <div style="margin-top:100px">
-        <h4>{{month}}/{{year}}</h4>
+    <div style="margin-top:50px">
         <div class="row">
         {% for campaign in campaigns %}
-
-            <div class="col-md-5" style="padding: 20px;border: 1px solid grey;margin-bottom: 45px;margin-right:20px">
+            <div class="col-md-3" style="margin: 50px 20px;box-shadow: 5px 5px 10px lightgrey;background: #ffe0a8;padding: 20px 40px;">
             <p>Campaign - {{campaign.name}}</p>
-            <p>Quality Score - {{campaign.avg_score}}%</p>
+            <p style=" font-size: 30px;text-shadow: 2px 1px darkgrey;">{{campaign.avg_score|floatformat:2}}%</p>
+                <div style="padding: 35px">
+                    <form action="/campaign-detailed-view" method="POST">
+                            {% csrf_token %}
+                        <input type="hidden" value="{{campaign.name}}" name="campaign">
+                        <button class="btn btn-secondary" style="width: 100px;height: 28px; font-size: 11px;">View More</button>
+                    </form>
+                </div>
             </div>
         {% endfor %}
         </div>
     </div>
 </div>
-
 
 {% endblock %}

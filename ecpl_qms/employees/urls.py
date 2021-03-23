@@ -135,7 +135,7 @@ urlpatterns = [
     path('leads-summary',leadsSummary),
     path('outbound-summary',leadsSummary),  # Same as Leads
     path('other-summary',otherSummary),
-    path('email-summary',chatSummary),  # same as chat
+    path('email-summary',emailSummary),
 
     ##############3
     path('campaign-detailed-view',campaignwiseDetailedReport),
