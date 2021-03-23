@@ -1597,6 +1597,11 @@ def qahome(request):
     user_id=request.user.id
     teams=Team.objects.all()
 
+    from django.db.models import Count, Avg, Sum
+    from datetime import datetime
+    currentMonth = datetime.now().month
+    currentYear = datetime.now().year
+
     ######### List of All Coachings ##############3
 
     list_of_monforms=[ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,
@@ -1609,11 +1614,20 @@ def qahome(request):
                       MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
                       ]
 
+    empw_list=[]
+
+    for i in list_of_monforms:
+        emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,added_by=qa_name).values(
+        'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
+        '-davg')[:10]
+        empw_list.append(emp_wise)
+
+
     # Total NO of Coachings
     total_coaching_ids=[]
 
     for i in list_of_monforms:
-        x=i.objects.filter(added_by=qa_name)
+        x=i.objects.filter(added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
 
         for i in x:
             total_coaching_ids.append(i.id)
@@ -1625,7 +1639,7 @@ def qahome(request):
     all_coaching_obj=[]
 
     for i in list_of_monforms:
-        x=i.objects.filter(added_by=qa_name).order_by('audit_date')
+        x=i.objects.filter(added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth).order_by('audit_date')
         all_coaching_obj.append(x)
 
     ##### Open_campaigns_objects  ###############
@@ -1633,14 +1647,14 @@ def qahome(request):
     list_open_campaigns=[]
 
     for i in list_of_monforms:
-        opn_cmp_obj=i.objects.filter(status=False)
+        opn_cmp_obj=i.objects.filter(status=False,added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
         list_open_campaigns.append(opn_cmp_obj)
 
 
     #################### open campaigns indevidual
 
     def openCampaigns(monforms):
-        open_obj=monforms.objects.filter(added_by=qa_name,status=False)
+        open_obj=monforms.objects.filter(added_by=qa_name,status=False,audit_date__year=currentYear, audit_date__month=currentMonth)
         return open_obj
 
     open_eva=openCampaigns(ChatMonitoringFormEva)
@@ -1675,7 +1689,7 @@ def qahome(request):
 
     for i in list_of_monforms:
 
-        count=i.objects.filter(added_by=qa_name,status=False).count()
+        count=i.objects.filter(added_by=qa_name,status=False,audit_date__year=currentYear, audit_date__month=currentMonth).count()
         list_of_open_count.append(count)
 
     total_open_coachings=sum(list_of_open_count)
@@ -1710,7 +1724,8 @@ def qahome(request):
           'total_open':total_open_coachings,'total_coaching':total_coaching,
           'all_c_obj':all_coaching_obj,
 
-          'open_campaigns':list_open_campaigns
+          'open_campaigns':list_open_campaigns,
+          'emp_wise_score':empw_list
 
           }
 
@@ -4524,23 +4539,16 @@ def exportFameHouse(request,campaign):
 
         start_date=request.POST['start_date']
         end_date = request.POST['end_date']
-
         if campaign=='Fame House':
-
-
 
             response = HttpResponse(content_type='application/ms-excel')
             response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
-
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data') # this will make a sheet named Users Data
-
             # Sheet header, first row
             row_num = 0
-
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-
             columns = ['empID', 'Associate Name','transaction date', 'Audit Date', 'overall_score','Fatal Count','qa','am','team_lead','manager',
                        'Standard Greeting & Closing format used',
                        'Acknowledged the Customer Concern/s',
@@ -4567,7 +4575,6 @@ def exportFameHouse(request,campaign):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-
             rows = FameHouseMonitoringForm.objects.filter(audit_date__range = [start_date, end_date]).values_list('emp_id', 'associate_name','trans_date', 'audit_date', 'overall_score','fatal_count','qa','am','team_lead','manager',
 
                                                                      'ce_1',
@@ -4598,3 +4605,5 @@ def exportFameHouse(request,campaign):
             return response
         else:
             pass
+    else:
+        pass
