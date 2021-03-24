@@ -57,27 +57,29 @@ urlpatterns = [
 
 
     # Coaching Views
-    path('coaching-view-eva-chat/<int:pk>',empCoachingViewEvachat),
+    path('coaching-view-emp/<str:process>/<int:pk>',coachingViewAgents),
+
+
     path('coaching-view-eva-chat-qa/<int:pk>',qaCoachingViewEvachat),
     path('coaching-view-pod-chat/<int:pk>',empCoachingViewPodchat),
     path('coaching-view-pod-chat-qa/<int:pk>',qaCoachingViewPodchat),
-    path('coaching-view-inbound/<int:pk>',empCoachingviewNucleus),
+
     path('coaching-view-inbound-qa/<int:pk>',qaCoachingviewNucleus),
-    path('coaching-view-fame-house/<int:pk>',empCoachingviewFamehouse),
+
     path('coaching-view-fame-house-qa/<int:pk>',qaCoachingviewFamehouse),
-    path('coaching-view-fla/<int:pk>',empCoachingviewFLA),
+
     path('coaching-view-fla-qa/<int:pk>',qaCoachingviewFLA),
-    path('coaching-view-mt/<int:pk>',empCoachingviewMt),
+
     path('coaching-view-mt-qa/<int:pk>',qaCoachingviewMt),
-    path('coaching-view-mov-ins/<int:pk>',empCoachingviewMovIns),
+
     path('coaching-view-mov-ins-qa/<int:pk>',qaCoachingviewMovIns),
-    path('coaching-view-wit/<int:pk>',empCoachingviewWit),
+
     path('coaching-view-wit-qa/<int:pk>',qaCoachingviewWit),
-    path('coaching-view-tonn-chat/<int:pk>',empCoachingviewTonnchat),
+
     path('coaching-view-tonn-chat-qa/<int:pk>',qaCoachingviewTonnchat),
-    path('coaching-view-pix-chat/<int:pk>',empCoachingviewPixchat),
+
     path('coaching-view-pix-chat-qa/<int:pk>',qaCoachingviewPixchat),
-    path('coaching-view-pix-inbound/<int:pk>',empCoachingviewPixinbound),
+
     path('coaching-view-pix-inbound-qa/<int:pk>',qaCoachingviewPixinbound),
 
     path('coaching-view-aadya-qa/<int:pk>',qaCoachingviewAadya),
@@ -96,22 +98,6 @@ urlpatterns = [
     path('coaching-view-advance-qa/<int:pk>',qaCoachingviewAdvance),
 
 
-    path('coaching-view-aadya/<int:pk>',empCoachingviewAadya),
-    path('coaching-view-insalvage/<int:pk>',empCoachingviewInsalvage),
-    path('coaching-view-medicare/<int:pk>',empCoachingviewMedicare),
-    path('coaching-view-cts/<int:pk>',empCoachingviewCts),
-    path('coaching-view-tfood/<int:pk>',empCoachingviewTfood),
-    path('coaching-view-tpet/<int:pk>',empCoachingviewTpet),
-    path('coaching-view-city/<int:pk>',empCoachingviewCity),
-    path('coaching-view-allen/<int:pk>',empCoachingviewAllen),
-    path('coaching-view-system4/<int:pk>',empCoachingviewSystem4),
-    path('coaching-view-louis/<int:pk>',empCoachingviewLouis),
-    path('coaching-view-info/<int:pk>',empCoachingviewInfo),
-    path('coaching-view-psecu/<int:pk>',empCoachingviewPsecu),
-    path('coaching-view-get/<int:pk>',empCoachingviewGet),
-    path('coaching-view-advance/<int:pk>',empCoachingviewAdvance),
-
-
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
 
     path('campaign-wise-coaching-view',campaignwiseCoachings),
@@ -126,7 +112,7 @@ urlpatterns = [
     path('add-coaching',selectCoachingForm),
     path('coaching-summary-view',coachingSummaryView),
     path('coaching-success',coachingSuccess),
-    path('coaching-dispute',coachingDispute),
+    path('coaching-dispute/<int:pk>',coachingDispute),
 
     # Summary
     # categorywise

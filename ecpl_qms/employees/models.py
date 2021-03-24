@@ -177,6 +177,7 @@ class ChatMonitoringFormEva(models.Model):
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
 
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -236,6 +237,7 @@ class ChatMonitoringFormPodFather(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -306,6 +308,7 @@ class InboundMonitoringFormNucleusMedia(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -378,6 +381,8 @@ class FameHouseMonitoringForm(models.Model):
     fatal=models.BooleanField(default=False)
     fatal_count=models.IntegerField(default=0)
 
+    disput_status=models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.associate_name
@@ -427,6 +432,7 @@ class FLAMonitoringForm(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -435,7 +441,7 @@ class FLAMonitoringForm(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormGetaRatesPSECU(models.Model):
-    process = models.CharField(default='Get a Rates PSECU', max_length=50)
+    process = models.CharField(default='PSECU', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -495,6 +501,7 @@ class MasterMonitoringFormGetaRatesPSECU(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -564,6 +571,7 @@ class MasterMonitoringFormMovementInsurance(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -632,6 +640,7 @@ class MasterMonitoringFormMTCosmetics(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -702,6 +711,7 @@ class MasterMonitoringFormTonnChatsEmail(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -773,6 +783,7 @@ class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -843,6 +854,7 @@ class MonitoringFormLeadsAadhyaSolution(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -914,6 +926,7 @@ class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -985,6 +998,7 @@ class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1034,6 +1048,7 @@ class WitDigitalMasteringMonitoringForm(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1110,6 +1125,7 @@ class MonitoringFormLeadsInsalvage(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1181,6 +1197,7 @@ class MonitoringFormLeadsMedicare(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1252,6 +1269,7 @@ class MonitoringFormLeadsCTS(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -1324,6 +1342,7 @@ class MonitoringFormLeadsTentamusFood(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1395,6 +1414,7 @@ class MonitoringFormLeadsTentamusPet(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -1467,6 +1487,7 @@ class MonitoringFormLeadsCitySecurity(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1538,6 +1559,7 @@ class MonitoringFormLeadsAllenConsulting(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
 
     def __str__(self):
@@ -1610,6 +1632,7 @@ class MonitoringFormLeadsSystem4(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1681,6 +1704,7 @@ class MonitoringFormLeadsLouisville(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1752,6 +1776,7 @@ class MonitoringFormLeadsInfothinkLLC(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1823,6 +1848,7 @@ class MonitoringFormLeadsPSECU(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1894,6 +1920,7 @@ class MonitoringFormLeadsGetARates(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name
@@ -1965,6 +1992,7 @@ class MonitoringFormLeadsAdvanceConsultants(models.Model):
     ##############
     fatal = models.BooleanField(default=False)
     fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
 
     def __str__(self):
         return self.associate_name

@@ -591,40 +591,6 @@ def agenthome(request):
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
 
-    # Chat Eva Details
-
-    #################### open campaigns indevidual
-
-    def openCampaigns(monforms):
-        open_obj = monforms.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth,associate_name=agent_name, status=False)
-        return open_obj
-
-    open_eva = openCampaigns(ChatMonitoringFormEva)
-    open_pod = openCampaigns(ChatMonitoringFormPodFather)
-    open_nuc = openCampaigns(InboundMonitoringFormNucleusMedia)
-    open_fame = openCampaigns(FameHouseMonitoringForm)
-    open_fla = openCampaigns(FLAMonitoringForm)
-    open_mt = openCampaigns(MasterMonitoringFormMTCosmetics)
-    open_ton = openCampaigns(MasterMonitoringFormTonnChatsEmail)
-    open_mov = openCampaigns(MasterMonitoringFormMovementInsurance)
-    open_wit = openCampaigns(WitDigitalMasteringMonitoringForm)
-    open_pixchat = openCampaigns(PrinterPixMasterMonitoringFormChatsEmail)
-    open_pixcall = openCampaigns(PrinterPixMasterMonitoringFormInboundCalls)
-    open_aadya = openCampaigns(MonitoringFormLeadsAadhyaSolution)
-    open_insalvage = openCampaigns(MonitoringFormLeadsInsalvage)
-    open_medicare = openCampaigns(MonitoringFormLeadsMedicare)
-    open_cts = openCampaigns(MonitoringFormLeadsCTS)
-    open_tfood = openCampaigns(MonitoringFormLeadsTentamusFood)
-    open_tpet = openCampaigns(MonitoringFormLeadsTentamusPet)
-    open_city = openCampaigns(MonitoringFormLeadsCitySecurity)
-    open_allen = openCampaigns(MonitoringFormLeadsAllenConsulting)
-    open_system4 = openCampaigns(MonitoringFormLeadsSystem4)
-    open_louis = openCampaigns(MonitoringFormLeadsLouisville)
-    open_info = openCampaigns(MonitoringFormLeadsInfothinkLLC)
-    open_psecu = openCampaigns(MonitoringFormLeadsPSECU)
-    open_getarates = openCampaigns(MonitoringFormLeadsGetARates)
-    open_advance = openCampaigns(MonitoringFormLeadsAdvanceConsultants)
-
     ################### opn_count #############
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -641,6 +607,30 @@ def agenthome(request):
                         MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
                         ]
 
+    all_coaching_list = []
+    open_coaching_list=[]
+    disput_list=[]
+
+    def openCampaigns(monforms):
+        open_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                           associate_name=agent_name).order_by('-audit_date')
+        all_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                           associate_name=agent_name,status=False,disput_status=False).order_by('-audit_date')
+        disp_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                          associate_name=agent_name,disput_status=True).order_by(
+            '-audit_date')
+
+        all_coaching_list.append(open_obj)
+        open_coaching_list.append(all_obj)
+
+        disput_list.append(disp_obj)
+
+
+
+    for i in list_of_monforms:
+        openCampaigns(i)
+
+
     list_of_open_count = []
 
     for i in list_of_monforms:
@@ -649,32 +639,9 @@ def agenthome(request):
 
     total_open_coachings = sum(list_of_open_count)
 
-    data = {
-            'open_eva_chat': open_eva,
-            'open_pod_chat': open_pod,
-            'open_nucleus': open_nuc,
-            'open_famehouse': open_fame,
-            'open_fla': open_fla,
-            'open_mt': open_mt,
-            'open_tonnchat': open_ton,
-            'open_mov': open_mov,
-            'open_wit': open_wit,
-            'open_pixchat': open_pixchat,
-            'open_pixinbound': open_pixcall,
-            'open_aadya': open_aadya,
-            'open_insalvage': open_insalvage,
-            'open_medicare': open_medicare,
-            'open_cts': open_cts,
-            'open_tfood': open_tfood,
-            'open_tpet': open_tpet,
-            'open_city': open_city,
-            'open_allen': open_allen,
-            'open_system4': open_system4,
-            'open_louis': open_louis,
-            'open_info': open_info,
-            'open_psecu': open_psecu,
-            'open_get': open_getarates,
-            'open_advance': open_advance,
+    data = {'all_coachings':all_coaching_list,
+            'open_coaching':open_coaching_list,
+            'disput_coaching':disput_list,
 
             'total_open': total_open_coachings,
 
@@ -687,10 +654,121 @@ def agenthome(request):
 
 # Coaching View ---------------------------- !!!
 
-def empCoachingViewEvachat(request,pk):
-    coaching=ChatMonitoringFormEva.objects.get(id=pk)
-    data={'coaching':coaching}
-    return render(request,'coaching-views/emp-coaching-view-eva-chat.html',data)
+def coachingViewAgents(request,process,pk):
+
+    process_name=process
+
+    if process_name=='Fame House':
+        coaching = FameHouseMonitoringForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-fame-house.html', data)
+
+    if process_name == 'EVA Chat':
+        coaching = ChatMonitoringFormEva.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-eva-chat.html', data)
+
+    if process_name=='Nucleus':
+        coaching = InboundMonitoringFormNucleusMedia.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-inbound.html', data)
+    if process_name=='FLA':
+        coaching = FLAMonitoringForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-fla.html', data)
+
+    if process_name=='PSECU':
+        coaching = MonitoringFormLeadsPSECU.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-psecu.html', data)
+
+    if process_name=='Mov Insurance':
+        coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-mov-ins.html', data)
+
+    if process_name=='Mt Cosmetic':
+        coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-mt.html', data)
+
+    if process_name=='Tonn Chat':
+        coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-tonn-chat.html', data)
+
+    if process_name=='Aadya':
+        coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-aadya.html', data)
+
+    if process_name=='Printer Pix Inbound':
+        coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-pix-inbound.html', data)
+
+    if process_name=='Printer Pix Chat':
+        coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-pix-chat.html', data)
+
+    if process_name=='Wit Digital':
+        coaching = WitDigitalMasteringMonitoringForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-wit.html', data)
+
+    if process_name=='Insalvage':
+        coaching = MonitoringFormLeadsInsalvage.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-insalvage.html', data)
+    if process_name=='Medicare':
+        coaching = MonitoringFormLeadsMedicare.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-medicare.html', data)
+    if process_name=='CTS':
+        coaching = MonitoringFormLeadsCTS.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-cts.html', data)
+    if process_name=='Tentamus Food':
+        coaching = MonitoringFormLeadsTentamusFood.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-tfood.html', data)
+    if process_name=='Tentamus Pet':
+        coaching = MonitoringFormLeadsTentamusPet.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-tpet.html', data)
+    if process_name=='City Security':
+        coaching = MonitoringFormLeadsCitySecurity.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-city.html', data)
+    if process_name=='Allen Consulting':
+        coaching = MonitoringFormLeadsAllenConsulting.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-allen.html', data)
+    if process_name=='System4':
+        coaching = MonitoringFormLeadsSystem4.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-system4.html', data)
+    if process_name=='Louisville':
+        coaching = MonitoringFormLeadsLouisville.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-louis.html', data)
+    if process_name=='Infothink LLC':
+        coaching = MonitoringFormLeadsInfothinkLLC.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-info.html', data)
+
+    if process_name=='Get A Rates':
+        coaching = MonitoringFormLeadsGetARates.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-get.html', data)
+    if process_name=='Advance Consultants':
+        coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-advance.html', data)
+
+    else:
+        pass
 
 def qaCoachingViewEvachat(request,pk):
     coaching = ChatMonitoringFormEva.objects.get(id=pk)
@@ -707,141 +785,50 @@ def qaCoachingViewPodchat(request,pk):
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pod-chat.html', data)
 
-def empCoachingviewNucleus(request,pk):
-    coaching=InboundMonitoringFormNucleusMedia.objects.get(id=pk)
-    data={'coaching':coaching}
-    return render(request,'coaching-views/emp-coaching-view-inbound.html',data)
-
 def qaCoachingviewNucleus(request,pk):
     coaching=InboundMonitoringFormNucleusMedia.objects.get(id=pk)
     data={'coaching':coaching}
     return render(request,'coaching-views/qa-coaching-view-inbound.html',data)
 
-def empCoachingviewFamehouse(request,pk):
-    coaching=FameHouseMonitoringForm.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-detailed.html', data)
 def qaCoachingviewFamehouse(request,pk):
     coaching=FameHouseMonitoringForm.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-fame-house.html', data)
 
-def empCoachingviewFLA(request,pk):
-    coaching = FLAMonitoringForm.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-fla.html', data)
 def qaCoachingviewFLA(request,pk):
     coaching = FLAMonitoringForm.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-fla.html', data)
-def empCoachingviewMt(request,pk):
-    coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-mt.html', data)
+
 def qaCoachingviewMt(request,pk):
     coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-mt.html', data)
-def empCoachingviewMovIns(request,pk):
-    coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-mov-ins.html', data)
+
 def qaCoachingviewMovIns(request,pk):
     coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-mov-ins.html', data)
-def empCoachingviewWit(request,pk):
-    coaching = WitDigitalMasteringMonitoringForm.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-wit.html', data)
+
 def qaCoachingviewWit(request,pk):
     coaching = WitDigitalMasteringMonitoringForm.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-wit.html', data)
-def empCoachingviewTonnchat(request,pk):
-    coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-tonn-chat.html', data)
+
 def qaCoachingviewTonnchat(request,pk):
     coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-tonn-chat.html', data)
 
-def empCoachingviewPixchat(request,pk):
-    coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-pix-chat.html', data)
 def qaCoachingviewPixchat(request,pk):
     coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pix-chat.html', data)
-def empCoachingviewPixinbound(request,pk):
-    coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-pix-inbound.html', data)
+
 def qaCoachingviewPixinbound(request,pk):
     coaching = PrinterPixMasterMonitoringFormInboundCalls.objects.get(id=pk)
     data = {'coaching': coaching}
     return render(request, 'coaching-views/qa-coaching-view-pix-inbound.html', data)
-
-def empCoachingviewAadya(request,pk):
-    coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-aadya.html', data)
-
-def empCoachingviewInsalvage(request,pk):
-    coaching = MonitoringFormLeadsInsalvage.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-insalvage.html', data)
-def empCoachingviewMedicare(request,pk):
-    coaching = MonitoringFormLeadsMedicare.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-medicare.html', data)
-def empCoachingviewCts(request,pk):
-    coaching = MonitoringFormLeadsCTS.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-cts.html', data)
-def empCoachingviewTfood(request,pk):
-    coaching = MonitoringFormLeadsTentamusFood.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-tfood.html', data)
-def empCoachingviewTpet(request,pk):
-    coaching = MonitoringFormLeadsTentamusPet.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-tpet.html', data)
-def empCoachingviewCity(request,pk):
-    coaching = MonitoringFormLeadsCitySecurity.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-city.html', data)
-def empCoachingviewAllen(request,pk):
-    coaching = MonitoringFormLeadsAllenConsulting.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-allen.html', data)
-def empCoachingviewSystem4(request,pk):
-    coaching = MonitoringFormLeadsSystem4.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-system4.html', data)
-def empCoachingviewLouis(request,pk):
-    coaching = MonitoringFormLeadsLouisville.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-louis.html', data)
-def empCoachingviewInfo(request,pk):
-    coaching = MonitoringFormLeadsInfothinkLLC.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-info.html', data)
-def empCoachingviewPsecu(request,pk):
-    coaching = MonitoringFormLeadsPSECU.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-psecu.html', data)
-def empCoachingviewGet(request,pk):
-    coaching = MonitoringFormLeadsGetARates.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-get.html', data)
-def empCoachingviewAdvance(request,pk):
-    coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
-    data = {'coaching': coaching}
-    return render(request, 'coaching-views/emp-coaching-view-advance.html', data)
-
 
 def qaCoachingviewAadya(request,pk):
     coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
@@ -1580,13 +1567,24 @@ def coachingSuccess(request):
 
     return render(request,'coaching-success-message.html')
 
-def coachingDispute(request):
+def coachingDispute(request,pk):
+
     if request.method == 'POST':
 
-        team= request.user.profile.team
+        cid=pk
+        campaign=request.POST['campaign']
+        print(campaign)
 
+        team= request.user.profile.team
         team=Team.objects.get(name=team)
+
+        obj=FameHouseMonitoringForm.objects.get(id=cid)
+
+        obj.disput_status=True
+        obj.save()
+
         data={'team':team}
+
         return render(request,'coaching-dispute-message.html',data)
     else:
         return redirect('/employees/agenthome')

@@ -135,9 +135,10 @@
                 <input class="btn btn-success" type="submit" value="Accept & Sign" style="width: 150px">
             </form>
             <br>
-            <form action="/employees/coaching-dispute" method="POST">
+            <form action="/employees/coaching-dispute/{{coaching.id}}" method="POST">
                 {% csrf_token %}
                 <label for="emp_comments_d">Employee Comments *</label><br>
+                <input type="hidden" value="{{coaching.process}}" name="campaign">
                 <textarea name="emp_comments_dispute" id="emp_comments_d" cols="30" rows="5" required class="form-control"></textarea>
                 <br><button class="btn btn-danger" style="width: 150px">Reject & Dispute</button>
             </form>
