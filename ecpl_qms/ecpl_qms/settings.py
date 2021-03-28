@@ -126,3 +126,14 @@ STATICFILES_DIRS = [
    os.path.join(BASE_DIR, "static")
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
+# Sending Email
+EMAIL_HOST=('secure.emailsrvr.com')
+EMAIL_PORT=465
+EMAIL_HOST_USER='kalesh.cv@expertcallers.com'
+EMAIL_HOST_PASSWORD='K!@l#sh.cv202@'
+EMAIL_USE_TLS =False
+EMAIL_USE_SSL =True
+
+

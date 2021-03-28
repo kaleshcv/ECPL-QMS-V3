@@ -55,8 +55,60 @@
 </section>
 
 
+<div class="container-lg" style="margin-top: 100px">
 
-<section style="margin:100px">
+    <div class="row">
+        <div class="col-md-4">
+            <h2 style="color:grey">Quality Score</h2>
+            <br>
+            {% for i in avg_campaignwise %}
+                {% for j in i %}
+                <div>
+                    <p>{{j.process}}</p>
+                    <p><h4 style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red">{{j.davg|floatformat:2}}%</h4> </p>
+
+                </div>
+
+                {% endfor %}
+            {% endfor%}
+
+        </div>
+        <div class="col-md-4">
+            <h2 style="color:grey">Failed Audits</h2>
+            <br>
+            {% for i in camp_wise_count %}
+                {% for j in i %}
+                <div>
+                    <p>{{j.process}}</p>
+                    <p><h4 style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red">{{j.dcount}}</h4> </p>
+
+                </div>
+
+                {% endfor %}
+            {% endfor%}
+        </div>
+        <div class="col-md-4">
+            <h2 style="color:grey">Fatal Parameters</h2>
+            <br>
+            {% for i in fatal_list %}
+                {% for j in i %}
+                <div>
+                    <p>{{j.process}}</p>
+                    <p><h4 style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red">{{j.dcount}}</h4> </p>
+
+                </div>
+
+                {% endfor %}
+            {% endfor%}
+        </div>
+
+     </div>
+
+</div>
+
+
+
+<section style="margin:100px;background: bisque;padding: 60px;">
     <div class="container-lg">
         <div class="row">
             <div class="col-md-6">

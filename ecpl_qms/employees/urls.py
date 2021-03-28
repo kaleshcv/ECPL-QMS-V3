@@ -58,44 +58,7 @@ urlpatterns = [
 
     # Coaching Views
     path('coaching-view-emp/<str:process>/<int:pk>',coachingViewAgents),
-
-
-    path('coaching-view-eva-chat-qa/<int:pk>',qaCoachingViewEvachat),
-    path('coaching-view-pod-chat/<int:pk>',empCoachingViewPodchat),
-    path('coaching-view-pod-chat-qa/<int:pk>',qaCoachingViewPodchat),
-
-    path('coaching-view-inbound-qa/<int:pk>',qaCoachingviewNucleus),
-
-    path('coaching-view-fame-house-qa/<int:pk>',qaCoachingviewFamehouse),
-
-    path('coaching-view-fla-qa/<int:pk>',qaCoachingviewFLA),
-
-    path('coaching-view-mt-qa/<int:pk>',qaCoachingviewMt),
-
-    path('coaching-view-mov-ins-qa/<int:pk>',qaCoachingviewMovIns),
-
-    path('coaching-view-wit-qa/<int:pk>',qaCoachingviewWit),
-
-    path('coaching-view-tonn-chat-qa/<int:pk>',qaCoachingviewTonnchat),
-
-    path('coaching-view-pix-chat-qa/<int:pk>',qaCoachingviewPixchat),
-
-    path('coaching-view-pix-inbound-qa/<int:pk>',qaCoachingviewPixinbound),
-
-    path('coaching-view-aadya-qa/<int:pk>',qaCoachingviewAadya),
-    path('coaching-view-insalvage-qa/<int:pk>',qaCoachingviewInsalvage),
-    path('coaching-view-medicare-qa/<int:pk>',qaCoachingviewMedicare),
-    path('coaching-view-cts-qa/<int:pk>',qaCoachingviewCts),
-    path('coaching-view-tfood-qa/<int:pk>',qaCoachingviewTfood),
-    path('coaching-view-tpet-qa/<int:pk>',qaCoachingviewTpet),
-    path('coaching-view-city-qa/<int:pk>',qaCoachingviewCity),
-    path('coaching-view-allen-qa/<int:pk>',qaCoachingviewAllen),
-    path('coaching-view-system4-qa/<int:pk>',qaCoachingviewSystem4),
-    path('coaching-view-louis-qa/<int:pk>',qaCoachingviewLouis),
-    path('coaching-view-info-qa/<int:pk>',qaCoachingviewInfo),
-    path('coaching-view-psecu-qa/<int:pk>',qaCoachingviewPsecu),
-    path('coaching-view-get-qa/<int:pk>',qaCoachingviewGet),
-    path('coaching-view-advance-qa/<int:pk>',qaCoachingviewAdvance),
+    path('coaching-view-qa-all/<str:process>/<int:pk>',coachingViewQaDetailed),
 
 
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
