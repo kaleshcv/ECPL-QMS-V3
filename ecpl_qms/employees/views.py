@@ -947,6 +947,7 @@ def campaignwiseCoachings(request):
         team_name=Team.objects.get(id=team_id)
         start_date = request.POST['start_date']
         end_date = request.POST['end_date']
+        print(type(start_date))
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
                             FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
