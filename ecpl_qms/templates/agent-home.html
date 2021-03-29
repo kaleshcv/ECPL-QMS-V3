@@ -28,7 +28,7 @@
             {% for i in avg_campaignwise %}
                 {% for j in i %}
                 <div>
-                    <span style="font-size:12px">{{j.process}}</span>
+
                     <span style="font-weight: 600;color: black;text-shadow: 2px 2px 4px lightgrey;font-size:25px">{{j.davg|floatformat:2}}%</span>
 
                 </div>
@@ -43,7 +43,7 @@
             {% for i in camp_wise_count %}
                 {% for j in i %}
                 <div>
-                    <span style="font-size:12px">{{j.process}}</span>
+
                     <span style="font-weight: 600;color: black;text-shadow: 2px 2px 4px lightgrey;font-size:25px">{{j.dcount}}</span>
 
                 </div>
@@ -52,12 +52,12 @@
             {% endfor%}
         </div>
         <div class="col-md-3" style="margin: 20px;box-shadow: 5px 5px 10px darkgrey;padding: 20px; background: #fff8e8;">
-            <h5 style="color:grey">Fatal Parameters</h5>
+            <h5 style="color:grey">Fatal</h5>
             <br>
             {% for i in fatal_list %}
                 {% for j in i %}
                 <div>
-                    <span style="font-size:12px">{{j.process}}</span>
+
                     <span style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red;font-size:25px">{{j.dcount}}</span>
 
                 </div>
@@ -70,14 +70,14 @@
 
 </div>
 
-<section style="padding:90px 0px">
+<section style="padding:50px 0px">
     <div class="container-lg">
 
         <div class="row">
             <div class="col-md-5">
                  <h5 style="color:grey">List of Open Coachings</h5>
                 <br>
-                    <div class="row" style="overflow: scroll;height: 500px;">
+                    <div class="row" style="overflow: scroll;height: 300px;">
                         <table class="table">
                             <tr>
                                 <th>Date</th>
@@ -107,64 +107,46 @@
                         </table>
                     </div>
                 <br>
-                <h5 style="color:grey">Recent Coachings</h5>
+                <h5 style="color:grey">List of Dispute Coachings</h5>
                 <br>
-                <div style="overflow: scroll;height: 500px;">
-                    <table class="allcoachings table">
-                        <tr>
-                            <th>Audit Date</th>
+                <div class="row" style="overflow: scroll;height: 300px;">
+                        <table class="table">
+                            <tr>
+                                <th>Date</th>
+                                <th>Score</th>
+                                <th>Result</th>
+                                <th>Ticket No</th>
+                            </tr>
 
-                            <th>Ticket No</th>
-                            <th>Overall Score</th>
-                            <th>Result</th>
-                            <th>Fatal Count</th>
-
-                        </tr>
-                          {% for i in all_coachings %}
-                             {% for j in i %}
-                        <tr>
-                            <td>{{j.audit_date}}</td>
-
-                            <td>{{j.ticket_no}}</td>
-                            <td>{{j.overall_score}}</td>
-                            {% if j.overall_score < 100 %}
-                            <td>Fail</td>
-                            {% else %}
-                            <td>Pass</td>
-                            {% endif %}
-                            <td>{{j.fatal_count}}</td>
-                        </tr>
-
-                               {% endfor %}
-                          {% endfor %}
-                    </table>
-                </div>
-            </div>
-            <div class="col-md-3">
-
-            </div>
-            <div class="col-md-4">
+                            {% for i in disput_coaching %}
+                                {% for j in i %}
+                            <tr style="line-height: 2px">
+                                <td>{{j.audit_date}}</td>
+                                <td>{{j.overall_score}}</td>
+                                {% if j.overall_score < 100 %}
+                                <td>Fail</td>
+                                {% else %}
+                                <td>Pass</td>
+                                {% endif %}
+                                <td>{{j.ticket_no}}</td>
+                                <td><a href="/employees/coaching-view-emp/{{j.process}}/{{j.id}}"><br>View</a></td>
+                            </tr>
 
 
-                <div style="margin-top:50px">
-                    <h5 style="color:grey">List of Dispute Coachings</h5>
-                <br>
-                    <div class="row">
-
-                        {% for i in disput_coaching %}
-                            {% for j in i %}
-
-                        <div class="col-md-12">
-                            <span style="font-size: 12px"><b>Date</b>-{{j.audit_date}}</span>
-                            <span style="font-size: 12px"><b>Score</b>-{{j.overall_score}}</span>
-                            <span style="font-size: 12px"><b>Ticket No</b>-{{j.ticket_no}}</span>
-                            <span><a href="/employees/coaching-view-emp/{{j.process}}/{{j.id}}"><br>View</a></span>
-                        </div>
-
+                                {% endfor %}
                             {% endfor %}
-                        {% endfor %}
+
+                        </table>
                     </div>
-                </div>
+
+
+
+            <div class="col-md-7">
+
+
+
+
+
 
             </div>
         </div>

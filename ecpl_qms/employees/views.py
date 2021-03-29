@@ -661,9 +661,7 @@ def agenthome(request):
             'avg_campaignwise':avg_campaignwise,
             'camp_wise_count':campaign_wise_count,
             'fatal_list':fatal_list,
-
             'total_open': total_open_coachings,
-
             'team':team
             }
 
@@ -1574,8 +1572,10 @@ def coachingDispute(request,pk):
                   fail_silently=False)
 
     if request.method == 'POST':
+
         # Sending Mail
-        sendEmail(manager_email)
+        #sendEmail(manager_email)
+
         team = request.user.profile.team
         team = Team.objects.get(name=team)
 
@@ -1586,6 +1586,7 @@ def coachingDispute(request,pk):
 
             obj=monform.objects.get(id=cid)
             obj.disput_status=True
+            obj.emp_comments=emp_comments
             obj.save()
 
         if campaign == 'Fame House':
@@ -4643,10 +4644,18 @@ def qualityDashboard(request):
 
 def exportFameHouse(request,campaign):
 
+    from datetime import datetime, timezone
+
+    now = datetime.now(timezone.utc)
+
     if request.method=='POST':
 
         start_date=request.POST['start_date']
+
         end_date = request.POST['end_date']
+
+        print(start_date,end_date)
+
         if campaign=='Fame House':
 
             response = HttpResponse(content_type='application/ms-excel')
