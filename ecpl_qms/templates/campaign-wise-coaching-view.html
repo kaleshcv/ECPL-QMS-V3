@@ -1,170 +1,34 @@
 {% extends 'base.html' %}
 {% block main %}
 {% load static %}
-<section style="margin-top:100px">
-    <div class="container-lg">
-
-            <table class="table">
-                <tr>
-                    <th>Emp Name</th>
-                    <th>Emp ID</th>
-                    <th>Audit Date</th>
-                    <th>Campaign</th>
-                    <th>Overall Score</th>
-                    <th></th>
-                </tr>
-                {% for c in nucleus %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-inbound-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in eva_chat %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-eva-chat-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in pod_chat %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-pod-chat-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-                 {% for c in fame %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-fame-house-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-                 {% for c in fla %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-fla-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-                 {% for c in mt %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-mt-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in tonnchat %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-tonn-chat-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in mov %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-mov-ins-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-                {% for c in wit %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-wit-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in pixchat %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-pix-chat-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in pixinbound %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-pix-inbound-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-
-                {% for c in aadya %}
-                <tr>
-                <td>{{c.associate_name}}</td>
-                <td>{{c.emp_id}}</td>
-                <td>{{c.audit_date}}</td>
-                <td>{{c.campaign}}</td>
-                <td>{{c.overall_score}}</td>
-                <td><a href="/employees/coaching-view-aadya-qa/{{c.id}}">View</a></td>
-                </tr>
-                {% endfor %}
-            </table>
-    </div>
-</section>
-
 
 <section>
-    <div class="container-lg">
+    <div class="container-lg" style="margin-top:100px">
         <div>
             <table class="table">
                 <tr>
-                    <th></th>
+                  <th>Emp Name</th>
+                    <th>Emp ID</th>
+                    <th>Audit Date</th>
+                    <th>Campaign</th>
+                    <th>QA</th>
+                    <th>Overall Score</th>
                 </tr>
 
                 {% for i in coaching_list %}
                 {% for j in i %}
                 <tr>
-                    <td>{{j.audit_date}}</td>
                     <td>{{j.associate_name}}</td>
+                    <td>{{j.emp_id}}</td>
+                    <td>{{j.audit_date}}</td>
+                    <td>{{j.process}}</td>
+                    <td>{{j.added_by}}</td>
                     <td>{{j.overall_score}}</td>
                     <td><a href="/employees/coaching-view-qa-all/{{j.process}}/{{j.id}}">View</a></td>
                 </tr>
 
                 {% endfor %}
                 {% endfor %}
-
 
             </table>
         </div>
