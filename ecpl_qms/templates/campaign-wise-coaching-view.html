@@ -145,4 +145,31 @@
 </section>
 
 
+<section>
+    <div class="container-lg">
+        <div>
+            <table class="table">
+                <tr>
+                    <th></th>
+                </tr>
+
+                {% for i in coaching_list %}
+                {% for j in i %}
+                <tr>
+                    <td>{{j.audit_date}}</td>
+                    <td>{{j.associate_name}}</td>
+                    <td>{{j.overall_score}}</td>
+                    <td><a href="/employees/coaching-view-qa-all/{{j.process}}/{{j.id}}">View</a></td>
+                </tr>
+
+                {% endfor %}
+                {% endfor %}
+
+
+            </table>
+        </div>
+    </div>
+</section>
+
+
 {% endblock %}
