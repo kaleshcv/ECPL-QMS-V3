@@ -9,6 +9,7 @@ from django_pivot.pivot import pivot
 from django.core.mail import send_mail
 from django.db.models import Count,Avg,Sum
 
+
 import xlwt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -909,8 +910,6 @@ def coachingViewQaDetailed(request,process,pk):
 
 
 
-
-
 # Open status Coaching View
 def qacoachingViewOpenAll(request,pk):
     if pk>0:
@@ -1679,8 +1678,6 @@ def qahome(request):
     user_id=request.user.id
     teams=Team.objects.all()
 
-    from django.db.models import Count, Avg, Sum
-    from datetime import datetime
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
 
@@ -1732,38 +1729,6 @@ def qahome(request):
         opn_cmp_obj=i.objects.filter(status=False,added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
         list_open_campaigns.append(opn_cmp_obj)
 
-    #################### open campaigns indevidual
-
-    def openCampaigns(monforms):
-        open_obj=monforms.objects.filter(added_by=qa_name,status=False,audit_date__year=currentYear, audit_date__month=currentMonth)
-        return open_obj
-
-    open_eva=openCampaigns(ChatMonitoringFormEva)
-    open_pod=openCampaigns(ChatMonitoringFormPodFather)
-    open_nuc=openCampaigns(InboundMonitoringFormNucleusMedia)
-    open_fame=openCampaigns(FameHouseMonitoringForm)
-    open_fla=openCampaigns(FLAMonitoringForm)
-    open_mt=openCampaigns(MasterMonitoringFormMTCosmetics)
-    open_ton=openCampaigns(MasterMonitoringFormTonnChatsEmail)
-    open_mov=openCampaigns(MasterMonitoringFormMovementInsurance)
-    open_wit=openCampaigns(WitDigitalMasteringMonitoringForm)
-    open_pixchat=openCampaigns(PrinterPixMasterMonitoringFormChatsEmail)
-    open_pixcall=openCampaigns(PrinterPixMasterMonitoringFormInboundCalls)
-    open_aadya=openCampaigns(MonitoringFormLeadsAadhyaSolution)
-    open_insalvage=openCampaigns(MonitoringFormLeadsInsalvage)
-    open_medicare=openCampaigns(MonitoringFormLeadsMedicare)
-    open_cts=openCampaigns(MonitoringFormLeadsCTS)
-    open_tfood=openCampaigns(MonitoringFormLeadsTentamusFood)
-    open_tpet=openCampaigns(MonitoringFormLeadsTentamusPet)
-    open_city=openCampaigns(MonitoringFormLeadsCitySecurity)
-    open_allen=openCampaigns(MonitoringFormLeadsAllenConsulting)
-    open_system4=openCampaigns(MonitoringFormLeadsSystem4)
-    open_louis=openCampaigns(MonitoringFormLeadsLouisville)
-    open_info=openCampaigns(MonitoringFormLeadsInfothinkLLC)
-    open_psecu=openCampaigns(MonitoringFormLeadsPSECU)
-    open_getarates=openCampaigns(MonitoringFormLeadsGetARates)
-    open_advance=openCampaigns(MonitoringFormLeadsAdvanceConsultants)
-
 ################### opn_count #############
 
     list_of_open_count=[]
@@ -1784,13 +1749,10 @@ def qahome(request):
     fatal_list = []
 
     for i in list_of_monforms:
-        emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
-                                    added_by=qa_name).values('process').annotate(davg=Avg('overall_score'))
-        camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
-                                           added_by=qa_name, overall_score__lt=100).values('process').annotate(
+        emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(davg=Avg('overall_score'))
+        camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth, overall_score__lt=100).values('process').annotate(
             dcount=Count('associate_name'))
-        fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
-                                       added_by=qa_name).values('process').annotate(dcount=Sum('fatal_count'))
+        fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(dcount=Sum('fatal_count'))
 
         avg_campaignwise.append(emp_wise)
         campaign_wise_count.append(camp_wise_count)
@@ -1800,31 +1762,6 @@ def qahome(request):
 
 
     data={'teams':teams,
-          'open_eva_chat':open_eva,
-          'open_pod_chat':open_pod,
-          'open_nucleus':open_nuc,
-          'open_famehouse':open_fame,
-          'open_fla':open_fla,
-          'open_mt':open_mt,
-          'open_tonnchat':open_ton,
-          'open_mov':open_mov,
-          'open_wit':open_wit,
-          'open_pixchat':open_pixchat,
-          'open_pixinbound':open_pixcall,
-          'open_aadya':open_aadya,
-          'open_insalvage': open_insalvage,
-          'open_medicare':open_medicare,
-          'open_cts':open_cts,
-          'open_tfood':open_tfood,
-          'open_tpet':open_tpet,
-          'open_city':open_city,
-          'open_allen':open_allen,
-          'open_system4':open_system4,
-          'open_louis':open_louis,
-          'open_info':open_info,
-          'open_psecu':open_psecu,
-          'open_get':open_getarates,
-          'open_advance':open_advance,
 
           'total_open':total_open_coachings,'total_coaching':total_coaching,
           'all_c_obj':all_coaching_obj,
