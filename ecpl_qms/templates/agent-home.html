@@ -7,6 +7,7 @@
     <div class="container-fluid" style="background: #101c48;opacity: 77%;height: 300px">
         <div style="padding: 50px 40px">
             <h4 style="color:white;float:right;">Quality Dashboard</h4>
+
         </div>
         <div class="agentprofile" style="padding: 50px 40px">
             <span style="color:white"><small style="color:#ffeb3b">Employee Name :</small>{{user.profile.emp_name}}</span>
@@ -26,6 +27,7 @@
         <div class="col-md-4">
 
             <h2 style="margin-top:60px;margin-left:50px;">Quality Details</h2>
+
         </div>
         <div class="col-md-8">
             <div class="row">
@@ -96,7 +98,7 @@
                                         <form action="/employees/campaign-wise-coaching-view-agent" method="POST" enctype="multipart/form-data">
                                             {% csrf_token %}
                                             <h6>Campaign</h6>
-                                            <select name="team_id" id="camp" class="form-control" style="width: 300px;font-size: 12px;height: auto">
+                                            <select name="team_id" id="camp" class="form-control" style="width: 300px;font-size: 12px;height:auto;">
                                                 {% for team in teams %}
                                                 <option value="{{team.id}}">{{team.name}}</option>
                                                 {% endfor %}
@@ -199,6 +201,8 @@
     </div>
     </div>
 </section>
+
+ <span class="vertical-line"></span>
 
 
 {% endblock %}
