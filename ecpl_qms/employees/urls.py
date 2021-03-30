@@ -64,6 +64,7 @@ urlpatterns = [
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
 
     path('campaign-wise-coaching-view',campaignwiseCoachings),
+
     path('campaign-wise-coaching-view-agent',campaignwiseCoachingsAgent),
 
     path('employee-wise-report', employeeWiseReport),
