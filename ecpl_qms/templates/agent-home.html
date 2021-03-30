@@ -4,7 +4,7 @@
 
 <section class="profile_1" style="background-image: url(/static/images/dashboard.jpg);height: 300px;background-size: cover;"">
 
-    <div class="container-fluid" style="background: black;opacity: 77%;height: 300px">
+    <div class="container-fluid" style="background: #101c48;opacity: 77%;height: 300px">
         <div style="padding: 50px 40px">
             <h4 style="color:white;float:right;">Quality Dashboard</h4>
         </div>
@@ -21,15 +21,15 @@
 
 <div class="container-lg">
 
-    <div class="row" style="margin: auto;width: 70%;padding: 10px;margin-top: -65px">
-        <div class="col-md-3" style="margin: 20px;box-shadow: 5px 5px 10px darkgrey;padding: 20px; background: #fff8e8;">
-            <h5 style="color:grey">Quality Score</h5>
+    <div class="row" style="margin: auto;width: 70%;padding: 10px;margin-top: -90px">
+        <div class="col-md-3" style="margin: 20px;box-shadow: 1px 1px 10px #423e55;padding: 20px;background: #101c48">
+            <h6 style="color:grey">Quality Score</h6>
             <br>
             {% for i in avg_campaignwise %}
                 {% for j in i %}
                 <div>
 
-                    <span style="font-weight: 600;color: black;text-shadow: 2px 2px 4px lightgrey;font-size:25px">{{j.davg|floatformat:2}}%</span>
+                    <span style="font-weight: 600;color: white;font-size:25px">{{j.davg|floatformat:2}}%</span>
 
                 </div>
 
@@ -37,28 +37,28 @@
             {% endfor%}
 
         </div>
-        <div class="col-md-3" style="margin: 20px;box-shadow: 5px 5px 10px darkgrey;padding: 20px; background: #fff8e8;">
-            <h5 style="color:grey">Failed Audits</h5>
+        <div class="col-md-3" style="margin: 20px;box-shadow: 1px 1px 10px #423e55;padding: 20px;background: #101c48">
+            <h6 style="color:grey">Failed Audits</h6>
             <br>
             {% for i in camp_wise_count %}
                 {% for j in i %}
                 <div>
 
-                    <span style="font-weight: 600;color: black;text-shadow: 2px 2px 4px lightgrey;font-size:25px">{{j.dcount}}</span>
+                    <span style="font-weight: 600;color: white;font-size:25px">{{j.dcount}}</span>
 
                 </div>
 
                 {% endfor %}
             {% endfor%}
         </div>
-        <div class="col-md-3" style="margin: 20px;box-shadow: 5px 5px 10px darkgrey;padding: 20px; background: #fff8e8;">
-            <h5 style="color:grey">Fatal</h5>
+        <div class="col-md-3" style="margin: 20px;box-shadow: 1px 1px 10px #423e55;padding: 20px;background: #101c48">
+            <h6 style="color:grey">Fatal</h6>
             <br>
             {% for i in fatal_list %}
                 {% for j in i %}
                 <div>
 
-                    <span style="font-weight: 600;color: black;text-shadow: 2px 2px 10px darkgrey;font-size:25px">{{j.dcount}}</span>
+                    <span style="font-weight: 600;color: white;font-size:25px">{{j.dcount}}</span>
 
                 </div>
 
@@ -74,16 +74,20 @@
     <div class="container-lg">
 
         <div class="row">
+            <div class="col-md-7">
+
+            </div>
             <div class="col-md-5">
-                 <h5 style="color:grey">List of Open Coachings</h5>
+                 <h5 style="color: #101c48;font-size: 24px;font-weight: 600">List of Open Coachings</h5>
                 <br>
                     <div class="row" style="overflow: scroll;height: 300px;">
-                        <table class="table">
-                            <tr>
+                        <table class="table" style="background: #272a4c;color: white">
+                            <tr style="background: black;color: darkgoldenrod">
                                 <th>Date</th>
                                 <th>Score</th>
                                 <th>Result</th>
                                 <th>Ticket No</th>
+                                <th></th>
                             </tr>
 
                             {% for i in open_coaching %}
@@ -110,12 +114,13 @@
                 <h5 style="color:grey">List of Dispute Coachings</h5>
                 <br>
                 <div class="row" style="overflow: scroll;height: 300px;">
-                        <table class="table">
-                            <tr>
+                        <table class="table" style="background: #272a4c;color: white">
+                            <tr style="background: black;color: darkgoldenrod">
                                 <th>Date</th>
                                 <th>Score</th>
                                 <th>Result</th>
                                 <th>Ticket No</th>
+                                <th></th>
                             </tr>
 
                             {% for i in disput_coaching %}
@@ -139,16 +144,6 @@
                         </table>
                     </div>
 
-
-
-            <div class="col-md-7">
-
-
-
-
-
-
-            </div>
         </div>
 
     </div>

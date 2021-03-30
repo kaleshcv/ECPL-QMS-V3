@@ -2,14 +2,15 @@
 {% block main %}
 {% load static %}
 <section class="profile_1" style="background-image: url(/static/images/dashboard.jpg);height: 300px;background-size: cover;"">
-    <div style="background: black;opacity: 77%;height: 300px">
+    <div style="background: #2f374e;opacity: 77%;height: 300px">
         <div class="container-lg" style="padding-bottom: 20px">
             <div class="row">
                 <div class="col-md-12" style="padding: 50px 30px">
-                    <h2 style="color:grey">Campaigns</h2>
+                    <h2 style="color:white">Campaigns</h2>
+                    <br>
                     <span style="color: gold;font-size: 10px">Add Coaching</span>
                     {% for team in teams %}
-                    <span style="margin-left:10px;"><a href="campaign-view/{{team.id}}">{{team.name}}</a></span>
+                    <span style="margin-left:10px;"><a href="campaign-view/{{team.id}}" style="color:#b0fbff">{{team.name}}</a></span>
                     {% endfor %}
                 </div>
             </div>
@@ -26,49 +27,20 @@
 </section>
 
 
-<section id="guidelines" style="padding-top:70px;background:#fffaf4;padding-bottom: 70px;">
-    <div class="container-lg">
-        <div class="row">
-            <div class="col-md-4">
-                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid" style="box-shadow:4px 4px 50px lightslategrey;">
-            </div>
-            <div class="col-md-4">
-                <h4 class="text-center" style="margin-top:-50px">Monitoring Form Guidelines</h4>
-                <ul>
-                    <li><a href="/employees/outbound-monitoring-guidelines">Outbound </a></li>
-                    <li><a href="/employees/inbound-monitoring-guidelines">Inbound </a></li>
-                    <li><a href="/employees/chat-monitoring-guidelines">Chat </a></li>
-                    <li><a href="/employees/email-monitoring-guidelines">Email </a></li>
-                </ul>
-            </div>
-            <div class="col-md-4">
-                <div style="margin-top: 60px;margin-left: 50px;">
-                    <h2 style="color:grey">Coaching Details</h2>
-                    <br>
-                    <div>
-                        <span>Open Status <a href="qa-open-status-coachings-view/{{user.id}}" style="background: #d39e00;padding: 13px 23px;border-radius: 50%;color: black;font-size: 32px;margin-left: 10px">{{total_open}}</a></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <div class="container-lg" style="margin-top: 50px">
 
-    <h3 class="text-center">Quality Details - Campaign-wise</h3>
+    <h3 class="text-right" style="margin-right:90px">Quality Details</h3>
     <br>
     <br>
-    <div class="row">
-        <div class="col-md-4">
-            <h5 style="color:grey">Quality Score</h5>
-            <br>
+    <div class="row" style="margin-left:50%">
+        <div class="col-md-3" style="background: #011c38;color: white;box-shadow: 1px 1px 10px grey;margin: 10px 10px;padding: 25px">
+            <h6 style="color:white">Quality Score</h6>
+
             {% for i in avg_campaignwise %}
                 {% for j in i %}
                 <div>
-                    <small>{{j.process}}</small>
-                    <p><h4 style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red">{{j.davg|floatformat:2}}%</h4> </p>
+
+                    <h4 style="font-weight: 600;color: sandybrown;">{{j.davg|floatformat:2}}%</h4>
 
                 </div>
 
@@ -76,28 +48,28 @@
             {% endfor%}
 
         </div>
-        <div class="col-md-4">
-            <h5 style="color:grey">Failed Audits</h5>
+        <div class="col-md-3" style="background: #011c38;white: white;box-shadow: 1px 1px 10px grey;margin: 10px 10px;padding: 25px">
+            <h6 style="color:white">Failed Audits</h6>
             <br>
             {% for i in camp_wise_count %}
                 {% for j in i %}
                 <div>
-                     <small>{{j.process}}</small>
-                    <p><h4 style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red">{{j.dcount}}</h4> </p>
+
+                    <h4 style="font-weight: 600;color: sandybrown;">{{j.dcount}}</h4>
 
                 </div>
 
                 {% endfor %}
             {% endfor%}
         </div>
-        <div class="col-md-4">
-            <h5 style="color:grey">Fatal Parameters</h5>
-            <br>
+        <div class="col-md-3" style="background: #011c38;color: white;box-shadow: 1px 1px 10px grey;margin: 10px 10px;padding: 25px">
+            <h6 style="color:white">Fatal Parameters</h6>
+
             {% for i in fatal_list %}
                 {% for j in i %}
                 <div>
-                     <small>{{j.process}}</small>
-                    <p><h4 style="font-weight: 600;color: brown;text-shadow: 2px 2px 4px red">{{j.dcount}}</h4> </p>
+
+                    <h4 style="font-weight: 600;color: sandybrown">{{j.dcount}}</h4>
 
                 </div>
 
@@ -110,8 +82,39 @@
 </div>
 
 
+<section id="guidelines" style="padding-top:70px;padding-bottom: 70px;margin-top:50px">
+    <div class="container-lg">
+         <h4>Monitoring Form Guidelines</h4>
+        <div class="row">
 
-<section style="margin:100px;background: bisque;padding: 60px;">
+            <div class="col-md-4">
+                <br>
+                <img src="{% static 'images/guidelines.jpg' %}" alt="" class="img-fluid" style="box-shadow:4px 4px 50px lightslategrey;">
+            </div>
+            <div class="col-md-4">
+                <ul>
+                    <li><a href="/employees/outbound-monitoring-guidelines">Outbound </a></li>
+                    <li><a href="/employees/inbound-monitoring-guidelines">Inbound </a></li>
+                    <li><a href="/employees/chat-monitoring-guidelines">Chat </a></li>
+                    <li><a href="/employees/email-monitoring-guidelines">Email </a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <div style="margin-top: 60px;margin-left: 50px;">
+                    <h2 style="color:grey">Coaching Details</h2>
+                    <br>
+                    <div>
+                        <span>Open Status <a href="qa-open-status-coachings-view/{{user.id}}" style="background: #011c38;padding: 13px 23px;border-radius: 50%;color: white;font-size: 32px;margin-left: 10px">{{total_open}}</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section style="margin: 50px 100px;background: #011c38;padding: 60px;color:white;">
     <div class="container-lg">
         <div class="row">
             <div class="col-md-6">
@@ -120,23 +123,23 @@
                     <br>
                     <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
-                        <h5>Campaign</h5>
-                        <select name="team_id" id="camp" class="form-control">
+                        <h6>Campaign</h6>
+                        <select name="team_id" id="camp" class="form-control" style="width: 200px;font-size: 12px;height: auto">
                             {% for team in teams %}
                             <option value="{{team.id}}">{{team.name}}</option>
                             {% endfor %}
                         </select>
                         <br>
-                        <h5>status</h5>
-                        <select name="status" id="" class="form-control">
+                        <h6>status</h6>
+                        <select name="status" id="" class="form-control" style="width: 200px;font-size: 12px;height: auto">
                             <option value="all">All</option>
                             <option value="False">Open status</option>
                         </select><br>
-                        <h5>Date</h5>
+                        <h6>Date</h6>
                         <label for="">From</label>
-                        <input type="date" name="start_date" class="form-control">
+                        <input type="date" name="start_date" class="form-control" style="width: 200px;font-size: 10px;height: auto">
                         <label for="">To</label>
-                        <input type="date" name="end_date" class="form-control">
+                        <input type="date" name="end_date" class="form-control" style="width: 200px;font-size: 10px;height: auto">
                         <br>
                         <button class="btn btn-secondary" class="form-control">submit</button>
                     </form>
@@ -149,7 +152,7 @@
                 <h2 style="color:grey">Associate-wise Scores <small style="font-size: 14px">Top -10</small></h2>
                 <br>
                 <br>
-                <table class="table">
+                <table class="table" style="color:white;">
                     <tr>
                         <th>Agent Name</th>
                         <th>Audit Count</th>

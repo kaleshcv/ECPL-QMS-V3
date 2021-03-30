@@ -9,6 +9,11 @@ body
     background:white;
 
 }
+h5{
+    color: #101c48!important;
+    font-size: 24px;
+    font-weight: 600;
+}
 
 .navbar-nav li a
 {
@@ -140,8 +145,10 @@ color:grey;
 {
     position: relative;
     width: 250px;
-    margin: 40px auto 0;
-    padding: 10px;
+    margin-left:20px;
+    margin-top:10px;
+
+    padding: 10px 10px;
     box-sizing: border-box;
 }
 
