@@ -4582,20 +4582,15 @@ def exportFameHouse(request,campaign):
 
     import pytz
 
-
     from datetime import datetime
 
     if request.method=='POST':
 
         start_date=request.POST['start_date']
-        start_date= datetime.strptime(start_date, '%Y-%m-%d')
+
 
         end_date = request.POST['end_date']
-        end_date=datetime.strptime(end_date,'%Y-%m-%d')
 
-        start_date=start_date.utcnow().replace(tzinfo=pytz.UTC)
-
-        end_date=end_date.utcnow().replace(tzinfo=pytz.UTC)
 
         print(start_date,end_date)
 
@@ -4635,7 +4630,7 @@ def exportFameHouse(request,campaign):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = FameHouseMonitoringForm.objects.filter(audit_date__range = [start_date, end_date]).values_list('emp_id', 'associate_name','trans_date', 'audit_date', 'overall_score','fatal_count','qa','am','team_lead','manager',
+            rows = FameHouseMonitoringForm.objects.filter(audit_date__range=[start_date,end_date]).values_list('emp_id', 'associate_name','trans_date', 'audit_date', 'overall_score','fatal_count','qa','am','team_lead','manager',
 
                                                                      'ce_1',
                                                                      'ce_2',
@@ -4655,6 +4650,9 @@ def exportFameHouse(request,campaign):
                                                                      'sh_1',
 
                                                                      'status','closed_date','fatal')
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                   rows]
             for row in rows:
                 row_num += 1
                 for col_num in range(len(row)):
@@ -4663,6 +4661,8 @@ def exportFameHouse(request,campaign):
             wb.save(response)
 
             return response
+
+
         else:
             pass
     else:
