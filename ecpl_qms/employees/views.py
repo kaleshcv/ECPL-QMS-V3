@@ -8,6 +8,8 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django_pivot.pivot import pivot
 from django.core.mail import send_mail
 from django.db.models import Count,Avg,Sum
+import pandas as pd
+
 
 
 import xlwt
@@ -4578,15 +4580,22 @@ def qualityDashboard(request):
 
 def exportFameHouse(request,campaign):
 
-    from datetime import datetime, timezone
+    import pytz
 
-    now = datetime.now(timezone.utc)
+
+    from datetime import datetime
 
     if request.method=='POST':
 
         start_date=request.POST['start_date']
+        start_date= datetime.strptime(start_date, '%Y-%m-%d')
 
         end_date = request.POST['end_date']
+        end_date=datetime.strptime(end_date,'%Y-%m-%d')
+
+        start_date=start_date.utcnow().replace(tzinfo=pytz.UTC)
+
+        end_date=end_date.utcnow().replace(tzinfo=pytz.UTC)
 
         print(start_date,end_date)
 
