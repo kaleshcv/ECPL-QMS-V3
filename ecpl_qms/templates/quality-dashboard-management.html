@@ -5,18 +5,18 @@
 <section style="background-image: url(/static/images/dashboard.jpg);height: 400px;background-size: cover;">
     <div class="container-lg">
             <div>
-                <h2 style="padding-top: 100px;color: antiquewhite;font-size: 43px">Quality Dashboard</h2>
+                <h2 style="padding-top: 170px;color: antiquewhite;font-size: 43px">Quality Dashboard</h2>
             </div>
     </div>
 </section>
 
-<section style="padding: 75px;margin-top: -251px" id="dashboardcampaigns">
-    <div class="container-fluid" style="margin-top:50px">
-            <div class="row">
+<section id="dashboardcampaigns">
+    <div class="container-lg" style="margin-top:100px">
+            <div class="row" style="margin-left:20px;">
                 <div class="col-md-12">
                     <div class="row">
                     <div class="col-md-2">
-                        <h5>Inbound</h5>
+                        <h6>Inbound</h6>
                         <br>
                         <p>{{inbound|floatformat:2}}%</p>
                         <a href="/employees/inbound-summary">View More</a>
@@ -30,26 +30,26 @@
                     </div>
                     -->
                     <div class="col-md-2">
-                        <h5>Chat</h5>
+                        <h6>Chat</h6>
                         <br>
                         <p>{{chat|floatformat:2}}%</p>
                         <a href="/employees/chat-summary">View More</a>
                     </div>
                     <div class="col-md-2">
-                        <h5>Email</h5>
+                        <h6>Email</h6>
                         <br>
                         <p>{{email|floatformat:2}}%</p>
                         <a href="/employees/email-summary">View More</a>
                     </div>
 
                     <div class="col-md-2">
-                        <h5>Other</h5>
+                        <h6>Other</h6>
                         <br>
                         <p>{{ other|floatformat:2 }}%</p>
                         <a href="/employees/other-summary">View More</a>
                     </div>
                     <div class="col-md-2">
-                        <h5>Leads</h5>
+                        <h6>Leads</h6>
                         <br>
                         <p>{{leads|floatformat:2}}%</p>
                         <a href="/employees/leads-summary">View More</a>
@@ -65,50 +65,53 @@
 
 </section>
 
-<section id="campaignwisereport">
 
-    <div class="container-lg" style="margin-top:20px">
-      <div class="row">
 
-                {% for c in campaigns %}
-                <div class="col-md-3" style="background: #f9f7f0;margin-bottom:40px;">
-                    <div style="padding: 35px">
-                        <form action="/campaign-detailed-view" method="POST">
-                            {% csrf_token %}
+<section style="margin:100px">
+    <div class="container-lg">
+        <div class="row">
+            <div class="col-md-6">
+                <div>
+                    <h2 style="color:grey">View Feedbacks</h2>
+                    <br>
+                    <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h6>Campaign</h6>
+                        <select name="team_id" id="camp" class="form-control">
+                            {% for team in teams %}
+                            <option value="{{team.id}}">{{team.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <br>
+                        <h6>status</h6>
+                        <select name="status" id="" class="form-control">
+                            <option value="all">All</option>
+                            <option value="False">Open status</option>
+                        </select><br>
+                        <h6>Date</h6>
+                        <label for="">From</label>
+                        <input type="date" name="start_date">
+                        <label for="">To</label>
+                        <input type="date" name="end_date">
 
-                            <h5><b>{{c.name}}</b></h5>
-                            <div style="padding: 27px 25px">
-                                <h6>{{c.score|floatformat:2}}%</h6>
-                            </div>
-
-                            <input type="hidden" value="{{c.name}}" name="campaign">
-                            <button class="btn btn-secondary" style="width: 62px;height: 28px; font-size: 11px;margin-left: 14%">View</button>
-                        </form>
-                    </div>
-                    <div style="padding: 35px">
-                        <form action="/export-data/{{c.name}}" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{c.name}}" name="campaign">
-                            <br>
-                            <h5>Export Report</h5>
-                            <label for="" class="datelabel">Start Date</label>
-                            <input type="date" name="start_date" required class="dateinput form-control">
-                            <label for="" class="datelabel">End Date</label>
-                            <input type="date" name="end_date" required class="dateinput form-control">
-                            <br>
-                            <button class="btn btn-secondary" style="width: 62px;height: 28px; font-size: 11px;margin-left: 14%">Export</button>
-                        </form>
-                    </div>
+                        <button class="btn btn-primary" class="form-control">submit</button>
+                    </form>
                 </div>
-                {% endfor %}
             </div>
+            <div class="col-md-6">
+                <div style="margin-top:60px;margin-left:50px;">
+                    <h4>View Detailed Report</h4>
+                    {% for c in campaigns %}
+                             <span class="vertical-line"></span>
+                             <span><a href="/campaign-detailed-view/{{c.name}}">{{c.name}}</a></span>
+                             <span class="vertical-line"></span>
 
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
-
 </section>
-
-
-
 
 
 
@@ -116,7 +119,7 @@
 
     <div class="container-fluid" style="margin-top:100px">
         <div class="row">
-            <div class="col-md-6" style="background: #ffa622">
+            <div class="col-md-6" style="background: #64b5f6">
                 <section style="margin:100px 100px">
                     <h4>Employee wise Quality Report</h4><br>
                     <div class="row" style="margin-left: 50px">
@@ -136,7 +139,7 @@
                     </div>
                 </section>
             </div>
-            <div class="col-md-6" style="background: cornflowerblue">
+            <div class="col-md-6" style="background:#90a4ae">
                 <section style="margin:100px 100px">
                     <h4>Manager wise Quality Report</h4><br>
                     <div class="row" style="margin-left: 50px">
@@ -178,40 +181,23 @@
 </section>
 
 
-<section style="margin:100px">
-    <div class="container-lg">
-        <div class="row">
-            <div class="col-md-6">
-                <div>
-                    <h2 style="color:grey">View Feedbacks</h2>
-                    <br>
-                    <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
-                        {% csrf_token %}
-                        <h5>Campaign</h5>
-                        <select name="team_id" id="camp" class="form-control">
-                            {% for team in teams %}
-                            <option value="{{team.id}}">{{team.name}}</option>
-                            {% endfor %}
-                        </select>
-                        <br>
-                        <h5>status</h5>
-                        <select name="status" id="" class="form-control">
-                            <option value="all">All</option>
-                            <option value="False">Open status</option>
-                        </select><br>
-                        <h5>Date</h5>
-                        <label for="">From</label>
-                        <input type="date" name="start_date">
-                        <label for="">To</label>
-                        <input type="date" name="end_date">
 
-                        <button class="btn btn-primary" class="form-control">submit</button>
-                    </form>
-                </div>
+
+<section id="campaignwisereport">
+
+    <div class="container-lg" style="margin-top:100px">
+      <div class="row" style="overflow: scroll;height: 200px;">
+
             </div>
-        </div>
+
     </div>
+
 </section>
+
+
+
+
+
 
 
 

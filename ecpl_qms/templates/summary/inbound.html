@@ -2,15 +2,15 @@
 {% block main %}
 {% load static %}
 
-<div class="container-lg">
+<div class="container-lg" id="summary">
     <div style="margin-top:50px">
         <div class="row">
         {% for campaign in campaigns %}
-            <div class="col-md-3" style="margin: 50px 20px;box-shadow: 5px 5px 10px lightgrey;background: #ffe0a8;padding: 20px 40px;">
+            <div class="col-md-3">
             <p>Campaign - {{campaign.name}}</p>
             <p style=" font-size: 30px;text-shadow: 2px 1px darkgrey;">{{campaign.avg_score|floatformat:2}}%</p>
-                <div style="padding: 35px">
-                    <form action="/campaign-detailed-view" method="POST">
+                <div>
+                    <form action="/campaign-detailed-view/{{campaign.name}}" method="POST">
                             {% csrf_token %}
                         <input type="hidden" value="{{campaign.name}}" name="campaign">
                         <button class="btn btn-secondary" style="width: 100px;height: 28px; font-size: 11px;">View More</button>
