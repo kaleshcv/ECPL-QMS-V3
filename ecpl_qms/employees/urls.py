@@ -88,7 +88,7 @@ urlpatterns = [
     path('email-summary',emailSummary),
 
     ##############3
-    path('campaign-detailed-view',campaignwiseDetailedReport),
+    path('campaign-detailed-view/<str:cname>',campaignwiseDetailedReport),
 
     path('fame-house-full-report',fameHouseFullReport),
 

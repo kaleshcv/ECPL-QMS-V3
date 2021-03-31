@@ -217,17 +217,18 @@ color:grey;
     color:cadetblue;
 }
 
-#dashboardcampaigns h5{
+#dashboardcampaigns h6{
     font-weight: 600;
-    text-shadow: 1px 2px 9px slategrey;
+    color:white;
 }
 
 #dashboardcampaigns .col-md-2 {
     padding: 20px 20px;
     margin: 10px 10px;
-    background: #fdf7e4;
-    box-shadow: 2px -1px 10px lightgrey;
+    background: #2f374e;
+    box-shadow: 1px 1px 10px lightgrey;
     border-radius: 7px;
+    color:white;
 }
 
 #dashboardcampaigns .col-md-2:hover {
@@ -243,13 +244,14 @@ color:grey;
 
     padding: 30px 30px;
     font-size: 14px;
-    background: aliceblue;
+    background: white;
 }
 
 .summary{
-    background: bisque;
+    background: #2f374e;
     padding: 18px;
-    margin: 10px
+    margin: 10px;
+    color: white;
 }
 .summary:hover {
     background: #944000;
@@ -302,5 +304,14 @@ color:grey;
         display: inline-block;
         border-left: 1px solid #ccc;
         margin: 0 10px;
-        height: 125px;
+        height: 10px;
     }
+
+#summary .col-md-3
+{
+    margin: 50px 20px;
+    box-shadow: 5px 5px 10px lightgrey;
+    background: #2f374e;
+    padding: 20px 40px;
+    color: white;
+}

@@ -1131,13 +1131,13 @@ def campaignwiseCoachingsAgent(request):
         pass
 
 
-def campaignwiseDetailedReport(request):
+def campaignwiseDetailedReport(request,cname):
 
 
     from datetime import datetime
     currentMonth = datetime.now().month
     currentYear = datetime.now().year
-    campaign=request.POST['campaign']
+    campaign=cname
 
     def campaignWiseCalculator(monform):
 
@@ -1257,7 +1257,8 @@ def campaignwiseDetailedReport(request):
                 'qa_wise_avg':qa_wise,
                 'am_wise_avg':am_wise,
                 'tl_wise_avg':tl_wise,
-                'pivot_test':pivot_test
+                'pivot_test':pivot_test,
+                'process':campaign
                 }
 
         return data
