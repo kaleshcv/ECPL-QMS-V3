@@ -131,8 +131,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Sending Email
 EMAIL_HOST=('secure.emailsrvr.com')
 EMAIL_PORT=465
-EMAIL_HOST_USER='kalesh.cv@expertcallers.com'
-EMAIL_HOST_PASSWORD=''
+EMAIL_HOST_USER='qms@expertcallers.com'
+EMAIL_HOST_PASSWORD='ExperQm$2021'
 EMAIL_USE_TLS =False
 EMAIL_USE_SSL =True
 

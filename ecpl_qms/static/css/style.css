@@ -315,3 +315,8 @@ color:grey;
     padding: 20px 40px;
     color: white;
 }
+
+#overview small
+{
+    color:grey;
+}

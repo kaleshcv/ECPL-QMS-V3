@@ -234,159 +234,307 @@ def managerWiseReport(request):
 
 def qualityDashboardMgt(request):
     # Date Time
-    import datetime
-    d = datetime.datetime.now()
+    if request.method=='POST':
 
-    month = d.strftime("%m")
-    year = d.strftime("%Y")
+        import datetime
+        d = datetime.datetime.now()
 
-    user_id = request.user.id
+        month =request.POST['month']
+        year = request.POST['year']
 
-    employees = Profile.objects.filter(emp_desi='CRO')
-    managers = Profile.objects.filter(emp_desi='Manager')
+        user_id = request.user.id
 
-    teams=Team.objects.all()
+        employees = Profile.objects.filter(emp_desi='CRO')
+        managers = Profile.objects.filter(emp_desi='Manager')
 
-
-    ############ Avg Score Calculator
-
-    def avgscoreCalculator(monform):
-        a=monform.objects.filter(audit_date__year=year, audit_date__month=month)
-        a_avg=[]
-        for i in a:
-            a_avg.append(i.overall_score)
-        if len(a_avg)>0:
-            a_avg_score=sum(a_avg)/len(a_avg)
-            return a_avg_score
-        else:
-            return 100
-
-    eva_avg_score=avgscoreCalculator(ChatMonitoringFormEva)
-    pod_avg_score=avgscoreCalculator(ChatMonitoringFormPodFather)
-    nuc_avg_score=avgscoreCalculator(InboundMonitoringFormNucleusMedia)
-    fame_avg_score=avgscoreCalculator(FameHouseMonitoringForm)
-    fla_avg_score=avgscoreCalculator(FLAMonitoringForm)
-    mt_avg_score=avgscoreCalculator(MasterMonitoringFormMTCosmetics)
-    ton_avg_score=avgscoreCalculator(MasterMonitoringFormTonnChatsEmail)
-    mov_avg_score=avgscoreCalculator(MasterMonitoringFormMovementInsurance)
-    wit_avg_score=avgscoreCalculator(WitDigitalMasteringMonitoringForm)
-    pixchat_avg_score=avgscoreCalculator(PrinterPixMasterMonitoringFormChatsEmail)
-    pixcall_avg_score=avgscoreCalculator(PrinterPixMasterMonitoringFormInboundCalls)
-    aadya_avg_score=avgscoreCalculator(MonitoringFormLeadsAadhyaSolution)
-    insalvage_avg_score=avgscoreCalculator(MonitoringFormLeadsInsalvage)
-    medicare_avg_score=avgscoreCalculator(MonitoringFormLeadsMedicare)
-    cts_avg_score=avgscoreCalculator(MonitoringFormLeadsCTS)
-    tfood_avg_score=avgscoreCalculator(MonitoringFormLeadsTentamusFood)
-    tpet_avg_score=avgscoreCalculator(MonitoringFormLeadsTentamusPet)
-    city_avg_score=avgscoreCalculator(MonitoringFormLeadsCitySecurity)
-    allen_avg_score=avgscoreCalculator(MonitoringFormLeadsAllenConsulting)
-    system4_avg_score=avgscoreCalculator(MonitoringFormLeadsSystem4)
-    louis_avg_score=avgscoreCalculator(MonitoringFormLeadsLouisville)
-    info_avg_score=avgscoreCalculator(MonitoringFormLeadsInfothinkLLC)
-    psecu_avg_score=avgscoreCalculator(MonitoringFormLeadsPSECU)
-    get_avg_score=avgscoreCalculator(MonitoringFormLeadsGetARates)
-    adv_avg_score=avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
+        teams=Team.objects.all()
 
 
-    chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
-    outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
-    email=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score+fame_avg_score)/5
-    inbound=(nuc_avg_score+pixcall_avg_score)/2
-    other=(fla_avg_score+wit_avg_score)/2
-    leads=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+        ############ Avg Score Calculator
 
-    # Coaching closure
+        def avgscoreCalculator(monform):
+            a=monform.objects.filter(audit_date__year=year, audit_date__month=month)
+            a_avg=[]
+            for i in a:
+                a_avg.append(i.overall_score)
+            if len(a_avg)>0:
+                a_avg_score=sum(a_avg)/len(a_avg)
+                return a_avg_score
+            else:
+                return 100
 
-    user_id = request.user.id
-
-    employees = Profile.objects.filter(emp_desi='CRO')
-
-    ######## Coaching closed Percentage Calculator
-
-    def coachingClosureCalculator(monform):
-
-        total=monform.objects.filter(audit_date__year=year, audit_date__month=month).count()
-        closed_total=monform.objects.filter(status=True,audit_date__year=year, audit_date__month=month).count()
-
-        if total>0:
-            closure=int((closed_total/total)*100)
-            return closure
-        else:
-            return 100
-
-    closed_percentage_eva=coachingClosureCalculator(ChatMonitoringFormEva)
-    closed_percentage_pod=coachingClosureCalculator(ChatMonitoringFormPodFather)
-    closed_percentage_nuc=coachingClosureCalculator(InboundMonitoringFormNucleusMedia)
-    closed_percentage_fame=coachingClosureCalculator(FameHouseMonitoringForm)
-    closed_percentage_fla=coachingClosureCalculator(FLAMonitoringForm)
-    closed_percentage_mt=coachingClosureCalculator(MasterMonitoringFormMTCosmetics)
-    closed_percentage_ton=coachingClosureCalculator(MasterMonitoringFormTonnChatsEmail)
-    closed_percentage_mov=coachingClosureCalculator(MasterMonitoringFormMovementInsurance)
-    closed_percentage_wit=coachingClosureCalculator(WitDigitalMasteringMonitoringForm)
-    closed_percentage_pixchat=coachingClosureCalculator(PrinterPixMasterMonitoringFormChatsEmail)
-    closed_percentage_pixcall=coachingClosureCalculator(PrinterPixMasterMonitoringFormInboundCalls)
-    closed_percentage_aadya=coachingClosureCalculator(MonitoringFormLeadsAadhyaSolution)
-    closed_percentage_insalvage=coachingClosureCalculator(MonitoringFormLeadsInsalvage)
-    closed_percentage_medicare=coachingClosureCalculator(MonitoringFormLeadsMedicare)
-    closed_percentage_cts=coachingClosureCalculator(MonitoringFormLeadsCTS)
-    closed_percentage_tfood=coachingClosureCalculator(MonitoringFormLeadsTentamusFood)
-    closed_percentage_tpet=coachingClosureCalculator(MonitoringFormLeadsTentamusPet)
-    closed_percentage_city=coachingClosureCalculator(MonitoringFormLeadsCitySecurity)
-    closed_percentage_allen=coachingClosureCalculator(MonitoringFormLeadsAllenConsulting)
-    closed_percentage_system4=coachingClosureCalculator(MonitoringFormLeadsSystem4)
-    closed_percentage_louis=coachingClosureCalculator(MonitoringFormLeadsLouisville)
-    closed_percentage_info=coachingClosureCalculator(MonitoringFormLeadsInfothinkLLC)
-    closed_percentage_psecu=coachingClosureCalculator(MonitoringFormLeadsPSECU)
-    closed_percentage_getarates=coachingClosureCalculator(MonitoringFormLeadsGetARates)
-    closed_percentage_advance=coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
+        eva_avg_score=avgscoreCalculator(ChatMonitoringFormEva)
+        pod_avg_score=avgscoreCalculator(ChatMonitoringFormPodFather)
+        nuc_avg_score=avgscoreCalculator(InboundMonitoringFormNucleusMedia)
+        fame_avg_score=avgscoreCalculator(FameHouseMonitoringForm)
+        fla_avg_score=avgscoreCalculator(FLAMonitoringForm)
+        mt_avg_score=avgscoreCalculator(MasterMonitoringFormMTCosmetics)
+        ton_avg_score=avgscoreCalculator(MasterMonitoringFormTonnChatsEmail)
+        mov_avg_score=avgscoreCalculator(MasterMonitoringFormMovementInsurance)
+        wit_avg_score=avgscoreCalculator(WitDigitalMasteringMonitoringForm)
+        pixchat_avg_score=avgscoreCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+        pixcall_avg_score=avgscoreCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+        aadya_avg_score=avgscoreCalculator(MonitoringFormLeadsAadhyaSolution)
+        insalvage_avg_score=avgscoreCalculator(MonitoringFormLeadsInsalvage)
+        medicare_avg_score=avgscoreCalculator(MonitoringFormLeadsMedicare)
+        cts_avg_score=avgscoreCalculator(MonitoringFormLeadsCTS)
+        tfood_avg_score=avgscoreCalculator(MonitoringFormLeadsTentamusFood)
+        tpet_avg_score=avgscoreCalculator(MonitoringFormLeadsTentamusPet)
+        city_avg_score=avgscoreCalculator(MonitoringFormLeadsCitySecurity)
+        allen_avg_score=avgscoreCalculator(MonitoringFormLeadsAllenConsulting)
+        system4_avg_score=avgscoreCalculator(MonitoringFormLeadsSystem4)
+        louis_avg_score=avgscoreCalculator(MonitoringFormLeadsLouisville)
+        info_avg_score=avgscoreCalculator(MonitoringFormLeadsInfothinkLLC)
+        psecu_avg_score=avgscoreCalculator(MonitoringFormLeadsPSECU)
+        get_avg_score=avgscoreCalculator(MonitoringFormLeadsGetARates)
+        adv_avg_score=avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
 
-    pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod,'score':pod_avg_score}
-    eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva,'score':eva_avg_score}
-    nucleus={'name': 'Nucleus','perc':closed_percentage_nuc,'score':nuc_avg_score}
-    famehouse={'name':'Fame House','perc':closed_percentage_fame,'score':fame_avg_score}
-    fla={'name':'FLA','perc':closed_percentage_fla,'score':fla_avg_score}
-    mt={'name':'MT Cosmetic','perc':closed_percentage_mt,'score':mt_avg_score}
-    ton={'name':'Tonn Chat Email','perc':closed_percentage_ton,'score':ton_avg_score}
-    mov={'name':'Movement of Insurance','perc':closed_percentage_mov,'score':mov_avg_score}
-    wit={'name':'Wit Digital','perc':closed_percentage_wit,'score':wit_avg_score}
-    pixchat={'name':'Printer Pix Chat Email','perc':closed_percentage_pixchat,'score':pixchat_avg_score}
-    pixcall={'name':'Printer Pix Inbound','perc':closed_percentage_pixcall,'score':pixcall_avg_score}
-    aadya={'name':'AAdya','perc':closed_percentage_aadya,'score':aadya_avg_score}
-    insalvage={'name':'Insalvage','perc':closed_percentage_insalvage,'score':insalvage_avg_score}
-    medicare={'name':'Medicare','perc':closed_percentage_medicare,'score':medicare_avg_score}
-    cts={'name':'CTS','perc':closed_percentage_cts,'score':cts_avg_score}
-    tfood={'name':'Tentamus Food','perc':closed_percentage_tfood,'score':tfood_avg_score}
-    tpet={'name':'Tentamus Pet','perc':closed_percentage_tpet,'score':tpet_avg_score}
-    city={'name':'City Security','perc':closed_percentage_city,'score':city_avg_score}
-    allen={'name':'Allen Consulting','perc':closed_percentage_allen,'score':allen_avg_score}
-    system={'name':'System4','perc':closed_percentage_system4,'score':system4_avg_score}
-    louis={'name':'Louisville','perc':closed_percentage_louis,'score':louis_avg_score}
-    info={'name':'Info Think LLC','perc':closed_percentage_info,'score':info_avg_score}
-    psecu={'name':'PSECU','perc':closed_percentage_psecu,'score':psecu_avg_score}
-    getarates={'name':'Get A Rates','perc':closed_percentage_getarates,'score':get_avg_score}
-    advance={'name':'Advance Consultants','perc':closed_percentage_advance,'score':adv_avg_score}
+        chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
+        outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+        email=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score+fame_avg_score)/5
+        inbound=(nuc_avg_score+pixcall_avg_score)/2
+        other=(fla_avg_score+wit_avg_score)/2
+        leads=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+
+        # Coaching closure
+
+        user_id = request.user.id
+
+        employees = Profile.objects.filter(emp_desi='CRO')
+
+        ######## Coaching closed Percentage Calculator
+
+        def coachingClosureCalculator(monform):
+
+            total=monform.objects.filter(audit_date__year=year, audit_date__month=month).count()
+            closed_total=monform.objects.filter(status=True,audit_date__year=year, audit_date__month=month).count()
+
+            if total>0:
+                closure=int((closed_total/total)*100)
+                return closure
+            else:
+                return 100
+
+        closed_percentage_eva=coachingClosureCalculator(ChatMonitoringFormEva)
+        closed_percentage_pod=coachingClosureCalculator(ChatMonitoringFormPodFather)
+        closed_percentage_nuc=coachingClosureCalculator(InboundMonitoringFormNucleusMedia)
+        closed_percentage_fame=coachingClosureCalculator(FameHouseMonitoringForm)
+        closed_percentage_fla=coachingClosureCalculator(FLAMonitoringForm)
+        closed_percentage_mt=coachingClosureCalculator(MasterMonitoringFormMTCosmetics)
+        closed_percentage_ton=coachingClosureCalculator(MasterMonitoringFormTonnChatsEmail)
+        closed_percentage_mov=coachingClosureCalculator(MasterMonitoringFormMovementInsurance)
+        closed_percentage_wit=coachingClosureCalculator(WitDigitalMasteringMonitoringForm)
+        closed_percentage_pixchat=coachingClosureCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+        closed_percentage_pixcall=coachingClosureCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+        closed_percentage_aadya=coachingClosureCalculator(MonitoringFormLeadsAadhyaSolution)
+        closed_percentage_insalvage=coachingClosureCalculator(MonitoringFormLeadsInsalvage)
+        closed_percentage_medicare=coachingClosureCalculator(MonitoringFormLeadsMedicare)
+        closed_percentage_cts=coachingClosureCalculator(MonitoringFormLeadsCTS)
+        closed_percentage_tfood=coachingClosureCalculator(MonitoringFormLeadsTentamusFood)
+        closed_percentage_tpet=coachingClosureCalculator(MonitoringFormLeadsTentamusPet)
+        closed_percentage_city=coachingClosureCalculator(MonitoringFormLeadsCitySecurity)
+        closed_percentage_allen=coachingClosureCalculator(MonitoringFormLeadsAllenConsulting)
+        closed_percentage_system4=coachingClosureCalculator(MonitoringFormLeadsSystem4)
+        closed_percentage_louis=coachingClosureCalculator(MonitoringFormLeadsLouisville)
+        closed_percentage_info=coachingClosureCalculator(MonitoringFormLeadsInfothinkLLC)
+        closed_percentage_psecu=coachingClosureCalculator(MonitoringFormLeadsPSECU)
+        closed_percentage_getarates=coachingClosureCalculator(MonitoringFormLeadsGetARates)
+        closed_percentage_advance=coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
+
+
+        pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod,'score':pod_avg_score}
+        eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva,'score':eva_avg_score}
+        nucleus={'name': 'Nucleus','perc':closed_percentage_nuc,'score':nuc_avg_score}
+        famehouse={'name':'Fame House','perc':closed_percentage_fame,'score':fame_avg_score}
+        fla={'name':'FLA','perc':closed_percentage_fla,'score':fla_avg_score}
+        mt={'name':'MT Cosmetic','perc':closed_percentage_mt,'score':mt_avg_score}
+        ton={'name':'Tonn Chat Email','perc':closed_percentage_ton,'score':ton_avg_score}
+        mov={'name':'Movement of Insurance','perc':closed_percentage_mov,'score':mov_avg_score}
+        wit={'name':'Wit Digital','perc':closed_percentage_wit,'score':wit_avg_score}
+        pixchat={'name':'Printer Pix Chat Email','perc':closed_percentage_pixchat,'score':pixchat_avg_score}
+        pixcall={'name':'Printer Pix Inbound','perc':closed_percentage_pixcall,'score':pixcall_avg_score}
+        aadya={'name':'AAdya','perc':closed_percentage_aadya,'score':aadya_avg_score}
+        insalvage={'name':'Insalvage','perc':closed_percentage_insalvage,'score':insalvage_avg_score}
+        medicare={'name':'Medicare','perc':closed_percentage_medicare,'score':medicare_avg_score}
+        cts={'name':'CTS','perc':closed_percentage_cts,'score':cts_avg_score}
+        tfood={'name':'Tentamus Food','perc':closed_percentage_tfood,'score':tfood_avg_score}
+        tpet={'name':'Tentamus Pet','perc':closed_percentage_tpet,'score':tpet_avg_score}
+        city={'name':'City Security','perc':closed_percentage_city,'score':city_avg_score}
+        allen={'name':'Allen Consulting','perc':closed_percentage_allen,'score':allen_avg_score}
+        system={'name':'System4','perc':closed_percentage_system4,'score':system4_avg_score}
+        louis={'name':'Louisville','perc':closed_percentage_louis,'score':louis_avg_score}
+        info={'name':'Info Think LLC','perc':closed_percentage_info,'score':info_avg_score}
+        psecu={'name':'PSECU','perc':closed_percentage_psecu,'score':psecu_avg_score}
+        getarates={'name':'Get A Rates','perc':closed_percentage_getarates,'score':get_avg_score}
+        advance={'name':'Advance Consultants','perc':closed_percentage_advance,'score':adv_avg_score}
 
 
 
-    campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya,
-                 insalvage,medicare,cts,tfood,tpet,city,allen,system,louis,info,psecu,
-                 getarates,advance]
+        campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya,
+                     insalvage,medicare,cts,tfood,tpet,city,allen,system,louis,info,psecu,
+                     getarates,advance]
 
 
-    data = {
+        data = {
 
-            'chat':chat,'outbound':outbound,'email':email,'inbound':inbound,'other':other,'leads':leads,
+                'chat':chat,'outbound':outbound,'email':email,'inbound':inbound,'other':other,'leads':leads,
 
-            'employees':employees,'managers':managers,'campaigns':campaigns,
+                'employees':employees,'managers':managers,'campaigns':campaigns,
 
-            'teams':teams,
+                'teams':teams,
 
-            }
+                }
 
-    return render(request, 'quality-dashboard-management.html',data)
+        return render(request, 'quality-dashboard-management.html',data)
 
+    else:
 
+        import datetime
+        d = datetime.datetime.now()
+
+        month = d.strftime("%m")
+        year = d.strftime("%Y")
+
+        user_id = request.user.id
+
+        employees = Profile.objects.filter(emp_desi='CRO')
+        managers = Profile.objects.filter(emp_desi='Manager')
+
+        teams = Team.objects.all()
+
+        ############ Avg Score Calculator
+
+        def avgscoreCalculator(monform):
+            a = monform.objects.filter(audit_date__year=year, audit_date__month=month)
+            a_avg = []
+            for i in a:
+                a_avg.append(i.overall_score)
+            if len(a_avg) > 0:
+                a_avg_score = sum(a_avg) / len(a_avg)
+                return a_avg_score
+            else:
+                return 100
+
+        eva_avg_score = avgscoreCalculator(ChatMonitoringFormEva)
+        pod_avg_score = avgscoreCalculator(ChatMonitoringFormPodFather)
+        nuc_avg_score = avgscoreCalculator(InboundMonitoringFormNucleusMedia)
+        fame_avg_score = avgscoreCalculator(FameHouseMonitoringForm)
+        fla_avg_score = avgscoreCalculator(FLAMonitoringForm)
+        mt_avg_score = avgscoreCalculator(MasterMonitoringFormMTCosmetics)
+        ton_avg_score = avgscoreCalculator(MasterMonitoringFormTonnChatsEmail)
+        mov_avg_score = avgscoreCalculator(MasterMonitoringFormMovementInsurance)
+        wit_avg_score = avgscoreCalculator(WitDigitalMasteringMonitoringForm)
+        pixchat_avg_score = avgscoreCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+        pixcall_avg_score = avgscoreCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+        aadya_avg_score = avgscoreCalculator(MonitoringFormLeadsAadhyaSolution)
+        insalvage_avg_score = avgscoreCalculator(MonitoringFormLeadsInsalvage)
+        medicare_avg_score = avgscoreCalculator(MonitoringFormLeadsMedicare)
+        cts_avg_score = avgscoreCalculator(MonitoringFormLeadsCTS)
+        tfood_avg_score = avgscoreCalculator(MonitoringFormLeadsTentamusFood)
+        tpet_avg_score = avgscoreCalculator(MonitoringFormLeadsTentamusPet)
+        city_avg_score = avgscoreCalculator(MonitoringFormLeadsCitySecurity)
+        allen_avg_score = avgscoreCalculator(MonitoringFormLeadsAllenConsulting)
+        system4_avg_score = avgscoreCalculator(MonitoringFormLeadsSystem4)
+        louis_avg_score = avgscoreCalculator(MonitoringFormLeadsLouisville)
+        info_avg_score = avgscoreCalculator(MonitoringFormLeadsInfothinkLLC)
+        psecu_avg_score = avgscoreCalculator(MonitoringFormLeadsPSECU)
+        get_avg_score = avgscoreCalculator(MonitoringFormLeadsGetARates)
+        adv_avg_score = avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
+
+        chat = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score) / 4
+        outbound = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
+        email = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score + fame_avg_score) / 5
+        inbound = (nuc_avg_score + pixcall_avg_score) / 2
+        other = (fla_avg_score + wit_avg_score) / 2
+        leads = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
+
+        # Coaching closure
+
+        user_id = request.user.id
+
+        employees = Profile.objects.filter(emp_desi='CRO')
+
+        ######## Coaching closed Percentage Calculator
+
+        def coachingClosureCalculator(monform):
+
+            total = monform.objects.filter(audit_date__year=year, audit_date__month=month).count()
+            closed_total = monform.objects.filter(status=True, audit_date__year=year, audit_date__month=month).count()
+
+            if total > 0:
+                closure = int((closed_total / total) * 100)
+                return closure
+            else:
+                return 100
+
+        closed_percentage_eva = coachingClosureCalculator(ChatMonitoringFormEva)
+        closed_percentage_pod = coachingClosureCalculator(ChatMonitoringFormPodFather)
+        closed_percentage_nuc = coachingClosureCalculator(InboundMonitoringFormNucleusMedia)
+        closed_percentage_fame = coachingClosureCalculator(FameHouseMonitoringForm)
+        closed_percentage_fla = coachingClosureCalculator(FLAMonitoringForm)
+        closed_percentage_mt = coachingClosureCalculator(MasterMonitoringFormMTCosmetics)
+        closed_percentage_ton = coachingClosureCalculator(MasterMonitoringFormTonnChatsEmail)
+        closed_percentage_mov = coachingClosureCalculator(MasterMonitoringFormMovementInsurance)
+        closed_percentage_wit = coachingClosureCalculator(WitDigitalMasteringMonitoringForm)
+        closed_percentage_pixchat = coachingClosureCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+        closed_percentage_pixcall = coachingClosureCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+        closed_percentage_aadya = coachingClosureCalculator(MonitoringFormLeadsAadhyaSolution)
+        closed_percentage_insalvage = coachingClosureCalculator(MonitoringFormLeadsInsalvage)
+        closed_percentage_medicare = coachingClosureCalculator(MonitoringFormLeadsMedicare)
+        closed_percentage_cts = coachingClosureCalculator(MonitoringFormLeadsCTS)
+        closed_percentage_tfood = coachingClosureCalculator(MonitoringFormLeadsTentamusFood)
+        closed_percentage_tpet = coachingClosureCalculator(MonitoringFormLeadsTentamusPet)
+        closed_percentage_city = coachingClosureCalculator(MonitoringFormLeadsCitySecurity)
+        closed_percentage_allen = coachingClosureCalculator(MonitoringFormLeadsAllenConsulting)
+        closed_percentage_system4 = coachingClosureCalculator(MonitoringFormLeadsSystem4)
+        closed_percentage_louis = coachingClosureCalculator(MonitoringFormLeadsLouisville)
+        closed_percentage_info = coachingClosureCalculator(MonitoringFormLeadsInfothinkLLC)
+        closed_percentage_psecu = coachingClosureCalculator(MonitoringFormLeadsPSECU)
+        closed_percentage_getarates = coachingClosureCalculator(MonitoringFormLeadsGetARates)
+        closed_percentage_advance = coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
+
+        pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod, 'score': pod_avg_score}
+        eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva, 'score': eva_avg_score}
+        nucleus = {'name': 'Nucleus', 'perc': closed_percentage_nuc, 'score': nuc_avg_score}
+        famehouse = {'name': 'Fame House', 'perc': closed_percentage_fame, 'score': fame_avg_score}
+        fla = {'name': 'FLA', 'perc': closed_percentage_fla, 'score': fla_avg_score}
+        mt = {'name': 'MT Cosmetic', 'perc': closed_percentage_mt, 'score': mt_avg_score}
+        ton = {'name': 'Tonn Chat Email', 'perc': closed_percentage_ton, 'score': ton_avg_score}
+        mov = {'name': 'Movement of Insurance', 'perc': closed_percentage_mov, 'score': mov_avg_score}
+        wit = {'name': 'Wit Digital', 'perc': closed_percentage_wit, 'score': wit_avg_score}
+        pixchat = {'name': 'Printer Pix Chat Email', 'perc': closed_percentage_pixchat, 'score': pixchat_avg_score}
+        pixcall = {'name': 'Printer Pix Inbound', 'perc': closed_percentage_pixcall, 'score': pixcall_avg_score}
+        aadya = {'name': 'AAdya', 'perc': closed_percentage_aadya, 'score': aadya_avg_score}
+        insalvage = {'name': 'Insalvage', 'perc': closed_percentage_insalvage, 'score': insalvage_avg_score}
+        medicare = {'name': 'Medicare', 'perc': closed_percentage_medicare, 'score': medicare_avg_score}
+        cts = {'name': 'CTS', 'perc': closed_percentage_cts, 'score': cts_avg_score}
+        tfood = {'name': 'Tentamus Food', 'perc': closed_percentage_tfood, 'score': tfood_avg_score}
+        tpet = {'name': 'Tentamus Pet', 'perc': closed_percentage_tpet, 'score': tpet_avg_score}
+        city = {'name': 'City Security', 'perc': closed_percentage_city, 'score': city_avg_score}
+        allen = {'name': 'Allen Consulting', 'perc': closed_percentage_allen, 'score': allen_avg_score}
+        system = {'name': 'System4', 'perc': closed_percentage_system4, 'score': system4_avg_score}
+        louis = {'name': 'Louisville', 'perc': closed_percentage_louis, 'score': louis_avg_score}
+        info = {'name': 'Info Think LLC', 'perc': closed_percentage_info, 'score': info_avg_score}
+        psecu = {'name': 'PSECU', 'perc': closed_percentage_psecu, 'score': psecu_avg_score}
+        getarates = {'name': 'Get A Rates', 'perc': closed_percentage_getarates, 'score': get_avg_score}
+        advance = {'name': 'Advance Consultants', 'perc': closed_percentage_advance, 'score': adv_avg_score}
+
+        campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
+                     insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
+                     getarates, advance]
+
+        data = {
+
+            'chat': chat, 'outbound': outbound, 'email': email, 'inbound': inbound, 'other': other, 'leads': leads,
+
+            'employees': employees, 'managers': managers, 'campaigns': campaigns,
+
+            'teams': teams,
+
+        }
+
+        return render(request, 'quality-dashboard-management.html', data)
 # Categorywise
 
 def inboundSummary(request):
@@ -589,90 +737,183 @@ def emailSummary(request):
 
 def agenthome(request):
 
-    agent_name = request.user.profile.emp_name
-    team_name=request.user.profile.team
-    team = Team.objects.get(name=team_name)
+    if request.method=='POST':
 
-    teams=Team.objects.all()
-    currentMonth = datetime.now().month
-    currentYear = datetime.now().year
+        agent_name = request.user.profile.emp_name
+        team_name=request.user.profile.team
+        team = Team.objects.get(name=team_name)
 
-    ################### opn_count #############
+        teams=Team.objects.all()
+        currentMonth = request.POST['month']
+        currentYear = request.POST['year']
 
-    list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                        FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
-                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                        WitDigitalMasteringMonitoringForm,
-                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                        MonitoringFormLeadsAadhyaSolution,
-                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                        MonitoringFormLeadsTentamusFood,
-                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                        MonitoringFormLeadsAllenConsulting,
-                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
-                        ]
+        ################### opn_count #############
 
-    all_coaching_list = []
-    open_coaching_list=[]
-    disput_list=[]
+        list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                            WitDigitalMasteringMonitoringForm,
+                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                            MonitoringFormLeadsAadhyaSolution,
+                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                            MonitoringFormLeadsTentamusFood,
+                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                            MonitoringFormLeadsAllenConsulting,
+                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                            ]
 
-
-    def openCampaigns(monforms):
-        open_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name).order_by('-audit_date')
-        all_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name,status=False,disput_status=False).order_by('-audit_date')
-        disp_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name,disput_status=True).order_by('-audit_date')
-
-        all_coaching_list.append(open_obj)
-        open_coaching_list.append(all_obj)
-
-        disput_list.append(disp_obj)
-
-    for i in list_of_monforms:
-        openCampaigns(i)
-
-    ###################  Avg Campaignwise
-
-    avg_campaignwise=[]
-    campaign_wise_count=[]
-    fatal_list=[]
-
-    for i in list_of_monforms:
-
-        emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name).values('process').annotate(davg=Avg('overall_score'))
-        camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name,overall_score__lt=100).values('process').annotate(dcount=Count('associate_name'))
-        fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name).values('process').annotate(dcount=Sum('fatal_count'))
-
-        avg_campaignwise.append(emp_wise)
-        campaign_wise_count.append(camp_wise_count)
-        fatal_list.append(fatal_count)
-
-        #############################################
+        all_coaching_list = []
+        open_coaching_list=[]
+        disput_list=[]
 
 
-    list_of_open_count = []
+        def openCampaigns(monforms):
+            open_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name).order_by('-audit_date')
+            all_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name,status=False,disput_status=False).order_by('-audit_date')
+            disp_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name,disput_status=True).order_by('-audit_date')
 
-    for i in list_of_monforms:
-        count = i.objects.filter(associate_name=agent_name,audit_date__year=currentYear,audit_date__month=currentMonth,status=False).count()
+            all_coaching_list.append(open_obj)
+            open_coaching_list.append(all_obj)
 
-        list_of_open_count.append(count)
+            disput_list.append(disp_obj)
 
-    total_open_coachings = sum(list_of_open_count)
+        for i in list_of_monforms:
+            openCampaigns(i)
 
-    data = {'all_coachings':all_coaching_list,
-            'open_coaching':open_coaching_list,
-            'disput_coaching':disput_list,
-            'avg_campaignwise':avg_campaignwise,
-            'camp_wise_count':campaign_wise_count,
-            'fatal_list':fatal_list,
-            'total_open': total_open_coachings,
-            'team':team,
-            'teams':teams
-            }
+        ###################  Avg Campaignwise
+
+        avg_campaignwise=[]
+        campaign_wise_count=[]
+        fatal_list=[]
+
+        for i in list_of_monforms:
+
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name).values('process').annotate(davg=Avg('overall_score'))
+            camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name,overall_score__lt=100).values('process').annotate(dcount=Count('associate_name'))
+            fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,associate_name=agent_name).values('process').annotate(dcount=Sum('fatal_count'))
+
+            avg_campaignwise.append(emp_wise)
+            campaign_wise_count.append(camp_wise_count)
+            fatal_list.append(fatal_count)
+
+            #############################################
 
 
-    return render(request, 'agent-home.html',data)
+        list_of_open_count = []
 
+        for i in list_of_monforms:
+            count = i.objects.filter(associate_name=agent_name,audit_date__year=currentYear,audit_date__month=currentMonth,status=False).count()
+
+            list_of_open_count.append(count)
+
+        total_open_coachings = sum(list_of_open_count)
+
+        data = {'all_coachings':all_coaching_list,
+                'open_coaching':open_coaching_list,
+                'disput_coaching':disput_list,
+                'avg_campaignwise':avg_campaignwise,
+                'camp_wise_count':campaign_wise_count,
+                'fatal_list':fatal_list,
+                'total_open': total_open_coachings,
+                'team':team,
+                'teams':teams
+                }
+
+
+        return render(request, 'agent-home.html',data)
+
+    else:
+        agent_name = request.user.profile.emp_name
+        team_name = request.user.profile.team
+        team = Team.objects.get(name=team_name)
+
+        teams = Team.objects.all()
+        currentMonth = datetime.now().month
+        currentYear = datetime.now().year
+
+        ################### opn_count #############
+
+        list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                            WitDigitalMasteringMonitoringForm,
+                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                            MonitoringFormLeadsAadhyaSolution,
+                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                            MonitoringFormLeadsTentamusFood,
+                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                            MonitoringFormLeadsAllenConsulting,
+                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
+                            MonitoringFormLeadsAdvanceConsultants,
+                            ]
+
+        all_coaching_list = []
+        open_coaching_list = []
+        disput_list = []
+
+        def openCampaigns(monforms):
+            open_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                               associate_name=agent_name).order_by('-audit_date')
+            all_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                              associate_name=agent_name, status=False, disput_status=False).order_by(
+                '-audit_date')
+            disp_obj = monforms.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                               associate_name=agent_name, disput_status=True).order_by('-audit_date')
+
+            all_coaching_list.append(open_obj)
+            open_coaching_list.append(all_obj)
+
+            disput_list.append(disp_obj)
+
+        for i in list_of_monforms:
+            openCampaigns(i)
+
+        ###################  Avg Campaignwise
+
+        avg_campaignwise = []
+        campaign_wise_count = []
+        fatal_list = []
+
+        for i in list_of_monforms:
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                        associate_name=agent_name).values('process').annotate(davg=Avg('overall_score'))
+            camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                               associate_name=agent_name, overall_score__lt=100).values(
+                'process').annotate(dcount=Count('associate_name'))
+            fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                           associate_name=agent_name).values('process').annotate(
+                dcount=Sum('fatal_count'))
+
+            avg_campaignwise.append(emp_wise)
+            campaign_wise_count.append(camp_wise_count)
+            fatal_list.append(fatal_count)
+
+            #############################################
+
+        list_of_open_count = []
+
+        for i in list_of_monforms:
+            count = i.objects.filter(associate_name=agent_name, audit_date__year=currentYear,
+                                     audit_date__month=currentMonth, status=False).count()
+
+            list_of_open_count.append(count)
+
+        total_open_coachings = sum(list_of_open_count)
+
+        data = {'all_coachings': all_coaching_list,
+                'open_coaching': open_coaching_list,
+                'disput_coaching': disput_list,
+                'avg_campaignwise': avg_campaignwise,
+                'camp_wise_count': campaign_wise_count,
+                'fatal_list': fatal_list,
+                'total_open': total_open_coachings,
+                'team': team,
+                'teams': teams
+                }
+
+        return render(request, 'agent-home.html', data)
 
 # Coaching View ---------------------------- !!!
 
@@ -1135,213 +1376,449 @@ def campaignwiseCoachingsAgent(request):
 
 def campaignwiseDetailedReport(request,cname):
 
+    if request.method=='POST':
 
-    from datetime import datetime
-    currentMonth = datetime.now().month
-    currentYear = datetime.now().year
-    campaign=cname
+        from datetime import datetime
 
-    def campaignWiseCalculator(monform):
-
-        emp_wise = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by('-dcount')
-        #emp_wise_avg = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Avg('overall_score')).order_by('-dcount')
-        emp_wise_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Sum('fatal_count'))
-        fame_all = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth)
-        total_errors = monform.objects.filter(overall_score__lt=100, audit_date__year=currentYear,audit_date__month=currentMonth).count()
-        total_fatal_obj = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth)
-        total_fata_list=[]
-
-        for i in total_fatal_obj:
-            total_fata_list.append(i.fatal_count)
-
-        total_fatal = sum(total_fata_list)
-
-        total_audit_count = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).count()
-
-        avg=monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).aggregate(Avg('overall_score'))
-        processavg=avg['overall_score__avg']
-
-        if processavg==None:
-            process_avg = 0
-        else:
-            process_avg = float("{:.2f}".format(processavg))
+        currentMonth = request.POST['month']
+        currentYear = request.POST['year']
 
 
-        week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('week'))
+        campaign=cname
 
+        def campaignWiseCalculator(monform):
 
-        #week_wise_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True).values('week').annotate(dcount=Count('fatal'))
+            emp_wise = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by('-dcount')
+            #emp_wise_avg = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Avg('overall_score')).order_by('-dcount')
+            emp_wise_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Sum('fatal_count'))
+            fame_all = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth)
+            total_errors = monform.objects.filter(overall_score__lt=100, audit_date__year=currentYear,audit_date__month=currentMonth).count()
+            total_fatal_obj = monform.objects.filter(fatal=True, audit_date__year=currentYear,audit_date__month=currentMonth)
+            total_fata_list=[]
 
-        if total_audit_count>0:
-            error_percentage = (total_errors / total_audit_count) * 100
-        else:
-            error_percentage=0
-        error_perc = float("{:.2f}".format(error_percentage))
+            for i in total_fatal_obj:
+                total_fata_list.append(i.fatal_count)
 
-        if total_audit_count>0:
-            error_percentage_fatal = (total_fatal / total_audit_count) * 100
-        else:
-            error_percentage_fatal=0
-        error_perc_fatal = float("{:.2f}".format(error_percentage_fatal))
+            total_fatal = sum(total_fata_list)
 
-        ########  -- Weekwise Calculations
+            total_audit_count = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).count()
 
-        week_list=['week1','week2','week3','week4','week5']
-        week_wise_report=[]
-        for i in week_list:
-            weekdict={}
+            avg=monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).aggregate(Avg('overall_score'))
+            processavg=avg['overall_score__avg']
 
-            week_fatal_obj=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True,week=i)
-
-            week_fatal_list=[]
-            for j in week_fatal_obj:
-                week_fatal_list.append(j.fatal_count)
-            week_fatal_count=sum(week_fatal_list)
-
-            week_nonfatal=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i,overall_score__lt=100,fatal=False).count()
-            week_total_audits=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).count()
-            if week_total_audits>0:
-                fatal_avg=round(float((week_fatal_count/week_total_audits)*100),2)
-                nonfatal_avg=round(float((week_nonfatal/week_total_audits)*100),2)
-
+            if processavg==None:
+                process_avg = 0
             else:
-                fatal_avg='NA'
-                nonfatal_avg='NA'
-
-            weekdict['week']=i
-            weekdict['fatal_count']=week_fatal_count
-            weekdict['fatal_avg']=fatal_avg
-            weekdict['total_audits']=week_total_audits
-            weekdict['non_fatal_avg']=nonfatal_avg
-            weekdict['non_fatal_count']=week_nonfatal
-
-            week_wise_report.append(weekdict)
-
-            ########  -- Weekwise Calculations End
-
-        #### --- QA Wise
-
-        qa_wise=[]
-        for i in week_list:
-            qa_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('added_by','week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('added_by'))
-            qa_wise.append(qa_wise_avg)
-
-        am_wise = []
-        for i in week_list:
-            am_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('am', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
-            am_wise.append(am_wise_avg)
-
-        tl_wise = []
-        for i in week_list:
-            tl_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('team_lead', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
-            tl_wise.append(tl_wise_avg)
+                process_avg = float("{:.2f}".format(processavg))
 
 
-        #Week-wise Emp Fatal
-        pivot_test=pivot(monform.objects.filter(fatal=True),'associate_name','week','fatal_count',aggregation=Sum)
-
-        # Parameter wise ########
+            week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('week'))
 
 
-        data = {'fame_all': fame_all,
-                'emp_wise': emp_wise,
-                'emp_wise_fatal': emp_wise_fatal,
-                #'emp_wise_avg': emp_wise_avg,
-                'total_errors': total_errors,
-                'total_fatal':total_fatal,
-                'total_audit_count': total_audit_count,
-                'error_perc': error_perc,
-                'error_perc_fatal':error_perc_fatal,
-                'process_avg':process_avg,
-                'week_wise_avg':week_wise_avg,
-                #'week_wise_fatal_count':week_wise_fatal_count
-                'week_wise_report':week_wise_report,
-                'qa_wise_avg':qa_wise,
-                'am_wise_avg':am_wise,
-                'tl_wise_avg':tl_wise,
-                'pivot_test':pivot_test,
-                'process':campaign
-                }
+            #week_wise_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True).values('week').annotate(dcount=Count('fatal'))
 
-        return data
+            if total_audit_count>0:
+                error_percentage = (total_errors / total_audit_count) * 100
+            else:
+                error_percentage=0
+            error_perc = float("{:.2f}".format(error_percentage))
 
-    if campaign=='Fame House':
-        data=campaignWiseCalculator(FameHouseMonitoringForm)
-        return render(request, 'campaign-report/detailed.html',data)
-    if campaign=='Nucleus':
-        data = campaignWiseCalculator(InboundMonitoringFormNucleusMedia)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Noom-POD':
-        data = campaignWiseCalculator(ChatMonitoringFormPodFather)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Noom-EVA':
-        data = campaignWiseCalculator(ChatMonitoringFormEva)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='FLA':
-        data = campaignWiseCalculator(FLAMonitoringForm)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='MT Cosmetic':
-        data = campaignWiseCalculator(MasterMonitoringFormMTCosmetics)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Tonn Chat Email':
-        data = campaignWiseCalculator(MasterMonitoringFormTonnChatsEmail)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Movement of Insurance':
-        data = campaignWiseCalculator(MasterMonitoringFormMovementInsurance)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Wit Digital':
-        data = campaignWiseCalculator(WitDigitalMasteringMonitoringForm)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Printer Pix Chat Email':
-        data = campaignWiseCalculator(PrinterPixMasterMonitoringFormChatsEmail)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Printer Pix Inbound':
-        data = campaignWiseCalculator(PrinterPixMasterMonitoringFormInboundCalls)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='AAdya':
-        data = campaignWiseCalculator(MonitoringFormLeadsAadhyaSolution)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Insalvage':
-        data = campaignWiseCalculator(MonitoringFormLeadsInsalvage)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Medicare':
-        data = campaignWiseCalculator(MonitoringFormLeadsMedicare)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='CTS':
-        data = campaignWiseCalculator(MonitoringFormLeadsCTS)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Tentamus Food':
-        data = campaignWiseCalculator(MonitoringFormLeadsTentamusFood)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='Tentamus Pet':
-        data = campaignWiseCalculator(MonitoringFormLeadsTentamusPet)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign=='City Security':
-        data = campaignWiseCalculator(MonitoringFormLeadsCitySecurity)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'Allen Consulting':
-        data = campaignWiseCalculator(MonitoringFormLeadsAllenConsulting)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'System4':
-        data = campaignWiseCalculator(MonitoringFormLeadsSystem4)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'Louisville':
-        data = campaignWiseCalculator(MonitoringFormLeadsLouisville)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'Info Think LLC':
-        data = campaignWiseCalculator(MonitoringFormLeadsInfothinkLLC)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'PSECU':
-        data = campaignWiseCalculator(MonitoringFormLeadsPSECU)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'Get A Rates':
-        data = campaignWiseCalculator(MonitoringFormLeadsGetARates)
-        return render(request, 'campaign-report/detailed.html', data)
-    if campaign == 'Advance Consultants':
-        data = campaignWiseCalculator(MonitoringFormLeadsAdvanceConsultants)
-        return render(request, 'campaign-report/detailed.html', data)
+            if total_audit_count>0:
+                error_percentage_fatal = (total_fatal / total_audit_count) * 100
+            else:
+                error_percentage_fatal=0
+            error_perc_fatal = float("{:.2f}".format(error_percentage_fatal))
+
+            ########  -- Weekwise Calculations
+
+            week_list=['week1','week2','week3','week4','week5']
+            week_wise_report=[]
+            for i in week_list:
+                weekdict={}
+
+                week_fatal_obj=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True,week=i)
+
+                week_fatal_list=[]
+                for j in week_fatal_obj:
+                    week_fatal_list.append(j.fatal_count)
+                week_fatal_count=sum(week_fatal_list)
+
+                week_nonfatal=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i,overall_score__lt=100,fatal=False).count()
+                week_total_audits=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).count()
+                if week_total_audits>0:
+                    fatal_avg=round(float((week_fatal_count/week_total_audits)*100),2)
+                    nonfatal_avg=round(float((week_nonfatal/week_total_audits)*100),2)
+
+                else:
+                    fatal_avg='NA'
+                    nonfatal_avg='NA'
+
+                weekdict['week']=i
+                weekdict['fatal_count']=week_fatal_count
+                weekdict['fatal_avg']=fatal_avg
+                weekdict['total_audits']=week_total_audits
+                weekdict['non_fatal_avg']=nonfatal_avg
+                weekdict['non_fatal_count']=week_nonfatal
+
+                week_wise_report.append(weekdict)
+
+                ########  -- Weekwise Calculations End
+
+            #### --- QA Wise
+
+            qa_wise=[]
+            for i in week_list:
+                qa_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('added_by','week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('added_by'))
+                qa_wise.append(qa_wise_avg)
+
+            am_wise = []
+            for i in week_list:
+                am_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('am', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
+                am_wise.append(am_wise_avg)
+
+            tl_wise = []
+            for i in week_list:
+                tl_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,week=i).values('team_lead', 'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('am'))
+                tl_wise.append(tl_wise_avg)
+
+
+            #Week-wise Emp Fatal
+            pivot_test=pivot(monform.objects.filter(fatal=True),'associate_name','week','fatal_count',aggregation=Sum)
+
+            # Parameter wise ########
+
+            open_coaching_employee_wise=monform.objects.filter(status=False).values('associate_name').annotate(dcount=Count('status'))
+
+
+            data = {'fame_all': fame_all,
+                    'emp_wise': emp_wise,
+                    'emp_wise_fatal': emp_wise_fatal,
+                    #'emp_wise_avg': emp_wise_avg,
+                    'total_errors': total_errors,
+                    'total_fatal':total_fatal,
+                    'total_audit_count': total_audit_count,
+                    'error_perc': error_perc,
+                    'error_perc_fatal':error_perc_fatal,
+                    'process_avg':process_avg,
+                    'week_wise_avg':week_wise_avg,
+                    #'week_wise_fatal_count':week_wise_fatal_count
+                    'week_wise_report':week_wise_report,
+                    'qa_wise_avg':qa_wise,
+                    'am_wise_avg':am_wise,
+                    'tl_wise_avg':tl_wise,
+                    'pivot_test':pivot_test,
+                    'process':campaign,
+                    'emp_coaching':open_coaching_employee_wise,
+                    }
+
+            return data
+
+        if campaign=='Fame House':
+            data=campaignWiseCalculator(FameHouseMonitoringForm)
+            return render(request, 'campaign-report/detailed.html',data)
+        if campaign=='Nucleus':
+            data = campaignWiseCalculator(InboundMonitoringFormNucleusMedia)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Noom-POD':
+            data = campaignWiseCalculator(ChatMonitoringFormPodFather)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Noom-EVA':
+            data = campaignWiseCalculator(ChatMonitoringFormEva)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='FLA':
+            data = campaignWiseCalculator(FLAMonitoringForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='MT Cosmetic':
+            data = campaignWiseCalculator(MasterMonitoringFormMTCosmetics)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Tonn Chat Email':
+            data = campaignWiseCalculator(MasterMonitoringFormTonnChatsEmail)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Movement of Insurance':
+            data = campaignWiseCalculator(MasterMonitoringFormMovementInsurance)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Wit Digital':
+            data = campaignWiseCalculator(WitDigitalMasteringMonitoringForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Printer Pix Chat Email':
+            data = campaignWiseCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Printer Pix Inbound':
+            data = campaignWiseCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='AAdya':
+            data = campaignWiseCalculator(MonitoringFormLeadsAadhyaSolution)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Insalvage':
+            data = campaignWiseCalculator(MonitoringFormLeadsInsalvage)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Medicare':
+            data = campaignWiseCalculator(MonitoringFormLeadsMedicare)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='CTS':
+            data = campaignWiseCalculator(MonitoringFormLeadsCTS)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Tentamus Food':
+            data = campaignWiseCalculator(MonitoringFormLeadsTentamusFood)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='Tentamus Pet':
+            data = campaignWiseCalculator(MonitoringFormLeadsTentamusPet)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign=='City Security':
+            data = campaignWiseCalculator(MonitoringFormLeadsCitySecurity)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Allen Consulting':
+            data = campaignWiseCalculator(MonitoringFormLeadsAllenConsulting)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'System4':
+            data = campaignWiseCalculator(MonitoringFormLeadsSystem4)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Louisville':
+            data = campaignWiseCalculator(MonitoringFormLeadsLouisville)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Info Think LLC':
+            data = campaignWiseCalculator(MonitoringFormLeadsInfothinkLLC)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'PSECU':
+            data = campaignWiseCalculator(MonitoringFormLeadsPSECU)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Get A Rates':
+            data = campaignWiseCalculator(MonitoringFormLeadsGetARates)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Advance Consultants':
+            data = campaignWiseCalculator(MonitoringFormLeadsAdvanceConsultants)
+            return render(request, 'campaign-report/detailed.html', data)
+        else:
+            return render(request,'')
+
     else:
-        return render(request,'')
+        from datetime import datetime
+
+        currentMonth = datetime.now().month
+        currentYear = datetime.now().year
+
+        campaign = cname
+
+        def campaignWiseCalculator(monform):
+
+            emp_wise = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values(
+                'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
+                '-dcount')
+            # emp_wise_avg = monform.objects.filter(audit_date__year=currentYear,audit_date__month=currentMonth).values('associate_name').annotate(dcount=Avg('overall_score')).order_by('-dcount')
+            emp_wise_fatal = monform.objects.filter(fatal=True, audit_date__year=currentYear,
+                                                    audit_date__month=currentMonth).values('associate_name').annotate(
+                dcount=Sum('fatal_count'))
+            fame_all = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth)
+            total_errors = monform.objects.filter(overall_score__lt=100, audit_date__year=currentYear,
+                                                  audit_date__month=currentMonth).count()
+            total_fatal_obj = monform.objects.filter(fatal=True, audit_date__year=currentYear,
+                                                     audit_date__month=currentMonth)
+            total_fata_list = []
+
+            for i in total_fatal_obj:
+                total_fata_list.append(i.fatal_count)
+
+            total_fatal = sum(total_fata_list)
+
+            total_audit_count = monform.objects.filter(audit_date__year=currentYear,
+                                                       audit_date__month=currentMonth).count()
+
+            avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).aggregate(
+                Avg('overall_score'))
+            processavg = avg['overall_score__avg']
+
+            if processavg == None:
+                process_avg = 0
+            else:
+                process_avg = float("{:.2f}".format(processavg))
+
+            week_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values(
+                'week').annotate(davg=Avg('overall_score')).annotate(dcount=Count('week'))
+
+            # week_wise_fatal_count=monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,fatal=True).values('week').annotate(dcount=Count('fatal'))
+
+            if total_audit_count > 0:
+                error_percentage = (total_errors / total_audit_count) * 100
+            else:
+                error_percentage = 0
+            error_perc = float("{:.2f}".format(error_percentage))
+
+            if total_audit_count > 0:
+                error_percentage_fatal = (total_fatal / total_audit_count) * 100
+            else:
+                error_percentage_fatal = 0
+            error_perc_fatal = float("{:.2f}".format(error_percentage_fatal))
+
+            ########  -- Weekwise Calculations
+
+            week_list = ['week1', 'week2', 'week3', 'week4', 'week5']
+            week_wise_report = []
+            for i in week_list:
+                weekdict = {}
+
+                week_fatal_obj = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                                        fatal=True, week=i)
+
+                week_fatal_list = []
+                for j in week_fatal_obj:
+                    week_fatal_list.append(j.fatal_count)
+                week_fatal_count = sum(week_fatal_list)
+
+                week_nonfatal = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                                       week=i, overall_score__lt=100, fatal=False).count()
+                week_total_audits = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                                           week=i).count()
+                if week_total_audits > 0:
+                    fatal_avg = round(float((week_fatal_count / week_total_audits) * 100), 2)
+                    nonfatal_avg = round(float((week_nonfatal / week_total_audits) * 100), 2)
+
+                else:
+                    fatal_avg = 'NA'
+                    nonfatal_avg = 'NA'
+
+                weekdict['week'] = i
+                weekdict['fatal_count'] = week_fatal_count
+                weekdict['fatal_avg'] = fatal_avg
+                weekdict['total_audits'] = week_total_audits
+                weekdict['non_fatal_avg'] = nonfatal_avg
+                weekdict['non_fatal_count'] = week_nonfatal
+
+                week_wise_report.append(weekdict)
+
+                ########  -- Weekwise Calculations End
+
+            #### --- QA Wise
+
+            qa_wise = []
+            for i in week_list:
+                qa_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                                     week=i).values('added_by', 'week').annotate(
+                    davg=Avg('overall_score')).annotate(dcount=Count('added_by'))
+                qa_wise.append(qa_wise_avg)
+
+            am_wise = []
+            for i in week_list:
+                am_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                                     week=i).values('am', 'week').annotate(
+                    davg=Avg('overall_score')).annotate(dcount=Count('am'))
+                am_wise.append(am_wise_avg)
+
+            tl_wise = []
+            for i in week_list:
+                tl_wise_avg = monform.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                                     week=i).values('team_lead', 'week').annotate(
+                    davg=Avg('overall_score')).annotate(dcount=Count('am'))
+                tl_wise.append(tl_wise_avg)
+
+            # Week-wise Emp Fatal
+            pivot_test = pivot(monform.objects.filter(fatal=True), 'associate_name', 'week', 'fatal_count',
+                               aggregation=Sum)
+
+            # Parameter wise ########
+
+            open_coaching_employee_wise = monform.objects.filter(status=False).values('associate_name').annotate(
+                dcount=Count('status'))
+
+            data = {'fame_all': fame_all,
+                    'emp_wise': emp_wise,
+                    'emp_wise_fatal': emp_wise_fatal,
+                    # 'emp_wise_avg': emp_wise_avg,
+                    'total_errors': total_errors,
+                    'total_fatal': total_fatal,
+                    'total_audit_count': total_audit_count,
+                    'error_perc': error_perc,
+                    'error_perc_fatal': error_perc_fatal,
+                    'process_avg': process_avg,
+                    'week_wise_avg': week_wise_avg,
+                    # 'week_wise_fatal_count':week_wise_fatal_count
+                    'week_wise_report': week_wise_report,
+                    'qa_wise_avg': qa_wise,
+                    'am_wise_avg': am_wise,
+                    'tl_wise_avg': tl_wise,
+                    'pivot_test': pivot_test,
+                    'process': campaign,
+                    'emp_coaching': open_coaching_employee_wise,
+                    }
+
+            return data
+
+        if campaign == 'Fame House':
+            data = campaignWiseCalculator(FameHouseMonitoringForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Nucleus':
+            data = campaignWiseCalculator(InboundMonitoringFormNucleusMedia)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Noom-POD':
+            data = campaignWiseCalculator(ChatMonitoringFormPodFather)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Noom-EVA':
+            data = campaignWiseCalculator(ChatMonitoringFormEva)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'FLA':
+            data = campaignWiseCalculator(FLAMonitoringForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'MT Cosmetic':
+            data = campaignWiseCalculator(MasterMonitoringFormMTCosmetics)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Tonn Chat Email':
+            data = campaignWiseCalculator(MasterMonitoringFormTonnChatsEmail)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Movement of Insurance':
+            data = campaignWiseCalculator(MasterMonitoringFormMovementInsurance)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Wit Digital':
+            data = campaignWiseCalculator(WitDigitalMasteringMonitoringForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Printer Pix Chat Email':
+            data = campaignWiseCalculator(PrinterPixMasterMonitoringFormChatsEmail)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Printer Pix Inbound':
+            data = campaignWiseCalculator(PrinterPixMasterMonitoringFormInboundCalls)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'AAdya':
+            data = campaignWiseCalculator(MonitoringFormLeadsAadhyaSolution)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Insalvage':
+            data = campaignWiseCalculator(MonitoringFormLeadsInsalvage)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Medicare':
+            data = campaignWiseCalculator(MonitoringFormLeadsMedicare)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'CTS':
+            data = campaignWiseCalculator(MonitoringFormLeadsCTS)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Tentamus Food':
+            data = campaignWiseCalculator(MonitoringFormLeadsTentamusFood)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Tentamus Pet':
+            data = campaignWiseCalculator(MonitoringFormLeadsTentamusPet)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'City Security':
+            data = campaignWiseCalculator(MonitoringFormLeadsCitySecurity)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Allen Consulting':
+            data = campaignWiseCalculator(MonitoringFormLeadsAllenConsulting)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'System4':
+            data = campaignWiseCalculator(MonitoringFormLeadsSystem4)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Louisville':
+            data = campaignWiseCalculator(MonitoringFormLeadsLouisville)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Info Think LLC':
+            data = campaignWiseCalculator(MonitoringFormLeadsInfothinkLLC)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'PSECU':
+            data = campaignWiseCalculator(MonitoringFormLeadsPSECU)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Get A Rates':
+            data = campaignWiseCalculator(MonitoringFormLeadsGetARates)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Advance Consultants':
+            data = campaignWiseCalculator(MonitoringFormLeadsAdvanceConsultants)
+            return render(request, 'campaign-report/detailed.html', data)
+        else:
+            return render(request, '')
 
 
 def fameHouseFullReport(request):
@@ -1565,14 +2042,14 @@ def coachingDispute(request,pk):
 
         send_mail(subject_of_email, #Subject
                   body_of_email,#Body
-                  'kalesh.cv@expertcallers.com',# From
-                  ['kalesh.cv@expertcallers.com'],# To
+                  'qms@expertcallers.com',# From
+                  ['kalesh.cv@expertcallers.com','aravindh.s@expertcallers.com'],# To
                   fail_silently=False)
 
     if request.method == 'POST':
 
-        # Sending Mail
-        #sendEmail(manager_email)
+        #Sending Mail
+        sendEmail(manager_email)
 
         team = request.user.profile.team
         team = Team.objects.get(name=team)
@@ -4592,7 +5069,6 @@ def exportFameHouse(request,campaign):
         end_date = request.POST['end_date']
 
 
-        print(start_date,end_date)
 
         if campaign=='Fame House':
 
@@ -4650,9 +5126,11 @@ def exportFameHouse(request,campaign):
                                                                      'sh_1',
 
                                                                      'status','closed_date','fatal')
+
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
                    rows]
+
             for row in rows:
                 row_num += 1
                 for col_num in range(len(row)):
@@ -4662,8 +5140,8 @@ def exportFameHouse(request,campaign):
 
             return response
 
-
         else:
-            pass
+
+            return redirect('/quality-dashboard-mgt')
     else:
         pass

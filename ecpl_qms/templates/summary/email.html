@@ -10,11 +10,8 @@
             <p>Campaign - {{campaign.name}}</p>
             <p style=" font-size: 30px;text-shadow: 2px 1px darkgrey;">{{campaign.avg_score|floatformat:2}}%</p>
                 <div>
-                    <form action="/campaign-detailed-view/{{campaign.name}}" method="POST">
-                            {% csrf_token %}
-                        <input type="hidden" value="{{campaign.name}}" name="campaign">
-                        <button class="btn btn-secondary" style="width: 100px;height: 28px; font-size: 11px;">View More</button>
-                    </form>
+
+                    <a href="/employees/campaign-detailed-view/{{campaign.name}}">View More</a>
                 </div>
             </div>
         {% endfor %}

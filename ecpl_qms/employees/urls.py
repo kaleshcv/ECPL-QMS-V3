@@ -90,6 +90,7 @@ urlpatterns = [
     ##############3
     path('campaign-detailed-view/<str:cname>',campaignwiseDetailedReport),
 
+
     path('fame-house-full-report',fameHouseFullReport),
 
     path('export-data/<str:campaign>',exportFameHouse)
