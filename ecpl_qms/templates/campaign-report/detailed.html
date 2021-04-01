@@ -623,23 +623,28 @@
 
 </div>
 
-<div>
-    <table>
-        <tr>
-            <th>Associate Name</th>
-            <th>Open Coachings</th>
-        </tr>
+<div class="container-lg">
+    <div class="row">
+        <div class="col-md-6">
+            <table>
+                <tr>
+                    <th>Associate Name</th>
+                    <th>Open Coachings</th>
+                </tr>
 
 
-            {% for p in emp_coaching %}
-        <tr>
-                <td>{{p.associate_name}}</td>
-                <td>{{p.dcount}}</td>
-        </tr>
-            {% endfor %}
+                    {% for p in emp_coaching %}
+                <tr>
+                        <td>{{p.associate_name}}</td>
+                        <td>{{p.dcount}}</td>
+                </tr>
+                    {% endfor %}
 
 
-    </table>
+            </table>
+        </div>
+    </div>
+
 
 </div>
 

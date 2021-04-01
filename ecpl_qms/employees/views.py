@@ -2150,109 +2150,223 @@ def coachingDispute(request,pk):
 
 def qahome(request):
 
-    qa_name=request.user.profile.emp_name
-    user_id=request.user.id
-    teams=Team.objects.all()
+    if request.method=='POST':
 
-    currentMonth = datetime.now().month
-    currentYear = datetime.now().year
+        qa_name=request.user.profile.emp_name
+        user_id=request.user.id
+        teams=Team.objects.all()
 
-    ######### List of All Coachings ##############3
+        currentMonth = request.POST['month']
+        currentYear = request.POST['year']
 
-    list_of_monforms=[ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,
-                      FameHouseMonitoringForm,FLAMonitoringForm,MasterMonitoringFormMTCosmetics,
-                      MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,WitDigitalMasteringMonitoringForm,
-                      PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,MonitoringFormLeadsAadhyaSolution,
-                      MonitoringFormLeadsInsalvage,MonitoringFormLeadsMedicare,MonitoringFormLeadsCTS,MonitoringFormLeadsTentamusFood,
-                      MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,MonitoringFormLeadsAllenConsulting,
-                      MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
-                      MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
-                      ]
+        ######### List of All Coachings ##############3
 
-    empw_list=[]
+        list_of_monforms=[ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,
+                          FameHouseMonitoringForm,FLAMonitoringForm,MasterMonitoringFormMTCosmetics,
+                          MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,WitDigitalMasteringMonitoringForm,
+                          PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,MonitoringFormLeadsAadhyaSolution,
+                          MonitoringFormLeadsInsalvage,MonitoringFormLeadsMedicare,MonitoringFormLeadsCTS,MonitoringFormLeadsTentamusFood,
+                          MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,MonitoringFormLeadsAllenConsulting,
+                          MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
+                          MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
+                          ]
 
-    for i in list_of_monforms:
-        emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,added_by=qa_name).values(
-        'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
-        '-davg')[:10]
-        empw_list.append(emp_wise)
+        empw_list=[]
 
-
-    # Total NO of Coachings
-    total_coaching_ids=[]
-
-    for i in list_of_monforms:
-        x=i.objects.filter(added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
-
-        for i in x:
-            total_coaching_ids.append(i.id)
-
-    total_coaching=len(total_coaching_ids)
-
-    # All coaching objects
-
-    all_coaching_obj=[]
-
-    for i in list_of_monforms:
-        x=i.objects.filter(added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth).order_by('audit_date')
-        all_coaching_obj.append(x)
-
-    ##### Open_campaigns_objects  ###############
-
-    list_open_campaigns=[]
-
-    for i in list_of_monforms:
-        opn_cmp_obj=i.objects.filter(status=False,added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
-        list_open_campaigns.append(opn_cmp_obj)
-
-################### opn_count #############
-
-    list_of_open_count=[]
-
-    for i in list_of_monforms:
-
-        count=i.objects.filter(added_by=qa_name,status=False,audit_date__year=currentYear, audit_date__month=currentMonth).count()
-        list_of_open_count.append(count)
-
-    total_open_coachings=sum(list_of_open_count)
-
-    ######## Quality Score
-
-    ###################  Avg Campaignwise
-
-    avg_campaignwise = []
-    campaign_wise_count = []
-    fatal_list = []
-
-    for i in list_of_monforms:
-        emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(davg=Avg('overall_score'))
-        camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth, overall_score__lt=100).values('process').annotate(
-            dcount=Count('associate_name'))
-        fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(dcount=Sum('fatal_count'))
-
-        avg_campaignwise.append(emp_wise)
-        campaign_wise_count.append(camp_wise_count)
-        fatal_list.append(fatal_count)
-
-        #############################################
+        for i in list_of_monforms:
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,added_by=qa_name).values(
+            'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
+            '-davg')[:10]
+            empw_list.append(emp_wise)
 
 
-    data={'teams':teams,
+        # Total NO of Coachings
+        total_coaching_ids=[]
 
-          'total_open':total_open_coachings,'total_coaching':total_coaching,
-          'all_c_obj':all_coaching_obj,
+        for i in list_of_monforms:
+            x=i.objects.filter(added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
 
-          'open_campaigns':list_open_campaigns,
-          'emp_wise_score':empw_list,
+            for i in x:
+                total_coaching_ids.append(i.id)
 
-          'avg_campaignwise': avg_campaignwise,
-          'camp_wise_count': campaign_wise_count,
-          'fatal_list': fatal_list,
+        total_coaching=len(total_coaching_ids)
 
-          }
+        # All coaching objects
 
-    return render(request,'qa-home.html',data)
+        all_coaching_obj=[]
 
+        for i in list_of_monforms:
+            x=i.objects.filter(added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth).order_by('audit_date')
+            all_coaching_obj.append(x)
+
+        ##### Open_campaigns_objects  ###############
+
+        list_open_campaigns=[]
+
+        for i in list_of_monforms:
+            opn_cmp_obj=i.objects.filter(status=False,added_by=qa_name,audit_date__year=currentYear, audit_date__month=currentMonth)
+            list_open_campaigns.append(opn_cmp_obj)
+
+    ################### opn_count #############
+
+        list_of_open_count=[]
+
+        for i in list_of_monforms:
+
+            count=i.objects.filter(added_by=qa_name,status=False,audit_date__year=currentYear, audit_date__month=currentMonth).count()
+            list_of_open_count.append(count)
+
+        total_open_coachings=sum(list_of_open_count)
+
+        ######## Quality Score
+
+        ###################  Avg Campaignwise
+
+        avg_campaignwise = []
+        campaign_wise_count = []
+        fatal_list = []
+
+        for i in list_of_monforms:
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(davg=Avg('overall_score'))
+            camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth, overall_score__lt=100).values('process').annotate(
+                dcount=Count('associate_name'))
+            fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(dcount=Sum('fatal_count'))
+
+            avg_campaignwise.append(emp_wise)
+            campaign_wise_count.append(camp_wise_count)
+            fatal_list.append(fatal_count)
+
+            #############################################
+
+
+        data={'teams':teams,
+
+              'total_open':total_open_coachings,'total_coaching':total_coaching,
+              'all_c_obj':all_coaching_obj,
+
+              'open_campaigns':list_open_campaigns,
+              'emp_wise_score':empw_list,
+
+              'avg_campaignwise': avg_campaignwise,
+              'camp_wise_count': campaign_wise_count,
+              'fatal_list': fatal_list,
+
+              }
+
+        return render(request,'qa-home.html',data)
+
+    else:
+        qa_name = request.user.profile.emp_name
+        user_id = request.user.id
+        teams = Team.objects.all()
+
+        currentMonth = datetime.now().month
+        currentYear = datetime.now().year
+
+        ######### List of All Coachings ##############3
+
+        list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                            WitDigitalMasteringMonitoringForm,
+                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                            MonitoringFormLeadsAadhyaSolution,
+                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                            MonitoringFormLeadsTentamusFood,
+                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                            MonitoringFormLeadsAllenConsulting,
+                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
+                            MonitoringFormLeadsAdvanceConsultants,
+                            ]
+
+        empw_list = []
+
+        for i in list_of_monforms:
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                        added_by=qa_name).values(
+                'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
+                '-davg')[:10]
+            empw_list.append(emp_wise)
+
+        # Total NO of Coachings
+        total_coaching_ids = []
+
+        for i in list_of_monforms:
+            x = i.objects.filter(added_by=qa_name, audit_date__year=currentYear, audit_date__month=currentMonth)
+
+            for i in x:
+                total_coaching_ids.append(i.id)
+
+        total_coaching = len(total_coaching_ids)
+
+        # All coaching objects
+
+        all_coaching_obj = []
+
+        for i in list_of_monforms:
+            x = i.objects.filter(added_by=qa_name, audit_date__year=currentYear,
+                                 audit_date__month=currentMonth).order_by('audit_date')
+            all_coaching_obj.append(x)
+
+        ##### Open_campaigns_objects  ###############
+
+        list_open_campaigns = []
+
+        for i in list_of_monforms:
+            opn_cmp_obj = i.objects.filter(status=False, added_by=qa_name, audit_date__year=currentYear,
+                                           audit_date__month=currentMonth)
+            list_open_campaigns.append(opn_cmp_obj)
+
+        ################### opn_count #############
+
+        list_of_open_count = []
+
+        for i in list_of_monforms:
+            count = i.objects.filter(added_by=qa_name, status=False, audit_date__year=currentYear,
+                                     audit_date__month=currentMonth).count()
+            list_of_open_count.append(count)
+
+        total_open_coachings = sum(list_of_open_count)
+
+        ######## Quality Score
+
+        ###################  Avg Campaignwise
+
+        avg_campaignwise = []
+        campaign_wise_count = []
+        fatal_list = []
+
+        for i in list_of_monforms:
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values(
+                'process').annotate(davg=Avg('overall_score'))
+            camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
+                                               overall_score__lt=100).values('process').annotate(
+                dcount=Count('associate_name'))
+            fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values(
+                'process').annotate(dcount=Sum('fatal_count'))
+
+            avg_campaignwise.append(emp_wise)
+            campaign_wise_count.append(camp_wise_count)
+            fatal_list.append(fatal_count)
+
+            #############################################
+
+        data = {'teams': teams,
+
+                'total_open': total_open_coachings, 'total_coaching': total_coaching,
+                'all_c_obj': all_coaching_obj,
+
+                'open_campaigns': list_open_campaigns,
+                'emp_wise_score': empw_list,
+
+                'avg_campaignwise': avg_campaignwise,
+                'camp_wise_count': campaign_wise_count,
+                'fatal_list': fatal_list,
+
+                }
+
+        return render(request, 'qa-home.html', data)
 
 # Final Forms
 
