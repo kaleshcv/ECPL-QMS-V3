@@ -4,21 +4,84 @@
 
 <section style="margin-top:100px">
     <div class="container-lg">
-        <h4>Quality Report - <span style="color: darkblue;font-size: 28px;font-weight: 600">{{manager_name}}</span></h4>
+        <h4>Quality Report - <span style="color: darkblue;font-size: 28px;font-weight: 600">{{profile.emp_name}}</span></h4>
         <hr>
-       <div class="row">
+    </div>
+</section>
 
-            {% for c in campaign %}
-            <div class="col-md-2" style="margin-top:50px;padding-left:30px;">
-               <h4><span style="color: firebrick;font-weight: 600">{{c.name}}</span></h4>
-                <br>
-                <h6><b>Quality Score - {{c.ov_avg|floatformat:2}}%</b></h6>
-                <h6>Total feedbacks - {{c.feedbacks_count}}</h6>
+<section style="padding-top: 30px;padding-left: 40px">
+    <div class="container-lg">
+        <h6><b>Overall</b></h6>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+
+                    <table class="table">
+                        <tr>
+                            <th>Process</th>
+                            <th>Total Audits</th>
+                            <th>Score</th>
+                        </tr>
+
+                    {% for i in associate_data %}
+                    {% for j in i %}
+                        <tr>
+                            <td>{{j.process}}</td>
+                            <td>{{j.dcount}}</td>
+                            <td>{{j.davg|floatformat:2}}%</td>
+                        </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    </table>
             </div>
-            {% endfor %}
-
         </div>
     </div>
 </section>
+
+<section style="padding-top: 30px;padding-left: 40px;margin-bottom:100px">
+    <div class="container-lg">
+        <h6><b>Failed Audit</b></h6>
+        <br>
+        <div class="row">
+            <div class="col-md-5">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th>Process</th>
+                            <th>Fatal Parameters</th>
+                        </tr>
+                    {% for i in associate_data_fatal %}
+                    {% for j in i %}
+                    <tr>
+                            <td>{{j.process}}</td>
+                            <td>{{j.dsum}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    </table>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th>Process</th>
+                            <th>Errors</th>
+                        </tr>
+                    {% for i in associate_data_errors %}
+                    {% for j in i %}
+                    <tr>
+                            <td>{{j.process}}</td>
+                            <td>{{j.dcount}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endfor %}
+                    </table>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
 
 {% endblock %}

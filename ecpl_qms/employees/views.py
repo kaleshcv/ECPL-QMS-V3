@@ -131,73 +131,13 @@ def change_password(request):
 
 
 def employeeWiseReport(request):
+
     if request.method == 'POST':
 
-        currentMonth = datetime.now().month
-        currentYear = datetime.now().year
+        currentMonth = request.POST['month']
+        currentYear = request.POST['year']
         emp_id = request.POST['emp_id']
         profile=Profile.objects.get(emp_id=emp_id)
-
-        # function to calcluate overall Score, process name
-        def scoreCalculator(campaign):
-            overall_total = []
-            name=[]
-            for i in campaign:
-                overall_total.append(i.overall_score)
-                name.append(i.process)
-            if len(overall_total) > 0:
-                ov_perc = sum(overall_total) / len(overall_total)
-            else:
-                ov_perc = 100
-            return ov_perc,name[0]
-
-        # Mon Form List
-        mon_forms = [ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,FameHouseMonitoringForm,
-                     FLAMonitoringForm,MasterMonitoringFormMTCosmetics,MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,
-                     WitDigitalMasteringMonitoringForm,PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,
-                     MonitoringFormLeadsAadhyaSolution,MonitoringFormLeadsInsalvage,MonitoringFormLeadsMedicare,MonitoringFormLeadsCTS,
-                     MonitoringFormLeadsTentamusFood,MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,
-                     MonitoringFormLeadsAllenConsulting,MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants]
-
-        #Campaign List
-        campaign_details = []
-
-        # Score in All forms
-        for i in mon_forms:
-            coaching=i.objects.filter(emp_id=emp_id,audit_date__year=currentYear,audit_date__month=currentMonth)
-
-            if coaching.count()>0:
-                ov_perc,name=scoreCalculator(coaching)
-                summary={'feedbacks_count':coaching.count(),'ov_avg':ov_perc,'name':name}
-                campaign_details.append(summary)
-            else:
-                pass
-
-        data={'campaign':campaign_details,'profile':profile}
-        return render(request,'employee-wise-report.html',data)
-
-def managerWiseReport(request):
-    if request.method == 'POST':
-
-        currentMonth = datetime.now().month
-        currentYear = datetime.now().year
-        manager_emp_id=request.POST['emp_id']
-        profile=Profile.objects.get(emp_id=manager_emp_id)
-        manager_name=profile.emp_name
-
-        # function to calcluate overall Score, process name
-        def scoreCalculator(campaign):
-            overall_total = []
-            name=[]
-            for i in campaign:
-                overall_total.append(i.overall_score)
-                name.append(i.process)
-            if len(overall_total) > 0:
-                ov_perc = sum(overall_total) / len(overall_total)
-            else:
-                ov_perc = 100
-            return ov_perc,name[0]
 
         # Mon Form List
         mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -213,22 +153,103 @@ def managerWiseReport(request):
                      MonitoringFormLeadsInfothinkLLC,
                      MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
 
-        #Campaign List
-        campaign_details = []
+
+        associate_data=[]
+        associate_data_fatal=[]
+        associate_data_errors=[]
 
         # Score in All forms
         for i in mon_forms:
-            coaching=i.objects.filter(manager_id=manager_emp_id,audit_date__year=currentYear,audit_date__month=currentMonth)
+            coaching = i.objects.filter(emp_id=emp_id, audit_date__year=currentYear,
+                                        audit_date__month=currentMonth)
+            if coaching.count() > 0:
 
-            if coaching.count()>0:
-                ov_perc,name=scoreCalculator(coaching)
-                summary={'feedbacks_count':coaching.count(),'ov_avg':ov_perc,'name':name}
-                campaign_details.append(summary)
+                emp_wise = i.objects.filter(emp_id=emp_id,audit_date__year=currentYear, audit_date__month=currentMonth).values(
+                    'process').annotate(dcount=Count('associate_name')).annotate(
+                    davg=Avg('overall_score'))
+                emp_wise_fatal = i.objects.filter(emp_id=emp_id, audit_date__year=currentYear,
+                                            audit_date__month=currentMonth).values(
+                    'process').annotate(dsum=Sum('fatal_count'))
+
+                emp_wise_errors = i.objects.filter(emp_id=emp_id, audit_date__year=currentYear,
+                                                  audit_date__month=currentMonth,overall_score__lt=100).values(
+                    'process').annotate(dcount=Count('process'))
+
+                associate_data.append(emp_wise)
+                associate_data_fatal.append(emp_wise_fatal)
+                associate_data_errors.append(emp_wise_errors)
+
+
             else:
                 pass
 
 
-        data={'campaign':campaign_details,'manager_name':manager_name}
+        data = {'profile':profile,'associate_data':associate_data,
+                'associate_data_fatal':associate_data_fatal,
+                'associate_data_errors':associate_data_errors,
+                }
+
+
+        return render(request,'employee-wise-report.html',data)
+
+def managerWiseReport(request):
+
+    if request.method == 'POST':
+
+        currentMonth = request.POST['month']
+        currentYear = request.POST['year']
+        manager_emp_id=request.POST['emp_id']
+        profile=Profile.objects.get(emp_id=manager_emp_id)
+        manager_name=profile.emp_name
+
+
+
+        # Mon Form List
+        mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                     FameHouseMonitoringForm,
+                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
+                     MasterMonitoringFormMovementInsurance,
+                     WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
+                     PrinterPixMasterMonitoringFormInboundCalls,
+                     MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
+                     MonitoringFormLeadsCTS,
+                     MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                     MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
+                     MonitoringFormLeadsInfothinkLLC,
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+
+        associate_data = []
+        associate_data_fatal = []
+        associate_data_errors = []
+
+        # Score in All forms
+        for i in mon_forms:
+            coaching = i.objects.filter(manager_id=manager_emp_id, audit_date__year=currentYear,
+                                        audit_date__month=currentMonth)
+            if coaching.count() > 0:
+
+                emp_wise = i.objects.filter(manager_id=manager_emp_id, audit_date__year=currentYear,
+                                            audit_date__month=currentMonth).values(
+                    'process').annotate(dcount=Count('associate_name')).annotate(
+                    davg=Avg('overall_score'))
+                emp_wise_fatal = i.objects.filter(manager_id=manager_emp_id, audit_date__year=currentYear,
+                                                  audit_date__month=currentMonth).values(
+                    'process').annotate(dsum=Sum('fatal_count'))
+
+                emp_wise_errors = i.objects.filter(manager_id=manager_emp_id, audit_date__year=currentYear,
+                                                   audit_date__month=currentMonth, overall_score__lt=100).values(
+                    'process').annotate(dcount=Count('process'))
+
+                associate_data.append(emp_wise)
+                associate_data_fatal.append(emp_wise_fatal)
+                associate_data_errors.append(emp_wise_errors)
+            else:
+                pass
+
+        data = {'profile': profile, 'associate_data': associate_data,
+                'associate_data_fatal': associate_data_fatal,
+                'associate_data_errors': associate_data_errors,
+                }
 
         return render(request,'manager-wise-report.html',data)
 
@@ -2141,7 +2162,6 @@ def coachingDispute(request,pk):
 
         else:
             pass
-
 
         data={'team':team}
         return render(request,'coaching-dispute-message.html',data)
