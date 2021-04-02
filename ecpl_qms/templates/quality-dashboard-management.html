@@ -165,7 +165,27 @@
                                             <option value="{{employee.emp_id}}" class="form-control">{{employee.emp_name}}</option>
                                             {% endfor %}
                                         </select><br>
+                                        <select name="month" id="" class="form-control">
+                                            <option value="1" class="form-control">Jan</option>
+                                            <option value="2" class="form-control">Feb</option>
+                                            <option value="3" class="form-control">March</option>
+                                            <option value="4" class="form-control">April</option>
+                                            <option value="5" class="form-control">May</option>
+                                            <option value="6" class="form-control">June</option>
+                                            <option value="7" class="form-control">July</option>
+                                            <option value="8" class="form-control">August</option>
+                                            <option value="9" class="form-control">September</option>
+                                            <option value="10" class="form-control">October</option>
+                                            <option value="11" class="form-control">November</option>
+                                            <option value="12" class="form-control">Dec</option>
+                                        </select>
+                                        <br>
 
+                                        <select name="year" id="" class="form-control">
+                                            <option value="2021" class="form-control">2021</option>
+                                        </select>
+
+                                        <br>
                                         <input type="hidden" value="{{team.name}}" name="team">
 
                                         <button class="btn btn-info">View Report</button>
@@ -186,6 +206,27 @@
                                             {% endfor %}
                                         </select><br>
 
+                                        <select name="month" id="" class="form-control">
+                                            <option value="1" class="form-control">Jan</option>
+                                            <option value="2" class="form-control">Feb</option>
+                                            <option value="3" class="form-control">March</option>
+                                            <option value="4" class="form-control">April</option>
+                                            <option value="5" class="form-control">May</option>
+                                            <option value="6" class="form-control">June</option>
+                                            <option value="7" class="form-control">July</option>
+                                            <option value="8" class="form-control">August</option>
+                                            <option value="9" class="form-control">September</option>
+                                            <option value="10" class="form-control">October</option>
+                                            <option value="11" class="form-control">November</option>
+                                            <option value="12" class="form-control">Dec</option>
+                                        </select>
+                                        <br>
+
+                                        <select name="year" id="" class="form-control">
+                                            <option value="2021" class="form-control">2021</option>
+                                        </select>
+                                        <br>
+
                                         <input type="hidden" value="{{team.name}}" name="team">
 
                                         <button class="btn btn-info">View Report</button>
@@ -198,7 +239,6 @@
     </div>
 </section>
 
-
 <section style="margin-top:100px">
     <div class="container-lg">
         <h2>Coaching Closure Status</h2><br>
@@ -207,12 +247,11 @@
         <div class="col-md-3" style="box-shadow: 5px 5px 10px lightgrey;padding: 20px;margin: 31px">
             <h4>{{c.name}}</h4>
             <br>
-            <p>{{c.perc}}%</p>
+            <p>{{c.perc|floatformat:2}}%</p>
         </div>
         {% endfor %}
         </div>
     </div>
 </section>
-
 
 {% endblock %}
