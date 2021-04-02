@@ -26,8 +26,8 @@ SECRET_KEY = 'qiqrj@a%23r3w$@74il94tgh!3@$*if$1x#w8p&@4lko!p7#u2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#ALLOWED_HOSTS = ['172.16.10.25','0.0.0.0']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['172.16.10.25','0.0.0.0']
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -132,7 +132,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 EMAIL_HOST=('secure.emailsrvr.com')
 EMAIL_PORT=465
 EMAIL_HOST_USER='qms@expertcallers.com'
-EMAIL_HOST_PASSWORD=''
+EMAIL_HOST_PASSWORD='ExperQm$2021'
 EMAIL_USE_TLS =False
 EMAIL_USE_SSL =True
 
