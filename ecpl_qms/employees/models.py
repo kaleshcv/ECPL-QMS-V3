@@ -39,7 +39,7 @@ class Profile(models.Model):
 
                    )
 
-    process_list=(('Fame House','Fame House'),('CTS','CTS'))
+
 
 
     user=models.OneToOneField(User,on_delete=models.CASCADE)
@@ -49,7 +49,7 @@ class Profile(models.Model):
     team=models.CharField(max_length=50,choices=team_list)
     email=models.EmailField(default='emp@ecpl.com',null=True)
 
-    process = models.CharField(max_length=100,choices=process_list)
+    process = models.CharField(max_length=100,choices=team_list)
     team_lead = models.CharField(max_length=50,default='Testlead')
     manager = models.CharField(max_length=50,default='Testmanager')
     am = models.CharField(max_length=50,default='testam')
@@ -57,7 +57,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.emp_name
-
 
 
 class Team(models.Model):
@@ -1999,4 +1998,28 @@ class MonitoringFormLeadsAdvanceConsultants(models.Model):
 
     def snippet(self):
         return self.comments[:100] + '...'
+
+
+
+class Empdata(models.Model):
+    uid=models.IntegerField(unique=True)
+    username=models.IntegerField()
+    password=models.CharField(max_length=30)
+
+class Empprofile(models.Model):
+    uid = models.IntegerField(unique=True)
+    empname=models.CharField(max_length=50)
+    empid=models.IntegerField()
+    empdesi=models.CharField(max_length=50)
+    team=models.CharField(max_length=50)
+    email=models.CharField(max_length=50)
+    teamlead=models.CharField(max_length=50)
+    manager=models.CharField(max_length=50)
+    user_id=models.IntegerField()
+    am=models.CharField(max_length=50)
+    process=models.CharField(max_length=50)
+
+
+
+
 

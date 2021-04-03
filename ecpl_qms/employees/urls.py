@@ -72,7 +72,7 @@ urlpatterns = [
 
 
     path('coaching/signcoaching/<int:pk>',signCoaching),
-    path('campaign-view/<int:pk>',campaignView),
+    path('campaign-view',campaignView),
     path('add-coaching',selectCoachingForm),
     path('coaching-summary-view',coachingSummaryView),
     path('coaching-success',coachingSuccess),
@@ -92,6 +92,8 @@ urlpatterns = [
 
     path('fame-house-full-report',fameHouseFullReport),
 
-    path('export-data/<str:campaign>',exportFameHouse)
+    path('export-data/<str:campaign>',exportFameHouse),
+
+    path('adduser',addtoUserModel),
 
 ]

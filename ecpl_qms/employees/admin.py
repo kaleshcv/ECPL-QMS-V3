@@ -5,6 +5,8 @@ from .models import *
 admin.site.register(Team)
 admin.site.register(Profile)
 admin.site.register(Process)
+admin.site.register(Empdata)
+admin.site.register(Empprofile)
 
 # Monitoring Forms
 

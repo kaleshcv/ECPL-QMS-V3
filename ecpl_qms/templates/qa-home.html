@@ -1,17 +1,27 @@
 {% extends 'base.html' %}
 {% block main %}
 {% load static %}
-<section class="profile_1" style="background-image: url(/static/images/dashboard.jpg);height: 300px;background-size: cover;"">
+<section class="profile_1" style="background-image: url(/static/images/dashboard.jpg);height: 300px;background-size: cover;">
     <div style="background: #2f374e;opacity: 77%;height: 300px">
         <div class="container-lg" style="padding-bottom: 20px">
             <div class="row">
                 <div class="col-md-12" style="padding: 50px 30px">
                     <h2 style="color:white">Campaigns</h2>
                     <br>
-                    <span style="color: gold;font-size: 10px">Add Coaching</span>
-                    {% for team in teams %}
-                    <span style="margin-left:10px;"><a href="campaign-view/{{team.id}}" style="color:#b0fbff">{{team.name}}</a></span>
-                    {% endfor %}
+                    <div>
+                        <form action="/campaign-view" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <span style="color: gold;font-size: 10px">Add Coaching</span>
+                            <select name="campaign">
+                            {% for team in teams %}
+                            <option value="{{team.id}}">{{team.name}}</option>
+                             {% endfor %}
+                            </select>
+                            <br>
+                            <br>
+                            <button class="btn btn-primary">Add Coaching</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 

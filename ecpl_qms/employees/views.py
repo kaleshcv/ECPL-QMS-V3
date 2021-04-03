@@ -11,7 +11,6 @@ from django.db.models import Count,Avg,Sum
 import pandas as pd
 
 
-
 import xlwt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -91,12 +90,17 @@ def login_view(request):
             login(request, user)
 
             # redirecting
-            if user.profile.emp_desi=='QA' :
+            if user.profile.emp_desi=='QA':
                 return redirect('/employees/qahome')
             elif user.profile.emp_desi=='Manager' or user.profile.emp_desi=='AM':
                 return redirect('/employees/manager-home')
-            else:
+            elif user.profile.emp_desi=='CRO' or user.profile.emp_desi=='Patrolling officer':
                 return redirect('/employees/agenthome')
+            else:
+                form = AuthenticationForm()
+                messages.info(request, 'Please Contact Admin !')
+                return render(request, 'login.html', {'form': form})
+
         else:
             form = AuthenticationForm()
             messages.info(request,'Invalid Credentials !')
@@ -5038,14 +5042,19 @@ def leadsandSalesAdvance(request):
 
 #campaign View
 
-def campaignView(request,pk):
-    team=Team.objects.get(id=pk)
-    team_name=team.name
-    agents=Profile.objects.filter(team=team_name,emp_desi='CRO')
+def campaignView(request):
 
-    data = {'team': team,'agents':agents}
-    return render(request,'campaign-view.html',data)
+    if request.method=='POST':
 
+        pk=request.POST['campaign']
+        team=Team.objects.get(id=pk)
+        team_name=team.name
+        agents=Profile.objects.filter(team=team_name,emp_desi='CRO')
+
+        data = {'team': team,'agents':agents}
+        return render(request,'campaign-view.html',data)
+    else:
+        pass
 def selectCoachingForm(request):
     if request.method == 'POST':
         audit_form=request.POST['audit_form']
@@ -5281,4 +5290,18 @@ def exportFameHouse(request,campaign):
         pass
 
     #test
+
+def addtoUserModel(request):
+
+    empobj=Empdata.objects.all()
+
+    for i in empobj:
+
+        user = User.objects.create_user(id=i.id,username=i.username,
+                                    password=i.password)
+
+
+
+
+
 
