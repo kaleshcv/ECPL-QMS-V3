@@ -2061,9 +2061,7 @@ def coachingDispute(request,pk):
 
     # Email Contents
     subject_of_email='Coaching dispute of -'+emp_name
-    body_of_email = 'Hello'+ '\n' + 'The QA socre for the following call is being disputed by '+' - '+'emp_name' +'\n'+'for the following reasons' +'\n' + emp_comments +'\n' +'Request you to follow up on this with the concerned as the coaching will remain OPEN until resolved, and will not reflect in the QA Scorecard.'
-
-    body_of_email = 'Emp - Comments' + emp_comments
+    body_of_email = 'Hello'+ '\n' + 'The QA socre for the following call is being disputed by '+' - '+emp_name +'\n for the following reasons -- >\n' + emp_comments +'\n -- Request you to follow up on this with the concerned as the coaching will remain OPEN until resolved, and will not reflect in the QA Scorecard.'
 
     def sendEmail(email):
 
@@ -5214,7 +5212,6 @@ def exportFameHouse(request,campaign):
         end_date = request.POST['end_date']
 
 
-
         if campaign=='Fame House':
 
             response = HttpResponse(content_type='application/ms-excel')
@@ -5302,8 +5299,4 @@ def addtoUserModel(request):
         user = User.objects.create_user(id=i.id,username=i.username,
                                     password=i.password)
 
-
-
-
-
-
+    print('Done')
