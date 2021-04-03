@@ -2061,6 +2061,8 @@ def coachingDispute(request,pk):
 
     # Email Contents
     subject_of_email='Coaching dispute of -'+emp_name
+    body_of_email = 'Hello'+ '\n' + 'The QA socre for the following call is being disputed by '+' - '+'emp_name' +'\n'+'for the following reasons' +'\n' + emp_comments +'\n' +'Request you to follow up on this with the concerned as the coaching will remain OPEN until resolved, and will not reflect in the QA Scorecard.'
+
     body_of_email = 'Emp - Comments' + emp_comments
 
     def sendEmail(email):
