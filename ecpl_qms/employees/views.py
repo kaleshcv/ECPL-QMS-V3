@@ -333,13 +333,17 @@ def qualityDashboardMgt(request):
         get_avg_score=avgscoreCalculator(MonitoringFormLeadsGetARates)
         adv_avg_score=avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
+        leads = (mt_avg_score + mov_avg_score + aadya_avg_score+insalvage_avg_score+
+                 medicare_avg_score+cts_avg_score+tfood_avg_score+tpet_avg_score+
+                 city_avg_score+allen_avg_score+system4_avg_score+louis_avg_score+
+                 info_avg_score+psecu_avg_score+get_avg_score+adv_avg_score) / 16  # Outbound
 
         chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
-        outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+        #outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
         email=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score+fame_avg_score)/5
         inbound=(nuc_avg_score+pixcall_avg_score)/2
         other=(fla_avg_score+wit_avg_score)/2
-        leads=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+
 
         # Coaching closure
 
@@ -487,11 +491,14 @@ def qualityDashboardMgt(request):
         adv_avg_score = avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
         chat = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score) / 4
-        outbound = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
+        #outbound = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
         email = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score + fame_avg_score) / 5
         inbound = (nuc_avg_score + pixcall_avg_score) / 2
         other = (fla_avg_score + wit_avg_score) / 2
-        leads = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
+        leads = (mt_avg_score + mov_avg_score + aadya_avg_score + insalvage_avg_score +
+                 medicare_avg_score + cts_avg_score + tfood_avg_score + tpet_avg_score +
+                 city_avg_score + allen_avg_score + system4_avg_score + louis_avg_score +
+                 info_avg_score + psecu_avg_score + get_avg_score + adv_avg_score) / 16  # Outbound
 
         # Coaching closure
 
