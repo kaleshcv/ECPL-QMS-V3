@@ -339,7 +339,7 @@ def qualityDashboardMgt(request):
                  info_avg_score+psecu_avg_score+get_avg_score+adv_avg_score) / 16  # Outbound
 
         chat=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score)/4
-        #outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
+        outbound=(mt_avg_score+mov_avg_score+aadya_avg_score)/3
         email=(eva_avg_score+pod_avg_score+ton_avg_score+pixchat_avg_score+fame_avg_score)/5
         inbound=(nuc_avg_score+pixcall_avg_score)/2
         other=(fla_avg_score+wit_avg_score)/2
@@ -491,7 +491,7 @@ def qualityDashboardMgt(request):
         adv_avg_score = avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
         chat = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score) / 4
-        #outbound = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
+        outbound = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
         email = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score + fame_avg_score) / 5
         inbound = (nuc_avg_score + pixcall_avg_score) / 2
         other = (fla_avg_score + wit_avg_score) / 2
