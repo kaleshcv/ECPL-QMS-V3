@@ -5309,13 +5309,13 @@ def exportFameHouse(request,campaign):
 
     #test
 
-def addtoUserModel(request):
+#def addtoUserModel(request):
 
-    empobj=Empdata.objects.all()
+    #empobj=Empdata.objects.all()
 
-    for i in empobj:
+    #for i in empobj:
 
-        user = User.objects.create_user(id=i.id,username=i.username,
-                                    password=i.password)
+       # user = User.objects.create_user(id=i.id,username=i.username,
+                              #      password=i.password)
 
-    print('Done')
+    #print('Done')
