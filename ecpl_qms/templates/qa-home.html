@@ -11,7 +11,7 @@
                     <div>
                         <form action="/campaign-view" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <span style="color: gold;font-size: 10px">Add Coaching</span>
+                            <span style="color: gold;font-size: 14px">Add Coaching</span>
                             <select name="campaign">
                             {% for team in teams %}
                             <option value="{{team.id}}">{{team.name}}</option>
