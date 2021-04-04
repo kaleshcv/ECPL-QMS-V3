@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block main %}
+<div class="container-lg" style="padding:100px 100px">
+    <h4>Update Email Address</h4>
+</div>
+
+<div class="container-lg">
+
+        <div class="row">
+            <div class="col-md-5">
+                <form action="/employees/update-email-address/{{user.profile.emp_id}}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                    <label for="">Enter New Email Address</label>
+                    <input type="email" name="email1" required class="form-control">
+                    <label for="">Confirm New Email Address</label>
+                    <input type="email" name="email2" required class="form-control">
+                    <input class="btn btn-info" type="submit" value="Update" style="margin-top:30px;">
+                </form>
+            </div>
+                <div style="margin: 20px 0px;color: red;font-size: 21px">
+                    {% for m in messages %}
+                        {{m}}
+                    {% endfor %}
+                </div>
+        </div>
+
+</div>
+
+
+{% endblock %}

@@ -3,10 +3,17 @@
 {% load static %}
 
 <section style="background-image: url(/static/images/dashboard.jpg);height: 400px;background-size: cover;">
+    <div style="background: #2f374e;opacity: 77%;height: 400px">
     <div class="container-lg">
-            <div>
+            <div class="profile-head">
                 <h2 style="padding-top: 170px;color: antiquewhite;font-size: 43px">Quality Dashboard</h2>
+                <br>
+                <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
+                <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
+                <span style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}</span>
+                <span><a href="/employees/update-email-address/{{user.profile.emp_id}}">Update Email Address</a></span><br><br>
             </div>
+    </div>
     </div>
 </section>
 

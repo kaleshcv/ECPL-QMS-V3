@@ -131,6 +131,25 @@ def change_password(request):
         form = PasswordChangeForm(request.user)
     return render(request, 'change_password.html', {'form': form})
 
+
+def updateEmailAddress(request,pk):
+
+    if request.method=='POST':
+        emp_id=pk
+        email_1=request.POST['email1']
+        email_2 = request.POST['email2']
+        if email_1 == email_2 :
+            profile_obj=Profile.objects.get(emp_id=emp_id)
+            profile_obj.email=email_2
+            profile_obj.save()
+            messages.success(request,'Email Address Updated Successfully ! Please login back')
+            return redirect('/logout')
+        else:
+            messages.error(request,'Email Address Mismatching')
+            return render(request, 'update-email.html')
+    else:
+        return render(request,'update-email.html')
+
 #Done
 
 
@@ -2061,7 +2080,7 @@ def coachingDispute(request,pk):
 
     # Email Contents
     subject_of_email='Coaching dispute of -'+emp_name
-    body_of_email = 'Hello'+ '\n' + 'The QA socre for the following call is being disputed by '+' - '+emp_name +'\n for the following reasons -- >\n' + emp_comments +'\n -- Request you to follow up on this with the concerned as the coaching will remain OPEN until resolved, and will not reflect in the QA Scorecard.'
+    body_of_email = 'Hello ,'+ '\n' + 'The QA socre for the following call is being disputed by '+' - '+emp_name +'\n for the following reasons -- >\n' + emp_comments +'\n -- Request you to follow up on this with the concerned as the coaching will remain OPEN until resolved, and will not reflect in the QA Scorecard.'
 
     def sendEmail(email):
 
