@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'qiqrj@a%23r3w$@74il94tgh!3@$*if$1x#w8p&@4lko!p7#u2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['172.16.10.25','0.0.0.0']
 #ALLOWED_HOSTS = []
@@ -138,4 +138,4 @@ EMAIL_USE_SSL =True
 
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
-SESSION_COOKIE_AGE = 5 * 60
+#SESSION_COOKIE_AGE = 5 * 60
