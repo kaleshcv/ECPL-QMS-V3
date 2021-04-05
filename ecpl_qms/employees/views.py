@@ -5328,6 +5328,19 @@ def addtoUserModel(request):
     print('Done')
 
 
+def addSingleProfile(request):
+
+    emp_id=6728
+
+    manager='Dina'
+    profile_object=Profile.objects.get(emp_id=emp_id)
+    profile_object.manager=manager
+    profile_object.save()
+
+    print ('Added',emp_id,manager)
+
+
+
 def updateProfile(request):
 
     if request.method=='POST':
