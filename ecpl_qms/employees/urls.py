@@ -99,6 +99,6 @@ urlpatterns = [
 
     path('update-profile',updateProfile),
 
-    path('add-single-profile',addSingleProfile),
+    #path('add-single-profile',addSingleProfile),
 
 ]
