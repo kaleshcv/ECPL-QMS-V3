@@ -5326,3 +5326,14 @@ def addtoUserModel(request):
                                    password=i.password)
 
     print('Done')
+
+
+def updateProfile(request):
+
+    if request.method=='POST':
+        pass
+    else:
+        profiles=Profile.objects.all()
+        data={'profiles':profiles}
+        return render(request,'update-profile.html',data)
+
