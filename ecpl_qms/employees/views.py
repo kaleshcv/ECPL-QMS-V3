@@ -5075,7 +5075,7 @@ def campaignView(request):
         pk=request.POST['campaign']
         team=Team.objects.get(id=pk)
         team_name=team.name
-        agents=Profile.objects.filter(team=team_name,emp_desi='CRO')
+        agents=Profile.objects.filter(emp_desi='CRO')
 
         data = {'team': team,'agents':agents}
         return render(request,'campaign-view.html',data)
