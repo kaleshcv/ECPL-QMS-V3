@@ -39,6 +39,9 @@ urlpatterns = [
     path('Monitoring-Form-Leads-Get-A-Rates',leadsandSalesGetRates),
     path('Monitoring-Form-Leads-Advance-Consultant',leadsandSalesAdvance),
 
+    path('fur-baby-mon-form',furBabyMonForm),
+    path('max-well',maxwellProperties),
+
 
 #### Credentials
 

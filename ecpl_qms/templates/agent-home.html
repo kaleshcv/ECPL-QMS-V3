@@ -66,12 +66,12 @@
             <div class="row">
                 <div class="col-md-3" style="margin: 20px;box-shadow: 1px 1px 10px #423e55;padding: 20px;background: #101c48">
             <h6 style="color:grey">Quality Score</h6>
-            <br>
+                    <hr>
             {% for i in avg_campaignwise %}
                 {% for j in i %}
                 <div>
-
-                    <span style="font-weight: 600;color: white;font-size:25px">{{j.davg|floatformat:2}}%</span>
+                    <span><small style="color:grey">{{j.process}}</small></span>
+                    <span style="font-weight: 600;color: white;font-size:16px">{{j.davg|floatformat:2}}%</span>
 
                 </div>
 
@@ -81,12 +81,12 @@
         </div>
         <div class="col-md-3" style="margin: 20px;box-shadow: 1px 1px 10px #423e55;padding: 20px;background: #101c48">
             <h6 style="color:grey">Failed Audits</h6>
-            <br>
+            <hr>
             {% for i in camp_wise_count %}
                 {% for j in i %}
                 <div>
-
-                    <span style="font-weight: 600;color: white;font-size:25px">{{j.dcount}}</span>
+                    <span><small style="color:grey">{{j.process}}</small></span>
+                    <span style="font-weight: 600;color: white;font-size:16px">{{j.dcount}}</span>
 
                 </div>
 
@@ -95,12 +95,12 @@
         </div>
         <div class="col-md-3" style="margin: 20px;box-shadow: 1px 1px 10px #423e55;padding: 20px;background: #101c48">
             <h6 style="color:grey">Fatal</h6>
-            <br>
+            <hr>
             {% for i in fatal_list %}
                 {% for j in i %}
                 <div>
-
-                    <span style="font-weight: 600;color: white;font-size:25px">{{j.dcount}}</span>
+                    <span><small style="color:grey">{{j.process}}</small></span>
+                    <span style="font-weight: 600;color: white;font-size:16px">{{j.dcount}}</span>
 
                 </div>
 

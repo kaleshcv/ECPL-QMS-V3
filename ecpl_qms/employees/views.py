@@ -174,7 +174,8 @@ def employeeWiseReport(request):
                      MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
                      MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
                      MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                     FurBabyMonForm,MaxwellProperties]
 
 
         associate_data=[]
@@ -239,7 +240,8 @@ def managerWiseReport(request):
                      MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
                      MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
                      MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                     FurBabyMonForm,MaxwellProperties]
 
         associate_data = []
         associate_data_fatal = []
@@ -333,6 +335,11 @@ def qualityDashboardMgt(request):
         get_avg_score=avgscoreCalculator(MonitoringFormLeadsGetARates)
         adv_avg_score=avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
+        fur_avg_score=avgscoreCalculator(FurBabyMonForm)
+        max_avg_score=avgscoreCalculator(MaxwellProperties)
+
+
+
         leads = (mt_avg_score + mov_avg_score + aadya_avg_score+insalvage_avg_score+
                  medicare_avg_score+cts_avg_score+tfood_avg_score+tpet_avg_score+
                  city_avg_score+allen_avg_score+system4_avg_score+louis_avg_score+
@@ -390,6 +397,9 @@ def qualityDashboardMgt(request):
         closed_percentage_getarates=coachingClosureCalculator(MonitoringFormLeadsGetARates)
         closed_percentage_advance=coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
 
+        closed_percentage_fur=coachingClosureCalculator(FurBabyMonForm)
+        closed_percentage_max=coachingClosureCalculator(MaxwellProperties)
+
 
         pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod,'score':pod_avg_score}
         eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva,'score':eva_avg_score}
@@ -417,11 +427,15 @@ def qualityDashboardMgt(request):
         getarates={'name':'Get A Rates','perc':closed_percentage_getarates,'score':get_avg_score}
         advance={'name':'Advance Consultants','perc':closed_percentage_advance,'score':adv_avg_score}
 
+        fur={'name':'Fur Baby','perc':closed_percentage_fur,'score':fur_avg_score}
+        max={'name':'Maxwell Properties','perc':closed_percentage_max,'score':max_avg_score}
+
+
 
 
         campaigns = [pod, eva,nucleus,famehouse,fla,mt,ton,mov,wit,pixchat,pixcall,aadya,
                      insalvage,medicare,cts,tfood,tpet,city,allen,system,louis,info,psecu,
-                     getarates,advance]
+                     getarates,advance,fur,max]
 
         ###############################################################
 
@@ -436,7 +450,8 @@ def qualityDashboardMgt(request):
                      MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
                      MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
                      MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                     FurBabyMonForm,MaxwellProperties]
 
         camp_wise_tot=[]
         for i in mon_forms:
@@ -513,15 +528,19 @@ def qualityDashboardMgt(request):
         get_avg_score = avgscoreCalculator(MonitoringFormLeadsGetARates)
         adv_avg_score = avgscoreCalculator(MonitoringFormLeadsAdvanceConsultants)
 
+        fur_avg_score = avgscoreCalculator(FurBabyMonForm)
+        max_avg_score = avgscoreCalculator(MaxwellProperties)
+
+        leads = (mt_avg_score + mov_avg_score + aadya_avg_score + insalvage_avg_score +
+                 medicare_avg_score + cts_avg_score + tfood_avg_score + tpet_avg_score +
+                 city_avg_score + allen_avg_score + system4_avg_score + louis_avg_score +
+                 info_avg_score + psecu_avg_score + get_avg_score + adv_avg_score) / 16  # Outbound
+
         chat = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score) / 4
         outbound = (mt_avg_score + mov_avg_score + aadya_avg_score) / 3
         email = (eva_avg_score + pod_avg_score + ton_avg_score + pixchat_avg_score + fame_avg_score) / 5
         inbound = (nuc_avg_score + pixcall_avg_score) / 2
         other = (fla_avg_score + wit_avg_score) / 2
-        leads = (mt_avg_score + mov_avg_score + aadya_avg_score + insalvage_avg_score +
-                 medicare_avg_score + cts_avg_score + tfood_avg_score + tpet_avg_score +
-                 city_avg_score + allen_avg_score + system4_avg_score + louis_avg_score +
-                 info_avg_score + psecu_avg_score + get_avg_score + adv_avg_score) / 16  # Outbound
 
         # Coaching closure
 
@@ -568,6 +587,9 @@ def qualityDashboardMgt(request):
         closed_percentage_getarates = coachingClosureCalculator(MonitoringFormLeadsGetARates)
         closed_percentage_advance = coachingClosureCalculator(MonitoringFormLeadsAdvanceConsultants)
 
+        closed_percentage_fur = coachingClosureCalculator(FurBabyMonForm)
+        closed_percentage_max = coachingClosureCalculator(MaxwellProperties)
+
         pod = {'name': 'Noom-POD', 'perc': closed_percentage_pod, 'score': pod_avg_score}
         eva = {'name': 'Noom-EVA', 'perc': closed_percentage_eva, 'score': eva_avg_score}
         nucleus = {'name': 'Nucleus', 'perc': closed_percentage_nuc, 'score': nuc_avg_score}
@@ -594,9 +616,14 @@ def qualityDashboardMgt(request):
         getarates = {'name': 'Get A Rates', 'perc': closed_percentage_getarates, 'score': get_avg_score}
         advance = {'name': 'Advance Consultants', 'perc': closed_percentage_advance, 'score': adv_avg_score}
 
+        fur = {'name': 'Fur Baby', 'perc': closed_percentage_fur, 'score': fur_avg_score}
+        max = {'name': 'Maxwell Properties', 'perc': closed_percentage_max, 'score': max_avg_score}
+
         campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance]
+                     getarates, advance, fur, max]
+
+        ###############################################################
 
         mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
                      FameHouseMonitoringForm,
@@ -609,7 +636,8 @@ def qualityDashboardMgt(request):
                      MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
                      MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
                      MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                     FurBabyMonForm, MaxwellProperties]
 
         camp_wise_tot = []
         for i in mon_forms:
@@ -617,15 +645,13 @@ def qualityDashboardMgt(request):
                 'process').annotate(dcount=Count('process')).annotate(davg=Avg('overall_score'))
             camp_wise_tot.append(camp_wise_total)
 
-
-
         data = {
 
             'chat': chat, 'outbound': outbound, 'email': email, 'inbound': inbound, 'other': other, 'leads': leads,
 
             'employees': employees, 'managers': managers, 'campaigns': campaigns,
 
-            'teams': teams,'camp_total':camp_wise_tot,
+            'teams': teams, 'camp_total': camp_wise_tot,
 
         }
 
@@ -856,6 +882,7 @@ def agenthome(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                            FurBabyMonForm,MaxwellProperties,
                             ]
 
         all_coaching_list = []
@@ -941,7 +968,7 @@ def agenthome(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
+                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
                             ]
 
         all_coaching_list = []
@@ -1124,6 +1151,15 @@ def coachingViewAgents(request,process,pk):
         coaching = MonitoringFormLeadsAdvanceConsultants.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/emp-coaching-view-advance.html', data)
+    if process_name=='Fur Baby':
+        coaching = FurBabyMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-furbaby.html', data)
+    if process_name=='Maxwell Properties':
+        coaching = MaxwellProperties.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/emp-coaching-view-maxwell.html', data)
+
 
     else:
         pass
@@ -1131,6 +1167,8 @@ def coachingViewAgents(request,process,pk):
 def coachingViewQaDetailed(request,process,pk):
 
     process_name = process
+
+    print(process_name)
 
     if process_name == 'Fame House':
         coaching = FameHouseMonitoringForm.objects.get(id=pk)
@@ -1243,6 +1281,15 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-advance.html', data)
 
+    if process_name == 'Fur Baby':
+        coaching = FurBabyMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-furbaby.html', data)
+    if process_name == 'Maxwell Properties':
+        coaching = MaxwellProperties.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-maxwell.html', data)
+
     else:
         pass
 
@@ -1300,7 +1347,7 @@ def campaignwiseCoachings(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
+                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
                             ]
 
         if start_date and end_date:
@@ -1397,7 +1444,7 @@ def campaignwiseCoachingsAgent(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
+                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
                             ]
 
         if start_date and end_date:
@@ -1683,6 +1730,13 @@ def campaignwiseDetailedReport(request,cname):
         if campaign == 'Advance Consultants':
             data = campaignWiseCalculator(MonitoringFormLeadsAdvanceConsultants)
             return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Fur Baby':
+            data = campaignWiseCalculator(FurBabyMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Maxwell Properties':
+            data = campaignWiseCalculator(MaxwellProperties)
+            return render(request, 'campaign-report/detailed.html', data)
+
         else:
             return render(request,'')
 
@@ -1912,6 +1966,13 @@ def campaignwiseDetailedReport(request,cname):
         if campaign == 'Advance Consultants':
             data = campaignWiseCalculator(MonitoringFormLeadsAdvanceConsultants)
             return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Fur Baby':
+            data = campaignWiseCalculator(FurBabyMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Maxwell Properties':
+            data = campaignWiseCalculator(MaxwellProperties)
+            return render(request, 'campaign-report/detailed.html', data)
+
         else:
             return render(request, '')
 
@@ -2112,6 +2173,22 @@ def signCoaching(request,pk):
         coaching.save()
         return redirect('/employees/agenthome')
 
+    elif category == 'furbaby':
+        coaching = FurBabyMonForm.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
+    elif category == 'maxwell':
+        coaching = MaxwellProperties.objects.get(id=pk)
+        coaching.status = True
+        coaching.closed_date = now
+        coaching.emp_comments = emp_comments
+        coaching.save()
+        return redirect('/employees/agenthome')
+
 
     else:
         return redirect('/employees/agenthome')
@@ -2234,6 +2311,13 @@ def coachingDispute(request,pk):
         if campaign == 'Advance Consultants':
             disputeStatusChange(MonitoringFormLeadsAdvanceConsultants)
 
+        if campaign == 'Fur Baby':
+            disputeStatusChange(FurBabyMonForm)
+
+        if campaign == 'Maxwell Properties':
+            disputeStatusChange(MaxwellProperties)
+
+
         else:
             pass
 
@@ -2263,6 +2347,7 @@ def qahome(request):
                           MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,MonitoringFormLeadsAllenConsulting,
                           MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
                           MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
+                          FurBabyMonForm,MaxwellProperties,
                           ]
 
         empw_list=[]
@@ -2371,7 +2456,7 @@ def qahome(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
+                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties
                             ]
 
         empw_list = []
@@ -3161,6 +3246,9 @@ def emailAndChatmonForm(request):
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/ECPL-Chat-Email-MONITORING-FORM.html', data)
 
+
+
+
 def movementInsurance(request):
     if request.method == 'POST':
         category='leads'
@@ -3444,6 +3532,239 @@ def printerPixChatsEmails(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Chats-Email.html', data)
+
+
+#################### Fur baby #########################3
+
+def furBabyMonForm(request):
+    if request.method == 'POST':
+        category='chat'
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        trans_date = request.POST['trans_date']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        duration=request.POST['duration']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Customer Experience
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+        ce_6 = int(request.POST['ce_6'])
+        ce_7 = int(request.POST['ce_7'])
+        ce_8 = int(request.POST['ce_8'])
+        ce_9 = int(request.POST['ce_9'])
+        ce_10 = int(request.POST['ce_10'])
+        ce_11 = int(request.POST['ce_11'])
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
+
+        # Business
+        business_1 = int(request.POST['business_1'])
+        business_2 = int(request.POST['business_2'])
+
+        business_total = business_1 + business_2
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+
+
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
+
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = ce_total + business_total + compliance_total
+            fatal = False
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        furbaby = FurBabyMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,duration=duration,
+
+                                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7, ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
+                                           ce_total=ce_total,
+
+                                           business_1=business_1,business_2=business_2,business_total=business_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,
+                                           compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score,category=category,
+                                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
+                                           )
+        furbaby.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/fur-baby-mon-form.html', data)
+
+
+def maxwellProperties(request):
+    if request.method == 'POST':
+        category='chat'
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        trans_date = request.POST['trans_date']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        duration=request.POST['duration']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Customer Experience
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+        ce_6 = int(request.POST['ce_6'])
+        ce_7 = int(request.POST['ce_7'])
+        ce_8 = int(request.POST['ce_8'])
+        ce_9 = int(request.POST['ce_9'])
+        ce_10 = int(request.POST['ce_10'])
+        ce_11 = int(request.POST['ce_11'])
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
+
+        # Business
+        business_1 = int(request.POST['business_1'])
+        business_2 = int(request.POST['business_2'])
+
+        business_total = business_1 + business_2
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+
+
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
+
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = ce_total + business_total + compliance_total
+            fatal = False
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        maxwell = MaxwellProperties(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,duration=duration,
+
+                                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7, ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
+                                           ce_total=ce_total,
+
+                                           business_1=business_1,business_2=business_2,business_total=business_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,
+                                           compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score,category=category,
+                                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
+                                           )
+        maxwell.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/max-well.html', data)
+
 
 def printerPixInboundCalls(request):
     if request.method == 'POST':
@@ -5256,6 +5577,17 @@ def selectCoachingForm(request):
             team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Advance-Consultant.html', data)
+        elif audit_form == 'fur-baby':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/fur-baby-mon-form.html', data)
+
+        elif audit_form == 'max-well':
+            agent = Profile.objects.get(emp_name=agent)
+            team = Team.objects.get(name=team)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/max-well.html', data)
 
     else:
         return redirect('/employees/qahome')

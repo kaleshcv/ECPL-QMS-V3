@@ -39,5 +39,7 @@ admin.site.register(MonitoringFormLeadsGetARates)
 admin.site.register(MonitoringFormLeadsAdvanceConsultants)
 
 
+admin.site.register(FurBabyMonForm)
+admin.site.register(MaxwellProperties)
 
 
