@@ -92,7 +92,7 @@ def login_view(request):
             # redirecting
             if user.profile.emp_desi=='QA':
                 return redirect('/employees/qahome')
-            elif user.profile.emp_desi=='Manager' or user.profile.emp_desi=='AM':
+            elif user.profile.emp_desi=='Manager' or user.profile.emp_desi=='AM' or user.profile.emp_desi=='Trainer':
                 return redirect('/employees/manager-home')
             elif user.profile.emp_desi=='CRO' or user.profile.emp_desi=='Patrolling officer':
                 return redirect('/employees/agenthome')
