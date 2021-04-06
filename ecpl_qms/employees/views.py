@@ -2406,7 +2406,7 @@ def qahome(request):
         fatal_list = []
 
         for i in list_of_monforms:
-            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(davg=Avg('overall_score'))
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,qa=qa_name).values('process').annotate(davg=Avg('overall_score'))
             camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth, overall_score__lt=100).values('process').annotate(
                 dcount=Count('associate_name'))
             fatal_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values('process').annotate(dcount=Sum('fatal_count'))
@@ -2517,7 +2517,7 @@ def qahome(request):
         fatal_list = []
 
         for i in list_of_monforms:
-            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth).values(
+            emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,qa=qa_name).values(
                 'process').annotate(davg=Avg('overall_score'))
             camp_wise_count = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
                                                overall_score__lt=100).values('process').annotate(
