@@ -423,6 +423,29 @@ def qualityDashboardMgt(request):
                      insalvage,medicare,cts,tfood,tpet,city,allen,system,louis,info,psecu,
                      getarates,advance]
 
+        ###############################################################
+
+        mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                     FameHouseMonitoringForm,
+                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
+                     MasterMonitoringFormMovementInsurance,
+                     WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
+                     PrinterPixMasterMonitoringFormInboundCalls,
+                     MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
+                     MonitoringFormLeadsCTS,
+                     MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                     MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
+                     MonitoringFormLeadsInfothinkLLC,
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+
+        camp_wise_tot=[]
+        for i in mon_forms:
+
+            camp_wise_total = i.objects.filter(audit_date__year=year, audit_date__month=month).values(
+                'process').annotate(dcount=Count('process')).annotate(davg=Avg('overall_score'))
+            camp_wise_tot.append(camp_wise_total)
+
+
 
         data = {
 
@@ -430,7 +453,7 @@ def qualityDashboardMgt(request):
 
                 'employees':employees,'managers':managers,'campaigns':campaigns,
 
-                'teams':teams,
+                'teams':teams,'camp_total':camp_wise_tot,
 
                 }
 
@@ -575,13 +598,34 @@ def qualityDashboardMgt(request):
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                      getarates, advance]
 
+        mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                     FameHouseMonitoringForm,
+                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
+                     MasterMonitoringFormMovementInsurance,
+                     WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
+                     PrinterPixMasterMonitoringFormInboundCalls,
+                     MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
+                     MonitoringFormLeadsCTS,
+                     MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                     MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
+                     MonitoringFormLeadsInfothinkLLC,
+                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants]
+
+        camp_wise_tot = []
+        for i in mon_forms:
+            camp_wise_total = i.objects.filter(audit_date__year=year, audit_date__month=month).values(
+                'process').annotate(dcount=Count('process')).annotate(davg=Avg('overall_score'))
+            camp_wise_tot.append(camp_wise_total)
+
+
+
         data = {
 
             'chat': chat, 'outbound': outbound, 'email': email, 'inbound': inbound, 'other': other, 'leads': leads,
 
             'employees': employees, 'managers': managers, 'campaigns': campaigns,
 
-            'teams': teams,
+            'teams': teams,'camp_total':camp_wise_tot,
 
         }
 
@@ -5350,3 +5394,7 @@ def updateProfile(request):
         data={'profiles':profiles}
         return render(request,'update-profile.html',data)
 
+
+def powerBITest(request):
+
+    return render(request,'test-powerbi-view.html')

@@ -154,6 +154,44 @@
     </div>
 </section>
 
+<section>
+    <div class="container-lg" style="margin-top:100px">
+        <div class="row">
+            <div class="col-md-3">
+
+            </div>
+            <div class="col-md-6">
+
+            <h4 class="text-center"><b>Campaign-wise Quick Report</b></h4>
+            <br>
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th>Process</th>
+                            <th>Audit Count</th>
+                            <th>Avg Score</th>
+                        </tr>
+                         {% for c in camp_total %}
+                            {% for i in c %}
+
+                            <tr>
+                                <td>{{i.process}}</td>
+                                <td>{{i.dcount}}</td>
+                                <td>{{i.davg|floatformat:2}}%</td>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+
+                    </table>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <section>
@@ -260,5 +298,6 @@
         </div>
     </div>
 </section>
+
 
 {% endblock %}

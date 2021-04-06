@@ -101,4 +101,6 @@ urlpatterns = [
 
     #path('add-single-profile',addSingleProfile),
 
+    path('powerbi-test',powerBITest),
+
 ]
