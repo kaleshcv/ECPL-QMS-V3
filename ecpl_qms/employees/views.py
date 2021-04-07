@@ -5979,7 +5979,7 @@ def exportFameHouse(request,campaign):
         elif campaign == 'AAdya':
 
             response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
             # Sheet header, first row
@@ -5990,25 +5990,22 @@ def exportFameHouse(request,campaign):
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
-                       'Personalization ( Report Building, Addressing by Name)',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption / Paraphrasing',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
                        'Used Empathetic Statements whenever required',
-                       'Clear Grammar / Sentence Structure',
-                       'Tone & Intonation / Rate of Speech',
-                       'Diction/ Choice of Words / Phrase',
-                       'Took Ownership on the call',
-                       'Followed Hold Procedure Appropriately / Dead Air',
-                       'Offered Additional Assistance & Closed Call as per Protocol',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
 
-                       'Probing / Tactful Finding / Rebuttal',
-                       'Complete Information Provided',
-
-                       'Professional / Courtesy',
-                       'Verification process followed',
-                       'Case Study',
-                       'Process & Procedure Followed',
-                       'First Call Resolution',
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+                       
 
                        'status',
                        'closed_date', 'fatal']
@@ -6018,31 +6015,26 @@ def exportFameHouse(request,campaign):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__range=[start_date, end_date]).values_list(
+            rows = MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__range=[start_date, end_date]).values_list(
                 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
-                'ce_1',
-                'ce_2',
-                'ce_3',
-                'ce_4',
-                'ce_5',
-                'ce_6',
-                'ce_7',
-                'ce_8',
-                'ce_9',
-                'ce_10',
-                'ce_11',
+                'oc_1',
+                'oc_2',
+                'oc_3',
 
-                'business_1',
-                'business_2',
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
 
                 'compliance_1',
                 'compliance_2',
                 'compliance_3',
                 'compliance_4',
                 'compliance_5',
-
+                'compliance_6',
 
                 'status', 'closed_date', 'fatal')
 
@@ -6058,9 +6050,1065 @@ def exportFameHouse(request,campaign):
             wb.save(response)
 
             return response
+
+        elif campaign == 'Insalvage':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsInsalvage.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Medicare':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsMedicare.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'CTS':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsCTS.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Tentamus Food':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsTentamusFood.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Tentamus Pet':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsTentamusPet.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Tentamus Pet':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsTentamusPet.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'City Security':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsCitySecurity.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Allen Consulting':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsAllenConsulting.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'System4':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsSystem4.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Louisville':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsLouisville.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Info Think LLC':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsInfothinkLLC.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'PSECU':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsPSECU.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Get A Rates':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsGetARates.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Advance Consultants':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MonitoringFormLeadsAdvanceConsultants.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+
         else:
 
             return redirect('/quality-dashboard-mgt')
+
+
+
+
     else:
         pass
 
