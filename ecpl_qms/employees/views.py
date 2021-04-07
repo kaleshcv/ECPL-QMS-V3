@@ -5625,6 +5625,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
             columns = ['empID', 'Associate Name','transaction date', 'Audit Date', 'overall_score','Fatal Count','qa','am','team_lead','manager',
+
                        'Standard Greeting & Closing format used',
                        'Acknowledged the Customer Concern/s',
                        'Empathy / Sympathy used where ever required',
@@ -5684,6 +5685,379 @@ def exportFameHouse(request,campaign):
 
             return response
 
+        elif campaign == 'Noom-POD':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
+                       'If the "You last checked in" user is not sent with respective message or sent twice with the response',
+                       'If the user are not assigned in spreadsheet. Ex: If the user code is not added in the spreadsheet.',
+                       'If "was assigned to you" users are not hit finish',
+
+                       "If a user's query is missed to answer and directly assigned to GS.",
+                       'If the user is directly assigned without an Acknowledgement. If the user is sent with irrelevant response. If user is missed to assign to a coach while user wish to be assigned',
+                       'If the response is sent with any irrelevant words or free handed messages. If the task is popped up as UU and YLCI the UU task should be our first priority',
+                       'If the user has a System generated message of cancellation and CRO assigned to next GS. Negative empathy for user’s message!',
+                       'If the user is missed to send the survey response and assigned directly. If the survey messages are swapped.',
+                       'If the user has a question or information about Covid, that needs to addressed to coaches or Seek a help from the slack channels and then respond to it',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = ChatMonitoringFormPodFather.objects.filter(audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Noom-EVA':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
+                       'If the "You last checked in" user is not sent with respective message or sent twice with the response',
+                       'If the user are not assigned in spreadsheet. Ex: If the user code is not added in the spreadsheet.',
+                       'If "was assigned to you" users are not hit finish',
+
+                       "If a user's query is missed to answer and directly assigned to GS.",
+                       'If the user is directly assigned without an Acknowledgement. If the user is sent with irrelevant response. If user is missed to assign to a coach while user wish to be assigned',
+                       'If the response is sent with any irrelevant words or free handed messages. If the task is popped up as UU and YLCI the UU task should be our first priority',
+                       'If the user has a System generated message of cancellation and CRO assigned to next GS. Negative empathy for user’s message!',
+                       'If the user is missed to send the survey response and assigned directly. If the survey messages are swapped.',
+                       'If the user has a question or information about Covid, that needs to addressed to coaches or Seek a help from the slack channels and then respond to it',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = ChatMonitoringFormEva.objects.filter(audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Nucleus':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Personalization ( Report Building, Addressing by Name)',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption / Paraphrasing',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar / Sentence Structure',
+                       'Tone & Intonation / Rate of Speech',
+                       'Diction/ Choice of Words / Phrase',
+                       'Took Ownership on the call',
+                       'Followed Hold Procedure Appropriately / Dead Air',
+                       'Offered Additional Assistance & Closed Call as per Protocol',
+
+                       'Probing / Tactful Finding / Rebuttal',
+                       'Complete Information Provided',
+
+                       'Professional / Courtesy',
+                       'Process & Procedure Followed',
+                       'First Call Resolution',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = InboundMonitoringFormNucleusMedia.objects.filter(audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+                'ce_7',
+                'ce_8',
+                'ce_9',
+                'ce_10',
+                'ce_11',
+
+                'business_1',
+                'business_2',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+
+        elif campaign == 'Printer Pix Inbound':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Personalization ( Report Building, Addressing by Name)',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption / Paraphrasing',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar / Sentence Structure',
+                       'Tone & Intonation / Rate of Speech',
+                       'Diction/ Choice of Words / Phrase',
+                       'Took Ownership on the call',
+                       'Followed Hold Procedure Appropriately / Dead Air',
+                       'Offered Additional Assistance & Closed Call as per Protocol',
+
+                       'Probing / Tactful Finding / Rebuttal',
+                       'Complete Information Provided',
+
+                       'Professional / Courtesy',
+                       'Verification process followed',
+                       'Case Study',
+                       'Process & Procedure Followed',
+                       'First Call Resolution',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+                'ce_7',
+                'ce_8',
+                'ce_9',
+                'ce_10',
+                'ce_11',
+
+                'business_1',
+                'business_2',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'AAdya':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Personalization ( Report Building, Addressing by Name)',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption / Paraphrasing',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar / Sentence Structure',
+                       'Tone & Intonation / Rate of Speech',
+                       'Diction/ Choice of Words / Phrase',
+                       'Took Ownership on the call',
+                       'Followed Hold Procedure Appropriately / Dead Air',
+                       'Offered Additional Assistance & Closed Call as per Protocol',
+
+                       'Probing / Tactful Finding / Rebuttal',
+                       'Complete Information Provided',
+
+                       'Professional / Courtesy',
+                       'Verification process followed',
+                       'Case Study',
+                       'Process & Procedure Followed',
+                       'First Call Resolution',
+
+                       'status',
+                       'closed_date', 'fatal']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+                'ce_7',
+                'ce_8',
+                'ce_9',
+                'ce_10',
+                'ce_11',
+
+                'business_1',
+                'business_2',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+
+
+                'status', 'closed_date', 'fatal')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
         else:
 
             return redirect('/quality-dashboard-mgt')
