@@ -23,7 +23,9 @@
                 <ul class="nav justify-content-end">
 
                     {% if user.is_authenticated %}
-
+                    {% if user.profile.emp_desi == "QA" %}
+                        <li class="nav_item"><a href="/employees/qahome" style="margin-right: 100px;font-size: 19px;color: antiquewhite;">Home</a></li>
+                    {% endif %}
 
                     <li class="nav-item" style="color: White;margin-right: 50px"><small style="margin-right: 20px;color: white;">Welcome,</small>{{user.profile.emp_name}}</li>
 
@@ -35,6 +37,8 @@
                     <li class="nav-item"><a class="nav-link" href="/employees/login">login</a></li>
                     <li class="nav_item"><a class="nav-link" href="/employees/signup">Register</a></li>
                     {% endif %}
+
+
 
                 </ul>
                 <div>

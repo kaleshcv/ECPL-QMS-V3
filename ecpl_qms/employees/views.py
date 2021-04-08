@@ -5508,10 +5508,11 @@ def campaignView(request):
         pk=request.POST['campaign']
         team=Team.objects.get(id=pk)
         team_name=team.name
-        agents=Profile.objects.filter(emp_desi='CRO')
+        agents=Profile.objects.filter(emp_desi='CRO').order_by('emp_name')
 
         data = {'team': team,'agents':agents}
         return render(request,'campaign-view.html',data)
+
     else:
         pass
 def selectCoachingForm(request):
@@ -5519,6 +5520,11 @@ def selectCoachingForm(request):
         audit_form=request.POST['audit_form']
         agent=request.POST['agent']
         team=request.POST['team']
+
+        from datetime import date
+        today = date.today()
+        # mm/dd/YY
+        d1 = today.strftime("%m/%d/%Y")
 
         if audit_form=='eva-chat':
             agent=Profile.objects.get(emp_name=agent)
