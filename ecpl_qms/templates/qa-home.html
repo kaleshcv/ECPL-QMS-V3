@@ -76,12 +76,33 @@
                     <button class="btn btn-info">View</button>
                 </form>
         </div>
-        <div class="col-md-8" style="padding-top:25px">
-            <div class="row">
+        <div class="col-md-3">
 
-
-            </div>
         </div>
+        <div class="col-md-4">
+                    <h4>Export Report</h4>
+                    <br>
+                    <div>
+                        <form action="/employees/export-data" method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <h6>Campaign</h6>
+                            <select name="process" class="form-control" style="width: 300px;font-size: 12px;height: auto" required>
+                                {% for c in campaigns %}
+                                <option value="{{c.name}}">{{c.name}}</option>
+                                {% endfor %}
+                            </select>
+                            <br>
+                            <h6>Date</h6>
+                            <label for="">From</label>
+                            <input type="date" name="start_date" class="form-control" style="width: 300px;font-size: 10px;height: auto" required>
+                            <label for="">To</label>
+                            <input type="date" name="end_date" class="form-control" style="width: 300px;font-size: 10px;height: auto" required>
+                            <input type="hidden" name="qa" value="{{user.profile.emp_name}}">
+                            <br>
+                            <button class="btn btn-secondary" class="form-control">submit</button>
+                        </form>
+                     </div>
+                </div>
 
      </div>
 
@@ -258,30 +279,7 @@
                 </div>
         </div>
         <div class="col-md-2"></div>
-        <div class="col-md-4">
-                    <h4>Export Report</h4>
-                    <br>
-                    <div>
-                        <form action="/employees/export-data" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <h6>Campaign</h6>
-                            <select name="process" class="form-control" style="width: 300px;font-size: 12px;height: auto" required>
-                                {% for c in campaigns %}
-                                <option value="{{c.name}}">{{c.name}}</option>
-                                {% endfor %}
-                            </select>
-                            <br>
-                            <h6>Date</h6>
-                            <label for="">From</label>
-                            <input type="date" name="start_date" class="form-control" style="width: 300px;font-size: 10px;height: auto" required>
-                            <label for="">To</label>
-                            <input type="date" name="end_date" class="form-control" style="width: 300px;font-size: 10px;height: auto" required>
-                            <input type="hidden" name="qa" value="{{user.profile.emp_name}}">
-                            <br>
-                            <button class="btn btn-secondary" class="form-control">submit</button>
-                        </form>
-                     </div>
-                </div>
+
     </div>
 
 </div>
