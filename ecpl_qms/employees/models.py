@@ -2169,6 +2169,5 @@ class Empprofile(models.Model):
     process=models.CharField(max_length=50)
 
 
-
-
-
+class EmpdataTest(models.Model):
+    uid=models.IntegerField(unique=True)
