@@ -97,14 +97,14 @@
         </div>
         <div class="col-md-6" style="padding:30px">
             <div style="padding: 30px">
-                <form action="/export-data/{{process}}" method="POST">
+                <form action="/employees/export-data" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" value="{{c.name}}" name="campaign">
+                            <input type="hidden" value="{{process}}" name="process" required>
                             <br>
                             <h4>Export Report</h4>
                     <br>
                             <label for="" class="datelabel">Start Date</label>
-                            <input type="date" name="start_date" required class="dateinput form-control">
+                            <input type="date" name="start_date" required class="dateinput form-control" >
                     <br>
                             <label for="" class="datelabel">End Date</label>
                             <input type="date" name="end_date" required class="dateinput form-control">

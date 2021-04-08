@@ -2416,6 +2416,39 @@ def qahome(request):
             fatal_list.append(fatal_count)
 
             #############################################
+        ### Campaign Names ###
+
+        pod = {'name': 'Noom-POD'}
+        eva = {'name': 'Noom-EVA'}
+        nucleus = {'name': 'Nucleus'}
+        famehouse = {'name': 'Fame House'}
+        fla = {'name': 'FLA'}
+        mt = {'name': 'MT Cosmetic'}
+        ton = {'name': 'Tonn Chat Email'}
+        mov = {'name': 'Movement of Insurance'}
+        wit = {'name': 'Wit Digital'}
+        pixchat = {'name': 'Printer Pix Chat Email'}
+        pixcall = {'name': 'Printer Pix Inbound'}
+        aadya = {'name': 'AAdya'}
+        insalvage = {'name': 'Insalvage'}
+        medicare = {'name': 'Medicare'}
+        cts = {'name': 'CTS'}
+        tfood = {'name': 'Tentamus Food'}
+        tpet = {'name': 'Tentamus Pet'}
+        city = {'name': 'City Security'}
+        allen = {'name': 'Allen Consulting'}
+        system = {'name': 'System4'}
+        louis = {'name': 'Louisville'}
+        info = {'name': 'Info Think LLC'}
+        psecu = {'name': 'PSECU'}
+        getarates = {'name': 'Get A Rates'}
+        advance = {'name': 'Advance Consultants'}
+        fur = {'name': 'Fur Baby'}
+        max = {'name': 'Maxwell Properties'}
+
+        campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
+                     insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
+                     getarates, advance, fur, max]
 
 
         data={'teams':teams,
@@ -2429,6 +2462,7 @@ def qahome(request):
               'avg_campaignwise': avg_campaignwise,
               'camp_wise_count': campaign_wise_count,
               'fatal_list': fatal_list,
+              'campaigns':campaigns,
 
               }
 
@@ -2531,6 +2565,38 @@ def qahome(request):
 
             #############################################
 
+        pod = {'name': 'Noom-POD'}
+        eva = {'name': 'Noom-EVA'}
+        nucleus = {'name': 'Nucleus'}
+        famehouse = {'name': 'Fame House'}
+        fla = {'name': 'FLA'}
+        mt = {'name': 'MT Cosmetic'}
+        ton = {'name': 'Tonn Chat Email'}
+        mov = {'name': 'Movement of Insurance'}
+        wit = {'name': 'Wit Digital'}
+        pixchat = {'name': 'Printer Pix Chat Email'}
+        pixcall = {'name': 'Printer Pix Inbound'}
+        aadya = {'name': 'AAdya'}
+        insalvage = {'name': 'Insalvage'}
+        medicare = {'name': 'Medicare'}
+        cts = {'name': 'CTS'}
+        tfood = {'name': 'Tentamus Food'}
+        tpet = {'name': 'Tentamus Pet'}
+        city = {'name': 'City Security'}
+        allen = {'name': 'Allen Consulting'}
+        system = {'name': 'System4'}
+        louis = {'name': 'Louisville'}
+        info = {'name': 'Info Think LLC'}
+        psecu = {'name': 'PSECU'}
+        getarates = {'name': 'Get A Rates'}
+        advance = {'name': 'Advance Consultants'}
+        fur = {'name': 'Fur Baby'}
+        max = {'name': 'Maxwell Properties'}
+
+        campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
+                     insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
+                     getarates, advance, fur, max]
+
         data = {'teams': teams,
 
                 'total_open': total_open_coachings, 'total_coaching': total_coaching,
@@ -2542,6 +2608,8 @@ def qahome(request):
                 'avg_campaignwise': avg_campaignwise,
                 'camp_wise_count': campaign_wise_count,
                 'fatal_list': fatal_list,
+
+                'campaigns':campaigns,
 
                 }
 
@@ -5600,31 +5668,30 @@ def qualityDashboard(request):
     return render(request,'quality-dashboard.html')
 
 
-def exportFameHouse(request,campaign):
+def exportAuditReport(request):
 
     import pytz
-
     from datetime import datetime
-
     if request.method=='POST':
 
+
         start_date=request.POST['start_date']
-
-
         end_date = request.POST['end_date']
+
+        campaign=request.POST['process']
 
 
         if campaign=='Fame House':
 
             response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data') # this will make a sheet named Users Data
             # Sheet header, first row
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name','transaction date', 'Audit Date', 'overall_score','Fatal Count','qa','am','team_lead','manager',
+            columns = ['process','empID', 'Associate Name','transaction date', 'Audit Date', 'overall_score','Fatal Count','qa','am','team_lead','manager',
 
                        'Standard Greeting & Closing format used',
                        'Acknowledged the Customer Concern/s',
@@ -5651,7 +5718,7 @@ def exportFameHouse(request,campaign):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = FameHouseMonitoringForm.objects.filter(audit_date__range=[start_date,end_date]).values_list('emp_id', 'associate_name','trans_date', 'audit_date', 'overall_score','fatal_count','qa','am','team_lead','manager',
+            rows = FameHouseMonitoringForm.objects.filter(audit_date__range=[start_date,end_date]).values_list('process','emp_id', 'associate_name','trans_date', 'audit_date', 'overall_score','fatal_count','qa','am','team_lead','manager',
 
                                                                      'ce_1',
                                                                      'ce_2',
@@ -5665,10 +5732,10 @@ def exportFameHouse(request,campaign):
                                                                      'ze_4',
 
                                                                      'sh_1',
-                                                                     'sh_1',
-                                                                     'sh_1',
-                                                                     'sh_1',
-                                                                     'sh_1',
+                                                                     'sh_2',
+                                                                     'sh_3',
+                                                                     'sh_4',
+                                                                     'sh_5',
 
                                                                      'status','closed_date','fatal','areas_improvement','positives','comments')
 
@@ -5688,14 +5755,14 @@ def exportFameHouse(request,campaign):
         elif campaign == 'Noom-POD':
 
             response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
             # Sheet header, first row
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
@@ -5719,7 +5786,7 @@ def exportFameHouse(request,campaign):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = ChatMonitoringFormPodFather.objects.filter(audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -5752,14 +5819,14 @@ def exportFameHouse(request,campaign):
         elif campaign == 'Noom-EVA':
 
             response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
             # Sheet header, first row
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
@@ -5783,7 +5850,7 @@ def exportFameHouse(request,campaign):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = ChatMonitoringFormEva.objects.filter(audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -5816,14 +5883,14 @@ def exportFameHouse(request,campaign):
         elif campaign == 'Nucleus':
 
             response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
             # Sheet header, first row
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -5854,7 +5921,7 @@ def exportFameHouse(request,campaign):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = InboundMonitoringFormNucleusMedia.objects.filter(audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -5896,14 +5963,14 @@ def exportFameHouse(request,campaign):
         elif campaign == 'Printer Pix Inbound':
 
             response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="Famehouse-report.xls"'
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
             wb = xlwt.Workbook(encoding='utf-8')
             ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
             # Sheet header, first row
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -5936,7 +6003,7 @@ def exportFameHouse(request,campaign):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -5986,7 +6053,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6016,7 +6083,7 @@ def exportFameHouse(request,campaign):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6061,7 +6128,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6091,7 +6158,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsInsalvage.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6136,7 +6203,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6166,7 +6233,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsMedicare.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6211,7 +6278,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6241,7 +6308,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsCTS.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6286,7 +6353,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6316,7 +6383,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsTentamusFood.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6361,7 +6428,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6391,7 +6458,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsTentamusPet.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6438,7 +6505,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6468,7 +6535,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsCitySecurity.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6513,7 +6580,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6543,7 +6610,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsAllenConsulting.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6588,7 +6655,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6618,7 +6685,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsSystem4.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6663,7 +6730,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6693,7 +6760,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsLouisville.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6738,7 +6805,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6768,7 +6835,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsInfothinkLLC.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6813,7 +6880,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6843,7 +6910,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsPSECU.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6888,7 +6955,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6918,7 +6985,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsGetARates.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -6963,7 +7030,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -6993,7 +7060,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsAdvanceConsultants.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -7038,7 +7105,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Associate used the standard greeting format',
@@ -7073,7 +7140,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = PrinterPixMasterMonitoringFormChatsEmail.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -7092,10 +7159,10 @@ def exportFameHouse(request,campaign):
                 'business_2',
 
                 'compliance_1',
-                'compliance_1',
-                'compliance_1',
-                'compliance_1',
-                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
 
 
                 'status', 'closed_date', 'fatal')
@@ -7123,7 +7190,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Associate used the standard greeting format',
@@ -7158,7 +7225,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = FurBabyMonForm.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -7177,10 +7244,10 @@ def exportFameHouse(request,campaign):
                 'business_2',
 
                 'compliance_1',
-                'compliance_1',
-                'compliance_1',
-                'compliance_1',
-                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
 
 
                 'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
@@ -7208,7 +7275,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Associate used the standard greeting format',
@@ -7243,7 +7310,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MaxwellProperties.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -7262,11 +7329,10 @@ def exportFameHouse(request,campaign):
                 'business_2',
 
                 'compliance_1',
-                'compliance_1',
-                'compliance_1',
-                'compliance_1',
-                'compliance_1',
-
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
 
                 'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
@@ -7293,7 +7359,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -7323,7 +7389,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MasterMonitoringFormMovementInsurance.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -7368,7 +7434,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Used Standard Opening Protocol',
@@ -7398,7 +7464,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MasterMonitoringFormMTCosmetics.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'oc_1',
@@ -7443,7 +7509,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Associate used the standard greeting format',
@@ -7475,7 +7541,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = MasterMonitoringFormTonnChatsEmail.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'ce_1',
@@ -7521,7 +7587,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Check List Used Correctly',
@@ -7537,7 +7603,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = FLAMonitoringForm.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'checklist_1',
@@ -7568,7 +7634,7 @@ def exportFameHouse(request,campaign):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'Call date', 'Audit Date', 'overall_score', 'Fatal Count',
+            columns = ['process','empID', 'Associate Name', 'Call date', 'Audit Date', 'overall_score', 'Fatal Count',
                        'qa', 'am', 'team_lead', 'manager',
 
                        'Tagging Done Correctly',
@@ -7583,7 +7649,7 @@ def exportFameHouse(request,campaign):
             font_style = xlwt.XFStyle()
             rows = WitDigitalMasteringMonitoringForm.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
 
                 'tagging_1',
@@ -7603,18 +7669,13 @@ def exportFameHouse(request,campaign):
 
             return response
 
-
         else:
 
-            return redirect('/quality-dashboard-mgt')
-
-
-
+            return redirect(request,'error-pages/export-error.html')
 
     else:
         pass
 
-    #test
 
 def addtoUserModel(request):
 

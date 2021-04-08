@@ -124,7 +124,7 @@ class Process(models.Model):
 # Final Forms ----------------------- #
 
 class ChatMonitoringFormEva(models.Model):
-    process=models.CharField(default='EVA Chat',max_length=50)
+    process=models.CharField(default='Noom-EVA',max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -185,7 +185,7 @@ class ChatMonitoringFormEva(models.Model):
         return self.comments[:100] + '...'
 
 class ChatMonitoringFormPodFather(models.Model):
-    process = models.CharField(default='Pod Father', max_length=50)
+    process = models.CharField(default='Noom-POD', max_length=50)
 
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
@@ -510,7 +510,7 @@ class MasterMonitoringFormGetaRatesPSECU(models.Model):
 
 
 class MasterMonitoringFormMovementInsurance(models.Model):
-    process = models.CharField(default='Mov Insurance', max_length=50)
+    process = models.CharField(default='Movement of Insurance', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -579,7 +579,7 @@ class MasterMonitoringFormMovementInsurance(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormMTCosmetics(models.Model):
-    process = models.CharField(default='Mt Cosmetic', max_length=50)
+    process = models.CharField(default='MT Cosmetic', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -648,7 +648,7 @@ class MasterMonitoringFormMTCosmetics(models.Model):
         return self.comments[:100] + '...'
 
 class MasterMonitoringFormTonnChatsEmail(models.Model):
-    process = models.CharField(default='Tonn Chat', max_length=50)
+    process = models.CharField(default='Tonn Chat Email', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -791,7 +791,7 @@ class MasterMonitoringFormTonnCoaInboundCalls(models.Model):
         return self.comments[:100] + '...'
 
 class MonitoringFormLeadsAadhyaSolution(models.Model):
-    process = models.CharField(default='Aadya', max_length=50)
+    process = models.CharField(default='AAdya', max_length=50)
 
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
@@ -934,7 +934,7 @@ class PrinterPixMasterMonitoringFormInboundCalls(models.Model):
         return self.comments[:100] + '...'
 
 class PrinterPixMasterMonitoringFormChatsEmail(models.Model):
-    process = models.CharField(default='Printer Pix Chat', max_length=50)
+    process = models.CharField(default='Printer Pix Chat Email', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
@@ -1713,7 +1713,7 @@ class MonitoringFormLeadsLouisville(models.Model):
 
 
 class MonitoringFormLeadsInfothinkLLC(models.Model):
-    process = models.CharField(default='Infothink LLC', max_length=50)
+    process = models.CharField(default='Info Think LLC', max_length=50)
 
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
@@ -2145,7 +2145,6 @@ class MaxwellProperties(models.Model):
 
     def snippet(self):
         return self.comments[:100] + '...'
-
 
 
 

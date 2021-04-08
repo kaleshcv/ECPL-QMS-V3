@@ -95,7 +95,7 @@ urlpatterns = [
 
     path('fame-house-full-report',fameHouseFullReport),
 
-    path('export-data/<str:campaign>',exportFameHouse),
+    path('export-data',exportAuditReport),
 
     #path('adduser',addtoUserModel),
     path('update-email-address/<int:pk>',updateEmailAddress),
