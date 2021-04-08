@@ -5644,7 +5644,7 @@ def exportFameHouse(request,campaign):
                        'RMA - Address Validation (Address Update / Returns / Exchange / RTS)',
 
                        'status',
-                       'closed_date','fatal']
+                       'closed_date','fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style) # at 0 row 0 column
@@ -5670,7 +5670,7 @@ def exportFameHouse(request,campaign):
                                                                      'sh_1',
                                                                      'sh_1',
 
-                                                                     'status','closed_date','fatal')
+                                                                     'status','closed_date','fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -5711,7 +5711,7 @@ def exportFameHouse(request,campaign):
                        'If the user has a question or information about Covid, that needs to addressed to coaches or Seek a help from the slack channels and then respond to it',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -5734,7 +5734,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -5775,7 +5775,7 @@ def exportFameHouse(request,campaign):
                        'If the user has a question or information about Covid, that needs to addressed to coaches or Seek a help from the slack channels and then respond to it',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -5798,7 +5798,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -5846,7 +5846,7 @@ def exportFameHouse(request,campaign):
                        'First Call Resolution',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -5877,7 +5877,7 @@ def exportFameHouse(request,campaign):
                 'compliance_3',
 
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -5928,7 +5928,7 @@ def exportFameHouse(request,campaign):
                        'First Call Resolution',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -5961,7 +5961,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
 
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6008,7 +6008,7 @@ def exportFameHouse(request,campaign):
                        
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6036,7 +6036,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6082,7 +6082,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6111,7 +6111,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6157,7 +6157,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6186,7 +6186,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6232,7 +6232,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6261,7 +6261,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6307,7 +6307,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6336,7 +6336,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6382,7 +6382,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6411,7 +6411,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6426,80 +6426,7 @@ def exportFameHouse(request,campaign):
 
             return response
 
-        elif campaign == 'Tentamus Pet':
 
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsTentamusPet.objects.filter(
-                audit_date__range=[start_date, end_date]).values_list(
-                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
 
         elif campaign == 'City Security':
 
@@ -6532,7 +6459,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6561,7 +6488,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6607,7 +6534,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6636,7 +6563,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6682,7 +6609,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6711,7 +6638,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6757,7 +6684,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6786,7 +6713,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6832,7 +6759,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6861,7 +6788,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6907,7 +6834,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -6936,7 +6863,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -6982,7 +6909,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -7011,7 +6938,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -7057,7 +6984,7 @@ def exportFameHouse(request,campaign):
                        'Advisor Sounding Rude / Proafinity Usage',
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -7086,7 +7013,7 @@ def exportFameHouse(request,campaign):
                 'compliance_5',
                 'compliance_6',
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -7137,7 +7064,7 @@ def exportFameHouse(request,campaign):
 
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -7222,7 +7149,7 @@ def exportFameHouse(request,campaign):
 
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -7256,7 +7183,7 @@ def exportFameHouse(request,campaign):
                 'compliance_1',
 
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -7307,7 +7234,7 @@ def exportFameHouse(request,campaign):
 
 
                        'status',
-                       'closed_date', 'fatal']
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
 
             for col_num in range(len(columns)):
                 ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
@@ -7341,7 +7268,7 @@ def exportFameHouse(request,campaign):
                 'compliance_1',
 
 
-                'status', 'closed_date', 'fatal')
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -7356,8 +7283,325 @@ def exportFameHouse(request,campaign):
 
             return response
 
+        elif campaign == 'Movement of Insurance':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+                       'Disposition done correctly',
+                       'Probing/Tactful finding/Rebuttal',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Date Captured Accurately (Fax, Email)',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MasterMonitoringFormMovementInsurance.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+                'softskill_6',
+                'softskill_7',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'MT Cosmetic':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+                       'Disposition done correctly',
+                       'Probing/Tactful finding/Rebuttal',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Date Captured Accurately (Fax, Email)',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MasterMonitoringFormMTCosmetics.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+                'softskill_6',
+                'softskill_7',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Tonn Chat Email':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Associate used the standard greeting format',
+                       'Appropriate responses ( acknowledging at the right time)',
+                       'Ownership on Emails / Chat',
+                       'Personalization ( building a Raport, Addressing by name)',
+                       'Empathy/Sympathy',
+                       'Sentence structure',
+                       'Punctuation (full stop, comma, and brackets, used in writing to separate sentences)',
+                       'Grammar (Tense, Noun, etc.)',
+                       'Probing done whenever necessary',
+                       'Recap (Summarization of the conversation)',
+                       'Associate used the standard closing format',
+
+                       'Accurate Resolution/Information is provided as per the process',
+                       'Chat Responded within 15 mins/Email Responded within 30 Mins',
+
+                       'Process & Procedure Followed',
+                       'First Chat / Email Resolution',
 
 
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MasterMonitoringFormTonnChatsEmail.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+                'ce_7',
+                'ce_8',
+                'ce_9',
+                'ce_10',
+                'ce_11',
+
+                'business_1',
+                'business_2',
+
+                'compliance_1',
+                'compliance_2',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'FLA':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Check List Used Correctly',
+                       'Reason for failure',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = FLAMonitoringForm.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'checklist_1',
+                'reason_for_failure',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Wit Digital':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['empID', 'Associate Name', 'Call date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Tagging Done Correctly',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = WitDigitalMasteringMonitoringForm.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'tagging_1',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
 
 
         else:
