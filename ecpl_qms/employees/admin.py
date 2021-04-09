@@ -42,4 +42,8 @@ admin.site.register(MonitoringFormLeadsAdvanceConsultants)
 admin.site.register(FurBabyMonForm)
 admin.site.register(MaxwellProperties)
 
+admin.site.register(UpfrontOnlineLLCMonform)
+admin.site.register(MicroDistributingMonForm)
+admin.site.register(JJStudioMonForm)
+
 

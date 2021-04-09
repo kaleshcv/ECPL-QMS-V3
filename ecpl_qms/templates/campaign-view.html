@@ -4,7 +4,7 @@
 
 <section>
     <div class="container-lg" style="padding: 0px 300px;margin-top:150px">
-        <h2>Campaign - {{team.name}}</h2><br>
+        <h2>Campaign - {{team}}</h2><br>
         <form action="/employees/add-coaching" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="agent">Select Employee</label>
@@ -13,42 +13,16 @@
                 <option value="{{agent.emp_name}}" class="form-control">{{agent.emp_name}}-{{agent.emp_id}}</option>
                 {% endfor %}
             </select><br>
-            <label for="">Choose Audit Form</label>
-            <select name="audit_form" id="" class="form-control">
-                <option value="eva-chat" class="form-control">Noom - Eva</option>
-                <option value="pod-chat" class="form-control">Chat Monitoring Form - Pod - Father</option>
-                <option value="inbound-call" class="form-control">Nucleus Media</option>
-                <option value="fame-house" class="form-control">Fame House Monitoring Form</option>
-                <option value="FLA" class="form-control">FLA Monitoring Form</option>
-                <option value="lead-sales">MT Cosmetics</option>
-                <option value="email-chat">Tonn Chats _ Email</option>
-                <option value="mov-ins">Movement Insurance</option>
-                <option value="wit-digital">Wit Digital Mastering Monitoring Form</option>
-                <option value="pix-chat-email">Printer Pix Master Monitoring Form-Chats-Email</option>
-                <option value="pix-inbound">Printer Pix Master Monitoring Form - Inbound Calls</option>
-                <option value="lead-aadya">Aadhya Solution</option>
-                <option value="insalvage">Insalvage</option>
-                <option value="medicare">Medicare</option>
-                <option value="cts">CTS</option>
-                <option value="tentamus-food">Tentamus Food</option>
-                <option value="tentamus-pet">Tentamus Pet</option>
-                <option value="city-sec">City Security</option>
-                <option value="allen">Allen Consulting</option>
-                <option value="system4">System4</option>
-                <option value="louisville">Louisville</option>
-                <option value="info-think">Info Think LLC</option>
-                <option value="psecu">PSECU</option>
-                <option value="get-rates">Get A Rates</option>
-                <option value="advance">Advance Consultants</option>
-                <option value="fur-baby">Fur-baby mon-form</option>
-                <option value="max-well">Max Well Mon-form</option>
-            </select><br><br>
-            <input type="hidden" value="{{team.name}}" name="team">
+            <label for="">Audit Form</label>
+            <input class="form-control" type="text" name="audit_form" value="{{team}}" readonly>
+            <br>
+            <input type="hidden" value="{{team}}" name="team">
 
             <button class="btn btn-info">Add Coaching</button>
         </form>
     </div>
 </section>
+
 
 
 {% endblock %}

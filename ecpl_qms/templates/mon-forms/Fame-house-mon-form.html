@@ -73,11 +73,7 @@
                             <input type="text" class="form-control" id="zone" name="ticket_no" required>
                         </div>
                          <div class="col-md-4">
-                            <label for="campaign">Campaign</label>
-                            <select class="form-control" id="campaign" required="required" name="campaign">
-                                <option value="{{agent.process}}">{{agent.process}}</option>
-                            </select>
-
+                             <input type="hidden" class="form-control" name="campaign" value="{{agent.process}}">
                         </div>
                     </div>
                 </div>

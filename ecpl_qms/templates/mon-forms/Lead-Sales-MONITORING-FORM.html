@@ -37,12 +37,8 @@
                             <input type="date" class="form-control" id="auditdate" name="auditdate" required>
                         </div>
                          <div class="col-md-4">
-                            <label for="campaign">Campaign</label>
-                             <select class="form-control" id="campaign" required="required" name="campaign">
+                             <input type="hidden" class="form-control" name="campaign" value="{{agent.process}}">
 
-                               <option value="{{agent.process}}">{{agent.process}}</option>
-
-                            </select>
 
                             <label for="zone">Zone</label>
                             <input type="text" class="form-control" id="zone" name="zone" required>

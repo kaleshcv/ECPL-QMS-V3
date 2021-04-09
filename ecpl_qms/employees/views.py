@@ -92,7 +92,7 @@ def login_view(request):
             # redirecting
             if user.profile.emp_desi=='QA':
                 return redirect('/employees/qahome')
-            elif user.profile.emp_desi=='Manager' or user.profile.emp_desi=='AM' or user.profile.emp_desi=='Trainer':
+            elif user.profile.emp_desi=='Manager' or user.profile.emp_desi=='AM' or user.profile.emp_desi=='Trainer' or user.profile.emp_id==224 or user.profile.emp_id==6479:
                 return redirect('/employees/manager-home')
             elif user.profile.emp_desi=='CRO' or user.profile.emp_desi=='Patrolling officer':
                 return redirect('/employees/agenthome')
@@ -1160,7 +1160,6 @@ def coachingViewAgents(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/emp-coaching-view-maxwell.html', data)
 
-
     else:
         pass
 
@@ -1168,22 +1167,27 @@ def coachingViewQaDetailed(request,process,pk):
 
     process_name = process
 
-    print(process_name)
-
     if process_name == 'Fame House':
         coaching = FameHouseMonitoringForm.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-fame-house.html', data)
 
-    if process_name == 'EVA Chat':
+    if process_name == 'Noom-EVA':
         coaching = ChatMonitoringFormEva.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-eva-chat.html', data)
+
+    if process_name == 'Noom-POD':
+        coaching = ChatMonitoringFormEva.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-pod-chat.html', data)
 
     if process_name == 'Nucleus':
         coaching = InboundMonitoringFormNucleusMedia.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-inbound.html', data)
+
+
     if process_name == 'FLA':
         coaching = FLAMonitoringForm.objects.get(id=pk)
         data = {'coaching': coaching}
@@ -1194,22 +1198,22 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-psecu.html', data)
 
-    if process_name == 'Mov Insurance':
+    if process_name == 'Movement of Insurance':
         coaching = MasterMonitoringFormMovementInsurance.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-mov-ins.html', data)
 
-    if process_name == 'Mt Cosmetic':
+    if process_name == 'MT Cosmetic':
         coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-mt.html', data)
 
-    if process_name == 'Tonn Chat':
+    if process_name == 'Tonn Chat Email':
         coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-tonn-chat.html', data)
 
-    if process_name == 'Aadya':
+    if process_name == 'AAdya':
         coaching = MonitoringFormLeadsAadhyaSolution.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-aadya.html', data)
@@ -1219,7 +1223,7 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-pix-inbound.html', data)
 
-    if process_name == 'Printer Pix Chat':
+    if process_name == 'Printer Pix Chat Email':
         coaching = PrinterPixMasterMonitoringFormChatsEmail.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-pix-chat.html', data)
@@ -1267,7 +1271,7 @@ def coachingViewQaDetailed(request,process,pk):
         coaching = MonitoringFormLeadsLouisville.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-louis.html', data)
-    if process_name == 'Infothink LLC':
+    if process_name == 'Info Think LLC':
         coaching = MonitoringFormLeadsInfothinkLLC.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-info.html', data)
@@ -1289,6 +1293,22 @@ def coachingViewQaDetailed(request,process,pk):
         coaching = MaxwellProperties.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-maxwell.html', data)
+
+    if process_name == 'Upfront Online LLC':
+        coaching = UpfrontOnlineLLCMonform.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-upfront.html', data)
+
+    if process_name == 'Micro Distributing':
+        coaching = MicroDistributingMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-micro.html', data)
+
+    if process_name == 'JJ Studio':
+        coaching = JJStudioMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-jj.html', data)
+
 
     else:
         pass
@@ -1329,9 +1349,9 @@ def qacoachingViewOpenAll(request,pk):
 def campaignwiseCoachings(request):
 
     if request.method == 'POST':
-        team_id = request.POST['team_id']
+        campaign = request.POST['campaign']
         status=request.POST['status']
-        team_name=Team.objects.get(id=team_id)
+
         start_date = request.POST['start_date']
         end_date = request.POST['end_date']
 
@@ -1348,6 +1368,7 @@ def campaignwiseCoachings(request):
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
                             MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
+                            UpfrontOnlineLLCMonform,MicroDistributingMonForm,JJStudioMonForm
                             ]
 
         if start_date and end_date:
@@ -1357,7 +1378,7 @@ def campaignwiseCoachings(request):
                 coaching_list=[]
 
                 def dateAll(monform):
-                    obj=monform.objects.filter(campaign=team_name,audit_date__range=[start_date, end_date])
+                    obj=monform.objects.filter(process=campaign,audit_date__range=[start_date, end_date])
                     return obj
 
                 for i in list_of_monforms:
@@ -1370,7 +1391,7 @@ def campaignwiseCoachings(request):
                 coaching_list = []
 
                 def datestatusAll(monform):
-                    obj = monform.objects.filter(campaign=team_name,status=status,audit_date__range=[start_date, end_date])
+                    obj = monform.objects.filter(process=campaign,status=status,audit_date__range=[start_date, end_date])
                     return obj
 
                 for i in list_of_monforms:
@@ -1391,7 +1412,7 @@ def campaignwiseCoachings(request):
                 coaching_list=[]
 
                 def dateAll(monform):
-                    obj=monform.objects.filter(campaign=team_name)
+                    obj=monform.objects.filter(process=campaign)
                     return obj
 
                 for i in list_of_monforms:
@@ -1404,7 +1425,7 @@ def campaignwiseCoachings(request):
                 coaching_list = []
 
                 def datestatusAll(monform):
-                    obj = monform.objects.filter(campaign=team_name,status=status)
+                    obj = monform.objects.filter(process=campaign,status=status)
                     return obj
 
                 for i in list_of_monforms:
@@ -2347,7 +2368,7 @@ def qahome(request):
                           MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,MonitoringFormLeadsAllenConsulting,
                           MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
                           MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
-                          FurBabyMonForm,MaxwellProperties,
+                          FurBabyMonForm,MaxwellProperties,UpfrontOnlineLLCMonform,MicroDistributingMonForm,JJStudioMonForm,
                           ]
 
         empw_list=[]
@@ -2445,10 +2466,14 @@ def qahome(request):
         advance = {'name': 'Advance Consultants'}
         fur = {'name': 'Fur Baby'}
         max = {'name': 'Maxwell Properties'}
+        upfront = {'name':'Upfront Online LLC'}
+        micro = {'name':'Micro Distributing'}
+        jj= {'name':'JJ Studio'}
+
 
         campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance, fur, max]
+                     getarates, advance, fur, max,upfront,micro,jj]
 
 
         data={'teams':teams,
@@ -2490,7 +2515,8 @@ def qahome(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties
+                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
+                            UpfrontOnlineLLCMonform, MicroDistributingMonForm, JJStudioMonForm,
                             ]
 
         empw_list = []
@@ -2593,9 +2619,13 @@ def qahome(request):
         fur = {'name': 'Fur Baby'}
         max = {'name': 'Maxwell Properties'}
 
+        upfront = {'name': 'Upfront Online LLC'}
+        micro = {'name': 'Micro Distributing'}
+        jj = {'name': 'JJ Studio'}
+
         campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance, fur, max]
+                     getarates, advance, fur, max, upfront, micro, jj]
 
         data = {'teams': teams,
 
@@ -5499,6 +5529,341 @@ def leadsandSalesAdvance(request):
         return render(request, 'mon-forms/Monitoring-Form-Leads-Advance-Consultant.html', data)
 
 
+def upfrontOnlineMonForm(request):
+    if request.method == 'POST':
+
+        category='leads'
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        call_duration=request.POST['duration']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Opening and Closing
+        oc_1 = int(request.POST['oc_1'])
+        oc_2 = int(request.POST['oc_2'])
+        oc_3 = int(request.POST['oc_3'])
+
+
+        oc_total = oc_1 + oc_2 + oc_3
+
+        # Softskills
+        softskill_1 = int(request.POST['softskill_1'])
+        softskill_2 = int(request.POST['softskill_2'])
+        softskill_3 = int(request.POST['softskill_3'])
+        softskill_4 = int(request.POST['softskill_4'])
+        softskill_5 = int(request.POST['softskill_5'])
+
+
+        softskill_total = softskill_1 + softskill_2+ softskill_3+ softskill_4+softskill_5
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+        compliance_6 = int(request.POST['compliance_6'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
+
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        leadsales = UpfrontOnlineLLCMonform(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                           oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+
+                                           softskill_1=softskill_1,softskill_2=softskill_2,softskill_3=softskill_3,softskill_4=softskill_4,softskill_5=softskill_5,softskill_total=softskill_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,compliance_6=compliance_6,
+                                                      compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score,category=category,
+                                                          week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
+                                           )
+        leadsales.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/upfront.html', data)
+
+def microDistributingMonForm(request):
+    if request.method == 'POST':
+
+        category='leads'
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        call_duration=request.POST['duration']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Opening and Closing
+        oc_1 = int(request.POST['oc_1'])
+        oc_2 = int(request.POST['oc_2'])
+        oc_3 = int(request.POST['oc_3'])
+
+
+        oc_total = oc_1 + oc_2 + oc_3
+
+        # Softskills
+        softskill_1 = int(request.POST['softskill_1'])
+        softskill_2 = int(request.POST['softskill_2'])
+        softskill_3 = int(request.POST['softskill_3'])
+        softskill_4 = int(request.POST['softskill_4'])
+        softskill_5 = int(request.POST['softskill_5'])
+
+
+        softskill_total = softskill_1 + softskill_2+ softskill_3+ softskill_4+softskill_5
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+        compliance_6 = int(request.POST['compliance_6'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
+
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        leadsales = MicroDistributingMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                           oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+
+                                           softskill_1=softskill_1,softskill_2=softskill_2,softskill_3=softskill_3,softskill_4=softskill_4,softskill_5=softskill_5,softskill_total=softskill_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,compliance_6=compliance_6,
+                                                      compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score,category=category,
+                                                          week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
+                                           )
+        leadsales.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/micro.html', data)
+
+
+def jjStudioMonform(request):
+    if request.method == 'POST':
+
+        category='leads'
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        customer_name=request.POST['customer']
+        customer_contact=request.POST['customercontact']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+        concept = request.POST['concept']
+        zone=request.POST['zone']
+        call_duration=request.POST['duration']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Opening and Closing
+        oc_1 = int(request.POST['oc_1'])
+        oc_2 = int(request.POST['oc_2'])
+        oc_3 = int(request.POST['oc_3'])
+
+
+        oc_total = oc_1 + oc_2 + oc_3
+
+        # Softskills
+        softskill_1 = int(request.POST['softskill_1'])
+        softskill_2 = int(request.POST['softskill_2'])
+        softskill_3 = int(request.POST['softskill_3'])
+        softskill_4 = int(request.POST['softskill_4'])
+        softskill_5 = int(request.POST['softskill_5'])
+
+
+        softskill_total = softskill_1 + softskill_2+ softskill_3+ softskill_4+softskill_5
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+        compliance_6 = int(request.POST['compliance_6'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
+
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = oc_total + softskill_total +compliance_total
+            fatal = False
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        leadsales = JJStudioMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                        manager=manager_name,manager_id=manager_emp_id,
+
+                                           call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                           campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                           oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+
+                                           softskill_1=softskill_1,softskill_2=softskill_2,softskill_3=softskill_3,softskill_4=softskill_4,softskill_5=softskill_5,softskill_total=softskill_total,
+
+                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,compliance_6=compliance_6,
+                                                      compliance_total=compliance_total,
+
+                                           areas_improvement=areas_improvement,
+                                           positives=positives, comments=comments,
+                                           added_by=added_by,
+
+                                           overall_score=overall_score,category=category,
+                                                          week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
+                                           )
+        leadsales.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/jj.html', data)
+
+
 #campaign View
 
 def campaignView(request):
@@ -5506,162 +5871,173 @@ def campaignView(request):
     if request.method=='POST':
 
         pk=request.POST['campaign']
-        team=Team.objects.get(id=pk)
-        team_name=team.name
+
         agents=Profile.objects.filter(emp_desi='CRO').order_by('emp_name')
 
-        data = {'team': team,'agents':agents}
+        data = {'team':pk,'agents':agents}
         return render(request,'campaign-view.html',data)
 
     else:
         pass
 def selectCoachingForm(request):
+
     if request.method == 'POST':
         audit_form=request.POST['audit_form']
         agent=request.POST['agent']
         team=request.POST['team']
 
-        from datetime import date
-        today = date.today()
-        # mm/dd/YY
-        d1 = today.strftime("%m/%d/%Y")
-
-        if audit_form=='eva-chat':
+        if audit_form=='Noom-EVA':
             agent=Profile.objects.get(emp_name=agent)
-            team=Team.objects.get(name=team)
             data = {'agent':agent,'team':team}
             return render(request, 'mon-forms/ECPL-EVA&NOVO-Monitoring-Form-chat.html', data)
-        elif audit_form=='pod-chat':
+
+        elif audit_form=='Noom-POD':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-Pod-Father-Monitoring-Form-chat.html', data)
-        elif audit_form=='inbound-call':
+
+        elif audit_form=='Nucleus':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-INBOUND-CALL-MONITORING-FORM.html', data)
-        elif audit_form=='fame-house':
+
+        elif audit_form=='Fame House':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Fame-house-mon-form.html', data)
+
         elif audit_form=='FLA':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/FLA-mon-form.html', data)
-        elif audit_form=='lead-sales':
+
+
+        elif audit_form=='MT Cosmetic':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Lead-Sales-MONITORING-FORM.html', data)
-        elif audit_form=='email-chat':
+
+
+        elif audit_form=='Tonn Chat Email':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-Chat-Email-MONITORING-FORM.html', data)
-        elif audit_form=='mov-ins':
+
+
+        elif audit_form=='Movement of Insurance':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Master-Monitoring-Form-Movement-Insurance.html', data)
-        elif audit_form=='wit-digital':
+
+        elif audit_form=='Wit Digital':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Wit-Digital-Mastering-Monitoring-Form.html', data)
-        elif audit_form == 'pix-chat-email':
+
+        elif audit_form == 'Printer Pix Chat Email':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Chats-Email.html', data)
-        elif audit_form == 'pix-inbound':
+
+        elif audit_form == 'Printer Pix Inbound':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Inbound-Calls.html', data)
-        elif audit_form == 'lead-aadya':
+
+        elif audit_form == 'AAdya':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Aadhya-Solution.html', data)
-        elif audit_form == 'insalvage':
+
+        elif audit_form == 'Insalvage':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Insalvage.html', data)
-        elif audit_form == 'medicare':
+
+        elif audit_form == 'Medicare':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Medicare.html', data)
-        elif audit_form == 'cts':
+
+        elif audit_form == 'CTS':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-CTS.html', data)
-        elif audit_form == 'tentamus-food':
+
+        elif audit_form == 'Tentamus Food':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Tentamus-Food.html', data)
-        elif audit_form == 'tentamus-pet':
+
+        elif audit_form == 'Tentamus Pet':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Tentamus-Pet.html', data)
-        elif audit_form == 'city-sec':
+
+        elif audit_form == 'City Security':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-City-Security.html', data)
-        elif audit_form == 'allen':
+
+        elif audit_form == 'Allen Consulting':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Allen-Consulting.html', data)
-        elif audit_form == 'system4':
+
+        elif audit_form == 'System4':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-System4.html', data)
-        elif audit_form == 'louisville':
+
+        elif audit_form == 'Louisville':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Louisville.html', data)
-        elif audit_form == 'info-think':
+
+        elif audit_form == 'Info Think LLC':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Info-Think-LLC.html', data)
-        elif audit_form == 'psecu':
+
+        elif audit_form == 'PSECU':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-PSECU.html', data)
-        elif audit_form == 'get-rates':
+
+        elif audit_form == 'Get A Rates':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Get-A-Rates.html', data)
-        elif audit_form == 'advance':
+
+        elif audit_form == 'Advance Consultants':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Monitoring-Form-Leads-Advance-Consultant.html', data)
-        elif audit_form == 'fur-baby':
+
+        elif audit_form == 'Fur Baby':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/fur-baby-mon-form.html', data)
 
-        elif audit_form == 'max-well':
+        elif audit_form == 'Maxwell Properties':
             agent = Profile.objects.get(emp_name=agent)
-            team = Team.objects.get(name=team)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/max-well.html', data)
+
+        elif audit_form == 'Upfront Online LLC':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/upfront.html', data)
+
+        elif audit_form == 'Micro Distributing':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/micro.html', data)
+
+        elif audit_form == 'JJ Studio':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/jj.html', data)
 
     else:
         return redirect('/employees/qahome')
@@ -7674,6 +8050,233 @@ def exportAuditReport(request):
             wb.save(response)
 
             return response
+
+        elif campaign == 'Upfront Online LLC':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = UpfrontOnlineLLCMonform.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Micro Distributing':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = MicroDistributingMonForm.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'JJ Studio':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process','empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score', 'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal','areas_improvement','positives','comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = JJStudioMonForm.objects.filter(
+                audit_date__range=[start_date, end_date]).values_list(
+                'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal','areas_improvement','positives','comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+
 
         else:
 

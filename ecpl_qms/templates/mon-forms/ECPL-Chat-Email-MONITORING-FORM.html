@@ -5,7 +5,7 @@
         <div class="container-lg">
             <form action="/employees/ECPL-Email-chat-MONITORING_FORM" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                <h2 class="text-center">ECPL - Email and Chat MONITORING FORM</h2>
+                <h2 class="text-center">ECPL - Tonn Chat Email Audit Form</h2>
 
                 <div class="basic">
                     <div class="row">
@@ -38,12 +38,8 @@
                             <input type="date" class="form-control" id="auditdate" name="auditdate" required>
                         </div>
                          <div class="col-md-4">
-                            <label for="campaign">Campaign</label>
-                             <select class="form-control" id="campaign" required="required" name="campaign">
+                             <input type="hidden" class="form-control" name="campaign" value="{{agent.process}}">
 
-                               <option value="{{agent.process}}">{{agent.process}}</option>
-
-                            </select>
 
                             <label for="zone">Zone</label>
                             <input type="text" class="form-control" id="zone" name="zone" required>
