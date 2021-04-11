@@ -81,7 +81,7 @@
                     <h4>Export Report</h4>
                     <br>
                     <div>
-                        <form action="/employees/export-data" method="POST" enctype="multipart/form-data">
+                        <form action="/employees/export-data-qa" method="POST" enctype="multipart/form-data">
                             {% csrf_token %}
                             <h6>Campaign</h6>
                             <select name="process" class="form-control" style="width: 300px;font-size: 12px;height: auto" required>
@@ -170,7 +170,7 @@
                 <div>
                     <h2 style="color:grey">View Feedbacks</h2>
                     <br>
-                    <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
+                    <form action="/employees/campaign-wise-coaching-view-qa" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <h6>Campaign</h6>
                         <select name="campaign" id="camp" class="form-control" style="width: 300px;font-size: 12px;height: auto">
@@ -189,6 +189,7 @@
                         <input type="date" name="start_date" class="form-control" style="width: 300px;font-size: 10px;height: auto">
                         <label for="">To</label>
                         <input type="date" name="end_date" class="form-control" style="width: 300px;font-size: 10px;height: auto">
+                        <input type="hidden" name="qa" value="{{user.profile.emp_name}}">
                         <br>
                         <button class="btn btn-secondary" class="form-control">submit</button>
                     </form>

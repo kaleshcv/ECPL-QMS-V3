@@ -71,6 +71,7 @@ urlpatterns = [
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
 
     path('campaign-wise-coaching-view',campaignwiseCoachings),
+    path('campaign-wise-coaching-view-qa',campaignwiseCoachingsQA),
 
     path('campaign-wise-coaching-view-agent',campaignwiseCoachingsAgent),
 
@@ -100,6 +101,7 @@ urlpatterns = [
     path('fame-house-full-report',fameHouseFullReport),
 
     path('export-data',exportAuditReport),
+    path('export-data-qa',exportAuditReportQA),
 
     #path('adduser',addtoUserModel),
     path('update-email-address/<int:pk>',updateEmailAddress),

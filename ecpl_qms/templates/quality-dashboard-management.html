@@ -119,9 +119,9 @@
                     <form action="/employees/campaign-wise-coaching-view" method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         <h6>Campaign</h6>
-                        <select name="team_id" id="camp" class="form-control">
-                            {% for team in teams %}
-                            <option value="{{team.id}}">{{team.name}}</option>
+                        <select name="campaign" id="camp" class="form-control">
+                            {% for c in campaigns %}
+                            <option value="{{c.name}}">{{c.name}}</option>
                             {% endfor %}
                         </select>
                         <br>
