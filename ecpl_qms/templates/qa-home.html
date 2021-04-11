@@ -266,9 +266,11 @@
 <section style="margin-top:100px">
 <div class="container-lg">
     <div class="row">
+
         <div class="col-md-5">
+            <h4>Recent feedbacks by {{user.profile.emp_name}}</h4>
             <div style="margin-top:50px;overflow:scroll;height:300px;" >
-                    <h4>Recent feedbacks by {{user.profile.emp_name}}</h4>
+
                     <table class="table">
                         {% for a in all_c_obj %}
                             {% for c in a %}
