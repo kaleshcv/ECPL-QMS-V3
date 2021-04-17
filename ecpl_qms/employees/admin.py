@@ -7,6 +7,7 @@ admin.site.register(Profile)
 admin.site.register(Process)
 admin.site.register(Empdata)
 admin.site.register(Empprofile)
+admin.site.register(Campaigns)
 
 # Monitoring Forms
 
@@ -46,4 +47,15 @@ admin.site.register(UpfrontOnlineLLCMonform)
 admin.site.register(MicroDistributingMonForm)
 admin.site.register(JJStudioMonForm)
 
-
+admin.site.register(ZeroStressMarketingMonForm)
+admin.site.register(WTUMonForm)
+admin.site.register(RoofWellMonForm)
+admin.site.register(GlydeAppMonForm)
+admin.site.register(MillenniumScientificMonForm)
+admin.site.register(FinesseMortgageMonForm)
+admin.site.register(StandSpotMonForm)
+admin.site.register(CamIndustrialMonForm)
+admin.site.register(OptimalStudentLoanMonForm)
+admin.site.register(NavigatorBioMonForm)
+admin.site.register(AKDYInboundMonForm)
+admin.site.register(AkKDYEmailMonForm)

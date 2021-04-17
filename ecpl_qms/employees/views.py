@@ -2569,10 +2569,23 @@ def qahome(request):
         micro = {'name':'Micro Distributing'}
         jj= {'name':'JJ Studio'}
 
+        zero = {'name': 'Zero Stress Marketing'}
+        wtu = {'name': 'WTU'}
+        roof = {'name': 'Roof Well'}
+        glyde = {'name': 'Glyde App'}
+        mill = {'name': 'Millennium Scientific'}
+        fin = {'name': 'Finesse Mortgage'}
+        spot = {'name': 'Stand Spot'}
+        cam = {'name': 'Cam Industrial'}
+        opti = {'name': 'Optimal Student Loan'}
+        nav = {'name': 'Navigator Bio'}
+        akdyinb = {'name': 'AKDY - Inbound'}
+        akdyemail = {'name': 'AKDY - Email'}
 
         campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance, fur, max,upfront,micro,jj]
+                     getarates, advance, fur, max, upfront, micro, jj,
+                     zero, wtu, roof, glyde, mill, fin, spot, cam, opti, nav, akdyinb, akdyemail]
 
 
         data={'teams':teams,
@@ -2722,9 +2735,24 @@ def qahome(request):
         micro = {'name': 'Micro Distributing'}
         jj = {'name': 'JJ Studio'}
 
+        zero={'name':'Zero Stress Marketing'}
+        wtu = {'name':'WTU'}
+        roof= {'name':'Roof Well'}
+        glyde = {'name':'Glyde App'}
+        mill = {'name':'Millennium Scientific'}
+        fin = {'name':'Finesse Mortgage'}
+        spot = {'name':'Stand Spot'}
+        cam= {'name':'Cam Industrial'}
+        opti = {'name':'Optimal Student Loan'}
+        nav = {'name':'Navigator Bio'}
+        akdyinb = {'name':'AKDY - Inbound'}
+        akdyemail = {'name':'AKDY - Email'}
+
+
         campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance, fur, max, upfront, micro, jj]
+                     getarates, advance, fur, max, upfront, micro, jj,
+                     zero,wtu,roof,glyde,mill,fin,spot,cam,opti,nav,akdyinb,akdyemail]
 
         data = {'teams': teams,
 
@@ -6137,6 +6165,12 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/jj.html', data)
+        elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound' or audit_form == 'AKDY - Email':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team}
+            return render(request, 'mon-forms/new-series-common.html', data)
+
+
 
     else:
         return redirect('/employees/qahome')
@@ -10715,3 +10749,178 @@ def updateProfile(request):
 def powerBITest(request):
 
     return render(request,'test-powerbi-view.html')
+
+
+
+#------------------ New Series MonForms ----------------copy Aadya---------#
+
+def newSeriesMonForms(request):
+
+
+    if request.method == 'POST':
+
+        campaign_name = request.POST['campaign']
+
+        def newseriesAddCoaching(monform):
+
+
+            category='leads'
+
+            associate_name = request.POST['empname']
+            emp_id = request.POST['empid']
+            qa = request.POST['qa']
+            team_lead = request.POST['tl']
+            customer_name=request.POST['customer']
+            customer_contact=request.POST['customercontact']
+            call_date = request.POST['calldate']
+            audit_date = request.POST['auditdate']
+            campaign = request.POST['campaign']
+            concept = request.POST['concept']
+            zone=request.POST['zone']
+            call_duration=request.POST['duration']
+
+            #######################################
+            prof_obj = Profile.objects.get(emp_id=emp_id)
+            manager = prof_obj.manager
+
+            manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+            manager_emp_id = manager_emp_id_obj.emp_id
+            manager_name = manager
+            #########################################
+
+            # Opening and Closing
+            oc_1 = int(request.POST['oc_1'])
+            oc_2 = int(request.POST['oc_2'])
+            oc_3 = int(request.POST['oc_3'])
+
+
+            oc_total = oc_1 + oc_2 + oc_3
+
+            # Softskills
+            softskill_1 = int(request.POST['softskill_1'])
+            softskill_2 = int(request.POST['softskill_2'])
+            softskill_3 = int(request.POST['softskill_3'])
+            softskill_4 = int(request.POST['softskill_4'])
+            softskill_5 = int(request.POST['softskill_5'])
+
+
+            softskill_total = softskill_1 + softskill_2+ softskill_3+ softskill_4+softskill_5
+
+            # Compliance
+            compliance_1 = int(request.POST['compliance_1'])
+            compliance_2 = int(request.POST['compliance_2'])
+            compliance_3 = int(request.POST['compliance_3'])
+            compliance_4 = int(request.POST['compliance_4'])
+            compliance_5 = int(request.POST['compliance_5'])
+            compliance_6 = int(request.POST['compliance_6'])
+
+            compliance_total = compliance_1 + compliance_2 + compliance_3+compliance_4+compliance_5+compliance_6
+
+            #################################################
+
+            fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5,compliance_6]
+            fatal_list_count = []
+            for i in fatal_list:
+                if i == 0:
+                    fatal_list_count.append(i)
+
+            no_of_fatals = len(fatal_list_count)
+
+            ####################################################
+
+            if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0:
+                overall_score = 0
+                fatal = True
+            else:
+                overall_score = oc_total + softskill_total +compliance_total
+                fatal = False
+
+            areas_improvement = request.POST['areaimprovement']
+            positives = request.POST['positives']
+            comments = request.POST['comments']
+            added_by = request.user.profile.emp_name
+
+            week = request.POST['week']
+            am = request.POST['am']
+
+            leadsales = monform(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                            manager=manager_name,manager_id=manager_emp_id,
+
+                                               call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
+                                               campaign=campaign, concept=concept, zone=zone,call_duration=call_duration,
+
+                                               oc_1=oc_1,oc_2=oc_2,oc_3=oc_3,
+
+                                               softskill_1=softskill_1,softskill_2=softskill_2,softskill_3=softskill_3,softskill_4=softskill_4,softskill_5=softskill_5,softskill_total=softskill_total,
+
+                                               compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,compliance_6=compliance_6,
+                                                          compliance_total=compliance_total,
+
+                                               areas_improvement=areas_improvement,
+                                               positives=positives, comments=comments,
+                                               added_by=added_by,
+
+                                               overall_score=overall_score,category=category,
+                                                          week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
+                                               )
+            leadsales.save()
+
+
+        if campaign_name == 'Zero Stress Marketing':
+            newseriesAddCoaching(ZeroStressMarketingMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'WTU':
+            newseriesAddCoaching(WTUMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Roof Well':
+            newseriesAddCoaching(RoofWellMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Glyde App':
+            newseriesAddCoaching(GlydeAppMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Millennium Scientific':
+            newseriesAddCoaching(MillenniumScientificMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Finesse Mortgage':
+            newseriesAddCoaching(FinesseMortgageMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Stand Spot':
+            newseriesAddCoaching(StandSpotMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Cam Industrial':
+            newseriesAddCoaching(CamIndustrialMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Optimal Student Loan':
+            newseriesAddCoaching(OptimalStudentLoanMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Navigator Bio':
+            newseriesAddCoaching(NavigatorBioMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'AKDY - Inbound':
+            newseriesAddCoaching(AKDYInboundMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'AKDY - Email':
+            newseriesAddCoaching(AkKDYEmailMonForm)
+            return redirect('/employees/qahome')
+
+        else:
+            pass
+
+
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/new-series-comon.html', data)
