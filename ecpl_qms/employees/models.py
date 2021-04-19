@@ -3157,7 +3157,7 @@ class AKDYInboundMonForm(models.Model):
         return self.comments[:100] + '...'
 
 class AkKDYEmailMonForm(models.Model):
-    process = models.CharField(default='AkKDY - Email', max_length=50)
+    process = models.CharField(default='AKDY - Email', max_length=50)
 
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)

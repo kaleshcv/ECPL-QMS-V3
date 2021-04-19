@@ -331,3 +331,24 @@ color:grey;
 .profile-head span {
     margin: 20px;
 }
+
+.scroll {
+border: none;
+padding: 30px 30px;
+overflow: scroll;
+}
+::-webkit-scrollbar {
+width: 12px;
+height: 12px;
+}
+::-webkit-scrollbar-track {
+border: None;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+background: grey;
+border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+background: gold;
+}

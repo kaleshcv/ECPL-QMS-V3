@@ -195,16 +195,14 @@
                     </form>
                 </div>
             </div>
-            <div class="col-md-1">
 
-            </div>
-            <div class="col-md-5" style="padding: 20px 20px">
-                <h2 style="color:grey">Associate-wise Scores <small style="font-size: 14px">Top -10</small></h2>
+            <div class="col-md-6" style="padding: 20px 20px">
+                <h2 style="color:grey">Associate-wise Scores</h2>
                 <br>
-                <br>
-                <table class="table" style="color:white;">
+                <div class="scroll" style="overflow:scroll;max-height:400px">
+                <table class="table" style="color: #81c5ba;">
                     <tr>
-
+                        <th>Process</th>
                         <th>Agent Name</th>
                         <th>Audit Count</th>
                         <th>Score</th>
@@ -212,6 +210,7 @@
                      {% for i in emp_wise_score %}
                     {% for j in i %}
                     <tr>
+                        <td>{{j.process}}</td>
                         <td>{{j.associate_name}}</td>
                         <td>{{j.dcount}}</td>
                         <td>{{j.davg|floatformat:2}}%</td>
@@ -219,6 +218,7 @@
                      {% endfor %}
                 {% endfor %}
                 </table>
+               </div>
             </div>
 
         </div>
@@ -229,7 +229,7 @@
 
     <h2 class="text-center">Open Coaching List</h2>
     <div class="container-lg" style="margin-top:50px">
-        <div>
+        <div class="scroll" style="max-height:500px">
 
 
             <table class="table">
@@ -269,7 +269,7 @@
 
         <div class="col-md-5">
             <h4>Recent feedbacks by {{user.profile.emp_name}}</h4>
-            <div style="margin-top:50px;overflow:scroll;height:300px;" >
+            <div style="margin-top:50px;overflow:scroll;max-height:300px;" >
 
                     <table class="table">
                         {% for a in all_c_obj %}

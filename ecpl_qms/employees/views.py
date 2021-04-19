@@ -1311,6 +1311,66 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-jj.html', data)
 
+    if process_name == 'Zero Stress Marketing':
+        coaching = ZeroStressMarketingMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'WTU':
+        coaching = WTUMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Roof Well':
+        coaching = RoofWellMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Glyde App':
+        coaching = GlydeAppMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Millennium Scientific':
+        coaching = MillenniumScientificMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Finesse Mortgage':
+        coaching = FinesseMortgageMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Stand Spot':
+        coaching = StandSpotMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Cam Industrial':
+        coaching = CamIndustrialMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Optimal Student Loan':
+        coaching = OptimalStudentLoanMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Navigator Bio':
+        coaching = NavigatorBioMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'AKDY - Inbound':
+        coaching = AKDYInboundMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'AKDY - Email':
+        coaching = AkKDYEmailMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
 
     else:
         pass
@@ -1467,7 +1527,12 @@ def campaignwiseCoachingsQA(request):
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
                             MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
-                            UpfrontOnlineLLCMonform,MicroDistributingMonForm,JJStudioMonForm
+                            UpfrontOnlineLLCMonform,MicroDistributingMonForm,JJStudioMonForm,
+                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                            MillenniumScientificMonForm,
+                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                            NavigatorBioMonForm,
+                            AKDYInboundMonForm, AkKDYEmailMonForm
                             ]
 
         if start_date and end_date:
@@ -1565,6 +1630,7 @@ def campaignwiseCoachingsAgent(request):
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
                             MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
+
                             ]
 
         if start_date and end_date:
@@ -2468,14 +2534,17 @@ def qahome(request):
                           MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
                           MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
                           FurBabyMonForm,MaxwellProperties,UpfrontOnlineLLCMonform,MicroDistributingMonForm,JJStudioMonForm,
+                          ZeroStressMarketingMonForm,WTUMonForm,RoofWellMonForm,GlydeAppMonForm,MillenniumScientificMonForm,
+                          FinesseMortgageMonForm,StandSpotMonForm,CamIndustrialMonForm,OptimalStudentLoanMonForm,NavigatorBioMonForm,
+                          AKDYInboundMonForm,AkKDYEmailMonForm
                           ]
 
         empw_list=[]
 
         for i in list_of_monforms:
             emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,added_by=qa_name).values(
-            'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
-            '-davg')[:10]
+            'associate_name','process').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
+            '-davg')
             empw_list.append(emp_wise)
 
 
@@ -2629,6 +2698,11 @@ def qahome(request):
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
                             MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
                             UpfrontOnlineLLCMonform, MicroDistributingMonForm, JJStudioMonForm,
+                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                            MillenniumScientificMonForm,
+                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                            NavigatorBioMonForm,
+                            AKDYInboundMonForm, AkKDYEmailMonForm
                             ]
 
         empw_list = []
@@ -2636,7 +2710,7 @@ def qahome(request):
         for i in list_of_monforms:
             emp_wise = i.objects.filter(audit_date__year=currentYear, audit_date__month=currentMonth,
                                         added_by=qa_name).values(
-                'associate_name').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
+                'associate_name','process').annotate(dcount=Count('associate_name')).annotate(davg=Avg('overall_score')).order_by(
                 '-davg')[:10]
             empw_list.append(emp_wise)
 
@@ -6009,6 +6083,11 @@ def campaignView(request):
 def selectCoachingForm(request):
 
     if request.method == 'POST':
+
+        import datetime
+        today_date = datetime.date.today()
+        new_today_date = today_date.strftime("%Y-%m-%d")
+
         audit_form=request.POST['audit_form']
         agent=request.POST['agent']
         team=request.POST['team']
@@ -6167,7 +6246,7 @@ def selectCoachingForm(request):
             return render(request, 'mon-forms/jj.html', data)
         elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound' or audit_form == 'AKDY - Email':
             agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
+            data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
 
@@ -10698,7 +10777,134 @@ def exportAuditReportQA(request):
 
             return response
 
+        elif campaign == 'Zero Stress Marketing' or campaign == 'WTU' or campaign == 'Roof Well' or campaign == 'Glyde App' or campaign == 'Millennium Scientific' or campaign == 'Finesse Mortgage' or campaign == 'Stand Spot' or campaign == 'Cam Industrial' or campaign == 'Optimal Student Loan' or campaign == 'Navigator Bio' or campaign == 'AKDY - Inbound' or campaign == 'AKDY - Email':
 
+            def exportNewSeries(monform):
+
+                response = HttpResponse(content_type='application/ms-excel')
+                response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+                wb = xlwt.Workbook(encoding='utf-8')
+                ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+                # Sheet header, first row
+                row_num = 0
+                font_style = xlwt.XFStyle()
+                font_style.font.bold = True
+                columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                           'Fatal Count',
+                           'qa', 'am', 'team_lead', 'manager',
+
+                           'Used Standard Opening Protocol',
+                           'Introduction of Product / Branding',
+                           'Call Closing as per the Protocol',
+
+                           'Followed Hold Procedure Appropriately/Dead Air',
+                           'Used Empathetic Statements whenever required',
+                           'Clear Grammar & Communication',
+                           'Acknowledged Appropriately',
+                           'Active Listening without Interruption',
+
+                           'Followed Policy & Procedure (Script)',
+                           'Probing/Tactful finding/Rebuttal',
+                           'Accurate Documentation',
+                           'Disposition done correctly',
+                           'Inaccurate Information',
+                           'Advisor Sounding Rude / Proafinity Usage',
+
+                           'status',
+                           'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+                for col_num in range(len(columns)):
+                    ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+                # Sheet body, remaining rows
+                font_style = xlwt.XFStyle()
+                rows = monform.objects.filter(audit_date__range=[start_date, end_date],
+                                                                        qa=qa).values_list(
+                    'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                    'am',
+                    'team_lead', 'manager',
+
+                    'oc_1',
+                    'oc_2',
+                    'oc_3',
+
+                    'softskill_1',
+                    'softskill_2',
+                    'softskill_3',
+                    'softskill_4',
+                    'softskill_5',
+
+                    'compliance_1',
+                    'compliance_2',
+                    'compliance_3',
+                    'compliance_4',
+                    'compliance_5',
+                    'compliance_6',
+
+                    'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+                import datetime
+                rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                        rows]
+
+                for row in rows:
+                    row_num += 1
+                    for col_num in range(len(row)):
+                        ws.write(row_num, col_num, row[col_num], font_style)
+
+                wb.save(response)
+
+                return response
+
+            if campaign == 'Zero Stress Marketing':
+                response = exportNewSeries(ZeroStressMarketingMonForm)
+                return response
+
+            elif campaign == 'WTU':
+                response = exportNewSeries(WTUMonForm)
+                return response
+
+            elif campaign == 'Roof Well':
+                response =exportNewSeries(RoofWellMonForm)
+                return response
+
+            elif campaign == 'Glyde App':
+                response =exportNewSeries(GlydeAppMonForm)
+                return response
+
+            elif campaign == 'Millennium Scientific':
+                response =exportNewSeries(MillenniumScientificMonForm)
+                return response
+
+            elif campaign == 'Finesse Mortgage':
+                response =exportNewSeries(FinesseMortgageMonForm)
+                return response
+
+            elif campaign == 'Stand Spot':
+                response =exportNewSeries(StandSpotMonForm)
+                return response
+
+
+            elif campaign == 'Cam Industrial':
+                response =exportNewSeries(CamIndustrialMonForm)
+                return response
+
+
+            elif campaign == 'Optimal Student Loan':
+                response =exportNewSeries(OptimalStudentLoanMonForm)
+                return response
+
+            elif campaign == 'Navigator Bio':
+                response =exportNewSeries(NavigatorBioMonForm)
+                return response
+
+            elif campaign == 'AKDY - Inbound':
+                response =exportNewSeries(AKDYInboundMonForm)
+                return response
+
+            elif campaign == 'AKDY - Email':
+                response =exportNewSeries(AkKDYEmailMonForm)
+                return response
 
         else:
 
@@ -10706,7 +10912,6 @@ def exportAuditReportQA(request):
 
     else:
         pass
-
 
 
 
@@ -10777,7 +10982,7 @@ def newSeriesMonForms(request):
             campaign = request.POST['campaign']
             concept = request.POST['concept']
             zone=request.POST['zone']
-            call_duration=request.POST['duration']
+            call_duration=(int(request.POST['durationh'])*3600)+(int(request.POST['durationm'])*60)+int(request.POST['durations'])
 
             #######################################
             prof_obj = Profile.objects.get(emp_id=emp_id)

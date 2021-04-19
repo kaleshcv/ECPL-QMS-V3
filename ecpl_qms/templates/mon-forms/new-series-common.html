@@ -34,20 +34,21 @@
                             <label for="calldate">Call Date</label>
                             <input type="date" class="form-control" id="calldate" name="calldate" required>
                             <label for="auditdate">Audit Date</label>
-                            <input type="date" class="form-control" id="auditdate" name="auditdate" required>
+                            <input type="text" class="form-control" id="auditdate" name="auditdate" value="{{date}}" readonly>
                         </div>
                          <div class="col-md-4">
                              <input type="hidden" class="form-control" name="campaign1" value="{{agent.process}}">
-                        
-
-                            <label for="zone">Zone</label>
+                             <label for="zone">Zone</label>
                             <input type="text" class="form-control" id="zone" name="zone" required>
+                             <label for="concept">Concept</label>
+                            <input type="text" class="form-control" id="concept" name="concept" required>
                         </div>
                          <div class="col-md-4">
-                            <label for="concept">Concept</label>
-                            <input type="text" class="form-control" id="concept" name="concept" required>
-                             <label for="duration">Call Duration</label>
-                            <input type="number" class="form-control" id="duration" name="duration" required>
+
+                             <label for="duration">Call Duration</label><br><br>
+                            <input type="number" placeholder="hh" name="durationh" required style="width:60px;">
+                             <input type="number" placeholder="mm" name="durationm" required style="width:60px;">
+                             <input type="number" placeholder="ss" name="durations" required style="width:60px;">
 
                         </div>
                         <div class="col-md-4">
