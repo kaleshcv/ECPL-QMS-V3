@@ -11129,3 +11129,12 @@ def newSeriesMonForms(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/new-series-comon.html', data)
+
+
+def processNameChanger(request):
+
+    obj=MonitoringFormLeadsAadhyaSolution.objects.all()
+    for i in obj:
+        i.process='AAdya'
+        i.save()
+
