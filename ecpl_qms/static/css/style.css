@@ -59,8 +59,8 @@ h5{
 }
 #nav{
     background: #2f374e;
-    height: 60px;
-    padding: 10px 10px;
+    height: 80px;
+    padding: 25px 10px;
 }
 #nav .nav-link{
     color:white!important;
@@ -351,4 +351,9 @@ border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
 background: gold;
+}
+
+.profile-head i{
+    color: white;
+    margin-left: 20px;
 }

@@ -5,7 +5,7 @@
     <div style="background: #2f374e;opacity: 77%;height: 355px">
         <div class="container-lg" style="padding-bottom: 20px">
             <div class="row">
-                <div class="col-md-12" style="padding: 50px 30px">
+                <div class="col-md-6" style="padding: 80px 30px">
                     <h2 style="color:white">Campaigns</h2>
                     <br>
                     <div>
@@ -23,17 +23,21 @@
                         </form>
                     </div>
                 </div>
-            </div>
-                <div class="profile-head">
-                <span style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}</span>
-                <span style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}</span>
-                <span style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}</span>
-                <span><a href="/employees/update-email-address/{{user.profile.emp_id}}">Update Email Address</a></span><br><br>
-                <span style="color:white"><small style="color:grey">Team :</small>{{user.profile.team}}</span>
+                <div class="col-md-6" style="padding-top: 50px;text-align: right;padding-right: 60px">
+                    <div class="profile-head">
+                        <p style="color:white"><small style="color:grey">Employee Name :</small>{{user.profile.emp_name}}<i class="fas fa-user" style="color:white;"></i></p>
 
-                <span style="color:white"><small style="color:grey">Designation :</small>{{user.profile.emp_desi}}</span>
-                <span style="color:White;"><small style="color:grey">Total Coachings - </small>{{total_coaching}}</span>
+                        <p style="color:white"><small style="color:grey">Employee ID :</small>{{user.profile.emp_id}}<i class="fas fa-id-card-alt"></i></p>
+                        <p style="color:white"><small style="color:grey">Email Address :</small>{{user.profile.email}}<i class="fas fa-envelope"></i><a href="/employees/update-email-address/{{user.profile.emp_id}}"><i class="fas fa-edit"></i></a></p>
+                        <p style="color:white"><small style="color:grey">Team :</small>{{user.profile.team}}<i class="fas fa-users"></i></p>
+
+                        <p style="color:white"><small style="color:grey">Designation :</small>{{user.profile.emp_desi}}<i class="fas fa-briefcase"></i></p>
+                        <p style="color:White;"><small style="color:grey">Total Coachings - </small>{{total_coaching}}</p>
+
+                    </div>
+                </div>
             </div>
+
         </div>
 
     </div>
@@ -44,7 +48,7 @@
     <br>
     <br>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-4" style="background: #eceff1;padding: 30px 30px;border-radius: 12px">
 
             <form action="/employees/qahome" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}

@@ -6150,75 +6150,11 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Inbound-Calls.html', data)
 
-        elif audit_form == 'AAdya':
+        elif audit_form == 'AAdya' or audit_form == 'Insalvage' or audit_form == 'Medicare' or audit_form == 'CTS' or audit_form == 'Tentamus Food' or audit_form == 'Tentamus Pet' or audit_form == 'City Security' or audit_form == 'Allen Consulting' or audit_form == 'System4' or audit_form == 'Louisville' or audit_form == 'Info Think LLC' or audit_form == 'PSECU' or audit_form == 'Get A Rates' or audit_form == 'Advance Consultants':
             agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Aadhya-Solution.html', data)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/new-series-common.html', data)
 
-        elif audit_form == 'Insalvage':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Insalvage.html', data)
-
-        elif audit_form == 'Medicare':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Medicare.html', data)
-
-        elif audit_form == 'CTS':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-CTS.html', data)
-
-        elif audit_form == 'Tentamus Food':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Tentamus-Food.html', data)
-
-        elif audit_form == 'Tentamus Pet':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Tentamus-Pet.html', data)
-
-        elif audit_form == 'City Security':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-City-Security.html', data)
-
-        elif audit_form == 'Allen Consulting':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Allen-Consulting.html', data)
-
-        elif audit_form == 'System4':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-System4.html', data)
-
-        elif audit_form == 'Louisville':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Louisville.html', data)
-
-        elif audit_form == 'Info Think LLC':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Info-Think-LLC.html', data)
-
-        elif audit_form == 'PSECU':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-PSECU.html', data)
-
-        elif audit_form == 'Get A Rates':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Get-A-Rates.html', data)
-
-        elif audit_form == 'Advance Consultants':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Monitoring-Form-Leads-Advance-Consultant.html', data)
 
         elif audit_form == 'Fur Baby':
             agent = Profile.objects.get(emp_name=agent)
@@ -6244,6 +6180,8 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/jj.html', data)
+
+
         elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound' or audit_form == 'AKDY - Email':
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team,'date':new_today_date}
@@ -11120,6 +11058,65 @@ def newSeriesMonForms(request):
             newseriesAddCoaching(AkKDYEmailMonForm)
             return redirect('/employees/qahome')
 
+        ######### Aadya series
+
+        elif campaign_name == 'AAdya':
+            newseriesAddCoaching(MonitoringFormLeadsAadhyaSolution)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Insalvage':
+            newseriesAddCoaching(MonitoringFormLeadsInsalvage)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Medicare':
+            newseriesAddCoaching(MonitoringFormLeadsMedicare)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'CTS':
+            newseriesAddCoaching(MonitoringFormLeadsCTS)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Tentamus Food':
+            newseriesAddCoaching(MonitoringFormLeadsTentamusFood)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Tentamus Pet':
+            newseriesAddCoaching(MonitoringFormLeadsTentamusPet)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'City Security':
+            newseriesAddCoaching(MonitoringFormLeadsCitySecurity)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Allen Consulting':
+            newseriesAddCoaching(MonitoringFormLeadsAllenConsulting)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'System4':
+            newseriesAddCoaching(MonitoringFormLeadsSystem4)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Louisville':
+            newseriesAddCoaching(MonitoringFormLeadsLouisville)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Info Think LLC':
+            newseriesAddCoaching(MonitoringFormLeadsInfothinkLLC)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'PSECU':
+            newseriesAddCoaching(MonitoringFormLeadsPSECU)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Get A Rates':
+            newseriesAddCoaching(MonitoringFormLeadsGetARates)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Advance Consultants':
+            newseriesAddCoaching(MonitoringFormLeadsAdvanceConsultants)
+            return redirect('/employees/qahome')
+
+
         else:
             pass
 
@@ -11129,7 +11126,6 @@ def newSeriesMonForms(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/new-series-comon.html', data)
-
 
 def processNameChanger(request):
 
