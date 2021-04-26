@@ -355,5 +355,10 @@ background: gold;
 
 .profile-head i{
     color: white;
-    margin-left: 20px;
+    margin-left: 30px;
+}
+.avg_scores:hover{
+    background:#011c38;
+    color:white;
+    cursor:pointer;
 }
