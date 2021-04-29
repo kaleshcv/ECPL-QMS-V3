@@ -2576,14 +2576,17 @@ def qahome(request):
     kalki = {'name':'Kalki Fashions'}
 
     super_play = {'name':'Super Play'}
+    dani_chat = {'name':'Daniel Wellington - Chat - Email'}
+    teraceo_chat = {'name':'Terraceo - Chat - Email'}
+
 
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                  getarates, advance, fur, max, upfront, micro, jj,
                  zero, wtu, roof, glyde, mill, fin, spot, cam, opti, nav, akdyinb, akdyemail,
-                 ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,proto,kappi,something,abh,
-                 embassy,iib,terracio_lead,kalki,super_play]
+                 ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
+                 embassy,iib,terracio_lead,teraceo_chat,kalki,super_play]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
                         FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
@@ -2606,7 +2609,8 @@ def qahome(request):
                         AKDYInboundMonForm, AkKDYEmailMonForm,
                         IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
                         DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
-                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
+                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm
 
                         ]
 
@@ -3795,237 +3799,6 @@ def printerPixChatsEmails(request):
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Chats-Email.html', data)
 
-
-#################### Fur baby #########################3
-
-def furBabyMonForm(request):
-    if request.method == 'POST':
-        category='chat'
-        associate_name = request.POST['empname']
-        emp_id = request.POST['empid']
-        qa = request.POST['qa']
-        team_lead = request.POST['tl']
-        customer_name=request.POST['customer']
-        customer_contact=request.POST['customercontact']
-        trans_date = request.POST['trans_date']
-        audit_date = request.POST['auditdate']
-        campaign = request.POST['campaign']
-        concept = request.POST['concept']
-        zone=request.POST['zone']
-        duration=request.POST['duration']
-
-        #######################################
-        prof_obj = Profile.objects.get(emp_id=emp_id)
-        manager = prof_obj.manager
-
-        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
-
-        manager_emp_id = manager_emp_id_obj.emp_id
-        manager_name = manager
-        #########################################
-
-        # Customer Experience
-        ce_1 = int(request.POST['ce_1'])
-        ce_2 = int(request.POST['ce_2'])
-        ce_3 = int(request.POST['ce_3'])
-        ce_4 = int(request.POST['ce_4'])
-        ce_5 = int(request.POST['ce_5'])
-        ce_6 = int(request.POST['ce_6'])
-        ce_7 = int(request.POST['ce_7'])
-        ce_8 = int(request.POST['ce_8'])
-        ce_9 = int(request.POST['ce_9'])
-        ce_10 = int(request.POST['ce_10'])
-        ce_11 = int(request.POST['ce_11'])
-
-        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
-
-        # Business
-        business_1 = int(request.POST['business_1'])
-        business_2 = int(request.POST['business_2'])
-
-        business_total = business_1 + business_2
-
-        # Compliance
-        compliance_1 = int(request.POST['compliance_1'])
-        compliance_2 = int(request.POST['compliance_2'])
-        compliance_3 = int(request.POST['compliance_3'])
-        compliance_4 = int(request.POST['compliance_4'])
-        compliance_5 = int(request.POST['compliance_5'])
-
-
-
-        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
-
-        #################################################
-
-        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5]
-        fatal_list_count = []
-        for i in fatal_list:
-            if i == 0:
-                fatal_list_count.append(i)
-
-        no_of_fatals = len(fatal_list_count)
-
-        ####################################################
-
-        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
-            overall_score = 0
-            fatal = True
-        else:
-            overall_score = ce_total + business_total + compliance_total
-            fatal = False
-
-        areas_improvement = request.POST['areaimprovement']
-        positives = request.POST['positives']
-        comments = request.POST['comments']
-        added_by = request.user.profile.emp_name
-
-        week = request.POST['week']
-        am = request.POST['am']
-
-        furbaby = FurBabyMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
-                                        manager=manager_name,manager_id=manager_emp_id,
-
-                                           trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
-                                           campaign=campaign, concept=concept, zone=zone,duration=duration,
-
-                                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7, ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
-                                           ce_total=ce_total,
-
-                                           business_1=business_1,business_2=business_2,business_total=business_total,
-
-                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,
-                                           compliance_total=compliance_total,
-
-                                           areas_improvement=areas_improvement,
-                                           positives=positives, comments=comments,
-                                           added_by=added_by,
-
-                                           overall_score=overall_score,category=category,
-                                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
-                                           )
-        furbaby.save()
-        return redirect('/employees/qahome')
-    else:
-        teams = Team.objects.all()
-        users = User.objects.all()
-        data = {'teams': teams, 'users': users}
-        return render(request, 'mon-forms/fur-baby-mon-form.html', data)
-
-
-def maxwellProperties(request):
-    if request.method == 'POST':
-        category='chat'
-        associate_name = request.POST['empname']
-        emp_id = request.POST['empid']
-        qa = request.POST['qa']
-        team_lead = request.POST['tl']
-        customer_name=request.POST['customer']
-        customer_contact=request.POST['customercontact']
-        trans_date = request.POST['trans_date']
-        audit_date = request.POST['auditdate']
-        campaign = request.POST['campaign']
-        concept = request.POST['concept']
-        zone=request.POST['zone']
-        duration=request.POST['duration']
-
-        #######################################
-        prof_obj = Profile.objects.get(emp_id=emp_id)
-        manager = prof_obj.manager
-
-        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
-
-        manager_emp_id = manager_emp_id_obj.emp_id
-        manager_name = manager
-        #########################################
-
-        # Customer Experience
-        ce_1 = int(request.POST['ce_1'])
-        ce_2 = int(request.POST['ce_2'])
-        ce_3 = int(request.POST['ce_3'])
-        ce_4 = int(request.POST['ce_4'])
-        ce_5 = int(request.POST['ce_5'])
-        ce_6 = int(request.POST['ce_6'])
-        ce_7 = int(request.POST['ce_7'])
-        ce_8 = int(request.POST['ce_8'])
-        ce_9 = int(request.POST['ce_9'])
-        ce_10 = int(request.POST['ce_10'])
-        ce_11 = int(request.POST['ce_11'])
-
-        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
-
-        # Business
-        business_1 = int(request.POST['business_1'])
-        business_2 = int(request.POST['business_2'])
-
-        business_total = business_1 + business_2
-
-        # Compliance
-        compliance_1 = int(request.POST['compliance_1'])
-        compliance_2 = int(request.POST['compliance_2'])
-        compliance_3 = int(request.POST['compliance_3'])
-        compliance_4 = int(request.POST['compliance_4'])
-        compliance_5 = int(request.POST['compliance_5'])
-
-
-
-        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
-
-        #################################################
-
-        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4,compliance_5]
-        fatal_list_count = []
-        for i in fatal_list:
-            if i == 0:
-                fatal_list_count.append(i)
-
-        no_of_fatals = len(fatal_list_count)
-
-        ####################################################
-
-        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 :
-            overall_score = 0
-            fatal = True
-        else:
-            overall_score = ce_total + business_total + compliance_total
-            fatal = False
-
-        areas_improvement = request.POST['areaimprovement']
-        positives = request.POST['positives']
-        comments = request.POST['comments']
-        added_by = request.user.profile.emp_name
-
-        week = request.POST['week']
-        am = request.POST['am']
-
-        maxwell = MaxwellProperties(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
-                                        manager=manager_name,manager_id=manager_emp_id,
-
-                                           trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
-                                           campaign=campaign, concept=concept, zone=zone,duration=duration,
-
-                                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7, ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
-                                           ce_total=ce_total,
-
-                                           business_1=business_1,business_2=business_2,business_total=business_total,
-
-                                           compliance_1=compliance_1, compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,
-                                           compliance_total=compliance_total,
-
-                                           areas_improvement=areas_improvement,
-                                           positives=positives, comments=comments,
-                                           added_by=added_by,
-
-                                           overall_score=overall_score,category=category,
-                                                             week=week,am=am,fatal_count=no_of_fatals,fatal=fatal
-                                           )
-        maxwell.save()
-        return redirect('/employees/qahome')
-    else:
-        teams = Team.objects.all()
-        users = User.objects.all()
-        data = {'teams': teams, 'users': users}
-        return render(request, 'mon-forms/max-well.html', data)
 
 
 def printerPixInboundCalls(request):
@@ -6113,36 +5886,10 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Inbound-Calls.html', data)
 
-        elif audit_form == 'AAdya' or audit_form == 'Insalvage' or audit_form == 'Medicare' or audit_form == 'CTS' or audit_form == 'Tentamus Food' or audit_form == 'Tentamus Pet' or audit_form == 'City Security' or audit_form == 'Allen Consulting' or audit_form == 'System4' or audit_form == 'Louisville' or audit_form == 'Info Think LLC' or audit_form == 'PSECU' or audit_form == 'Get A Rates' or audit_form == 'Advance Consultants':
+        elif audit_form == 'AAdya' or audit_form == 'Insalvage' or audit_form == 'Medicare' or audit_form == 'CTS' or audit_form == 'Tentamus Food' or audit_form == 'Tentamus Pet' or audit_form == 'City Security' or audit_form == 'Allen Consulting' or audit_form == 'System4' or audit_form == 'Louisville' or audit_form == 'Info Think LLC' or audit_form == 'PSECU' or audit_form == 'Get A Rates' or audit_form == 'Advance Consultants' or audit_form == 'Upfront Online LLC' or audit_form == 'Micro Distributing' or audit_form == 'JJ Studio':
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
-
-
-        elif audit_form == 'Fur Baby':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/fur-baby-mon-form.html', data)
-
-        elif audit_form == 'Maxwell Properties':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/max-well.html', data)
-
-        elif audit_form == 'Upfront Online LLC':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/upfront.html', data)
-
-        elif audit_form == 'Micro Distributing':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/micro.html', data)
-
-        elif audit_form == 'JJ Studio':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/jj.html', data)
 
 
         elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound' or audit_form == 'AKDY - Email':
@@ -6155,7 +5902,7 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
-        elif audit_form == 'Super Play':
+        elif audit_form == 'Super Play' or audit_form =='Daniel Wellington - Chat - Email' or audit_form =='Terraceo - Chat - Email' or audit_form == 'Fur Baby' or audit_form == 'Maxwell Properties':
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/domestic-email-chat.html', data)
@@ -11086,6 +10833,18 @@ def newSeriesMonForms(request):
             newseriesAddCoaching(MonitoringFormLeadsAdvanceConsultants)
             return redirect('/employees/qahome')
 
+        elif campaign_name == 'Upfront Online LLC':
+            newseriesAddCoaching(UpfrontOnlineLLCMonform)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Micro Distributing':
+            newseriesAddCoaching(MicroDistributingMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'JJ Studio':
+            newseriesAddCoaching(JJStudioMonForm)
+            return redirect('/employees/qahome')
+
         elif campaign_name == 'Ibiz':
             newseriesAddCoaching(IbizMonForm)
             return redirect('/employees/qahome')
@@ -11153,7 +10912,6 @@ def newSeriesMonForms(request):
         return render(request, 'mon-forms/new-series-comon.html', data)
 
 
-
 ############### Doestic Chat Email #################
 
 def domesticChatEmail(request):
@@ -11163,7 +10921,7 @@ def domesticChatEmail(request):
 
         def domesticEmailChatAddCoaching(monform):
 
-            category = 'email'
+            category = 'chat/email'
             associate_name = request.POST['empname']
             emp_id = request.POST['empid']
             qa = request.POST['qa']
@@ -11271,7 +11029,23 @@ def domesticChatEmail(request):
             domestic.save()
 
         if campaign_name == 'Super Play':
-            domesticEmailChatAddCoaching(SuperPlay)
+            domesticEmailChatAddCoaching(SuperPlayMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Daniel Wellington - Chat - Email':
+            domesticEmailChatAddCoaching(DanielWellinChatEmailMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Terraceo - Chat - Email':
+            domesticEmailChatAddCoaching(TerraceoChatEmailMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Fur Baby':
+            domesticEmailChatAddCoaching(FurBabyMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Maxwell Properties':
+            domesticEmailChatAddCoaching(MaxwellProperties)
             return redirect('/employees/qahome')
 
         else:
