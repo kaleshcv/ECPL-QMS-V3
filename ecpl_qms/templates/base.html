@@ -17,20 +17,21 @@
 <body>
     <!------------Navigation-------------->
 
-        <section id="nav">
+        <section id="nav" class="fixed-top">
             <div class="container-fluid">
 
                 <ul class="nav justify-content-end">
 
                     {% if user.is_authenticated %}
                     {% if user.profile.emp_desi == "QA" %}
+                        <i class="fa fa-home" aria-hidden="true" style="color: antiquewhite;padding: 6px"></i>
                         <li class="nav_item"><a href="/employees/qahome" style="margin-right: 100px;font-size: 19px;color: antiquewhite;">Home</a></li>
                     {% endif %}
 
-                    <li class="nav-item" style="color: White;margin-right: 50px"><small style="margin-right: 20px;color: white;">Welcome,</small>{{user.profile.emp_name}}</li>
+                    <li class="nav-item" style="color: White;margin-right: 50px"><small style="margin-right: 1px;color: white;font-size: 10px;font-style: italic;">Welcome,</small>{{user.profile.emp_name}}</li>
 
-                        <li class="nav-item"><a href="/employees/logout" style="color: #8ec3ff;margin: 10px;">logout</a></li>
-                        <li class="nav-item"><a href="/employees/change_password" style="margin: 10px;color:#8ec3ff !important">Change Password</a></li>
+                        <li class="nav-item"><a href="/employees/logout" style="color: #8ec3ff;margin: 10px 5px;">logout</a></li>
+                        <li class="nav-item"><a href="/employees/change_password" style="margin: 10px 2px;color:#ffeb3b !important;font-size:12px;">Change Password</a></li>
 
                     {% else %}
 

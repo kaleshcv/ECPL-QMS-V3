@@ -2514,6 +2514,102 @@ def coachingDispute(request,pk):
 
 def qahome(request):
 
+    ### Campaign Names ###
+
+    pod = {'name': 'Noom-POD'}
+    eva = {'name': 'Noom-EVA'}
+    nucleus = {'name': 'Nucleus'}
+    famehouse = {'name': 'Fame House'}
+    fla = {'name': 'FLA'}
+    mt = {'name': 'MT Cosmetic'}
+    ton = {'name': 'Tonn Chat Email'}
+    mov = {'name': 'Movement of Insurance'}
+    wit = {'name': 'Wit Digital'}
+    pixchat = {'name': 'Printer Pix Chat Email'}
+    pixcall = {'name': 'Printer Pix Inbound'}
+    aadya = {'name': 'AAdya'}
+    insalvage = {'name': 'Insalvage'}
+    medicare = {'name': 'Medicare'}
+    cts = {'name': 'CTS'}
+    tfood = {'name': 'Tentamus Food'}
+    tpet = {'name': 'Tentamus Pet'}
+    city = {'name': 'City Security'}
+    allen = {'name': 'Allen Consulting'}
+    system = {'name': 'System4'}
+    louis = {'name': 'Louisville'}
+    info = {'name': 'Info Think LLC'}
+    psecu = {'name': 'PSECU'}
+    getarates = {'name': 'Get A Rates'}
+    advance = {'name': 'Advance Consultants'}
+    fur = {'name': 'Fur Baby'}
+    max = {'name': 'Maxwell Properties'}
+    upfront = {'name': 'Upfront Online LLC'}
+    micro = {'name': 'Micro Distributing'}
+    jj = {'name': 'JJ Studio'}
+
+    zero = {'name': 'Zero Stress Marketing'}
+    wtu = {'name': 'WTU'}
+    roof = {'name': 'Roof Well'}
+    glyde = {'name': 'Glyde App'}
+    mill = {'name': 'Millennium Scientific'}
+    fin = {'name': 'Finesse Mortgage'}
+    spot = {'name': 'Stand Spot'}
+    cam = {'name': 'Cam Industrial'}
+    opti = {'name': 'Optimal Student Loan'}
+    nav = {'name': 'Navigator Bio'}
+    akdyinb = {'name': 'AKDY - Inbound'}
+    akdyemail = {'name': 'AKDY - Email'}
+
+    ibiz = {'name':'Ibiz'}
+    aditya_birla = {'name':'Aditya Birla Cellulose'}
+    bagya = {'name':'Bhagyalaxmi Industries'}
+    digiswisgold = {'name':'Digital Swiss Gold'}
+    nafa = {'name':'Naffa Innovations'}
+    daniel_inbound = {'name':'Daniel Wellington - Inbound'}
+    proto = {'name':'Protostar'}
+    kappi = {'name':'Kappi machine'}
+    something = {'name':'Somethings Brewing'}
+    abh = {'name':'AB - Hindalco'}
+    embassy = {'name':'Embassy Luxury'}
+    iib = {'name':'IIB'}
+    terracio_lead = {'name':'Terraceo - Lead'}
+    kalki = {'name':'Kalki Fashions'}
+
+    super_play = {'name':'Super Play'}
+
+
+    campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
+                 insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
+                 getarates, advance, fur, max, upfront, micro, jj,
+                 zero, wtu, roof, glyde, mill, fin, spot, cam, opti, nav, akdyinb, akdyemail,
+                 ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,proto,kappi,something,abh,
+                 embassy,iib,terracio_lead,kalki,super_play]
+
+    list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                        FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AkKDYEmailMonForm,
+                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions
+
+                        ]
+
     if request.method=='POST':
 
         qa_name=request.user.profile.emp_name
@@ -2525,19 +2621,7 @@ def qahome(request):
 
         ######### List of All Coachings ##############3
 
-        list_of_monforms=[ChatMonitoringFormEva,ChatMonitoringFormPodFather,InboundMonitoringFormNucleusMedia,
-                          FameHouseMonitoringForm,FLAMonitoringForm,MasterMonitoringFormMTCosmetics,
-                          MasterMonitoringFormTonnChatsEmail,MasterMonitoringFormMovementInsurance,WitDigitalMasteringMonitoringForm,
-                          PrinterPixMasterMonitoringFormChatsEmail,PrinterPixMasterMonitoringFormInboundCalls,MonitoringFormLeadsAadhyaSolution,
-                          MonitoringFormLeadsInsalvage,MonitoringFormLeadsMedicare,MonitoringFormLeadsCTS,MonitoringFormLeadsTentamusFood,
-                          MonitoringFormLeadsTentamusPet,MonitoringFormLeadsCitySecurity,MonitoringFormLeadsAllenConsulting,
-                          MonitoringFormLeadsSystem4,MonitoringFormLeadsLouisville,MonitoringFormLeadsInfothinkLLC,
-                          MonitoringFormLeadsPSECU,MonitoringFormLeadsGetARates,MonitoringFormLeadsAdvanceConsultants,
-                          FurBabyMonForm,MaxwellProperties,UpfrontOnlineLLCMonform,MicroDistributingMonForm,JJStudioMonForm,
-                          ZeroStressMarketingMonForm,WTUMonForm,RoofWellMonForm,GlydeAppMonForm,MillenniumScientificMonForm,
-                          FinesseMortgageMonForm,StandSpotMonForm,CamIndustrialMonForm,OptimalStudentLoanMonForm,NavigatorBioMonForm,
-                          AKDYInboundMonForm,AkKDYEmailMonForm
-                          ]
+
 
         empw_list=[]
 
@@ -2605,56 +2689,6 @@ def qahome(request):
             fatal_list.append(fatal_count)
 
             #############################################
-        ### Campaign Names ###
-
-        pod = {'name': 'Noom-POD'}
-        eva = {'name': 'Noom-EVA'}
-        nucleus = {'name': 'Nucleus'}
-        famehouse = {'name': 'Fame House'}
-        fla = {'name': 'FLA'}
-        mt = {'name': 'MT Cosmetic'}
-        ton = {'name': 'Tonn Chat Email'}
-        mov = {'name': 'Movement of Insurance'}
-        wit = {'name': 'Wit Digital'}
-        pixchat = {'name': 'Printer Pix Chat Email'}
-        pixcall = {'name': 'Printer Pix Inbound'}
-        aadya = {'name': 'AAdya'}
-        insalvage = {'name': 'Insalvage'}
-        medicare = {'name': 'Medicare'}
-        cts = {'name': 'CTS'}
-        tfood = {'name': 'Tentamus Food'}
-        tpet = {'name': 'Tentamus Pet'}
-        city = {'name': 'City Security'}
-        allen = {'name': 'Allen Consulting'}
-        system = {'name': 'System4'}
-        louis = {'name': 'Louisville'}
-        info = {'name': 'Info Think LLC'}
-        psecu = {'name': 'PSECU'}
-        getarates = {'name': 'Get A Rates'}
-        advance = {'name': 'Advance Consultants'}
-        fur = {'name': 'Fur Baby'}
-        max = {'name': 'Maxwell Properties'}
-        upfront = {'name':'Upfront Online LLC'}
-        micro = {'name':'Micro Distributing'}
-        jj= {'name':'JJ Studio'}
-
-        zero = {'name': 'Zero Stress Marketing'}
-        wtu = {'name': 'WTU'}
-        roof = {'name': 'Roof Well'}
-        glyde = {'name': 'Glyde App'}
-        mill = {'name': 'Millennium Scientific'}
-        fin = {'name': 'Finesse Mortgage'}
-        spot = {'name': 'Stand Spot'}
-        cam = {'name': 'Cam Industrial'}
-        opti = {'name': 'Optimal Student Loan'}
-        nav = {'name': 'Navigator Bio'}
-        akdyinb = {'name': 'AKDY - Inbound'}
-        akdyemail = {'name': 'AKDY - Email'}
-
-        campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
-                     insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance, fur, max, upfront, micro, jj,
-                     zero, wtu, roof, glyde, mill, fin, spot, cam, opti, nav, akdyinb, akdyemail]
 
 
         data={'teams':teams,
@@ -2684,26 +2718,6 @@ def qahome(request):
 
         ######### List of All Coachings ##############3
 
-        list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
-                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                            WitDigitalMasteringMonitoringForm,
-                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                            MonitoringFormLeadsAadhyaSolution,
-                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                            MonitoringFormLeadsTentamusFood,
-                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                            MonitoringFormLeadsAllenConsulting,
-                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
-                            UpfrontOnlineLLCMonform, MicroDistributingMonForm, JJStudioMonForm,
-                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
-                            MillenniumScientificMonForm,
-                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
-                            NavigatorBioMonForm,
-                            AKDYInboundMonForm, AkKDYEmailMonForm
-                            ]
 
         empw_list = []
 
@@ -2776,57 +2790,6 @@ def qahome(request):
             fatal_list.append(fatal_count)
 
             #############################################
-
-        pod = {'name': 'Noom-POD'}
-        eva = {'name': 'Noom-EVA'}
-        nucleus = {'name': 'Nucleus'}
-        famehouse = {'name': 'Fame House'}
-        fla = {'name': 'FLA'}
-        mt = {'name': 'MT Cosmetic'}
-        ton = {'name': 'Tonn Chat Email'}
-        mov = {'name': 'Movement of Insurance'}
-        wit = {'name': 'Wit Digital'}
-        pixchat = {'name': 'Printer Pix Chat Email'}
-        pixcall = {'name': 'Printer Pix Inbound'}
-        aadya = {'name': 'AAdya'}
-        insalvage = {'name': 'Insalvage'}
-        medicare = {'name': 'Medicare'}
-        cts = {'name': 'CTS'}
-        tfood = {'name': 'Tentamus Food'}
-        tpet = {'name': 'Tentamus Pet'}
-        city = {'name': 'City Security'}
-        allen = {'name': 'Allen Consulting'}
-        system = {'name': 'System4'}
-        louis = {'name': 'Louisville'}
-        info = {'name': 'Info Think LLC'}
-        psecu = {'name': 'PSECU'}
-        getarates = {'name': 'Get A Rates'}
-        advance = {'name': 'Advance Consultants'}
-        fur = {'name': 'Fur Baby'}
-        max = {'name': 'Maxwell Properties'}
-
-        upfront = {'name': 'Upfront Online LLC'}
-        micro = {'name': 'Micro Distributing'}
-        jj = {'name': 'JJ Studio'}
-
-        zero={'name':'Zero Stress Marketing'}
-        wtu = {'name':'WTU'}
-        roof= {'name':'Roof Well'}
-        glyde = {'name':'Glyde App'}
-        mill = {'name':'Millennium Scientific'}
-        fin = {'name':'Finesse Mortgage'}
-        spot = {'name':'Stand Spot'}
-        cam= {'name':'Cam Industrial'}
-        opti = {'name':'Optimal Student Loan'}
-        nav = {'name':'Navigator Bio'}
-        akdyinb = {'name':'AKDY - Inbound'}
-        akdyemail = {'name':'AKDY - Email'}
-
-
-        campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
-                     insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
-                     getarates, advance, fur, max, upfront, micro, jj,
-                     zero,wtu,roof,glyde,mill,fin,spot,cam,opti,nav,akdyinb,akdyemail]
 
         data = {'teams': teams,
 
@@ -6187,7 +6150,15 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
+        elif audit_form == 'Ibiz' or audit_form == 'Aditya Birla Cellulose' or audit_form == 'Bhagyalaxmi Industries' or audit_form == 'Digital Swiss Gold' or audit_form == 'Naffa Innovations' or audit_form =='Daniel Wellington - Inbound' or audit_form =='Protostar' or audit_form == 'Kappi machine' or audit_form == 'Somethings Brewing' or audit_form == 'AB - Hindalco' or audit_form == 'Embassy Luxury' or audit_form == 'IIB' or audit_form == 'Terraceo - Lead' or audit_form == 'Kalki Fashions':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team,'date':new_today_date}
+            return render(request, 'mon-forms/new-series-common.html', data)
 
+        elif audit_form == 'Super Play':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team,'date':new_today_date}
+            return render(request, 'mon-forms/domestic-email-chat.html', data)
 
     else:
         return redirect('/employees/qahome')
@@ -10863,7 +10834,6 @@ def addtoUserModel(request):
         user = User.objects.create_user(id=i.id,username=i.username,
                                    password=i.password)
 
-    print('Done')
 
 
 def addSingleProfile(request):
@@ -11116,6 +11086,61 @@ def newSeriesMonForms(request):
             newseriesAddCoaching(MonitoringFormLeadsAdvanceConsultants)
             return redirect('/employees/qahome')
 
+        elif campaign_name == 'Ibiz':
+            newseriesAddCoaching(IbizMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Aditya Birla Cellulose':
+            newseriesAddCoaching(AdityaBirlaMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Bhagyalaxmi Industries':
+            newseriesAddCoaching(BagyalakshmiMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Digital Swiss Gold':
+            newseriesAddCoaching(DigitalSwissMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Naffa Innovations':
+            newseriesAddCoaching(NafaInnovationsMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Daniel Wellington - Inbound':
+            newseriesAddCoaching(DanialWellingtonInboundMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Protostar':
+            newseriesAddCoaching(ProtostarMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Kappi machine':
+            newseriesAddCoaching(KappiMachineMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Somethings Brewing':
+            newseriesAddCoaching(SomethingsBrewMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'AB - Hindalco':
+            newseriesAddCoaching(ABHMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Embassy Luxury':
+            newseriesAddCoaching(EmbassyLuxuryMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'IIB':
+            newseriesAddCoaching(IIBMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Terraceo - Lead':
+            newseriesAddCoaching(TerraceoLeadMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Kalki Fashions':
+            newseriesAddCoaching(KalkiFashions)
+            return redirect('/employees/qahome')
 
         else:
             pass
@@ -11126,6 +11151,136 @@ def newSeriesMonForms(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/new-series-comon.html', data)
+
+
+
+############### Doestic Chat Email #################
+
+def domesticChatEmail(request):
+
+    if request.method == 'POST':
+        campaign_name = request.POST['campaign']
+
+        def domesticEmailChatAddCoaching(monform):
+
+            category = 'email'
+            associate_name = request.POST['empname']
+            emp_id = request.POST['empid']
+            qa = request.POST['qa']
+            team_lead = request.POST['tl']
+            customer_name = request.POST['customer']
+            customer_contact = request.POST['customercontact']
+            trans_date = request.POST['trans_date']
+            audit_date = request.POST['auditdate']
+            campaign = request.POST['campaign']
+            concept = request.POST['concept']
+            zone = request.POST['zone']
+            duration=(int(request.POST['durationh'])*3600)+(int(request.POST['durationm'])*60)+int(request.POST['durations'])
+
+            #######################################
+            prof_obj = Profile.objects.get(emp_id=emp_id)
+            manager = prof_obj.manager
+
+            manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+            manager_emp_id = manager_emp_id_obj.emp_id
+            manager_name = manager
+            #########################################
+
+            # Customer Experience
+            ce_1 = int(request.POST['ce_1'])
+            ce_2 = int(request.POST['ce_2'])
+            ce_3 = int(request.POST['ce_3'])
+            ce_4 = int(request.POST['ce_4'])
+            ce_5 = int(request.POST['ce_5'])
+            ce_6 = int(request.POST['ce_6'])
+            ce_7 = int(request.POST['ce_7'])
+            ce_8 = int(request.POST['ce_8'])
+            ce_9 = int(request.POST['ce_9'])
+            ce_10 = int(request.POST['ce_10'])
+            ce_11 = int(request.POST['ce_11'])
+
+            ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6 + ce_7 + ce_8 + ce_9 + ce_10 + ce_11
+
+            # Business
+            business_1 = int(request.POST['business_1'])
+            business_2 = int(request.POST['business_2'])
+
+            business_total = business_1 + business_2
+
+            # Compliance
+            compliance_1 = int(request.POST['compliance_1'])
+            compliance_2 = int(request.POST['compliance_2'])
+            compliance_3 = int(request.POST['compliance_3'])
+            compliance_4 = int(request.POST['compliance_4'])
+            compliance_5 = int(request.POST['compliance_5'])
+
+            compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5
+
+            #################################################
+
+            fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5]
+            fatal_list_count = []
+            for i in fatal_list:
+                if i == 0:
+                    fatal_list_count.append(i)
+
+            no_of_fatals = len(fatal_list_count)
+
+            ####################################################
+
+            if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0:
+                overall_score = 0
+                fatal = True
+            else:
+                overall_score = ce_total + business_total + compliance_total
+                fatal = False
+
+            areas_improvement = request.POST['areaimprovement']
+            positives = request.POST['positives']
+            comments = request.POST['comments']
+            added_by = request.user.profile.emp_name
+
+            week = request.POST['week']
+            am = request.POST['am']
+
+            domestic = monform(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name, manager_id=manager_emp_id,
+
+                                     trans_date=trans_date, audit_date=audit_date, customer_name=customer_name,
+                                     customer_contact=customer_contact,
+                                     campaign=campaign, concept=concept, zone=zone, duration=duration,
+
+                                     ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5, ce_6=ce_6, ce_7=ce_7,
+                                     ce_8=ce_8, ce_9=ce_9, ce_10=ce_10, ce_11=ce_11,
+                                     ce_total=ce_total,
+
+                                     business_1=business_1, business_2=business_2, business_total=business_total,
+
+                                     compliance_1=compliance_1, compliance_2=compliance_2, compliance_3=compliance_3,
+                                     compliance_4=compliance_4, compliance_5=compliance_5,
+                                     compliance_total=compliance_total,
+
+                                     areas_improvement=areas_improvement,
+                                     positives=positives, comments=comments,
+                                     added_by=added_by,
+
+                                     overall_score=overall_score, category=category,
+                                     week=week, am=am, fatal_count=no_of_fatals, fatal=fatal
+                                     )
+            domestic.save()
+
+        if campaign_name == 'Super Play':
+            domesticEmailChatAddCoaching(SuperPlay)
+            return redirect('/employees/qahome')
+
+        else:
+            pass
+
+    else:
+        return redirect('/employees/qahome')
+
+
 
 def processNameChanger(request):
 

@@ -41,6 +41,8 @@ urlpatterns = [
 
     path('Monitoring-Form-new-series-common',newSeriesMonForms),
 
+    path('domestic-email-chat-mon-form',domesticChatEmail),
+
 
     path('fur-baby-mon-form',furBabyMonForm),
     path('max-well',maxwellProperties),
