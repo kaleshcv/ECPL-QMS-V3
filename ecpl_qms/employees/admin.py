@@ -58,7 +58,7 @@ admin.site.register(CamIndustrialMonForm)
 admin.site.register(OptimalStudentLoanMonForm)
 admin.site.register(NavigatorBioMonForm)
 admin.site.register(AKDYInboundMonForm)
-admin.site.register(AkKDYEmailMonForm)
+admin.site.register(AKDYEmailMonForm)
 
 admin.site.register(IbizMonForm)
 admin.site.register(AdityaBirlaMonForm)

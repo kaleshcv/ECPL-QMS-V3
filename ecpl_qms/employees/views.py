@@ -1366,10 +1366,7 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
-    if process_name == 'AKDY - Email':
-        coaching = AkKDYEmailMonForm.objects.get(id=pk)
-        data = {'coaching': coaching}
-        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
 
 
 
@@ -1534,7 +1531,7 @@ def campaignwiseCoachingsQA(request):
                             MillenniumScientificMonForm,
                             FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
                             NavigatorBioMonForm,
-                            AKDYInboundMonForm, AkKDYEmailMonForm,
+                            AKDYInboundMonForm, AKDYEmailMonForm,
                             IbizMonForm, AdityaBirlaMonForm, BagyalakshmiMonForm, DigitalSwissMonForm,
                             NafaInnovationsMonForm,
                             DanialWellingtonInboundMonForm, ProtostarMonForm, KappiMachineMonForm,
@@ -2615,7 +2612,7 @@ def qahome(request):
                         MillenniumScientificMonForm,
                         FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
                         NavigatorBioMonForm,
-                        AKDYInboundMonForm, AkKDYEmailMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
                         IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
                         DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
@@ -5901,7 +5898,7 @@ def selectCoachingForm(request):
             return render(request, 'mon-forms/new-series-common.html', data)
 
 
-        elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound' or audit_form == 'AKDY - Email':
+        elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound':
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
@@ -5911,10 +5908,15 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
-        elif audit_form == 'Super Play' or audit_form =='Daniel Wellington - Chat - Email' or audit_form =='Terraceo - Chat - Email' or audit_form == 'Fur Baby' or audit_form == 'Maxwell Properties':
+        elif audit_form == 'Super Play' or audit_form =='Daniel Wellington - Chat - Email' or audit_form =='Terraceo - Chat - Email' :
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/domestic-email-chat.html', data)
+
+        elif audit_form == 'Fur Baby' or audit_form == 'Maxwell Properties'or audit_form == 'AKDY - Email':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/inter-email-chat.html', data)
 
     else:
         return redirect('/employees/qahome')
@@ -9730,7 +9732,7 @@ def exportAuditReportQA(request):
 
                        'Associate used the standard greeting format',
                        'Appropriate responses ( acknowledging at the right time)',
-                       'Ownership on Emails / Chat',
+                       'Ownership on Emails / Chat Answered within 30',
                        'Personalization ( building a Raport, Addressing by name)',
                        'Empathy/Sympathy',
                        'Sentence structure',
@@ -9741,12 +9743,12 @@ def exportAuditReportQA(request):
                        'Associate used the standard closing format',
 
                        'Accurate Resolution/Information is provided as per the process',
-                       'Worked on the Ticket Assigned / Chat Responded within 5 mins',
+                       'Worked on the Ticket Assigned / Chat Responded within 3 mins',
 
                        'Professional / Courtesy',
-                       'Verification process followed',
-                       'Case Study',
-                       'Process & Procedure Followed',
+                       'Follow up done on the Pending Tickets( Chats & Email)',
+                       'Retruns Updated in the google sheet',
+                       'Process & Procedure Followed (Refund Process Followed)',
                        'First Chat / Email Resolution',
 
                        'status',
@@ -9815,7 +9817,7 @@ def exportAuditReportQA(request):
 
                        'Associate used the standard greeting format',
                        'Appropriate responses ( acknowledging at the right time)',
-                       'Ownership on Emails / Chat',
+                       'Ownership on Emails / Chat Answered within 30',
                        'Personalization ( building a Raport, Addressing by name)',
                        'Empathy/Sympathy',
                        'Sentence structure',
@@ -9826,12 +9828,12 @@ def exportAuditReportQA(request):
                        'Associate used the standard closing format',
 
                        'Accurate Resolution/Information is provided as per the process',
-                       'Worked on the Ticket Assigned / Chat Responded within 5 mins',
+                       'Worked on the Ticket Assigned / Chat Responded within 3 mins',
 
                        'Professional / Courtesy',
-                       'Verification process followed',
-                       'Case Study',
-                       'Process & Procedure Followed',
+                       'Follow up done on the Pending Tickets( Chats & Email)',
+                       'Retruns Updated in the google sheet',
+                       'Process & Procedure Followed (Refund Process Followed)',
                        'First Chat / Email Resolution',
 
                        'status',
@@ -9843,6 +9845,91 @@ def exportAuditReportQA(request):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = MaxwellProperties.objects.filter(
+                audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+                'ce_7',
+                'ce_8',
+                'ce_9',
+                'ce_10',
+                'ce_11',
+
+                'business_1',
+                'business_2',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'AKDY - Email':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Associate used the standard greeting format',
+                       'Appropriate responses ( acknowledging at the right time)',
+                       'Ownership on Emails / Chat Answered within 30',
+                       'Personalization ( building a Raport, Addressing by name)',
+                       'Empathy/Sympathy',
+                       'Sentence structure',
+                       'Punctuation (full stop, comma, and brackets, used in writing to separate sentences)',
+                       'Grammar (Tense, Noun, etc.)',
+                       'Probing done whenever necessary',
+                       'Recap (Summarization of the conversation)',
+                       'Associate used the standard closing format',
+
+                       'Accurate Resolution/Information is provided as per the process',
+                       'Worked on the Ticket Assigned / Chat Responded within 3 mins',
+
+                       'Professional / Courtesy',
+                       'Follow up done on the Pending Tickets( Chats & Email)',
+                       'Retruns Updated in the google sheet',
+                       'Process & Procedure Followed (Refund Process Followed)',
+                       'First Chat / Email Resolution',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = AKDYEmailMonForm.objects.filter(
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
@@ -10823,9 +10910,7 @@ def exportAuditReportQA(request):
                 response =exportNewSeries(AKDYInboundMonForm)
                 return response
 
-            elif campaign == 'AKDY - Email':
-                response =exportNewSeries(AkKDYEmailMonForm)
-                return response
+
 
             elif campaign == 'Ibiz':
                 response = exportNewSeries(IbizMonForm)
@@ -11091,9 +11176,7 @@ def newSeriesMonForms(request):
             newseriesAddCoaching(AKDYInboundMonForm)
             return redirect('/employees/qahome')
 
-        elif campaign_name == 'AKDY - Email':
-            newseriesAddCoaching(AkKDYEmailMonForm)
-            return redirect('/employees/qahome')
+
 
         ######### Aadya series
 
@@ -11366,6 +11449,10 @@ def domesticChatEmail(request):
 
         elif campaign_name == 'Maxwell Properties':
             domesticEmailChatAddCoaching(MaxwellProperties)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'AKDY - Email':
+            domesticEmailChatAddCoaching(AKDYEmailMonForm)
             return redirect('/employees/qahome')
 
         else:

@@ -3376,21 +3376,21 @@ class AKDYInboundMonForm(models.Model):
     def snippet(self):
         return self.comments[:100] + '...'
 
-class AkKDYEmailMonForm(models.Model):
-    process = models.CharField(default='AKDY - Email', max_length=50)
+class AKDYEmailMonForm(models.Model):
 
+    process = models.CharField(default='AKDY - Email', max_length=50)
     emp_id = models.IntegerField()
     associate_name = models.CharField(max_length=50)
     qa = models.CharField(max_length=50)
     team_lead = models.CharField(max_length=50)
     customer_name = models.CharField(max_length=50)
     customer_contact = models.CharField(max_length=100)
-    call_date = models.DateField()
+    trans_date = models.DateField()
     audit_date = models.DateField()
     campaign = models.CharField(max_length=100)
     zone = models.CharField(max_length=50)
     concept = models.CharField(max_length=60)
-    call_duration = models.CharField(max_length=20)
+    duration = models.IntegerField()
 
     # mgt
     manager = models.CharField(max_length=50)
@@ -3398,26 +3398,29 @@ class AkKDYEmailMonForm(models.Model):
 
     category = models.CharField(max_length=20)
 
-    # Opening and Closing
-    oc_1 = models.IntegerField()
-    oc_2 = models.IntegerField()
-    oc_3 = models.IntegerField()
+    # Customer Experience
+    ce_1 = models.IntegerField()
+    ce_2 = models.IntegerField()
+    ce_3 = models.IntegerField()
+    ce_4 = models.IntegerField()
+    ce_5 = models.IntegerField()
+    ce_6 = models.IntegerField()
+    ce_7 = models.IntegerField()
+    ce_8 = models.IntegerField()
+    ce_9 = models.IntegerField()
+    ce_10 = models.IntegerField()
+    ce_11 = models.IntegerField()
 
-    # SoftSkills
+    # Business
+    business_1 = models.IntegerField()
+    business_2 = models.IntegerField()
 
-    softskill_1 = models.IntegerField()
-    softskill_2 = models.IntegerField()
-    softskill_3 = models.IntegerField()
-    softskill_4 = models.IntegerField()
-    softskill_5 = models.IntegerField()
-
-    # Business and Compliance
+    # Compliance
     compliance_1 = models.IntegerField()
     compliance_2 = models.IntegerField()
     compliance_3 = models.IntegerField()
     compliance_4 = models.IntegerField()
     compliance_5 = models.IntegerField()
-    compliance_6 = models.IntegerField()
 
     areas_improvement = models.TextField()
     positives = models.TextField()
@@ -3430,7 +3433,6 @@ class AkKDYEmailMonForm(models.Model):
 
     ce_total = models.IntegerField(null=True)
     business_total = models.IntegerField(null=True)
-    softskill_total = models.IntegerField(null=True)
     compliance_total = models.IntegerField(null=True)
     overall_score = models.IntegerField(null=True)
 
