@@ -1296,6 +1296,11 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-maxwell.html', data)
 
+    if process_name == 'AKDY - Email':
+        coaching = AKDYEmailMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-akdy-email.html', data)
+
     if process_name == 'Upfront Online LLC':
         coaching = UpfrontOnlineLLCMonform.objects.get(id=pk)
         data = {'coaching': coaching}
@@ -1366,8 +1371,90 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'Ibiz':
+        coaching = IbizMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'Aditya Birla Cellulose':
+        coaching = AdityaBirlaMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'Bhagyalaxmi Industries':
+        coaching = BagyalakshmiMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Digital Swiss Gold':
+        coaching = DigitalSwissMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Naffa Innovations':
+        coaching = NafaInnovationsMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Daniel Wellington - Inbound':
+        coaching = DanialWellingtonInboundMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Protostar':
+        coaching = ProtostarMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Kappi machine':
+        coaching = KappiMachineMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Somethings Brewing':
+        coaching = SomethingsBrewMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'AB - Hindalco':
+        coaching = ABHMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Embassy Luxury':
+        coaching = EmbassyLuxuryMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'IIB':
+        coaching = IIBMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Terraceo - Lead':
+        coaching = TerraceoLeadMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Kalki Fashions':
+        coaching = KalkiFashions.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Super Play':
+        coaching = SuperPlayMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-domestic-email-chat.html', data)
+
+    if process_name == 'Daniel Wellington - Chat - Email':
+        coaching = DanielWellinChatEmailMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-domestic-email-chat.html', data)
+
+    if process_name == 'Terraceo - Chat - Email':
+        coaching = TerraceoChatEmailMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-domestic-email-chat.html', data)
 
 
     else:
