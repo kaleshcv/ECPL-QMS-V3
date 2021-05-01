@@ -18,7 +18,7 @@ admin.site.register(FameHouseMonitoringForm)    # view done
 admin.site.register(FLAMonitoringForm)     # view done
 admin.site.register(MasterMonitoringFormGetaRatesPSECU)
 admin.site.register(MasterMonitoringFormMovementInsurance)
-admin.site.register(MasterMonitoringFormMTCosmetics)      # view done
+admin.site.register(MTCosmeticsMonForm)      # view done
 admin.site.register(MasterMonitoringFormTonnChatsEmail)     # view done
 admin.site.register(MasterMonitoringFormTonnCoaInboundCalls)
 admin.site.register(MonitoringFormLeadsAadhyaSolution)

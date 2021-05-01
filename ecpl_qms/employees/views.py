@@ -165,7 +165,7 @@ def employeeWiseReport(request):
         # Mon Form List
         mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
                      FameHouseMonitoringForm,
-                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
+                     FLAMonitoringForm, MTCosmeticsMonForm, MasterMonitoringFormTonnChatsEmail,
                      MasterMonitoringFormMovementInsurance,
                      WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
                      PrinterPixMasterMonitoringFormInboundCalls,
@@ -231,7 +231,7 @@ def managerWiseReport(request):
         # Mon Form List
         mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
                      FameHouseMonitoringForm,
-                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
+                     FLAMonitoringForm, MTCosmeticsMonForm, MasterMonitoringFormTonnChatsEmail,
                      MasterMonitoringFormMovementInsurance,
                      WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
                      PrinterPixMasterMonitoringFormInboundCalls,
@@ -279,6 +279,23 @@ def managerWiseReport(request):
         return render(request,'manager-wise-report.html',data)
 
 def qualityDashboardMgt(request):
+
+
+    mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                 FameHouseMonitoringForm,
+                 FLAMonitoringForm, MTCosmeticsMonForm, MasterMonitoringFormTonnChatsEmail,
+                 MasterMonitoringFormMovementInsurance,
+                 WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
+                 PrinterPixMasterMonitoringFormInboundCalls,
+                 MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
+                 MonitoringFormLeadsCTS,
+                 MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                 MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
+                 MonitoringFormLeadsInfothinkLLC,
+                 MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                 FurBabyMonForm, MaxwellProperties]
+
+
     # Date Time
     if request.method=='POST':
 
@@ -314,7 +331,7 @@ def qualityDashboardMgt(request):
         nuc_avg_score=avgscoreCalculator(InboundMonitoringFormNucleusMedia)
         fame_avg_score=avgscoreCalculator(FameHouseMonitoringForm)
         fla_avg_score=avgscoreCalculator(FLAMonitoringForm)
-        mt_avg_score=avgscoreCalculator(MasterMonitoringFormMTCosmetics)
+        mt_avg_score=avgscoreCalculator(MTCosmeticsMonForm)
         ton_avg_score=avgscoreCalculator(MasterMonitoringFormTonnChatsEmail)
         mov_avg_score=avgscoreCalculator(MasterMonitoringFormMovementInsurance)
         wit_avg_score=avgscoreCalculator(WitDigitalMasteringMonitoringForm)
@@ -378,7 +395,7 @@ def qualityDashboardMgt(request):
         closed_percentage_nuc=coachingClosureCalculator(InboundMonitoringFormNucleusMedia)
         closed_percentage_fame=coachingClosureCalculator(FameHouseMonitoringForm)
         closed_percentage_fla=coachingClosureCalculator(FLAMonitoringForm)
-        closed_percentage_mt=coachingClosureCalculator(MasterMonitoringFormMTCosmetics)
+        closed_percentage_mt=coachingClosureCalculator(MTCosmeticsMonForm)
         closed_percentage_ton=coachingClosureCalculator(MasterMonitoringFormTonnChatsEmail)
         closed_percentage_mov=coachingClosureCalculator(MasterMonitoringFormMovementInsurance)
         closed_percentage_wit=coachingClosureCalculator(WitDigitalMasteringMonitoringForm)
@@ -441,21 +458,10 @@ def qualityDashboardMgt(request):
 
         ###############################################################
 
-        mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                     FameHouseMonitoringForm,
-                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
-                     MasterMonitoringFormMovementInsurance,
-                     WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
-                     PrinterPixMasterMonitoringFormInboundCalls,
-                     MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
-                     MonitoringFormLeadsCTS,
-                     MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                     MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
-                     MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
-                     FurBabyMonForm,MaxwellProperties]
+
 
         camp_wise_tot=[]
+
         for i in mon_forms:
 
             camp_wise_total = i.objects.filter(audit_date__year=year, audit_date__month=month).values(
@@ -509,7 +515,7 @@ def qualityDashboardMgt(request):
         nuc_avg_score = avgscoreCalculator(InboundMonitoringFormNucleusMedia)
         fame_avg_score = avgscoreCalculator(FameHouseMonitoringForm)
         fla_avg_score = avgscoreCalculator(FLAMonitoringForm)
-        mt_avg_score = avgscoreCalculator(MasterMonitoringFormMTCosmetics)
+        mt_avg_score = avgscoreCalculator(MTCosmeticsMonForm)
         ton_avg_score = avgscoreCalculator(MasterMonitoringFormTonnChatsEmail)
         mov_avg_score = avgscoreCalculator(MasterMonitoringFormMovementInsurance)
         wit_avg_score = avgscoreCalculator(WitDigitalMasteringMonitoringForm)
@@ -568,7 +574,7 @@ def qualityDashboardMgt(request):
         closed_percentage_nuc = coachingClosureCalculator(InboundMonitoringFormNucleusMedia)
         closed_percentage_fame = coachingClosureCalculator(FameHouseMonitoringForm)
         closed_percentage_fla = coachingClosureCalculator(FLAMonitoringForm)
-        closed_percentage_mt = coachingClosureCalculator(MasterMonitoringFormMTCosmetics)
+        closed_percentage_mt = coachingClosureCalculator(MTCosmeticsMonForm)
         closed_percentage_ton = coachingClosureCalculator(MasterMonitoringFormTonnChatsEmail)
         closed_percentage_mov = coachingClosureCalculator(MasterMonitoringFormMovementInsurance)
         closed_percentage_wit = coachingClosureCalculator(WitDigitalMasteringMonitoringForm)
@@ -625,21 +631,7 @@ def qualityDashboardMgt(request):
                      insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                      getarates, advance, fur, max]
 
-        ###############################################################
 
-        mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                     FameHouseMonitoringForm,
-                     FLAMonitoringForm, MasterMonitoringFormMTCosmetics, MasterMonitoringFormTonnChatsEmail,
-                     MasterMonitoringFormMovementInsurance,
-                     WitDigitalMasteringMonitoringForm, PrinterPixMasterMonitoringFormChatsEmail,
-                     PrinterPixMasterMonitoringFormInboundCalls,
-                     MonitoringFormLeadsAadhyaSolution, MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare,
-                     MonitoringFormLeadsCTS,
-                     MonitoringFormLeadsTentamusFood, MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                     MonitoringFormLeadsAllenConsulting, MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville,
-                     MonitoringFormLeadsInfothinkLLC,
-                     MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
-                     FurBabyMonForm, MaxwellProperties]
 
         camp_wise_tot = []
         for i in mon_forms:
@@ -753,7 +745,7 @@ def leadsSummary(request):
     year = d.strftime("%Y")
 
     # MT Cosmetics
-    mt_avgs = MasterMonitoringFormMTCosmetics.objects.filter(audit_date__year=year, audit_date__month=month)
+    mt_avgs = MTCosmeticsMonForm.objects.filter(audit_date__year=year, audit_date__month=month)
     mt_avg = []
     for i in mt_avgs:
         mt_avg.append(i.overall_score)
@@ -873,7 +865,7 @@ def agenthome(request):
         ################### opn_count #############
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
                             MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
                             WitDigitalMasteringMonitoringForm,
                             PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
@@ -959,7 +951,7 @@ def agenthome(request):
         ################### opn_count #############
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
                             MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
                             WitDigitalMasteringMonitoringForm,
                             PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
@@ -1075,7 +1067,7 @@ def coachingViewAgents(request,process,pk):
         return render(request, 'coaching-views/emp-coaching-view-mov-ins.html', data)
 
     if process_name=='Mt Cosmetic':
-        coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
+        coaching = MTCosmeticsMonForm.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/emp-coaching-view-mt.html', data)
 
@@ -1205,10 +1197,7 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-mov-ins.html', data)
 
-    if process_name == 'MT Cosmetic':
-        coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
-        data = {'coaching': coaching}
-        return render(request, 'coaching-views/qa-coaching-view-mt.html', data)
+
 
     if process_name == 'Tonn Chat Email':
         coaching = MasterMonitoringFormTonnChatsEmail.objects.get(id=pk)
@@ -1326,6 +1315,7 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+
     if process_name == 'Roof Well':
         coaching = RoofWellMonForm.objects.get(id=pk)
         data = {'coaching': coaching}
@@ -1441,6 +1431,11 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'MT Cosmetic':
+        coaching = MTCosmeticsMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
     if process_name == 'Super Play':
         coaching = SuperPlayMonForm.objects.get(id=pk)
         data = {'coaching': coaching}
@@ -1462,8 +1457,6 @@ def coachingViewQaDetailed(request,process,pk):
 
 
 
-
-
 # Open status Coaching View
 def qacoachingViewOpenAll(request,pk):
     if pk>0:
@@ -1475,7 +1468,7 @@ def qacoachingViewOpenAll(request,pk):
         nucleus = InboundMonitoringFormNucleusMedia.objects.filter(added_by=qa_name, status=False)
         famehouse = FameHouseMonitoringForm.objects.filter(added_by=qa_name, status=False)
         fla = FLAMonitoringForm.objects.filter(added_by=qa_name, status=False)
-        mt = MasterMonitoringFormMTCosmetics.objects.filter(added_by=qa_name, status=False)
+        mt = MTCosmeticsMonForm.objects.filter(added_by=qa_name, status=False)
         tonnchat = MasterMonitoringFormTonnChatsEmail.objects.filter(added_by=qa_name, status=False)
         mov = MasterMonitoringFormMovementInsurance.objects.filter(added_by=qa_name, status=False)
         wit = WitDigitalMasteringMonitoringForm.objects.filter(added_by=qa_name, status=False)
@@ -1503,7 +1496,7 @@ def campaignwiseCoachings(request):
         end_date = request.POST['end_date']
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
                             MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
                             WitDigitalMasteringMonitoringForm,
                             PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
@@ -1600,7 +1593,7 @@ def campaignwiseCoachingsQA(request):
         qa = request.POST['qa']
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
                             MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
                             WitDigitalMasteringMonitoringForm,
                             PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
@@ -1711,7 +1704,7 @@ def campaignwiseCoachingsAgent(request):
         emp_name=request.POST['emp_name']
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
                             MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
                             WitDigitalMasteringMonitoringForm,
                             PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
@@ -1950,7 +1943,7 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(FLAMonitoringForm)
             return render(request, 'campaign-report/detailed.html', data)
         if campaign=='MT Cosmetic':
-            data = campaignWiseCalculator(MasterMonitoringFormMTCosmetics)
+            data = campaignWiseCalculator(MTCosmeticsMonForm)
             return render(request, 'campaign-report/detailed.html', data)
         if campaign=='Tonn Chat Email':
             data = campaignWiseCalculator(MasterMonitoringFormTonnChatsEmail)
@@ -2186,7 +2179,7 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(FLAMonitoringForm)
             return render(request, 'campaign-report/detailed.html', data)
         if campaign == 'MT Cosmetic':
-            data = campaignWiseCalculator(MasterMonitoringFormMTCosmetics)
+            data = campaignWiseCalculator(MTCosmeticsMonForm)
             return render(request, 'campaign-report/detailed.html', data)
         if campaign == 'Tonn Chat Email':
             data = campaignWiseCalculator(MasterMonitoringFormTonnChatsEmail)
@@ -2308,7 +2301,7 @@ def signCoaching(request,pk):
         coaching.save()
         return redirect('/employees/agenthome')
     elif category == 'mt':
-        coaching = MasterMonitoringFormMTCosmetics.objects.get(id=pk)
+        coaching = MTCosmeticsMonForm.objects.get(id=pk)
         coaching.status = True
         coaching.closed_date = now
         coaching.emp_comments = emp_comments
@@ -2531,7 +2524,7 @@ def coachingDispute(request,pk):
             disputeStatusChange(FLAMonitoringForm)
 
         if campaign == 'MT Cosmetic':
-            disputeStatusChange(MasterMonitoringFormMTCosmetics)
+            disputeStatusChange(MTCosmeticsMonForm)
 
         if campaign == 'Tonn Chat Email':
             disputeStatusChange(MasterMonitoringFormTonnChatsEmail)
@@ -2682,7 +2675,7 @@ def qahome(request):
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                        FameHouseMonitoringForm, FLAMonitoringForm, MasterMonitoringFormMTCosmetics,
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
                         MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
                         WitDigitalMasteringMonitoringForm,
                         PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
@@ -3471,7 +3464,7 @@ def leadsandSalesMonForm(request):
         week = request.POST['week']
         am = request.POST['am']
 
-        leadsales = MasterMonitoringFormMTCosmetics(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+        leadsales = MTCosmeticsMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
                                         manager=manager_name,manager_id=manager_emp_id,
 
                                            call_date=call_date, audit_date=audit_date, customer_name=customer_name,customer_contact=customer_contact,
@@ -5947,11 +5940,6 @@ def selectCoachingForm(request):
             return render(request, 'mon-forms/FLA-mon-form.html', data)
 
 
-        elif audit_form=='MT Cosmetic':
-            agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
-            return render(request, 'mon-forms/Lead-Sales-MONITORING-FORM.html', data)
-
 
         elif audit_form=='Tonn Chat Email':
             agent = Profile.objects.get(emp_name=agent)
@@ -5994,6 +5982,13 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
+
+        elif audit_form=='MT Cosmetic':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/new-series-common.html', data)
+
+
 
         elif audit_form == 'Super Play' or audit_form =='Daniel Wellington - Chat - Email' or audit_form =='Terraceo - Chat - Email' :
             agent = Profile.objects.get(emp_name=agent)
@@ -7811,7 +7806,7 @@ def exportAuditReport(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = MasterMonitoringFormMTCosmetics.objects.filter(
+            rows = MTCosmeticsMonForm.objects.filter(
                 audit_date__range=[start_date, end_date]).values_list(
                 'process','emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa', 'am',
                 'team_lead', 'manager',
@@ -10429,7 +10424,7 @@ def exportAuditReportQA(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = MasterMonitoringFormMTCosmetics.objects.filter(
+            rows = MTCosmeticsMonForm.objects.filter(
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
@@ -11321,6 +11316,10 @@ def newSeriesMonForms(request):
 
         elif campaign_name == 'Advance Consultants':
             newseriesAddCoaching(MonitoringFormLeadsAdvanceConsultants)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'MT Cosmetic':
+            newseriesAddCoaching(MTCosmeticsMonForm)
             return redirect('/employees/qahome')
 
         elif campaign_name == 'Upfront Online LLC':
