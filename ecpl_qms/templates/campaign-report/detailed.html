@@ -1,28 +1,20 @@
 {% extends 'base.html' %}
 {% block main %}
 {% load static %}
-<section>
-    <div class="container-lg">
-        <div class="row">
-            <div class="col-md-6">
-                <h3 style="margin-top:66px;margin-left:50px">{{process}}</h3>
-            </div>
-        </div>
-
-    </div>
-
-</section>
 
 
 
-<div class="container-lg">
-    <div class="row" style="margin-top:100px">
+
+<div class="container-fluid" style="background-image: url(/static/images/dashboard.jpg);height: 300px;background-size: cover;margin-top:79px;">
+    <div style="background: #2f374e;opacity: 77%;height: 300px">
+    <div class="row" style="padding-top: 50px;padding-left: 50px;color:white;">
         <div class="col-md-3">
 
             <form action="/employees/campaign-detailed-view/{{process}}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <label for="">Choose Month</label>
                     <select name="month" id="" class="form-control">
+
                         <option value="1" class="form-control">Jan</option>
                         <option value="2" class="form-control">Feb</option>
                         <option value="3" class="form-control">March</option>
@@ -48,6 +40,24 @@
 
         </div>
         <div class="col-md-8">
+            <h3 style="margin-top: 70px;margin-left: 70px;font-weight: 700;text-shadow: 2px 2px lightgrey;font-size: 38px;color:wheat;">{{process}}</h3>
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="container-lg" style="margin-top:50px">
+    <div class="row">
+        <div class="col-md-3"><br>
+            <h4>Quality Report For</h4>
+            <div style="padding: 29px;font-size: 27px;font-weight: 600;">
+                <span>{{cmonth}}</span><span>/</span><span>{{cyear}}</span>
+            </div>
+
+
+        </div>
+        <div class="col-md-9">
             <div class="row" id="overview">
                 <div class="summary col-md-2">
                     <small>Overall Team Score</small>
@@ -71,12 +81,30 @@
                 </div>
             </div>
         </div>
-
     </div>
 </div>
 
-<div class="container-lg" style="margin-top:100px">
+<div class="container-lg" style="margin-top:50px">
     <div class="row">
+
+        <div class="col-md-6">
+            <div style="width: 375px;background: #eceff1;padding: 25px 50px;">
+                <form action="/employees/export-data" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{process}}" name="process" required>
+                            <br>
+                            <h4>Export Report</h4>
+                    <br>
+                            <label for="" class="datelabel">Start Date</label>
+                            <input type="date" name="start_date" required class="dateinput form-control" >
+                    <br>
+                            <label for="" class="datelabel">End Date</label>
+                            <input type="date" name="end_date" required class="dateinput form-control">
+                            <br>
+                            <button class="btn btn-secondary" style="width: 90px;height: 28px; font-size: 11px;">Export</button>
+                </form>
+            </div>
+        </div>
         <div class="col-md-6" style="height: 310px;padding:30px">
             <h4>Weekly Score</h4>
             <br>
@@ -94,24 +122,6 @@
                 </tr>
                    {% endfor %}
             </table>
-        </div>
-        <div class="col-md-6" style="padding:30px">
-            <div style="padding: 30px">
-                <form action="/employees/export-data" method="POST">
-                            {% csrf_token %}
-                            <input type="hidden" value="{{process}}" name="process" required>
-                            <br>
-                            <h4>Export Report</h4>
-                    <br>
-                            <label for="" class="datelabel">Start Date</label>
-                            <input type="date" name="start_date" required class="dateinput form-control" >
-                    <br>
-                            <label for="" class="datelabel">End Date</label>
-                            <input type="date" name="end_date" required class="dateinput form-control">
-                            <br>
-                            <button class="btn btn-secondary" style="width: 90px;height: 28px; font-size: 11px;">Export</button>
-                </form>
-            </div>
         </div>
 
     </div>

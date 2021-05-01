@@ -256,7 +256,8 @@ color:grey;
 .summary:hover {
     background: #944000;
     padding: 18px;
-    margin: 10px
+    margin: 10px;
+    cursor: pointer;
 
     }
 
@@ -369,4 +370,13 @@ background: gold;
     right: 0;
     left: 0;
     z-index: 1030;
+}
+
+.manager-home-campaigns {
+    height: 50px;
+    width: 100px;
+    background: #eceff1;
+    padding: 6px 10px;
+    font-size: 14px;
+    margin: 10px 10px;
 }
