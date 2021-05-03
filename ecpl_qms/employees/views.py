@@ -1234,9 +1234,6 @@ def coachingViewQaDetailed(request,process,pk):
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
 
-
-
-
     if process_name == 'Super Play':
         coaching = SuperPlayMonForm.objects.get(id=pk)
         data = {'coaching': coaching}
@@ -1327,7 +1324,7 @@ def campaignwiseCoachings(request):
                             SomethingsBrewMonForm,
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm,
+                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm
 
                             ]
 
@@ -1437,7 +1434,7 @@ def campaignwiseCoachingsQA(request):
                             SomethingsBrewMonForm,
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm,
+                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm
 
                             ]
 
@@ -1535,9 +1532,24 @@ def campaignwiseCoachingsAgent(request):
                             MonitoringFormLeadsAllenConsulting,
                             MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
                             MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
+                            MonitoringFormLeadsAdvanceConsultants,
+                            FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                            JJStudioMonForm,
+                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                            MillenniumScientificMonForm,
+                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                            NavigatorBioMonForm,
+                            AKDYInboundMonForm, AKDYEmailMonForm,
+                            IbizMonForm, AdityaBirlaMonForm, BagyalakshmiMonForm, DigitalSwissMonForm,
+                            NafaInnovationsMonForm,
+                            DanialWellingtonInboundMonForm, ProtostarMonForm, KappiMachineMonForm,
+                            SomethingsBrewMonForm,
+                            ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
+                            SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
+                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm
 
                             ]
+
 
         if start_date and end_date:
 
@@ -1963,6 +1975,17 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(PractoMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Scala':
+            data = campaignWiseCalculator(ScalaMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Citizen Capital':
+            data = campaignWiseCalculator(CitizenCapitalMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Golden East':
+            data = campaignWiseCalculator(GoldenEastMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
 
 
         else:
@@ -2334,6 +2357,19 @@ def campaignwiseDetailedReport(request,cname):
         if campaign == 'Practo':
             data = campaignWiseCalculator(PractoMonForm)
             return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Scala':
+            data = campaignWiseCalculator(ScalaMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Citizen Capital':
+            data = campaignWiseCalculator(CitizenCapitalMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Golden East':
+            data = campaignWiseCalculator(GoldenEastMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
 
         else:
             return render(request, '')
