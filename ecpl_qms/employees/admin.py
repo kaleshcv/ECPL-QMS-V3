@@ -79,5 +79,10 @@ admin.site.register(KalkiFashions)
 admin.site.register(SuperPlayMonForm)
 admin.site.register(PractoMonForm)
 
+admin.site.register(ScalaMonForm)
+admin.site.register(GoldenEastMonForm)
+admin.site.register(CitizenCapitalMonForm)
+
+
 
 
