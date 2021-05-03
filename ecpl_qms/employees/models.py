@@ -4741,6 +4741,78 @@ class GoldenEastMonForm(models.Model):
         return self.comments[:100] + '...'
 
 
+class ClearViewMonform(models.Model):
+    process = models.CharField(default='Clear View', max_length=50)
+    emp_id = models.IntegerField()
+    associate_name = models.CharField(max_length=50)
+    qa = models.CharField(max_length=50)
+    team_lead = models.CharField(max_length=50)
+    trans_date = models.DateField()
+    audit_date = models.DateField()
+    campaign = models.CharField(max_length=100)
+
+    ticket_id = models.CharField(max_length=100)
+    teamm = models.CharField(max_length=50)
+
+    # mgt
+    manager = models.CharField(max_length=50)
+    manager_id = models.IntegerField()
+
+    category = models.CharField(max_length=20)
+
+    # Customer Experience
+    ce_1 = models.IntegerField()
+    ce_2 = models.IntegerField()
+    ce_3 = models.IntegerField()
+    ce_4 = models.IntegerField()
+    ce_5 = models.IntegerField()
+
+
+    # Business
+    business_1 = models.IntegerField()
+    business_2 = models.IntegerField()
+    business_3 = models.IntegerField()
+    business_4 = models.IntegerField()
+    business_5 = models.IntegerField()
+    business_6 = models.IntegerField()
+    business_7 = models.IntegerField()
+
+    # Compliance
+    compliance_1 = models.IntegerField()
+
+
+    summary = models.TextField()
+    action = models.TextField()
+    error = models.TextField()
+    error_type = models.TextField()
+    error_drill_down = models.TextField()
+
+    added_by = models.CharField(max_length=30)
+    status = models.BooleanField(default=False)
+    closed_date = models.DateTimeField(null=True)
+    emp_comments = models.TextField(null=True)
+
+    ce_total = models.IntegerField(null=True)
+    business_total=models.IntegerField(null=True)
+    compliance_total = models.IntegerField(null=True)
+    overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
+    fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.associate_name
+
+    def snippet(self):
+        return self.comments[:100] + '...'
+
+
+
+
 class Empdata(models.Model):
     uid=models.IntegerField(unique=True)
     username=models.IntegerField()

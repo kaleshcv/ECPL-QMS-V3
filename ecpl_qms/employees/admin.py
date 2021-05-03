@@ -83,6 +83,9 @@ admin.site.register(ScalaMonForm)
 admin.site.register(GoldenEastMonForm)
 admin.site.register(CitizenCapitalMonForm)
 
+admin.site.register(ClearViewMonform)
+
+
 
 
 

@@ -42,6 +42,7 @@ urlpatterns = [
     path('Monitoring-Form-new-series-common',newSeriesMonForms),
 
     path('domestic-email-chat-mon-form',domesticChatEmail),
+    path('clear-view',clearView),
 
     path('upfront-online-llc',upfrontOnlineMonForm),
     path('micro-distributing',microDistributingMonForm),

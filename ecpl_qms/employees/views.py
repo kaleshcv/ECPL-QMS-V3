@@ -1255,6 +1255,14 @@ def coachingViewQaDetailed(request,process,pk):
         return render(request, 'coaching-views/qa-coaching-view-domestic-email-chat.html', data)
 
 
+    if process_name == 'Clear View':
+
+        coaching = ClearViewMonform.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-clear-view.html', data)
+
+
+
     else:
         pass
 
@@ -1434,7 +1442,8 @@ def campaignwiseCoachingsQA(request):
                             SomethingsBrewMonForm,
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm
+                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm,
+                            ClearViewMonform
 
                             ]
 
@@ -2796,6 +2805,8 @@ def qahome(request):
     citizen = {'name':'Citizen Capital'}
     golden_east = {'name':'Golden East'}
 
+    clearview = {'name':'Clear View'}
+
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
@@ -2803,7 +2814,8 @@ def qahome(request):
                  zero, wtu, roof, glyde, mill, fin, spot, cam, opti, nav, akdyinb, akdyemail,
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
-                 scala,citizen,golden_east
+                 scala,citizen,golden_east,
+                 clearview
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2829,7 +2841,8 @@ def qahome(request):
                         DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
-                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform
 
                         ]
 
@@ -6132,6 +6145,12 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/inter-email-chat.html', data)
+
+        elif audit_form == 'Clear View':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/clear-view.html', data)
+
 
     else:
         return redirect('/employees/qahome')
@@ -12621,6 +12640,123 @@ def domesticChatEmail(request):
 
     else:
         return redirect('/employees/qahome')
+
+def clearView(request):
+    if request.method == 'POST':
+
+        category = 'chat/email'
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+
+        trans_date = request.POST['trans_date']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+
+        ticket_id = request.POST['ticket_id']
+        teamm = request.POST['teamm']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Customer Experience
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5
+
+        # Business
+        business_1 = int(request.POST['business_1'])
+        business_2 = int(request.POST['business_2'])
+        business_3 = int(request.POST['business_3'])
+        business_4 = int(request.POST['business_4'])
+        business_5 = int(request.POST['business_5'])
+        business_6 = int(request.POST['business_6'])
+        business_7 = int(request.POST['business_7'])
+
+        business_total = business_1 + business_2 + business_3 +business_4+business_5+business_6+business_7
+
+
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+
+
+        compliance_total = compliance_1
+
+        #################################################
+
+        fatal_list = [compliance_1]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0:
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = ce_total + business_total
+            fatal = False
+
+        summary = request.POST['summary']
+        action = request.POST['action']
+        error = request.POST['error']
+        error_type = request.POST['error_type']
+        error_drill_down = request.POST['error_drill_down']
+
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        clearview = ClearViewMonform(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                           manager=manager_name, manager_id=manager_emp_id,ticket_id=ticket_id,teamm=teamm,
+
+                           trans_date=trans_date, audit_date=audit_date,
+                           campaign=campaign,
+
+                           ce_1=ce_1, ce_2=ce_2, ce_3=ce_3, ce_4=ce_4, ce_5=ce_5,
+                           ce_total=ce_total,
+
+                           business_1=business_1, business_2=business_2, business_3=business_3, business_4=business_4,
+                           business_5=business_5, business_6=business_6,business_7=business_7,
+
+                                     business_total=business_total,
+
+                           compliance_1=compliance_1,
+                           compliance_total=compliance_total,
+
+                            summary=summary,action=action,error=error,
+                            error_type=error_type,error_drill_down=error_drill_down,
+
+                           added_by=added_by,
+
+                           overall_score=overall_score, category=category,
+                           week=week, am=am, fatal_count=no_of_fatals, fatal=fatal
+                           )
+        clearview.save()
+        return redirect('/employees/qahome')
+
+    else:
+        pass
+
 
 
 
