@@ -77,5 +77,7 @@ admin.site.register(TerraceoLeadMonForm)
 admin.site.register(TerraceoChatEmailMonForm)
 admin.site.register(KalkiFashions)
 admin.site.register(SuperPlayMonForm)
+admin.site.register(PractoMonForm)
+
 
 
