@@ -114,5 +114,7 @@ urlpatterns = [
 
     path('powerbi-test',powerBITest),
 
-    path('process-change',processNameChanger)
+    path('process-change',processNameChanger),
+
+    path('desi-changer',desiChanger),
 ]

@@ -12767,3 +12767,14 @@ def processNameChanger(request):
         i.process='AAdya'
         i.save()
 
+def desiChanger(request):
+
+    empid_list = [2145,3831]
+    for i in empid_list:
+
+        prof = Profile.objects.get(emp_id = i)
+        prof.emp_desi = 'QA'
+        prof.save()
+
+
+
