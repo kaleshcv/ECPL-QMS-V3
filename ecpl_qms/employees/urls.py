@@ -43,6 +43,7 @@ urlpatterns = [
 
     path('domestic-email-chat-mon-form',domesticChatEmail),
     path('clear-view',clearView),
+    path('printerpix-monform',printerPix),
 
     path('upfront-online-llc',upfrontOnlineMonForm),
     path('micro-distributing',microDistributingMonForm),

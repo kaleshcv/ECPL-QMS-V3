@@ -84,6 +84,7 @@ admin.site.register(GoldenEastMonForm)
 admin.site.register(CitizenCapitalMonForm)
 
 admin.site.register(ClearViewMonform)
+admin.site.register(PrinterPixMonForm)
 
 
 

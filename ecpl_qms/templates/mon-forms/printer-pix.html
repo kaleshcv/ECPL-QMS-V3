@@ -1,0 +1,319 @@
+{% extends 'base.html' %}
+{% block main %}
+
+    <section id="outboundform">
+        <div class="container-lg">
+            <form action="/employees/printerpix-monform" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">Audit Form - {{team}}</h2>
+                <div class="basic">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="empname">Associate Name</label>
+                            <select class="form-control" id="empname" required="required" name="empname">
+
+                                <option value="{{agent.emp_name}}">{{agent.emp_name}}</option>
+
+                            </select>
+                            <label for="empid">Employee ID</label>
+                            <input type="number" class="form-control" id="empid" name="empid" required value="{{agent.emp_id}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="qa">Quality Analyst</label>
+                            <input type="text" class="form-control" id="qa" name="qa" value="{{user.profile.emp_name}}" required readonly>
+                            <label for="tl">Team Lead</label>
+                            <input type="text" class="form-control" id="tl" name="tl" required value="{{agent.team_lead}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="customer">Order Number</label>
+                            <input type="text" class="form-control" id="customer" name="order_no" required>
+
+                            <label for="duration">Dead Air Duration</label><br>
+                            <input type="number" placeholder="hh" name="durationh1" required style="width:60px;">
+                             <input type="number" placeholder="mm" name="durationm1" required style="width:60px;">
+                             <input type="number" placeholder="ss" name="durations1" required style="width:60px;">
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="calldate">Date of Chat-Call- Email</label>
+                            <input type="date" class="form-control" id="calldate" name="calldate" required>
+                            <label for="auditdate">Audit Date</label>
+                            <input type="text" class="form-control" id="auditdate" name="auditdate" value="{{date}}" readonly>
+                        </div>
+                         <div class="col-md-4">
+                             <input type="hidden" class="form-control" name="campaign1" value="{{agent.process}}">
+                             <label for="zone">Type of Query</label>
+                            <input type="text" class="form-control" id="zone" name="query_type" required>
+                             <label for="concept">No of Hold</label>
+                            <input type="text" class="form-control" id="concept" name="hold_no" required>
+                        </div>
+                         <div class="col-md-4">
+
+                             <label for="duration">Call Duration</label><br>
+                            <input type="number" placeholder="hh" name="durationh" required style="width:60px;">
+                             <input type="number" placeholder="mm" name="durationm" required style="width:60px;">
+                             <input type="number" placeholder="ss" name="durations" required style="width:60px;">
+                             <br><br>
+                             <label for="duration">Hold Duration</label><br>
+                            <input type="number" placeholder="hh" name="durationh2" required style="width:60px;">
+                             <input type="number" placeholder="mm" name="durationm2" required style="width:60px;">
+                             <input type="number" placeholder="ss" name="durations2" required style="width:60px;">
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="am">AM</label>
+                            <input type="text" class="form-control" id="am" name="am" value="{{agent.am}}" required>
+                                <label for="week">Week</label>
+                                     <select class="form-control" name="week" id="week" required>
+                                         <option value="week1">Week1</option>
+                                         <option value="week2">Week2</option>
+                                         <option value="week3">Week3</option>
+                                         <option value="week4">Week4</option>
+                                         <option value="week5">Week5</option>
+                                     </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="business">
+                    <div>
+                        <h4>Softskills</h4>
+                        <br>
+                        <label class="qn">Greeting/Call opening ( Welcoming and Introduction of yourself)</label>
+                        <input type="radio" name="softskill_1" value="0" id="b1" required>
+                        <label for="b1">Yes</label>
+                        <input type="radio" name="softskill_1" value="0" id="b2">
+                        <label for="b2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Listening / understanding the customer / Identify / Probing.</label>
+                        <input type="radio" name="softskill_2" value="10" id="s3" required>
+                        <label for="s3">Yes</label>
+                        <input type="radio" name="softskill_2" value="0" id="s4">
+                        <label for="s4">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Appropriate responses ( acknowledging at the right time)</label>
+                        <input type="radio" name="softskill_3" value="5" id="s5" required>
+                        <label for="s5">Yes</label>
+                        <input type="radio" name="softskill_3" value="0" id="s6">
+                        <label for="s6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Personalization ( building a Raport, Addressing by name)Taking Ownership</label>
+                        <input type="radio" name="softskill_4" value="5" id="s7" required>
+                        <label for="s7">Yes</label>
+                        <input type="radio" name="softskill_4" value="0" id="s8">
+                        <label for="s8">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Professional/Courtesy (Politeness, Humble)</label>
+                        <input type="radio" name="softskill_5" value="15" id="s9" required>
+                        <label for="s9">Yes</label>
+                        <input type="radio" name="softskill_5" value="0" id="s10">
+                        <label for="s10">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Empathy/Sympathy</label>
+                        <input type="radio" name="softskill_6" value="5" id="s11" required>
+                        <label for="s11">Yes</label>
+                        <input type="radio" name="softskill_6" value="0" id="s12">
+                        <label for="s12">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Recap (Summarization of the conversation)</label>
+                        <input type="radio" name="softskill_7" value="1" id="s13" required>
+                        <label for="s13">Yes</label>
+                        <input type="radio" name="softskill_7" value="0" id="s14">
+                        <label for="s14">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Closing (ask for further assistance before closing)</label>
+                        <input type="radio" name="softskill_8" value="0" id="s15" required>
+                        <label for="s15">Yes</label>
+                        <input type="radio" name="softskill_8" value="0" id="s16">
+                        <label for="s16">No</label>
+                    </div>
+                    <br>
+
+                </div>
+
+                <div class="customerexperience">
+                    <div>
+                        <h4>Language</h4>
+                        <br>
+                        <label class="qn">Sentence structure</label>
+                        <input type="radio" name="oc_1" value="10" id="yes4" required>
+                        <label for="yes4">Yes</label>
+                        <input type="radio" name="oc_1" value="0" id="no4">
+                        <label for="no4">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Punctuation (full stop, comma, and brackets, used in writing to separate sentences)</label>
+                        <input type="radio" name="oc_2" value="5" id="yes5" required>
+                        <label for="yes5">Yes</label>
+                        <input type="radio" name="oc_2" value="0" id="no5">
+                        <label for="no5">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Tone and intonation</label>
+                        <input type="radio" name="oc_3" value="5" id="yes6" required>
+                        <label for="yes6">Yes</label>
+                        <input type="radio" name="oc_3" value="0" id="no6">
+                        <label for="no6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Grammar (Tense, Noun, etc.)</label>
+                        <input type="radio" name="oc_4" value="5" id="yes7" required>
+                        <label for="yes7">Yes</label>
+                        <input type="radio" name="oc_4" value="0" id="no7">
+                        <label for="no7">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Diction (choice and use of words and phrases in speech)</label>
+                        <input type="radio" name="oc_5" value="4" id="yes8" required>
+                        <label for="yes8">Yes</label>
+                        <input type="radio" name="oc_5" value="0" id="no8">
+                        <label for="no8">No</label>
+                    </div>
+                    <br>
+                </div>
+
+                <div class="customerexperience">
+                    <div>
+                        <h4>Process Requirement</h4>
+                        <br>
+                        <label class="qn">Response Time (Within 5 mines) and Opening Chat ( less than 1 min)</label>
+                        <input type="radio" name="pr_1" value="5" id="pryes4" required>
+                        <label for="pryes4">Yes</label>
+                        <input type="radio" name="pr_1" value="0" id="prno4">
+                        <label for="prno4">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">First Contact Resolution</label>
+                        <input type="radio" name="pr_2" value="15" id="pryes5" required>
+                        <label for="pryes5">Yes</label>
+                        <input type="radio" name="pr_2" value="0" id="prno5">
+                        <label for="prno5">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Check any previous emails sent (Close the Email only if resolution is provided).</label>
+                        <input type="radio" name="pr_3" value="5" id="pryes6" required>
+                        <label for="pryes6">Yes</label>
+                        <input type="radio" name="pr_3" value="0" id="prno6">
+                        <label for="prno6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Hold  procedure</label>
+                        <input type="radio" name="pr_4" value="5" id="pryes7" required>
+                        <label for="pryes7">Yes</label>
+                        <input type="radio" name="pr_4" value="0" id="prno7">
+                        <label for="prno7">No</label>
+                    </div>
+                    <br>
+
+                </div>
+
+                <div class="compliance">
+                    <div>
+                        <h4>Compliance, Data Capture & Process</h4>
+                        <br>
+                        <label class="qn">Rude Behaviour/ Intentional call disconnect</label>
+                        <input type="radio" name="compliance_1" value="10" id="yes1" required>
+                        <label for="yes1">Yes</label>
+                        <input type="radio" name="compliance_1" value="0" id="no1">
+                        <label for="no1">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Provided Accurate and Complete Information in referance with the  conversation</label>
+                        <input type="radio" name="compliance_2" value="10" id="yes2" required>
+                        <label for="yes2">Yes</label>
+                        <input type="radio" name="compliance_2" value="0" id="no2">
+                        <label for="no2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Verification process followed</label>
+                        <input type="radio" name="compliance_3" value="10" id="yes3" required>
+                        <label for="yes3">Yes</label>
+                        <input type="radio" name="compliance_3" value="0" id="no3">
+                        <label for="no3">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">History Check and Usage of Tools & Resources</label>
+                        <input type="radio" name="compliance_4" value="10" id="c4" required>
+                        <label for="c4">Yes</label>
+                        <input type="radio" name="compliance_4" value="0" id="c5">
+                        <label for="c5">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">BO Notes / Document the chat</label>
+                        <input type="radio" name="compliance_5" value="10" id="c6" required>
+                        <label for="c6">Yes</label>
+                        <input type="radio" name="compliance_5" value="0" id="c7">
+                        <label for="c7">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Unnecessary escalation to dependent team</label>
+                        <input type="radio" name="compliance_6" value="10" id="c8" required>
+                        <label for="c8">Yes</label>
+                        <input type="radio" name="compliance_6" value="0" id="c9">
+                        <label for="c9">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">RMA Fail</label>
+                        <input type="radio" name="compliance_7" value="10" id="c10" required>
+                        <label for="c10">Yes</label>
+                        <input type="radio" name="compliance_7" value="0" id="c11">
+                        <label for="c11">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Process & policy followed</label>
+                        <input type="radio" name="compliance_8" value="10" id="c12" required>
+                        <label for="c12">Yes</label>
+                        <input type="radio" name="compliance_8" value="0" id="c13">
+                        <label for="c13">No</label>
+                    </div>
+                    <br>
+                </div>
+                <hr>
+                <div class="other">
+
+                    <h4>Observations of the Call</h4>
+                    <textarea name="observation" id="areaimp" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Comments</h4>
+                    <textarea name="comments" id="cfeedback" cols="30" rows="5" class="form-control" required></textarea>
+                    <input type="hidden" name="campaign" value="{{team}}">
+                </div>
+                <div style="padding: 30px 30px">
+                    <button class="btn btn-info"> Submit </button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+
+{% endblock %}

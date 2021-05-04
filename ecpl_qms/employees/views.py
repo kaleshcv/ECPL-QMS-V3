@@ -1261,6 +1261,11 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-clear-view.html', data)
 
+    if process_name == 'PrinterPix':
+
+        coaching = PrinterPixMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-printerpix.html', data)
 
 
     else:
@@ -1443,7 +1448,7 @@ def campaignwiseCoachingsQA(request):
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
                             PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm,
-                            ClearViewMonform
+                            ClearViewMonform,PrinterPixMonForm
 
                             ]
 
@@ -2806,6 +2811,7 @@ def qahome(request):
     golden_east = {'name':'Golden East'}
 
     clearview = {'name':'Clear View'}
+    pix = {'name':'PrinterPix'}
 
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
@@ -2815,7 +2821,7 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview
+                 clearview,pix
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2842,7 +2848,7 @@ def qahome(request):
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
-                        ClearViewMonform
+                        ClearViewMonform,PrinterPixMonForm
 
                         ]
 
@@ -6150,6 +6156,10 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/clear-view.html', data)
+        elif audit_form == 'PrinterPix':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/printer-pix.html', data)
 
 
     else:
@@ -12757,6 +12767,145 @@ def clearView(request):
     else:
         pass
 
+
+def printerPix(request):
+
+    if request.method == 'POST':
+        category = 'leads'
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+
+        order_no = request.POST['order_no']
+        query_type = request.POST['query_type']
+        hold_no = request.POST['hold_no']
+
+
+        call_duration = (int(request.POST['durationh']) * 3600) + (int(request.POST['durationm']) * 60) + int(
+            request.POST['durations'])
+
+        hold_duration = (int(request.POST['durationh2']) * 3600) + (int(request.POST['durationm2']) * 60) + int(
+            request.POST['durations2'])
+
+        dead_air_duration = (int(request.POST['durationh1']) * 3600) + (int(request.POST['durationm1']) * 60) + int(
+            request.POST['durations1'])
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Language
+        oc_1 = int(request.POST['oc_1'])
+        oc_2 = int(request.POST['oc_2'])
+        oc_3 = int(request.POST['oc_3'])
+        oc_4 = int(request.POST['oc_4'])
+        oc_5 = int(request.POST['oc_5'])
+
+        language_total = oc_1 + oc_2 + oc_3 + oc_4 + oc_5
+
+        # Softskills
+        softskill_1 = int(request.POST['softskill_1'])
+        softskill_2 = int(request.POST['softskill_2'])
+        softskill_3 = int(request.POST['softskill_3'])
+        softskill_4 = int(request.POST['softskill_4'])
+        softskill_5 = int(request.POST['softskill_5'])
+        softskill_6 = int(request.POST['softskill_6'])
+        softskill_7 = int(request.POST['softskill_7'])
+        softskill_8 = int(request.POST['softskill_8'])
+
+
+        softskill_total = softskill_1 + softskill_2 + softskill_3 + softskill_4 + softskill_5 + softskill_6 + softskill_7 + softskill_8
+
+        #Process
+        pr_1 = int(request.POST['pr_1'])
+        pr_2 = int(request.POST['pr_2'])
+        pr_3 = int(request.POST['pr_3'])
+        pr_4 = int(request.POST['pr_4'])
+
+        process_total = pr_1 + pr_2 + pr_3 + pr_4
+
+        # Compliance
+        compliance_1 = int(request.POST['compliance_1'])
+        compliance_2 = int(request.POST['compliance_2'])
+        compliance_3 = int(request.POST['compliance_3'])
+        compliance_4 = int(request.POST['compliance_4'])
+        compliance_5 = int(request.POST['compliance_5'])
+        compliance_6 = int(request.POST['compliance_6'])
+        compliance_7 = int(request.POST['compliance_7'])
+        compliance_8 = int(request.POST['compliance_8'])
+
+        compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5 + compliance_6 + compliance_7 + compliance_8
+
+        #################################################
+
+        fatal_list = [compliance_1, compliance_2, compliance_3, compliance_4, compliance_5, compliance_6,compliance_7,compliance_8]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if compliance_1 == 0 or compliance_2 == 0 or compliance_3 == 0 or compliance_4 == 0 or compliance_5 == 0 or compliance_6 == 0 or compliance_7 == 0 or compliance_8 == 0:
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = language_total+ process_total + softskill_total
+            fatal = False
+
+        observation = request.POST['observation']
+        comments = request.POST['comments']
+
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        pix = PrinterPixMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                            manager=manager_name, manager_id=manager_emp_id,
+
+                            call_date=call_date, audit_date=audit_date,
+                            campaign=campaign, call_duration=call_duration,order_no=order_no,
+                                query_type=query_type,hold_no=hold_no,
+                                hold_duration=hold_duration,dead_air_duration=dead_air_duration,
+
+                            oc_1=oc_1, oc_2=oc_2, oc_3=oc_3,oc_4=oc_4, oc_5=oc_5,
+
+                            softskill_1=softskill_1, softskill_2=softskill_2, softskill_3=softskill_3,
+                            softskill_4=softskill_4, softskill_5=softskill_5,softskill_6=softskill_6,
+                            softskill_7=softskill_7, softskill_8=softskill_8, softskill_total=softskill_total,
+
+                            pr_1=pr_1,pr_2=pr_2,pr_3=pr_3,pr_4=pr_4,process_total=process_total,
+
+                            compliance_1=compliance_1, compliance_2=compliance_2, compliance_3=compliance_3,
+                            compliance_4=compliance_4, compliance_5=compliance_5, compliance_6=compliance_6,
+                                compliance_7=compliance_7, compliance_8=compliance_8,
+                            compliance_total=compliance_total,
+
+                            observation=observation, comments=comments,
+                            added_by=added_by,
+
+                            overall_score=overall_score, category=category,
+                            week=week, am=am, fatal_count=no_of_fatals, fatal=fatal
+                            )
+        pix.save()
+        return redirect('/employees/qahome')
+
+    else:
+        pass
 
 
 

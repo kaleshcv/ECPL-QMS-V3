@@ -4812,6 +4812,97 @@ class ClearViewMonform(models.Model):
 
 
 
+class PrinterPixMonForm(models.Model):
+    process = models.CharField(default='PrinterPix', max_length=50)
+
+    emp_id = models.IntegerField()
+    associate_name = models.CharField(max_length=50)
+    qa = models.CharField(max_length=50)
+    team_lead = models.CharField(max_length=50)
+    call_date = models.DateField()
+    audit_date = models.DateField()
+    campaign = models.CharField(max_length=100)
+    call_duration=models.IntegerField()
+
+    #new
+    order_no = models.CharField(max_length=50)
+    dead_air_duration = models.IntegerField()
+    query_type = models.CharField(max_length=100)
+    hold_no = models.CharField(max_length=100)
+    hold_duration = models.IntegerField()
+
+
+    # mgt
+    manager = models.CharField(max_length=50)
+    manager_id = models.IntegerField()
+
+    category = models.CharField(max_length=20)
+
+    # SoftSkills
+
+    softskill_1 = models.IntegerField()
+    softskill_2 = models.IntegerField()
+    softskill_3 = models.IntegerField()
+    softskill_4 = models.IntegerField()
+    softskill_5 = models.IntegerField()
+    softskill_6 = models.IntegerField()
+    softskill_7 = models.IntegerField()
+    softskill_8 = models.IntegerField()
+
+    #Language
+    oc_1 = models.IntegerField()
+    oc_2 = models.IntegerField()
+    oc_3 = models.IntegerField()
+    oc_4 = models.IntegerField()
+    oc_5 = models.IntegerField()
+
+    #Process
+    pr_1 = models.IntegerField()
+    pr_2 = models.IntegerField()
+    pr_3 = models.IntegerField()
+    pr_4 = models.IntegerField()
+
+    # Business and Compliance
+    compliance_1 = models.IntegerField()
+    compliance_2 = models.IntegerField()
+    compliance_3 = models.IntegerField()
+    compliance_4 = models.IntegerField()
+    compliance_5 = models.IntegerField()
+    compliance_6 = models.IntegerField()
+    compliance_7 = models.IntegerField()
+    compliance_8 = models.IntegerField()
+
+    observation = models.TextField()
+
+    comments = models.TextField()
+
+    added_by = models.CharField(max_length=30)
+    status = models.BooleanField(default=False)
+    closed_date = models.DateTimeField(null=True)
+    emp_comments = models.TextField(null=True)
+
+
+
+    softskill_total=models.IntegerField(null=True)
+    language_total = models.IntegerField(null=True)
+    process_total = models.IntegerField(null=True)
+    compliance_total = models.IntegerField(null=True)
+
+    overall_score = models.IntegerField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week = models.CharField(max_length=20,null=True)
+    ##############
+    fatal = models.BooleanField(default=False)
+    fatal_count = models.IntegerField(default=0)
+    disput_status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.associate_name
+
+    def snippet(self):
+        return self.comments[:100] + '...'
+
 
 class Empdata(models.Model):
     uid=models.IntegerField(unique=True)
