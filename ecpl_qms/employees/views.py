@@ -9311,6 +9311,83 @@ def exportAuditReportQA(request):
 
             return response
 
+        elif campaign == 'Clear View':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name','Ticket ID', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Greeted customer with appropriate opening',
+                       'Acknowledged customer at right place with right choice of words.',
+                       'Emphathized to user`s concern if necessary',
+                       'Sentence construction/Punctuations/Professionalism',
+                       'Closing (ask for further assistance before closing)',
+
+                       'Did the CRO read the email conversation clearly and understand the customer query',
+                       'Did the CRO probe when necessary',
+                       'Provided Accurate and Complete Information in reference with the conversation.',
+                       'History Check and correct usage of Tools & Resources',
+                       'Did the CRO answer to customer`s query within 2 hrs TAT',
+                       'Did the CRO work on the Tickets/email assigned',
+                       'Check any previous emails sent, close the email (only if resolution is provided)/also did the agent kept the status of the email correctly(Open/transfer/Solved)',
+
+                       'Provided incorrect information or took incorrect action that does not relate to user`s query',
+
+                       'status',
+                       'closed_date', 'fatal', 'summary', 'action', 'error_type','error_drill_down']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = ClearViewMonform.objects.filter(audit_date__range=[start_date, end_date],
+                                                              qa=qa).values_list(
+                'process', 'emp_id', 'associate_name','ticket_id','trans_date','audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+
+                'business_1',
+                'business_2',
+                'business_3',
+                'business_4',
+                'business_5',
+                'business_6',
+                'business_7',
+                                                                                                                            ''
+
+                'compliance_1',
+
+
+                'status', 'closed_date', 'fatal', 'summary', 'action', 'error_type','error_drill_down')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
         elif campaign == 'Noom-EVA':
 
             response = HttpResponse(content_type='application/ms-excel')
