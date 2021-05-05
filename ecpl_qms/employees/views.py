@@ -304,7 +304,8 @@ def qualityDashboardMgt(request):
                         DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
-                        PractoMonForm,ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform,PrinterPixMonForm
 
                         ]
 
@@ -372,19 +373,23 @@ def qualityDashboardMgt(request):
     super_play = {'name': 'Super Play'}
     dani_chat = {'name': 'Daniel Wellington - Chat - Email'}
     teraceo_chat = {'name': 'Terraceo - Chat - Email'}
-    practo = {'name':'Practo'}
+    practo = {'name': 'Practo'}
 
     scala = {'name': 'Scala'}
     citizen = {'name': 'Citizen Capital'}
     golden_east = {'name': 'Golden East'}
+
+    clearview = {'name': 'Clear View'}
+    pix = {'name': 'PrinterPix'}
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                  getarates, advance, fur, max, upfront, micro, jj,
                  zero, wtu, roof, glyde, mill, fin, spot, cam, opti, nav, akdyinb, akdyemail,
                  ibiz, aditya_birla, bagya, digiswisgold, nafa, daniel_inbound, dani_chat, proto, kappi, something, abh,
-                 embassy, iib, terracio_lead, teraceo_chat, kalki, super_play,practo,
-                 scala,citizen,golden_east
+                 embassy, iib, terracio_lead, teraceo_chat, kalki, super_play, practo,
+                 scala, citizen, golden_east,
+                 clearview, pix
                  ]
 
     import datetime
@@ -2001,6 +2006,15 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(GoldenEastMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Clear View':
+            data = campaignWiseCalculator(ClearViewMonform)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'PrinterPix':
+            data = campaignWiseCalculator(PrinterPixMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+
 
         else:
             return render(request,'')
@@ -2384,6 +2398,13 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(GoldenEastMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Clear View':
+            data = campaignWiseCalculator(ClearViewMonform)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'PrinterPix':
+            data = campaignWiseCalculator(PrinterPixMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
 
         else:
             return render(request, '')
@@ -6243,6 +6264,82 @@ def exportAuditReport(request):
                 'sh_5',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Clear View':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name','Ticket ID', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Greeted customer with appropriate opening',
+                       'Acknowledged customer at right place with right choice of words.',
+                       'Emphathized to user`s concern if necessary',
+                       'Sentence construction/Punctuations/Professionalism',
+                       'Closing (ask for further assistance before closing)',
+
+                       'Did the CRO read the email conversation clearly and understand the customer query',
+                       'Did the CRO probe when necessary',
+                       'Provided Accurate and Complete Information in reference with the conversation.',
+                       'History Check and correct usage of Tools & Resources',
+                       'Did the CRO answer to customer`s query within 2 hrs TAT',
+                       'Did the CRO work on the Tickets/email assigned',
+                       'Check any previous emails sent, close the email (only if resolution is provided)/also did the agent kept the status of the email correctly(Open/transfer/Solved)',
+
+                       'Provided incorrect information or took incorrect action that does not relate to user`s query',
+
+                       'status',
+                       'closed_date', 'fatal', 'summary', 'action', 'error_type','error_drill_down']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = ClearViewMonform.objects.filter(audit_date__range=[start_date, end_date],).values_list(
+                'process', 'emp_id', 'associate_name','ticket_id','trans_date','audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+
+                'business_1',
+                'business_2',
+                'business_3',
+                'business_4',
+                'business_5',
+                'business_6',
+                'business_7',
+                                                                                                                            ''
+
+                'compliance_1',
+
+
+                'status', 'closed_date', 'fatal', 'summary', 'action', 'error_type','error_drill_down')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -12225,43 +12322,6 @@ def exportAuditReportQA(request):
 
 
 
-def addtoUserModel(request):
-
-    empobj=Empdata.objects.all()
-
-    for i in empobj:
-
-        user = User.objects.create_user(id=i.id,username=i.username,
-                                   password=i.password)
-
-
-
-def addSingleProfile(request):
-
-    emp_id=6728
-
-    manager='Dina'
-    profile_object=Profile.objects.get(emp_id=emp_id)
-    profile_object.manager=manager
-    profile_object.save()
-
-
-
-
-
-def updateProfile(request):
-
-    if request.method=='POST':
-        pass
-    else:
-        profiles=Profile.objects.all()
-        data={'profiles':profiles}
-        return render(request,'update-profile.html',data)
-
-
-def powerBITest(request):
-
-    return render(request,'test-powerbi-view.html')
 
 
 
@@ -13001,6 +13061,62 @@ def desiChanger(request):
         prof = Profile.objects.get(emp_id = i)
         prof.emp_desi = 'QA'
         prof.save()
+
+
+
+
+def addSingleProfile(request):
+
+    emp_id=6728
+
+    manager='Dina'
+    profile_object=Profile.objects.get(emp_id=emp_id)
+    profile_object.manager=manager
+    profile_object.save()
+
+
+
+
+def updateProfile(request):
+
+    if request.method=='POST':
+        pass
+    else:
+        profiles=Profile.objects.all()
+        data={'profiles':profiles}
+        return render(request,'update-profile.html',data)
+
+
+def powerBITest(request):
+
+    return render(request,'test-powerbi-view.html')
+
+
+
+def addtoUserModel(request):
+
+    empobj=Empdata.objects.all()
+    for i in empobj:
+        pass
+
+    for i in empobj:
+
+        user=User.objects.filter(username=i.username)
+        if user.exists():
+            pass
+        else:
+
+            user = User.objects.create_user(id=i.id,username=i.username,password=i.password)
+
+
+def checkProfile(request):
+
+    profile=Profile.objects.get(emp_id=6043)
+
+    profile.user=6043
+    profile.id=6043
+    profile.save()
+
 
 
 

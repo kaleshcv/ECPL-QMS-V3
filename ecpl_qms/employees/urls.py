@@ -106,10 +106,11 @@ urlpatterns = [
     path('export-data',exportAuditReport),
     path('export-data-qa',exportAuditReportQA),
 
-    #path('adduser',addtoUserModel),
+    path('adduser',addtoUserModel),
     path('update-email-address/<int:pk>',updateEmailAddress),
 
     path('update-profile',updateProfile),
+    path('checkprofile',checkProfile),
 
     #path('add-single-profile',addSingleProfile),
 
