@@ -49,6 +49,7 @@ urlpatterns = [
     path('micro-distributing',microDistributingMonForm),
     path('jj-studio',jjStudioMonform),
     path('pluto-management',plutoManagement),
+    path('sterling-strategies',sterlingStrategies),
 
 
 #### Credentials

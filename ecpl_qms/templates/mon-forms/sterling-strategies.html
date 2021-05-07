@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block main %}
+
+    <section id="outboundform">
+        <div class="container-lg">
+            <form action="/employees/sterling-strategies" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">ECPL - {{team}}</h2>
+                <div class="basic">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="empname">Associate Name</label>
+                            <select class="form-control" id="empname" required="required" name="empname">
+
+                                <option value="{{agent.emp_name}}">{{agent.emp_name}}</option>
+
+                            </select>
+                            <label for="empid">Employee ID</label>
+                            <input type="number" class="form-control" id="empid" name="empid" required value="{{agent.emp_id}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="qa">Quality Analyst</label>
+                            <input type="text" class="form-control" id="qa" name="qa" value="{{user.profile.emp_name}}" required readonly>
+                            <label for="tl">Team Lead</label>
+                            <input type="text" class="form-control" id="tl" name="tl" required value="{{agent.team_lead}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="am">AM</label>
+                            <input type="text" class="form-control" id="am" name="am" value="{{agent.am}}" required>
+                                <label for="week">Week</label>
+                                     <select class="form-control" name="week" id="week" required>
+                                         <option value="week1">Week1</option>
+                                         <option value="week2">Week2</option>
+                                         <option value="week3">Week3</option>
+                                         <option value="week4">Week4</option>
+                                         <option value="week5">Week5</option>
+                                     </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="transdate">Call Date</label>
+                            <input type="date" class="form-control" id="transdate" name="transdate" required>
+                             <label for="auditdate">Date of Evaluation</label>
+                                <input type="text" class="form-control" id="auditdate" name="auditdate" value="{{date}}" readonly>
+                                <input type="hidden" class="form-control" name="campaign1" value="{{agent.process}}">
+                        </div>
+                         <div class="col-md-4">
+                               <label for="customercontact">Customer Contact</label>
+                            <input type="text" class="form-control" id="customercontact" name="customercontact" required>
+                             <label for="outcome">Outcome</label>
+                            <input type="text" class="form-control" id="outcome" name="outcome" required>
+                         </div>
+                        <div class="col-md-4">
+                            <label for="duration">Call Duration</label><br>
+                            <input type="number" placeholder="hh" name="durationh" required style="width:60px;">
+                             <input type="number" placeholder="mm" name="durationm" required style="width:60px;">
+                             <input type="number" placeholder="ss" name="durations" required style="width:60px;">
+                            <br><br>
+                             <label>Result</label>
+                                     <select class="form-control" name="result" required>
+                                         <option value="100">Pass</option>
+                                         <option value="0">Fail</option>
+                                     </select>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="customerexperience">
+                    <div>
+                        <h4>Comments/Observation</h4>
+                        <textarea name="comments" class="form-control" cols="30" rows="3" required></textarea>
+                    </div>
+                </div>
+
+                <div style="padding: 30px 30px">
+                    <input type="hidden" name="campaign" value="{{team}}">
+                    <button class="btn btn-info"> Submit </button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+
+{% endblock %}

@@ -86,6 +86,7 @@ admin.site.register(CitizenCapitalMonForm)
 admin.site.register(ClearViewMonform)
 admin.site.register(PrinterPixMonForm)
 admin.site.register(PlutoManagementMonForm)
+admin.site.register(SterlingMonForm)
 
 
 

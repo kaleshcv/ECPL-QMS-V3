@@ -304,7 +304,7 @@ def qualityDashboardMgt(request):
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
-                        ClearViewMonform,PrinterPixMonForm
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
 
                         ]
 
@@ -381,6 +381,9 @@ def qualityDashboardMgt(request):
     clearview = {'name': 'Clear View'}
     pix = {'name': 'PrinterPix'}
 
+    pluto = {'name': 'Pluto Management'}
+    sterling = {'name': 'Sterling Strategies'}
+
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                  getarates, advance, fur, max, upfront, micro, jj,
@@ -388,8 +391,9 @@ def qualityDashboardMgt(request):
                  ibiz, aditya_birla, bagya, digiswisgold, nafa, daniel_inbound, dani_chat, proto, kappi, something, abh,
                  embassy, iib, terracio_lead, teraceo_chat, kalki, super_play, practo,
                  scala, citizen, golden_east,
-                 clearview, pix
+                 clearview, pix, pluto, sterling
                  ]
+
 
     import datetime
     user_id = request.user.id
@@ -1277,6 +1281,14 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-pluto.html', data)
 
+    if process_name == 'Sterling Strategies':
+
+        coaching = SterlingMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-sterling.html', data)
+
+
+
     else:
         pass
 
@@ -1346,7 +1358,8 @@ def campaignwiseCoachings(request):
                             SomethingsBrewMonForm,
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm
+                            PractoMonForm, ScalaMonForm, CitizenCapitalMonForm, GoldenEastMonForm,
+                            ClearViewMonform, PrinterPixMonForm, PlutoManagementMonForm, SterlingMonForm
 
                             ]
 
@@ -1457,7 +1470,7 @@ def campaignwiseCoachingsQA(request):
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
                             PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm,
-                            ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm
+                            ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm
 
                             ]
 
@@ -2018,6 +2031,13 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(PrinterPixMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Pluto Management':
+            data = campaignWiseCalculator(PlutoManagementMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Sterling Strategies':
+            data = campaignWiseCalculator(SterlingMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
 
 
         else:
@@ -2408,6 +2428,13 @@ def campaignwiseDetailedReport(request,cname):
 
         if campaign == 'PrinterPix':
             data = campaignWiseCalculator(PrinterPixMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Pluto Management':
+            data = campaignWiseCalculator(PlutoManagementMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Sterling Strategies':
+            data = campaignWiseCalculator(SterlingMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
         else:
@@ -2839,6 +2866,7 @@ def qahome(request):
     pix = {'name':'PrinterPix'}
 
     pluto = {'name':'Pluto Management'}
+    sterling = {'name':'Sterling Strategies'}
 
 
 
@@ -2849,7 +2877,7 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview,pix,pluto
+                 clearview,pix,pluto,sterling
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2876,7 +2904,7 @@ def qahome(request):
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
-                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm
 
                         ]
 
@@ -3632,6 +3660,65 @@ def plutoManagement(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/pluto-management.html', data)
+
+def sterlingStrategies(request):
+
+    if request.method == 'POST':
+        category='Outbound'
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        call_date = request.POST['transdate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+
+        customer_contact = request.POST['customercontact']
+        outcome = request.POST['outcome']
+        call_duration = (int(request.POST['durationh']) * 3600) + (int(request.POST['durationm']) * 60) + int(request.POST['durations'])
+
+        result = request.POST['result']
+
+        #######################################
+        prof_obj=Profile.objects.get(emp_id=emp_id)
+        manager=prof_obj.manager
+
+        manager_emp_id_obj=Profile.objects.get(emp_name=manager)
+
+        manager_emp_id=manager_emp_id_obj.emp_id
+        manager_name=manager
+        #########################################
+
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        sterling = SterlingMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name,manager_id=manager_emp_id,
+
+                                     call_date=call_date, audit_date=audit_date,
+                                     campaign=campaign,
+                                        call_duration=call_duration,
+                                      outcome=outcome,customer_contact=customer_contact,
+                                      result=result,
+
+                                        overall_score=result,
+
+                                     comments=comments,
+                                     added_by=added_by,
+
+                                    category=category,
+                                week=week,am=am
+                                     )
+        sterling.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/sterling-strategies.html', data)
 
 
 def leadsandSalesMonForm(request):
@@ -6270,6 +6357,11 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/pluto-management.html', data)
 
+        elif audit_form == 'Sterling Strategies':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/sterling-strategies.html', data)
+
 
 
     else:
@@ -8771,6 +8863,48 @@ def exportAuditReport(request):
                 'reason_for_failure',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Sterling Strategies':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'Contact No', 'Call Date', 'Audit Date', 'overall_score',
+
+                       'qa', 'am', 'team_lead', 'manager', 'Call Durtation', 'outcome',
+
+                       'status',
+                       'closed_date', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = SterlingMonForm.objects.filter(
+                audit_date__range=[start_date, end_date],).values_list(
+                'process', 'emp_id', 'associate_name', 'customer_contact', 'call_date', 'audit_date', 'overall_score',
+                'qa', 'am', 'team_lead', 'manager', 'call_duration', 'outcome',
+
+                'status', 'closed_date', 'comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -11885,6 +12019,50 @@ def exportAuditReportQA(request):
                 'reason_for_failure',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Sterling Strategies':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name','Contact No', 'Call Date', 'Audit Date', 'overall_score',
+
+                       'qa', 'am', 'team_lead', 'manager','Call Durtation','outcome',
+
+
+
+                       'status',
+                       'closed_date', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = SterlingMonForm.objects.filter(
+                audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name','customer_contact', 'call_date', 'audit_date', 'overall_score',
+                 'qa','am','team_lead', 'manager','call_duration','outcome',
+
+                'status', 'closed_date','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
