@@ -10,7 +10,6 @@ from django.core.mail import send_mail
 from django.db.models import Count,Avg,Sum
 import pandas as pd
 
-
 import xlwt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
@@ -1272,6 +1271,11 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-printerpix.html', data)
 
+    if process_name == 'Pluto Management':
+
+        coaching = PlutoManagementMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-pluto.html', data)
 
     else:
         pass
@@ -1453,7 +1457,7 @@ def campaignwiseCoachingsQA(request):
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
                             PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm,
-                            ClearViewMonform,PrinterPixMonForm
+                            ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm
 
                             ]
 
@@ -2834,6 +2838,9 @@ def qahome(request):
     clearview = {'name':'Clear View'}
     pix = {'name':'PrinterPix'}
 
+    pluto = {'name':'Pluto Management'}
+
+
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
@@ -2842,7 +2849,7 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview,pix
+                 clearview,pix,pluto
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2869,7 +2876,7 @@ def qahome(request):
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
-                        ClearViewMonform,PrinterPixMonForm
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm
 
                         ]
 
@@ -3550,6 +3557,81 @@ def flaMonForm(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/FLA-mon-form.html', data)
+
+def plutoManagement(request):
+
+    if request.method == 'POST':
+        category='Email'
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        trans_date = request.POST['transdate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+
+        ownership = request.POST['ownership']
+        title_number = request.POST['title_number']
+        property_number = request.POST['property_number']
+        property_road = request.POST['property_road']
+        property_city = request.POST['property_city']
+        property_post = request.POST['property_post']
+        property_council = request.POST['property_council']
+        adressee_firstname = request.POST['adressee_firstname']
+        company = request.POST['company']
+        send_name = request.POST['send_name']
+        send_road = request.POST['send_road']
+        send_city = request.POST['send_city']
+        send_post = request.POST['send_post']
+        result = request.POST['result']
+
+
+
+        #######################################
+        prof_obj=Profile.objects.get(emp_id=emp_id)
+        manager=prof_obj.manager
+
+        manager_emp_id_obj=Profile.objects.get(emp_name=manager)
+
+        manager_emp_id=manager_emp_id_obj.emp_id
+        manager_name=manager
+        #########################################
+
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        pluto = PlutoManagementMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                                     manager=manager_name,manager_id=manager_emp_id,
+
+                                     trans_date=trans_date, audit_date=audit_date,
+                                     campaign=campaign,
+
+                                       ownership=ownership, title_number=title_number, property_number=property_number,
+                                       property_road=property_road,
+                                       property_city=property_city, property_post=property_post,
+                                       property_council=property_council,
+                                       adressee_firstname=adressee_firstname, company=company, send_name=send_name,
+                                       send_road=send_road,
+                                       send_city=send_city, send_post=send_post, result=result,
+
+                                        overall_score=result,
+
+                                     comments=comments,
+                                     added_by=added_by,
+
+                                    category=category,
+                                week=week,am=am
+                                     )
+        pluto.save()
+        return redirect('/employees/qahome')
+    else:
+        teams = Team.objects.all()
+        users = User.objects.all()
+        data = {'teams': teams, 'users': users}
+        return render(request, 'mon-forms/pluto-management.html', data)
 
 
 def leadsandSalesMonForm(request):
@@ -6105,7 +6187,8 @@ def selectCoachingForm(request):
 
         elif audit_form=='FLA':
             agent = Profile.objects.get(emp_name=agent)
-            data = {'agent': agent, 'team': team}
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+
             return render(request, 'mon-forms/FLA-mon-form.html', data)
 
 
@@ -6181,6 +6264,12 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_name=agent)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/printer-pix.html', data)
+
+        elif audit_form == 'Pluto Management':
+            agent = Profile.objects.get(emp_name=agent)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/pluto-management.html', data)
+
 
 
     else:
@@ -8682,6 +8771,56 @@ def exportAuditReport(request):
                 'reason_for_failure',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Pluto Management':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'ownership', 'title_number', 'property_number', 'property_road', 'property_city',
+                       'property_post', 'property_council', 'adressee_firstname', 'company', 'send_name', 'send_road',
+                       'send_city', 'send_post',
+
+                       'status',
+                       'closed_date', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = PlutoManagementMonForm.objects.filter(
+                audit_date__range=[start_date, end_date],).values_list(
+                'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score',
+                 'qa','am','team_lead', 'manager',
+
+                'ownership', 'title_number', 'property_number', 'property_road', 'property_city', 'property_post',
+                'property_council', 'adressee_firstname', 'company', 'send_name', 'send_road', 'send_city', 'send_post',
+
+
+                'status', 'closed_date','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -11746,6 +11885,56 @@ def exportAuditReportQA(request):
                 'reason_for_failure',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Pluto Management':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'ownership', 'title_number', 'property_number', 'property_road', 'property_city',
+                       'property_post', 'property_council', 'adressee_firstname', 'company', 'send_name', 'send_road',
+                       'send_city', 'send_post',
+
+                       'status',
+                       'closed_date', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = PlutoManagementMonForm.objects.filter(
+                audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score',
+                 'qa','am','team_lead', 'manager',
+
+                'ownership', 'title_number', 'property_number', 'property_road', 'property_city', 'property_post',
+                'property_council', 'adressee_firstname', 'company', 'send_name', 'send_road', 'send_city', 'send_post',
+
+
+                'status', 'closed_date','comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in

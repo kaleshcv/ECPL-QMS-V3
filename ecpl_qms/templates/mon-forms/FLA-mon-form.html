@@ -25,27 +25,6 @@
                             <input type="text" class="form-control" id="tl" name="tl" required value="{{agent.team_lead}}">
                         </div>
                         <div class="col-md-4">
-                            <label for="ticketnumber">Order ID</label>
-                            <input type="text" class="form-control" id="ticketnumber" name="order_id" required>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="transdate">Transaction Handled Date</label>
-                            <input type="date" class="form-control" id="transdate" name="transdate" required>
-                            <label for="auditdate">Audit Date</label>
-                            <input type="date" class="form-control" id="auditdate" name="auditdate" required>
-                        </div>
-                         <div class="col-md-4">
-                             <input type="hidden" class="form-control" name="campaign" value="{{agent.process}}">
-
-                            <label for="Service">Service</label>
-                            <input type="text" class="form-control" id="Service" name="service" required>
-                        </div>
-                         <div class="col-md-4">
-                            <label for="concept">Concept</label>
-                            <input type="text" class="form-control" id="concept" name="concept" required>
-
-                        </div>
-                        <div class="col-md-4">
                             <label for="am">AM</label>
                             <input type="text" class="form-control" id="am" name="am" value="{{agent.am}}" required>
                                 <label for="week">Week</label>
@@ -56,6 +35,28 @@
                                          <option value="week4">Week4</option>
                                          <option value="week5">Week5</option>
                                      </select>
+
+                        </div>
+                        <div class="col-md-4">
+                            <label for="transdate">Transaction Handled Date</label>
+                            <input type="date" class="form-control" id="transdate" name="transdate" required>
+                            <label for="auditdate">Audit Date</label>
+                            <input type="text" class="form-control" id="auditdate" name="auditdate" value="{{date}}" readonly>
+                        </div>
+                         <div class="col-md-4">
+                             <input type="hidden" class="form-control" name="campaign" value="{{agent.process}}">
+
+                            <label for="Service">Service</label>
+                            <input type="text" class="form-control" id="Service" name="service" required>
+                             <label for="ticketnumber">Order ID</label>
+                            <input type="text" class="form-control" id="ticketnumber" name="order_id" required>
+                        </div>
+                         <div class="col-md-4">
+                              <label for="concept">Concept</label>
+                            <input type="text" class="form-control" id="concept" name="concept" required>
+                        </div>
+                        <div class="col-md-4">
+
                         </div>
                     </div>
                 </div>
@@ -98,6 +99,7 @@
                     <textarea name="comments" id="cfeedback" cols="30" rows="5" class="form-control" required></textarea>
                 </div>
                 <div style="padding: 30px 30px">
+                    <input type="hidden" name="campaign" value="{{team}}">
                     <button class="btn btn-info"> Submit </button>
                 </div>
 

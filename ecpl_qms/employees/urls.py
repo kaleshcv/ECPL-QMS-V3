@@ -48,6 +48,7 @@ urlpatterns = [
     path('upfront-online-llc',upfrontOnlineMonForm),
     path('micro-distributing',microDistributingMonForm),
     path('jj-studio',jjStudioMonform),
+    path('pluto-management',plutoManagement),
 
 
 #### Credentials
