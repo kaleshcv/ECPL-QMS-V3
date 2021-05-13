@@ -14,7 +14,10 @@ urlpatterns = [
     path('ECPL-EVA&NOVO-Monitoring-Form-chat',chatCoachingformEva),
     path('ECPL-Pod-Father-Monitoring-Form-chat',chatCoachingformPodFather),
     path('ECPL-INBOUND-CALL-MONITORING-FORM',inboundCoachingForm),
+
     path('ECPL-Fame-House-MONITORING-FORM',fameHouse),
+    path('fame-house-new',fameHouseNew),
+
     path('ECPL-FLA-MONITORING_FORM',flaMonForm),
     path('ECPL-Lead-sales-MONITORING_FORM',leadsandSalesMonForm),
 
@@ -71,15 +74,10 @@ urlpatterns = [
     # Coaching Views
     path('coaching-view-emp/<str:process>/<int:pk>',coachingViewAgents),
     path('coaching-view-qa-all/<str:process>/<int:pk>',coachingViewQaDetailed),
-
-
     path('qa-open-status-coachings-view/<int:pk>',qacoachingViewOpenAll),
-
     path('campaign-wise-coaching-view',campaignwiseCoachings),
     path('campaign-wise-coaching-view-qa',campaignwiseCoachingsQA),
-
     path('campaign-wise-coaching-view-agent',campaignwiseCoachingsAgent),
-
     path('employee-wise-report', employeeWiseReport),
     path('manager-wise-report', managerWiseReport),
 
@@ -92,13 +90,6 @@ urlpatterns = [
     path('coaching-dispute/<int:pk>',coachingDispute),
 
     # Summary
-    # categorywise
-    path('inbound-summary',inboundSummary),
-    path('chat-summary',chatSummary),
-    path('leads-summary',leadsSummary),
-    path('outbound-summary',leadsSummary),  # Same as Leads
-    path('other-summary',otherSummary),
-    path('email-summary',emailSummary),
 
     ##############3
     path('campaign-detailed-view/<str:cname>',campaignwiseDetailedReport),

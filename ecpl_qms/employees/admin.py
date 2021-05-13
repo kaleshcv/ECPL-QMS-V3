@@ -14,7 +14,10 @@ admin.site.register(Campaigns)
 admin.site.register(ChatMonitoringFormEva)     # view done
 admin.site.register(ChatMonitoringFormPodFather)     # view done
 admin.site.register(InboundMonitoringFormNucleusMedia)     # view done
+
 admin.site.register(FameHouseMonitoringForm)    # view done
+admin.site.register(FameHouseNewMonForm)
+
 admin.site.register(FLAMonitoringForm)     # view done
 admin.site.register(MasterMonitoringFormGetaRatesPSECU)
 admin.site.register(MasterMonitoringFormMovementInsurance)
@@ -87,6 +90,7 @@ admin.site.register(ClearViewMonform)
 admin.site.register(PrinterPixMonForm)
 admin.site.register(PlutoManagementMonForm)
 admin.site.register(SterlingMonForm)
+
 
 
 

@@ -396,6 +396,108 @@ class FameHouseMonitoringForm(models.Model):
         return self.comments[:100] + '...'
 
 
+class FameHouseNewMonForm(models.Model):
+    process = models.CharField(default='Fame House', max_length=50)
+
+    emp_id = models.IntegerField()
+    associate_name = models.CharField(max_length=50)
+    qa = models.CharField(max_length=50)
+    team_lead = models.CharField(max_length=50)
+    ticket_no = models.CharField(max_length=50)
+    ticket_type = models.CharField(max_length=50)
+
+    trans_date = models.DateField()
+    audit_date = models.DateField()
+    campaign = models.CharField(max_length=100)
+
+    # Mgt
+    manager = models.CharField(max_length=50)
+    manager_id = models.IntegerField()
+
+    category = models.CharField(max_length=20)
+
+    # Immediate fails:
+    compliance_1 = models.IntegerField(null=True)
+    compliance_2 = models.IntegerField(null=True)
+    compliance_3 = models.IntegerField(null=True)
+    compliance_4 = models.IntegerField(null=True)
+    compliance_5 = models.IntegerField(null=True)
+    compliance_6 = models.IntegerField(null=True)
+
+    #Opening
+    opening_1 = models.IntegerField(null=True)
+    opening_2 = models.IntegerField(null=True)
+    opening_3 = models.IntegerField(null=True)
+
+    #Customer Issue Resolution
+
+    cir_1 = models.IntegerField(null=True)
+    cir_2 = models.IntegerField(null=True)
+    cir_3 = models.IntegerField(null=True)
+    cir_4 = models.IntegerField(null=True)
+    cir_5 = models.IntegerField(null=True)
+
+    #Macro Usage
+    macro_1 = models.IntegerField(null=True)
+    macro_2 = models.IntegerField(null=True)
+
+    #Formatting
+    formatting_1 = models.IntegerField(null=True)
+    formatting_2 = models.IntegerField(null=True)
+    formatting_3 = models.IntegerField(null=True)
+
+    #Documentation
+    doc_1 = models.IntegerField(null=True)
+    doc_2 = models.IntegerField(null=True)
+    doc_3 = models.IntegerField(null=True)
+    doc_4 = models.IntegerField(null=True)
+
+    #Etiquette
+    et_1 = models.IntegerField(null=True)
+    et_2 = models.IntegerField(null=True)
+    et_3 = models.IntegerField(null=True)
+    et_4 = models.IntegerField(null=True)
+
+    #Closing
+    closing_1 = models.IntegerField(null=True)
+    closing_2 = models.IntegerField(null=True)
+
+    closing_total = models.IntegerField(null=True)
+    et_total = models.IntegerField(null=True)
+    doc_total = models.IntegerField(null=True)
+    formatting_total = models.IntegerField(null=True)
+    macro_total = models.IntegerField(null=True)
+    cir_total = models.IntegerField(null=True)
+    opening_total = models.IntegerField(null=True)
+    compliance_total = models.IntegerField(null=True)
+
+    overall_score = models.IntegerField(null=True)
+
+    areas_improvement = models.TextField()
+    positives = models.TextField()
+    comments = models.TextField()
+
+    added_by = models.CharField(max_length=30)
+    status = models.BooleanField(default=False)
+    closed_date = models.DateTimeField(null=True)
+    emp_comments = models.TextField(null=True)
+
+    am = models.CharField(max_length=50,null=True)
+    week=models.CharField(max_length=20,null=True)
+    ##############
+    fatal=models.BooleanField(default=False)
+    fatal_count=models.IntegerField(default=0)
+
+    disput_status=models.BooleanField(default=False)
+
+
+    def __str__(self):
+        return self.associate_name
+
+    def snippet(self):
+        return self.comments[:100] + '...'
+
+
 class FLAMonitoringForm(models.Model):
     process = models.CharField(default='FLA', max_length=50)
 
