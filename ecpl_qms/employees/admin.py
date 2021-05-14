@@ -91,6 +91,9 @@ admin.site.register(PrinterPixMonForm)
 admin.site.register(PlutoManagementMonForm)
 admin.site.register(SterlingMonForm)
 
+admin.site.register(RitBrainMonForm)
+admin.site.register(HealthyPlusMonForm)
+
 
 
 

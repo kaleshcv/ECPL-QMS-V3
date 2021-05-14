@@ -278,36 +278,6 @@ def managerWiseReport(request):
         return render(request,'manager-wise-report.html',data)
 
 def qualityDashboardMgt(request):
-
-
-    mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
-                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                        WitDigitalMasteringMonitoringForm,
-                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                        MonitoringFormLeadsAadhyaSolution,
-                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                        MonitoringFormLeadsTentamusFood,
-                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                        MonitoringFormLeadsAllenConsulting,
-                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
-                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
-                        JJStudioMonForm,
-                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
-                        MillenniumScientificMonForm,
-                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
-                        NavigatorBioMonForm,
-                        AKDYInboundMonForm, AKDYEmailMonForm,
-                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
-                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
-                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
-                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
-                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
-                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
-
-                        ]
-
     ### Campaign Names ###
 
     pod = {'name': 'Noom-POD'}
@@ -384,6 +354,9 @@ def qualityDashboardMgt(request):
     pluto = {'name': 'Pluto Management'}
     sterling = {'name': 'Sterling Strategies'}
 
+    ritbrain = {'name': 'Ri8Brain'}
+    healthy = {'name': 'Healthy Plus'}
+
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                  getarates, advance, fur, max, upfront, micro, jj,
@@ -391,8 +364,38 @@ def qualityDashboardMgt(request):
                  ibiz, aditya_birla, bagya, digiswisgold, nafa, daniel_inbound, dani_chat, proto, kappi, something, abh,
                  embassy, iib, terracio_lead, teraceo_chat, kalki, super_play, practo,
                  scala, citizen, golden_east,
-                 clearview, pix, pluto, sterling
+                 clearview, pix, pluto, sterling, ritbrain, healthy
                  ]
+
+    mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
+                        IbizMonForm, AdityaBirlaMonForm, BagyalakshmiMonForm, DigitalSwissMonForm,
+                        NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm, ProtostarMonForm, KappiMachineMonForm, SomethingsBrewMonForm,
+                        ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
+                        SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform, PrinterPixMonForm, PlutoManagementMonForm, SterlingMonForm,
+                        FameHouseNewMonForm, RitBrainMonForm, HealthyPlusMonForm
+
+                        ]
 
 
     import datetime
@@ -1089,6 +1092,15 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-sterling.html', data)
 
+    if process_name == 'Ri8Brain':
+        coaching = RitBrainMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Healthy Plus':
+        coaching = HealthyPlusMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
 
     else:
@@ -1272,7 +1284,9 @@ def campaignwiseCoachingsQA(request):
                             ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
                             SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
                             PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm,
-                            ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm
+                            ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+
+                            FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
 
                             ]
 
@@ -1840,6 +1854,13 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(SterlingMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Ri8Brain':
+            data = campaignWiseCalculator(RitBrainMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Healthy Plus':
+            data = campaignWiseCalculator(HealthyPlusMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
 
 
         else:
@@ -2237,6 +2258,13 @@ def campaignwiseDetailedReport(request,cname):
             return render(request, 'campaign-report/detailed.html', data)
         if campaign == 'Sterling Strategies':
             data = campaignWiseCalculator(SterlingMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Ri8Brain':
+            data = campaignWiseCalculator(RitBrainMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+        if campaign == 'Healthy Plus':
+            data = campaignWiseCalculator(HealthyPlusMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
         else:
@@ -2670,6 +2698,9 @@ def qahome(request):
     pluto = {'name':'Pluto Management'}
     sterling = {'name':'Sterling Strategies'}
 
+    ritbrain = {'name':'Ri8Brain'}
+    healthy = {'name':'Healthy Plus'}
+
 
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
@@ -2679,7 +2710,7 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview,pix,pluto,sterling
+                 clearview,pix,pluto,sterling,ritbrain,healthy
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2706,7 +2737,8 @@ def qahome(request):
                         ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
-                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm
 
                         ]
 
@@ -6202,32 +6234,33 @@ def selectCoachingForm(request):
         new_today_date = today_date.strftime("%Y-%m-%d")
 
         audit_form=request.POST['audit_form']
-        agent=request.POST['agent']
+        agent_id=request.POST['agent_id']
         team=request.POST['team']
 
+
         if audit_form=='Noom-EVA':
-            agent=Profile.objects.get(emp_name=agent)
+            agent=Profile.objects.get(emp_id=agent_id)
             data = {'agent':agent,'team':team}
             return render(request, 'mon-forms/ECPL-EVA&NOVO-Monitoring-Form-chat.html', data)
 
         elif audit_form=='Noom-POD':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-Pod-Father-Monitoring-Form-chat.html', data)
 
         elif audit_form=='Nucleus':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-INBOUND-CALL-MONITORING-FORM.html', data)
 
         elif audit_form=='Fame House':
 
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/fame-house-new.html', data)
 
         elif audit_form=='FLA':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
 
             return render(request, 'mon-forms/FLA-mon-form.html', data)
@@ -6235,87 +6268,96 @@ def selectCoachingForm(request):
 
 
         elif audit_form=='Tonn Chat Email':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/ECPL-Chat-Email-MONITORING-FORM.html', data)
 
 
         elif audit_form=='Movement of Insurance':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Master-Monitoring-Form-Movement-Insurance.html', data)
 
         elif audit_form=='Wit Digital':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Wit-Digital-Mastering-Monitoring-Form.html', data)
 
         elif audit_form == 'Printer Pix Chat Email':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Chats-Email.html', data)
 
         elif audit_form == 'Printer Pix Inbound':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team}
             return render(request, 'mon-forms/Printer-Pix-Master-Monitoring-Form-Inbound-Calls.html', data)
 
         elif audit_form == 'AAdya' or audit_form == 'Insalvage' or audit_form == 'Medicare' or audit_form == 'CTS' or audit_form == 'Tentamus Food' or audit_form == 'Tentamus Pet' or audit_form == 'City Security' or audit_form == 'Allen Consulting' or audit_form == 'System4' or audit_form == 'Louisville' or audit_form == 'Info Think LLC' or audit_form == 'PSECU' or audit_form == 'Get A Rates' or audit_form == 'Advance Consultants' or audit_form == 'Upfront Online LLC' or audit_form == 'Micro Distributing' or audit_form == 'JJ Studio':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
 
         elif audit_form == 'Zero Stress Marketing' or audit_form =='WTU' or audit_form =='Roof Well' or audit_form == 'Glyde App' or audit_form == 'Millennium Scientific' or audit_form == 'Finesse Mortgage' or audit_form == 'Stand Spot' or audit_form == 'Cam Industrial' or audit_form == 'Optimal Student Loan' or audit_form == 'Navigator Bio' or audit_form == 'AKDY - Inbound':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
         elif audit_form == 'Ibiz' or audit_form == 'Aditya Birla Cellulose' or audit_form == 'Bhagyalaxmi Industries' or audit_form == 'Digital Swiss Gold' or audit_form == 'Naffa Innovations' or audit_form =='Daniel Wellington - Inbound' or audit_form =='Protostar' or audit_form == 'Kappi machine' or audit_form == 'Somethings Brewing' or audit_form == 'AB - Hindalco' or audit_form == 'Embassy Luxury' or audit_form == 'IIB' or audit_form == 'Terraceo - Lead' or audit_form == 'Kalki Fashions':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
         elif audit_form=='MT Cosmetic':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
         elif audit_form=='Scala' or audit_form=='Citizen Capital' or audit_form=='Golden East':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
 
         elif audit_form == 'Super Play' or audit_form =='Daniel Wellington - Chat - Email' or audit_form =='Terraceo - Chat - Email' or audit_form =='Practo':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team,'date':new_today_date}
             return render(request, 'mon-forms/domestic-email-chat.html', data)
 
         elif audit_form == 'Fur Baby' or audit_form == 'Maxwell Properties'or audit_form == 'AKDY - Email':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/inter-email-chat.html', data)
 
         elif audit_form == 'Clear View':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/clear-view.html', data)
         elif audit_form == 'PrinterPix':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/printer-pix.html', data)
 
         elif audit_form == 'Pluto Management':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/pluto-management.html', data)
 
         elif audit_form == 'Sterling Strategies':
-            agent = Profile.objects.get(emp_name=agent)
+            agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/sterling-strategies.html', data)
 
+        elif audit_form == 'Ri8Brain':
+            agent = Profile.objects.get(emp_id=agent_id)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/new-series-common.html', data)
+
+        elif audit_form == 'Healthy Plus':
+            agent = Profile.objects.get(emp_id=agent_id)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/new-series-common.html', data)
 
 
     else:
@@ -6602,6 +6644,15 @@ def exportAuditReport(request):
         elif campaign == 'Golden East':
             response = exportAadyaseries(GoldenEastMonForm)
             return response
+
+        elif campaign == 'Ri8Brain':
+            response = exportAadyaseries(RitBrainMonForm)
+            return response
+
+        elif campaign == 'Healthy Plus':
+            response = exportAadyaseries(HealthyPlusMonForm)
+            return response
+
 
 ########## other campaigns ##############
 
@@ -8588,6 +8639,160 @@ def exportAuditReportQA(request):
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
             rows = MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__range=[start_date, end_date],
+                                                                    qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Ri8Brain':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = RitBrainMonForm.objects.filter(audit_date__range=[start_date, end_date],
+                                                                    qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Healthy Plus':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = HealthyPlusMonForm.objects.filter(audit_date__range=[start_date, end_date],
                                                                     qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
@@ -11407,7 +11612,6 @@ def newSeriesMonForms(request):
             return redirect('/employees/qahome')
 
 
-
         ######### Aadya series
 
         elif campaign_name == 'AAdya':
@@ -11550,7 +11754,13 @@ def newSeriesMonForms(request):
             newseriesAddCoaching(GoldenEastMonForm)
             return redirect('/employees/qahome')
 
+        elif campaign_name == 'Ri8Brain':
+            newseriesAddCoaching(RitBrainMonForm)
+            return redirect('/employees/qahome')
 
+        elif campaign_name == 'Healthy Plus':
+            newseriesAddCoaching(HealthyPlusMonForm)
+            return redirect('/employees/qahome')
 
         else:
             pass

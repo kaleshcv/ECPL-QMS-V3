@@ -8,9 +8,9 @@
         <form action="/employees/add-coaching" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <label for="agent">Select Employee</label>
-            <select name="agent" id="agent" class="form-control">
+            <select name="agent_id" id="agent" class="form-control">
                 {% for agent in agents %}
-                <option value="{{agent.emp_name}}" class="form-control">{{agent.emp_name}}-{{agent.emp_id}}</option>
+                <option value="{{agent.emp_id}}" class="form-control">{{agent.emp_name}}-{{agent.emp_id}}</option>
                 {% endfor %}
             </select><br>
             <label for="">Audit Form</label>
