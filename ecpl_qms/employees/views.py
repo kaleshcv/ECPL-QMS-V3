@@ -6264,7 +6264,7 @@ def campaignView(request):
 
         pk=request.POST['campaign']
 
-        agents=Profile.objects.filter(emp_desi='CRO').order_by('emp_name')
+        agents=Profile.objects.all().order_by('emp_name')
 
         data = {'team':pk,'agents':agents}
         return render(request,'campaign-view.html',data)
@@ -10778,6 +10778,8 @@ def addtoUserModel(request):
             profile = Profile(id=i.username,emp_name=i.emp_name,emp_id=i.username,emp_desi=i.emp_desi,team=i.team,email=i.email,team_lead=i.team_lead,manager=i.manager,user_id=i.username,am=i.am,process=i.process)
             profile.save()
             print('User and Profile created')
+
+
 
 def checkProfile(request):
 
