@@ -39,20 +39,17 @@ class Profile(models.Model):
 
                    )
 
-
-
-
     user=models.OneToOneField(User,on_delete=models.CASCADE)
     emp_name = models.CharField(max_length=30)
     emp_id=models.IntegerField()
     emp_desi=models.CharField(max_length=50,choices=emp_desi_list)
-    team=models.CharField(max_length=50,choices=team_list)
+    team=models.CharField(max_length=50,null=True)
     email=models.EmailField(default='emp@ecpl.com',null=True)
 
-    process = models.CharField(max_length=100,choices=team_list)
-    team_lead = models.CharField(max_length=50,default='Testlead')
-    manager = models.CharField(max_length=50,default='Testmanager')
-    am = models.CharField(max_length=50,default='testam')
+    process = models.CharField(max_length=100,null=True)
+    team_lead = models.CharField(max_length=50)
+    manager = models.CharField(max_length=50)
+    am = models.CharField(max_length=50)
 
 
     def __str__(self):
@@ -5253,19 +5250,19 @@ class Empdata(models.Model):
     username=models.IntegerField()
     password=models.CharField(max_length=30)
 
-class Empprofile(models.Model):
-    uid = models.IntegerField(unique=True)
-    empname=models.CharField(max_length=50)
-    empid=models.IntegerField()
-    empdesi=models.CharField(max_length=50)
-    team=models.CharField(max_length=50)
-    email=models.CharField(max_length=50)
-    teamlead=models.CharField(max_length=50)
-    manager=models.CharField(max_length=50)
-    user_id=models.IntegerField()
-    am=models.CharField(max_length=50)
-    process=models.CharField(max_length=50)
 
+class ProfileNewtoAddUserandProfile(models.Model):
+    username = models.IntegerField()
+    password = models.CharField(max_length=30)
+    emp_name = models.CharField(max_length=30)
+    emp_id = models.IntegerField()
+    emp_desi = models.CharField(max_length=50)
+    team = models.CharField(max_length=50)
+    email = models.EmailField(null=True)
+    process = models.CharField(max_length=100)
+    team_lead = models.CharField(max_length=50)
+    manager = models.CharField(max_length=50)
+    am = models.CharField(max_length=50)
 
-class EmpdataTest(models.Model):
-    uid=models.IntegerField(unique=True)
+    def __str__(self):
+        return self.emp_name

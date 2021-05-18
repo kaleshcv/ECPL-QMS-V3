@@ -12229,19 +12229,17 @@ def powerBITest(request):
 
 def addtoUserModel(request):
 
-    empobj=Empdata.objects.all()
+    empobj=ProfileNewtoAddUserandProfile.objects.all()
     for i in empobj:
-        pass
-
-    for i in empobj:
-
         user=User.objects.filter(username=i.username)
         if user.exists():
+            print(i.emp_name+' '+'exist')
             pass
         else:
-
-            user = User.objects.create_user(id=i.id,username=i.username,password=i.password)
-
+            user = User.objects.create_user(id=i.username,username=i.username,password=i.password)
+            profile = Profile(id=i.username,emp_name=i.emp_name,emp_id=i.username,emp_desi=i.emp_desi,team=i.team,email=i.email,team_lead=i.team_lead,manager=i.manager,user_id=i.username,am=i.am,process=i.process)
+            profile.save()
+            print('User and Profile created')
 
 def checkProfile(request):
 
