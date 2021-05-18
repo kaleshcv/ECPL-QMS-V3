@@ -94,6 +94,9 @@ admin.site.register(SterlingMonForm)
 
 admin.site.register(RitBrainMonForm)
 admin.site.register(HealthyPlusMonForm)
+admin.site.register(RestaurentSolMonForm)
+admin.site.register(QBIQMonForm)
+admin.site.register(AccutimeMonForm)
 
 
 

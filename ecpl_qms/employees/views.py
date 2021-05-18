@@ -460,19 +460,34 @@ def agenthome(request):
         ################### opn_count #############
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
-                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                            WitDigitalMasteringMonitoringForm,
-                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                            MonitoringFormLeadsAadhyaSolution,
-                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                            MonitoringFormLeadsTentamusFood,
-                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                            MonitoringFormLeadsAllenConsulting,
-                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
-                            FurBabyMonForm,MaxwellProperties,
-                            ]
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
+                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
+                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+
+                        ]
 
         all_coaching_list = []
         open_coaching_list=[]
@@ -546,19 +561,34 @@ def agenthome(request):
         ################### opn_count #############
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
-                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                            WitDigitalMasteringMonitoringForm,
-                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                            MonitoringFormLeadsAadhyaSolution,
-                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                            MonitoringFormLeadsTentamusFood,
-                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                            MonitoringFormLeadsAllenConsulting,
-                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,FurBabyMonForm,MaxwellProperties,
-                            ]
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
+                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
+                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+
+                        ]
 
         all_coaching_list = []
         open_coaching_list = []
@@ -1102,6 +1132,21 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'Restaurant Solution Group':
+        coaching = RestaurentSolMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'QBIQ':
+        coaching = QBIQMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
+    if process_name == 'Accutime':
+        coaching = AccutimeMonForm.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
 
     else:
         pass
@@ -1147,35 +1192,34 @@ def campaignwiseCoachings(request):
         end_date = request.POST['end_date']
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
-                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                            WitDigitalMasteringMonitoringForm,
-                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                            MonitoringFormLeadsAadhyaSolution,
-                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                            MonitoringFormLeadsTentamusFood,
-                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                            MonitoringFormLeadsAllenConsulting,
-                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
-                            FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
-                            JJStudioMonForm,
-                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
-                            MillenniumScientificMonForm,
-                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
-                            NavigatorBioMonForm,
-                            AKDYInboundMonForm, AKDYEmailMonForm,
-                            IbizMonForm, AdityaBirlaMonForm, BagyalakshmiMonForm, DigitalSwissMonForm,
-                            NafaInnovationsMonForm,
-                            DanialWellingtonInboundMonForm, ProtostarMonForm, KappiMachineMonForm,
-                            SomethingsBrewMonForm,
-                            ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
-                            SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm, ScalaMonForm, CitizenCapitalMonForm, GoldenEastMonForm,
-                            ClearViewMonform, PrinterPixMonForm, PlutoManagementMonForm, SterlingMonForm
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
+                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
+                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
 
-                            ]
+                        ]
 
         if start_date and end_date:
 
@@ -1258,37 +1302,34 @@ def campaignwiseCoachingsQA(request):
         qa = request.POST['qa']
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
-                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                            WitDigitalMasteringMonitoringForm,
-                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                            MonitoringFormLeadsAadhyaSolution,
-                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                            MonitoringFormLeadsTentamusFood,
-                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                            MonitoringFormLeadsAllenConsulting,
-                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
-                            FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
-                            JJStudioMonForm,
-                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
-                            MillenniumScientificMonForm,
-                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
-                            NavigatorBioMonForm,
-                            AKDYInboundMonForm, AKDYEmailMonForm,
-                            IbizMonForm, AdityaBirlaMonForm, BagyalakshmiMonForm, DigitalSwissMonForm,
-                            NafaInnovationsMonForm,
-                            DanialWellingtonInboundMonForm, ProtostarMonForm, KappiMachineMonForm,
-                            SomethingsBrewMonForm,
-                            ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
-                            SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm,
-                            ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
+                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
+                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
 
-                            FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-
-                            ]
+                        ]
 
         if start_date and end_date:
 
@@ -1373,34 +1414,34 @@ def campaignwiseCoachingsAgent(request):
         emp_name=request.POST['emp_name']
 
         list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
-                            FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
-                            MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
-                            WitDigitalMasteringMonitoringForm,
-                            PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
-                            MonitoringFormLeadsAadhyaSolution,
-                            MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
-                            MonitoringFormLeadsTentamusFood,
-                            MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
-                            MonitoringFormLeadsAllenConsulting,
-                            MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
-                            MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates,
-                            MonitoringFormLeadsAdvanceConsultants,
-                            FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
-                            JJStudioMonForm,
-                            ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
-                            MillenniumScientificMonForm,
-                            FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
-                            NavigatorBioMonForm,
-                            AKDYInboundMonForm, AKDYEmailMonForm,
-                            IbizMonForm, AdityaBirlaMonForm, BagyalakshmiMonForm, DigitalSwissMonForm,
-                            NafaInnovationsMonForm,
-                            DanialWellingtonInboundMonForm, ProtostarMonForm, KappiMachineMonForm,
-                            SomethingsBrewMonForm,
-                            ABHMonForm, EmbassyLuxuryMonForm, IIBMonForm, TerraceoLeadMonForm, KalkiFashions,
-                            SuperPlayMonForm, DanielWellinChatEmailMonForm, TerraceoChatEmailMonForm,
-                            PractoMonForm,ScalaMonForm,CitizenCapitalMonForm,GoldenEastMonForm
+                        FameHouseMonitoringForm, FLAMonitoringForm, MTCosmeticsMonForm,
+                        MasterMonitoringFormTonnChatsEmail, MasterMonitoringFormMovementInsurance,
+                        WitDigitalMasteringMonitoringForm,
+                        PrinterPixMasterMonitoringFormChatsEmail, PrinterPixMasterMonitoringFormInboundCalls,
+                        MonitoringFormLeadsAadhyaSolution,
+                        MonitoringFormLeadsInsalvage, MonitoringFormLeadsMedicare, MonitoringFormLeadsCTS,
+                        MonitoringFormLeadsTentamusFood,
+                        MonitoringFormLeadsTentamusPet, MonitoringFormLeadsCitySecurity,
+                        MonitoringFormLeadsAllenConsulting,
+                        MonitoringFormLeadsSystem4, MonitoringFormLeadsLouisville, MonitoringFormLeadsInfothinkLLC,
+                        MonitoringFormLeadsPSECU, MonitoringFormLeadsGetARates, MonitoringFormLeadsAdvanceConsultants,
+                        FurBabyMonForm, MaxwellProperties, UpfrontOnlineLLCMonform, MicroDistributingMonForm,
+                        JJStudioMonForm,
+                        ZeroStressMarketingMonForm, WTUMonForm, RoofWellMonForm, GlydeAppMonForm,
+                        MillenniumScientificMonForm,
+                        FinesseMortgageMonForm, StandSpotMonForm, CamIndustrialMonForm, OptimalStudentLoanMonForm,
+                        NavigatorBioMonForm,
+                        AKDYInboundMonForm, AKDYEmailMonForm,
+                        IbizMonForm,AdityaBirlaMonForm,BagyalakshmiMonForm,DigitalSwissMonForm,NafaInnovationsMonForm,
+                        DanialWellingtonInboundMonForm,ProtostarMonForm,KappiMachineMonForm,SomethingsBrewMonForm,
+                        ABHMonForm,EmbassyLuxuryMonForm,IIBMonForm,TerraceoLeadMonForm,KalkiFashions,
+                        SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
+                        PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
+                        ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
 
-                            ]
+                        ]
 
 
         if start_date and end_date:
@@ -2701,6 +2742,10 @@ def qahome(request):
     ritbrain = {'name':'Ri8Brain'}
     healthy = {'name':'Healthy Plus'}
 
+    rsg = {'name':'Restaurant Solution Group'}
+    qbiq = {'name':'QBIQ'}
+    accutime = {'name':'Accutime'}
+
 
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
@@ -2710,7 +2755,7 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview,pix,pluto,sterling,ritbrain,healthy
+                 clearview,pix,pluto,sterling,ritbrain,healthy,rsg,qbiq,accutime
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2738,7 +2783,8 @@ def qahome(request):
                         SuperPlayMonForm,DanielWellinChatEmailMonForm,TerraceoChatEmailMonForm,
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
-                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm
+                        FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
 
                         ]
 
@@ -6359,6 +6405,11 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
+        elif audit_form == 'Restaurant Solution Group' or audit_form =='QBIQ' or audit_form =='Accutime':
+            agent = Profile.objects.get(emp_id=agent_id)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/new-series-common.html', data)
+
 
     else:
         return redirect('/employees/qahome')
@@ -6651,6 +6702,18 @@ def exportAuditReport(request):
 
         elif campaign == 'Healthy Plus':
             response = exportAadyaseries(HealthyPlusMonForm)
+            return response
+
+        elif campaign == 'Restaurant Solution Group':
+            response = exportAadyaseries(RestaurentSolMonForm)
+            return response
+
+        elif campaign == 'QBIQ':
+            response = exportAadyaseries(QBIQMonForm)
+            return response
+
+        elif campaign == 'Accutime':
+            response = exportAadyaseries(AccutimeMonForm)
             return response
 
 
@@ -8142,13 +8205,299 @@ def exportAuditReportQA(request):
     import pytz
     from datetime import datetime
     if request.method == 'POST':
-
         start_date = request.POST['start_date']
         end_date = request.POST['end_date']
-        qa=request.POST['qa']
+        qa = request.POST['qa']
         campaign = request.POST['process']
 
-        if campaign == 'Fame House':
+        ######  Export Function #############
+
+        def exportAadyaseries(monform):
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager', 'customer_name', 'customer_contact',
+
+                       'Used Standard Opening Protocol',
+                       'Introduction of Product / Branding',
+                       'Call Closing as per the Protocol',
+
+                       'Followed Hold Procedure Appropriately/Dead Air',
+                       'Used Empathetic Statements whenever required',
+                       'Clear Grammar & Communication',
+                       'Acknowledged Appropriately',
+                       'Active Listening without Interruption',
+
+                       'Followed Policy & Procedure (Script)',
+                       'Probing/Tactful finding/Rebuttal',
+                       'Accurate Documentation',
+                       'Disposition done correctly',
+                       'Inaccurate Information',
+                       'Advisor Sounding Rude / Proafinity Usage',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = monform.objects.filter(audit_date__range=[start_date, end_date], qa=qa
+                                          ).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager', 'customer_name', 'customer_contact',
+
+                'oc_1',
+                'oc_2',
+                'oc_3',
+
+                'softskill_1',
+                'softskill_2',
+                'softskill_3',
+                'softskill_4',
+                'softskill_5',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        #######  campaigns  adya series ###########
+
+        if campaign == 'AAdya':
+            response = exportAadyaseries(MonitoringFormLeadsAadhyaSolution)
+            return response
+
+        elif campaign == 'Insalvage':
+            response = exportAadyaseries(MonitoringFormLeadsInsalvage)
+            return response
+
+        elif campaign == 'Medicare':
+            response = exportAadyaseries(MonitoringFormLeadsMedicare)
+            return response
+
+        elif campaign == 'CTS':
+            response = exportAadyaseries(MonitoringFormLeadsCTS)
+            return response
+
+        elif campaign == 'Tentamus Food':
+            response = exportAadyaseries(MonitoringFormLeadsTentamusFood)
+            return response
+
+        elif campaign == 'Tentamus Pet':
+            response = exportAadyaseries(MonitoringFormLeadsTentamusPet)
+            return response
+
+        elif campaign == 'City Security':
+            response = exportAadyaseries(MonitoringFormLeadsCitySecurity)
+            return response
+
+        elif campaign == 'Allen Consulting':
+            response = exportAadyaseries(MonitoringFormLeadsAllenConsulting)
+            return response
+
+        elif campaign == 'System4':
+            response = exportAadyaseries(MonitoringFormLeadsSystem4)
+            return response
+
+        elif campaign == 'Louisville':
+            response = exportAadyaseries(MonitoringFormLeadsLouisville)
+            return response
+
+        elif campaign == 'Info Think LLC':
+            response = exportAadyaseries(MonitoringFormLeadsInfothinkLLC)
+            return response
+
+        elif campaign == 'PSECU':
+            response = exportAadyaseries(MonitoringFormLeadsPSECU)
+            return response
+
+        elif campaign == 'Get A Rates':
+            response = exportAadyaseries(MonitoringFormLeadsGetARates)
+            return response
+
+        elif campaign == 'Advance Consultants':
+            response = exportAadyaseries(MonitoringFormLeadsAdvanceConsultants)
+            return response
+
+        elif campaign == 'MT Cosmetic':
+            response = exportAadyaseries(MTCosmeticsMonForm)
+            return response
+
+        elif campaign == 'Upfront Online LLC':
+            response = exportAadyaseries(UpfrontOnlineLLCMonform)
+            return response
+
+        elif campaign == 'Micro Distributing':
+            response = exportAadyaseries(MicroDistributingMonForm)
+            return response
+
+        elif campaign == 'JJ Studio':
+            response = exportAadyaseries(JJStudioMonForm)
+            return response
+
+        elif campaign == 'Zero Stress Marketing':
+            response = exportAadyaseries(ZeroStressMarketingMonForm)
+            return response
+
+        elif campaign == 'WTU':
+            response = exportAadyaseries(WTUMonForm)
+            return response
+
+        elif campaign == 'Roof Well':
+            response = exportAadyaseries(RoofWellMonForm)
+            return response
+
+        elif campaign == 'Glyde App':
+            response = exportAadyaseries(GlydeAppMonForm)
+            return response
+
+        elif campaign == 'Millennium Scientific':
+            response = exportAadyaseries(MillenniumScientificMonForm)
+            return response
+
+        elif campaign == 'Finesse Mortgage':
+            response = exportAadyaseries(FinesseMortgageMonForm)
+            return response
+
+        elif campaign == 'Stand Spot':
+            response = exportAadyaseries(StandSpotMonForm)
+            return response
+
+        elif campaign == 'Cam Industrial':
+            response = exportAadyaseries(CamIndustrialMonForm)
+            return response
+
+        elif campaign == 'Optimal Student Loan':
+            response = exportAadyaseries(OptimalStudentLoanMonForm)
+            return response
+
+        elif campaign == 'Navigator Bio':
+            response = exportAadyaseries(NavigatorBioMonForm)
+            return response
+
+        elif campaign == 'AKDY - Inbound':
+            response = exportAadyaseries(AKDYInboundMonForm)
+            return response
+
+        elif campaign == 'Ibiz':
+            response = exportAadyaseries(IbizMonForm)
+            return response
+
+        elif campaign == 'Aditya Birla Cellulose':
+            response = exportAadyaseries(AdityaBirlaMonForm)
+            return response
+
+        elif campaign == 'Bhagyalaxmi Industries':
+            response = exportAadyaseries(BagyalakshmiMonForm)
+            return response
+
+        elif campaign == 'Digital Swiss Gold':
+            response = exportAadyaseries(DigitalSwissMonForm)
+            return response
+
+        elif campaign == 'Naffa Innovations':
+            response = exportAadyaseries(NafaInnovationsMonForm)
+            return response
+
+        elif campaign == 'Daniel Wellington - Inbound':
+            response = exportAadyaseries(DanialWellingtonInboundMonForm)
+            return response
+
+        elif campaign == 'Protostar':
+            response = exportAadyaseries(ProtostarMonForm)
+            return response
+
+        elif campaign == 'Kappi machine':
+            response = exportAadyaseries(KappiMachineMonForm)
+            return response
+
+        elif campaign == 'Somethings Brewing':
+            response = exportAadyaseries(SomethingsBrewMonForm)
+            return response
+
+        elif campaign == 'AB - Hindalco':
+            response = exportAadyaseries(ABHMonForm)
+            return response
+
+        elif campaign == 'Embassy Luxury':
+            response = exportAadyaseries(EmbassyLuxuryMonForm)
+            return response
+
+        elif campaign == 'IIB':
+            response = exportAadyaseries(IIBMonForm)
+            return response
+
+        elif campaign == 'Terraceo - Lead':
+            response = exportAadyaseries(TerraceoLeadMonForm)
+            return response
+        elif campaign == 'Kalki Fashions':
+            response = exportAadyaseries(KalkiFashions)
+            return response
+
+        if campaign == 'Scala':
+            response = exportAadyaseries(ScalaMonForm)
+            return response
+
+        elif campaign == 'Citizen Capital':
+            response = exportAadyaseries(CitizenCapitalMonForm)
+            return response
+
+        elif campaign == 'Golden East':
+            response = exportAadyaseries(GoldenEastMonForm)
+            return response
+
+        elif campaign == 'Ri8Brain':
+            response = exportAadyaseries(RitBrainMonForm)
+            return response
+
+        elif campaign == 'Healthy Plus':
+            response = exportAadyaseries(HealthyPlusMonForm)
+            return response
+
+        elif campaign == 'Restaurant Solution Group':
+            response = exportAadyaseries(RestaurentSolMonForm)
+            return response
+
+        elif campaign == 'QBIQ':
+            response = exportAadyaseries(QBIQMonForm)
+            return response
+
+        elif campaign == 'Accutime':
+            response = exportAadyaseries(AccutimeMonForm)
+            return response
+
+
+        ########## other campaigns ##############
+
+        elif campaign == 'Fame House':
 
             response = HttpResponse(content_type='application/ms-excel')
             response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
@@ -8186,7 +8535,7 @@ def exportAuditReportQA(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = FameHouseMonitoringForm.objects.filter(audit_date__range=[start_date, end_date],qa=qa).values_list(
+            rows = FameHouseMonitoringForm.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am', 'team_lead', 'manager',
 
@@ -8208,6 +8557,82 @@ def exportAuditReportQA(request):
                 'sh_5',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Clear View':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'Ticket ID', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count',
+                       'qa', 'am', 'team_lead', 'manager',
+
+                       'Greeted customer with appropriate opening',
+                       'Acknowledged customer at right place with right choice of words.',
+                       'Emphathized to user`s concern if necessary',
+                       'Sentence construction/Punctuations/Professionalism',
+                       'Closing (ask for further assistance before closing)',
+
+                       'Did the CRO read the email conversation clearly and understand the customer query',
+                       'Did the CRO probe when necessary',
+                       'Provided Accurate and Complete Information in reference with the conversation.',
+                       'History Check and correct usage of Tools & Resources',
+                       'Did the CRO answer to customer`s query within 2 hrs TAT',
+                       'Did the CRO work on the Tickets/email assigned',
+                       'Check any previous emails sent, close the email (only if resolution is provided)/also did the agent kept the status of the email correctly(Open/transfer/Solved)',
+
+                       'Provided incorrect information or took incorrect action that does not relate to user`s query',
+
+                       'status',
+                       'closed_date', 'fatal', 'summary', 'action', 'error_type', 'error_drill_down']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = ClearViewMonform.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'ticket_id', 'trans_date', 'audit_date', 'overall_score',
+                'fatal_count', 'qa',
+                'am',
+                'team_lead', 'manager',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+
+                'business_1',
+                'business_2',
+                'business_3',
+                'business_4',
+                'business_5',
+                'business_6',
+                'business_7',
+                ''
+    
+                'compliance_1',
+
+                'status', 'closed_date', 'fatal', 'summary', 'action', 'error_type', 'error_drill_down')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -8256,8 +8681,8 @@ def exportAuditReportQA(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = ChatMonitoringFormPodFather.objects.filter(audit_date__range=[start_date, end_date],
-                                                              qa=qa).values_list(
+            rows = ChatMonitoringFormPodFather.objects.filter(audit_date__range=[start_date, end_date], qa=qa
+                                                              ).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
                 'team_lead', 'manager',
@@ -8275,83 +8700,6 @@ def exportAuditReportQA(request):
                 'compliance_6',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Clear View':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name','Ticket ID', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Greeted customer with appropriate opening',
-                       'Acknowledged customer at right place with right choice of words.',
-                       'Emphathized to user`s concern if necessary',
-                       'Sentence construction/Punctuations/Professionalism',
-                       'Closing (ask for further assistance before closing)',
-
-                       'Did the CRO read the email conversation clearly and understand the customer query',
-                       'Did the CRO probe when necessary',
-                       'Provided Accurate and Complete Information in reference with the conversation.',
-                       'History Check and correct usage of Tools & Resources',
-                       'Did the CRO answer to customer`s query within 2 hrs TAT',
-                       'Did the CRO work on the Tickets/email assigned',
-                       'Check any previous emails sent, close the email (only if resolution is provided)/also did the agent kept the status of the email correctly(Open/transfer/Solved)',
-
-                       'Provided incorrect information or took incorrect action that does not relate to user`s query',
-
-                       'status',
-                       'closed_date', 'fatal', 'summary', 'action', 'error_type','error_drill_down']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = ClearViewMonform.objects.filter(audit_date__range=[start_date, end_date],
-                                                              qa=qa).values_list(
-                'process', 'emp_id', 'associate_name','ticket_id','trans_date','audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'ce_1',
-                'ce_2',
-                'ce_3',
-                'ce_4',
-                'ce_5',
-
-                'business_1',
-                'business_2',
-                'business_3',
-                'business_4',
-                'business_5',
-                'business_6',
-                'business_7',
-                                                                                                                            ''
-
-                'compliance_1',
-
-
-                'status', 'closed_date', 'fatal', 'summary', 'action', 'error_type','error_drill_down')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -8473,8 +8821,8 @@ def exportAuditReportQA(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = InboundMonitoringFormNucleusMedia.objects.filter(audit_date__range=[start_date, end_date],
-                                                                    qa=qa).values_list(
+            rows = InboundMonitoringFormNucleusMedia.objects.filter(audit_date__range=[start_date, end_date], qa=qa
+                                                                    ).values_list(
                 'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
                 'team_lead', 'manager',
@@ -8557,8 +8905,8 @@ def exportAuditReportQA(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__range=[start_date, end_date],
-                                                                             qa=qa).values_list(
+            rows = PrinterPixMasterMonitoringFormInboundCalls.objects.filter(audit_date__range=[start_date, end_date], qa=qa
+                                                                             ).values_list(
                 'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
                 'team_lead', 'manager',
@@ -8599,7 +8947,8 @@ def exportAuditReportQA(request):
 
             return response
 
-        elif campaign == 'AAdya':
+
+        elif campaign == 'Movement of Insurance':
 
             response = HttpResponse(content_type='application/ms-excel')
             response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
@@ -8611,7 +8960,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager', 'customer_name', 'customer_contact',
 
                        'Used Standard Opening Protocol',
                        'Introduction of Product / Branding',
@@ -8622,11 +8971,11 @@ def exportAuditReportQA(request):
                        'Clear Grammar & Communication',
                        'Acknowledged Appropriately',
                        'Active Listening without Interruption',
+                       'Disposition done correctly',
+                       'Probing/Tactful finding/Rebuttal',
 
                        'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
+                       'Date Captured Accurately (Fax, Email)',
                        'Inaccurate Information',
                        'Advisor Sounding Rude / Proafinity Usage',
 
@@ -8638,242 +8987,11 @@ def exportAuditReportQA(request):
 
             # Sheet body, remaining rows
             font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsAadhyaSolution.objects.filter(audit_date__range=[start_date, end_date],
-                                                                    qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Ri8Brain':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = RitBrainMonForm.objects.filter(audit_date__range=[start_date, end_date],
-                                                                    qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Healthy Plus':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = HealthyPlusMonForm.objects.filter(audit_date__range=[start_date, end_date],
-                                                                    qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Insalvage':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsInsalvage.objects.filter(
+            rows = MasterMonitoringFormMovementInsurance.objects.filter(
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager', 'customer_name', 'customer_contact',
 
                 'oc_1',
                 'oc_2',
@@ -8884,13 +9002,13 @@ def exportAuditReportQA(request):
                 'softskill_3',
                 'softskill_4',
                 'softskill_5',
+                'softskill_6',
+                'softskill_7',
 
                 'compliance_1',
                 'compliance_2',
                 'compliance_3',
                 'compliance_4',
-                'compliance_5',
-                'compliance_6',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
 
@@ -8907,931 +9025,6 @@ def exportAuditReportQA(request):
 
             return response
 
-        elif campaign == 'Medicare':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsMedicare.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'CTS':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsCTS.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager','customer_name','customer_contact',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Tentamus Food':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsTentamusFood.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Tentamus Pet':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsTentamusPet.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-
-
-        elif campaign == 'City Security':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsCitySecurity.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Allen Consulting':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsAllenConsulting.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'System4':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsSystem4.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Louisville':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsLouisville.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Info Think LLC':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsInfothinkLLC.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'PSECU':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsPSECU.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager','customer_name','customer_contact',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Get A Rates':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsGetARates.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager','customer_name','customer_contact',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Advance Consultants':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MonitoringFormLeadsAdvanceConsultants.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
 
         elif campaign == 'Printer Pix Chat Email':
 
@@ -10513,159 +9706,7 @@ def exportAuditReportQA(request):
 
             return response
 
-        elif campaign == 'Movement of Insurance':
 
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-                       'Disposition done correctly',
-                       'Probing/Tactful finding/Rebuttal',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Date Captured Accurately (Fax, Email)',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MasterMonitoringFormMovementInsurance.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager','customer_name','customer_contact',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-                'softskill_6',
-                'softskill_7',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'MT Cosmetic':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-                       'Disposition done correctly',
-                       'Probing/Tactful finding/Rebuttal',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Date Captured Accurately (Fax, Email)',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MTCosmeticsMonForm.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-                'softskill_6',
-                'softskill_7',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
 
         elif campaign == 'Tonn Chat Email':
 
@@ -10805,11 +9846,9 @@ def exportAuditReportQA(request):
             row_num = 0
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name','Contact No', 'Call Date', 'Audit Date', 'overall_score',
+            columns = ['process', 'empID', 'Associate Name', 'Contact No', 'Call Date', 'Audit Date', 'overall_score',
 
-                       'qa', 'am', 'team_lead', 'manager','Call Durtation','outcome',
-
-
+                       'qa', 'am', 'team_lead', 'manager', 'Call Durtation', 'outcome',
 
                        'status',
                        'closed_date', 'comments']
@@ -10821,10 +9860,10 @@ def exportAuditReportQA(request):
             font_style = xlwt.XFStyle()
             rows = SterlingMonForm.objects.filter(
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name','customer_contact', 'call_date', 'audit_date', 'overall_score',
-                 'qa','am','team_lead', 'manager','call_duration','outcome',
+                'process', 'emp_id', 'associate_name', 'customer_contact', 'call_date', 'audit_date', 'overall_score',
+                'qa', 'am', 'team_lead', 'manager', 'call_duration', 'outcome',
 
-                'status', 'closed_date','comments')
+                'status', 'closed_date', 'comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -10868,13 +9907,12 @@ def exportAuditReportQA(request):
             rows = PlutoManagementMonForm.objects.filter(
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score',
-                 'qa','am','team_lead', 'manager',
+                'qa', 'am', 'team_lead', 'manager',
 
                 'ownership', 'title_number', 'property_number', 'property_road', 'property_city', 'property_post',
                 'property_council', 'adressee_firstname', 'company', 'send_name', 'send_road', 'send_city', 'send_post',
 
-
-                'status', 'closed_date','comments')
+                'status', 'closed_date', 'comments')
 
             import datetime
             rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
@@ -10932,528 +9970,13 @@ def exportAuditReportQA(request):
                     ws.write(row_num, col_num, row[col_num], font_style)
 
             wb.save(response)
-
             return response
-
-        elif campaign == 'Upfront Online LLC':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = UpfrontOnlineLLCMonform.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Micro Distributing':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = MicroDistributingMonForm.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'JJ Studio':
-
-            response = HttpResponse(content_type='application/ms-excel')
-            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-            wb = xlwt.Workbook(encoding='utf-8')
-            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-            # Sheet header, first row
-            row_num = 0
-            font_style = xlwt.XFStyle()
-            font_style.font.bold = True
-            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
-
-                       'Used Standard Opening Protocol',
-                       'Introduction of Product / Branding',
-                       'Call Closing as per the Protocol',
-
-                       'Followed Hold Procedure Appropriately/Dead Air',
-                       'Used Empathetic Statements whenever required',
-                       'Clear Grammar & Communication',
-                       'Acknowledged Appropriately',
-                       'Active Listening without Interruption',
-
-                       'Followed Policy & Procedure (Script)',
-                       'Probing/Tactful finding/Rebuttal',
-                       'Accurate Documentation',
-                       'Disposition done correctly',
-                       'Inaccurate Information',
-                       'Advisor Sounding Rude / Proafinity Usage',
-
-                       'status',
-                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-            for col_num in range(len(columns)):
-                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-            # Sheet body, remaining rows
-            font_style = xlwt.XFStyle()
-            rows = JJStudioMonForm.objects.filter(
-                audit_date__range=[start_date, end_date], qa=qa).values_list(
-                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am',
-                'team_lead', 'manager',
-
-                'oc_1',
-                'oc_2',
-                'oc_3',
-
-                'softskill_1',
-                'softskill_2',
-                'softskill_3',
-                'softskill_4',
-                'softskill_5',
-
-                'compliance_1',
-                'compliance_2',
-                'compliance_3',
-                'compliance_4',
-                'compliance_5',
-                'compliance_6',
-
-                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-            import datetime
-            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                    rows]
-
-            for row in rows:
-                row_num += 1
-                for col_num in range(len(row)):
-                    ws.write(row_num, col_num, row[col_num], font_style)
-
-            wb.save(response)
-
-            return response
-
-        elif campaign == 'Zero Stress Marketing' or campaign == 'WTU' or campaign == 'Roof Well' or campaign == 'Glyde App' or campaign == 'Millennium Scientific' or campaign == 'Finesse Mortgage' or campaign == 'Stand Spot' or campaign == 'Cam Industrial' or campaign == 'Optimal Student Loan' or campaign == 'Navigator Bio' or campaign == 'AKDY - Inbound' or campaign == 'AKDY - Email' or campaign == 'Ibiz' or campaign == 'Aditya Birla Cellulose' or campaign == 'Bhagyalaxmi Industries' or campaign =='Digital Swiss Gold' or campaign =='Naffa Innovations' or campaign =='Daniel Wellington - Inbound' or campaign == 'Protostar' or campaign =='Kappi machine' or campaign =='Somethings Brewing' or campaign =='AB - Hindalco' or campaign =='Embassy Luxury' or campaign =='IIB' or campaign =='Terraceo - Lead' or campaign =='Kalki Fashions':
-
-            def exportNewSeries(monform):
-
-                response = HttpResponse(content_type='application/ms-excel')
-                response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-                wb = xlwt.Workbook(encoding='utf-8')
-                ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-                # Sheet header, first row
-                row_num = 0
-                font_style = xlwt.XFStyle()
-                font_style.font.bold = True
-                columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                           'Fatal Count',
-                           'qa', 'am', 'team_lead', 'manager',
-
-                           'Used Standard Opening Protocol',
-                           'Introduction of Product / Branding',
-                           'Call Closing as per the Protocol',
-
-                           'Followed Hold Procedure Appropriately/Dead Air',
-                           'Used Empathetic Statements whenever required',
-                           'Clear Grammar & Communication',
-                           'Acknowledged Appropriately',
-                           'Active Listening without Interruption',
-
-                           'Followed Policy & Procedure (Script)',
-                           'Probing/Tactful finding/Rebuttal',
-                           'Accurate Documentation',
-                           'Disposition done correctly',
-                           'Inaccurate Information',
-                           'Advisor Sounding Rude / Proafinity Usage',
-
-                           'status',
-                           'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-                for col_num in range(len(columns)):
-                    ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-                # Sheet body, remaining rows
-                font_style = xlwt.XFStyle()
-                rows = monform.objects.filter(audit_date__range=[start_date, end_date],
-                                                                        qa=qa).values_list(
-                    'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                    'am',
-                    'team_lead', 'manager',
-
-                    'oc_1',
-                    'oc_2',
-                    'oc_3',
-
-                    'softskill_1',
-                    'softskill_2',
-                    'softskill_3',
-                    'softskill_4',
-                    'softskill_5',
-
-                    'compliance_1',
-                    'compliance_2',
-                    'compliance_3',
-                    'compliance_4',
-                    'compliance_5',
-                    'compliance_6',
-
-                    'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-                import datetime
-                rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                        rows]
-
-                for row in rows:
-                    row_num += 1
-                    for col_num in range(len(row)):
-                        ws.write(row_num, col_num, row[col_num], font_style)
-
-                wb.save(response)
-
-                return response
-
-            if campaign == 'Zero Stress Marketing':
-                response = exportNewSeries(ZeroStressMarketingMonForm)
-                return response
-
-            elif campaign == 'WTU':
-                response = exportNewSeries(WTUMonForm)
-                return response
-
-            elif campaign == 'Roof Well':
-                response =exportNewSeries(RoofWellMonForm)
-                return response
-
-            elif campaign == 'Glyde App':
-                response =exportNewSeries(GlydeAppMonForm)
-                return response
-
-            elif campaign == 'Millennium Scientific':
-                response =exportNewSeries(MillenniumScientificMonForm)
-                return response
-
-            elif campaign == 'Finesse Mortgage':
-                response =exportNewSeries(FinesseMortgageMonForm)
-                return response
-
-            elif campaign == 'Stand Spot':
-                response =exportNewSeries(StandSpotMonForm)
-                return response
-
-
-            elif campaign == 'Cam Industrial':
-                response =exportNewSeries(CamIndustrialMonForm)
-                return response
-
-
-            elif campaign == 'Optimal Student Loan':
-                response =exportNewSeries(OptimalStudentLoanMonForm)
-                return response
-
-            elif campaign == 'Navigator Bio':
-                response =exportNewSeries(NavigatorBioMonForm)
-                return response
-
-            elif campaign == 'AKDY - Inbound':
-                response =exportNewSeries(AKDYInboundMonForm)
-                return response
-
-
-
-            elif campaign == 'Ibiz':
-                response = exportNewSeries(IbizMonForm)
-                return response
-
-            elif campaign == 'Aditya Birla Cellulose':
-                response = exportNewSeries(AdityaBirlaMonForm)
-                return response
-
-            elif campaign == 'Bhagyalaxmi Industries':
-                response = exportNewSeries(BagyalakshmiMonForm)
-                return response
-
-            elif campaign == 'Digital Swiss Gold':
-                response = exportNewSeries(DigitalSwissMonForm)
-                return response
-
-            elif campaign == 'Naffa Innovations':
-                response = exportNewSeries(NafaInnovationsMonForm)
-                return response
-
-            elif campaign == 'Daniel Wellington - Inbound':
-                response = exportNewSeries(DanialWellingtonInboundMonForm)
-                return response
-
-            elif campaign == 'Protostar':
-                response = exportNewSeries(ProtostarMonForm)
-                return response
-
-            elif campaign == 'Kappi machine':
-                response = exportNewSeries(KappiMachineMonForm)
-                return response
-
-            elif campaign == 'Somethings Brewing':
-                response = exportNewSeries(SomethingsBrewMonForm)
-                return response
-
-            elif campaign == 'AB - Hindalco':
-                response = exportNewSeries(ABHMonForm)
-                return response
-
-            elif campaign == 'Embassy Luxury':
-                response = exportNewSeries(EmbassyLuxuryMonForm)
-                return response
-
-            elif campaign == 'IIB':
-                response = exportNewSeries(IIBMonForm)
-                return response
-
-            elif campaign == 'Terraceo - Lead':
-                response = exportNewSeries(TerraceoLeadMonForm)
-                return response
-            elif campaign == 'Kalki Fashions':
-                response = exportNewSeries(KalkiFashions)
-                return response
-
-        elif campaign =='Scala' or campaign=='Citizen Capital' or campaign=='Golden East':
-
-            def exportNewSeries(monform):
-
-                response = HttpResponse(content_type='application/ms-excel')
-                response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
-                wb = xlwt.Workbook(encoding='utf-8')
-                ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
-                # Sheet header, first row
-                row_num = 0
-                font_style = xlwt.XFStyle()
-                font_style.font.bold = True
-                columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                           'Fatal Count',
-                           'qa', 'am', 'team_lead', 'manager',
-
-                           'Used Standard Opening Protocol',
-                           'Introduction of Product / Branding',
-                           'Call Closing as per the Protocol',
-
-                           'Followed Hold Procedure Appropriately/Dead Air',
-                           'Used Empathetic Statements whenever required',
-                           'Clear Grammar & Communication',
-                           'Acknowledged Appropriately',
-                           'Active Listening without Interruption',
-
-                           'Followed Policy & Procedure (Script)',
-                           'Probing/Tactful finding/Rebuttal',
-                           'Accurate Documentation',
-                           'Disposition done correctly',
-                           'Inaccurate Information',
-                           'Advisor Sounding Rude / Proafinity Usage',
-
-                           'status',
-                           'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
-
-                for col_num in range(len(columns)):
-                    ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
-
-                # Sheet body, remaining rows
-                font_style = xlwt.XFStyle()
-                rows = monform.objects.filter(audit_date__range=[start_date, end_date],
-                                                                        qa=qa).values_list(
-                    'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                    'am',
-                    'team_lead', 'manager',
-
-                    'oc_1',
-                    'oc_2',
-                    'oc_3',
-
-                    'softskill_1',
-                    'softskill_2',
-                    'softskill_3',
-                    'softskill_4',
-                    'softskill_5',
-
-                    'compliance_1',
-                    'compliance_2',
-                    'compliance_3',
-                    'compliance_4',
-                    'compliance_5',
-                    'compliance_6',
-
-                    'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
-
-                import datetime
-                rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
-                        rows]
-
-                for row in rows:
-                    row_num += 1
-                    for col_num in range(len(row)):
-                        ws.write(row_num, col_num, row[col_num], font_style)
-
-                wb.save(response)
-
-                return response
-
-            if campaign == 'Scala':
-                response = exportNewSeries(ScalaMonForm)
-                return response
-
-            elif campaign == 'Citizen Capital':
-                response = exportNewSeries(CitizenCapitalMonForm)
-                return response
-
-            elif campaign == 'Golden East':
-                response = exportNewSeries(GoldenEastMonForm)
-                return response
-
-
 
         else:
-
             return redirect(request, 'error-pages/export-error.html')
 
     else:
         pass
-
-
-
-
-
-
-
 #------------------ New Series MonForms ----------------copy Aadya---------#
 
 def newSeriesMonForms(request):
@@ -11761,6 +10284,21 @@ def newSeriesMonForms(request):
         elif campaign_name == 'Healthy Plus':
             newseriesAddCoaching(HealthyPlusMonForm)
             return redirect('/employees/qahome')
+
+        elif campaign_name == 'Restaurant Solution Group':
+            newseriesAddCoaching(RestaurentSolMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'QBIQ':
+            newseriesAddCoaching(QBIQMonForm)
+            return redirect('/employees/qahome')
+
+        elif campaign_name == 'Accutime':
+            newseriesAddCoaching(AccutimeMonForm)
+            return redirect('/employees/qahome')
+
+
+
 
         else:
             pass
@@ -12244,11 +10782,7 @@ def addtoUserModel(request):
 def checkProfile(request):
 
     profile=Profile.objects.get(emp_id=6043)
-
     profile.user=6043
     profile.id=6043
     profile.save()
-
-
-
 
