@@ -485,7 +485,7 @@ def agenthome(request):
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms
 
                         ]
 
@@ -586,7 +586,7 @@ def agenthome(request):
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms
 
                         ]
 
@@ -1147,6 +1147,11 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'Tonn Coa - Inbound':
+        coaching = TonCoaInboundMonForms.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
+
 
     else:
         pass
@@ -1217,7 +1222,7 @@ def campaignwiseCoachings(request):
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms
 
                         ]
 
@@ -1327,7 +1332,7 @@ def campaignwiseCoachingsQA(request):
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms
 
                         ]
 
@@ -1439,7 +1444,7 @@ def campaignwiseCoachingsAgent(request):
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms
 
                         ]
 
@@ -2746,6 +2751,8 @@ def qahome(request):
     qbiq = {'name':'QBIQ'}
     accutime = {'name':'Accutime'}
 
+    ton_coa_inb = {'name':'Tonn Coa - Inbound'}
+
 
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
@@ -2755,7 +2762,7 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview,pix,pluto,sterling,ritbrain,healthy,rsg,qbiq,accutime
+                 clearview,pix,pluto,sterling,ritbrain,healthy,rsg,qbiq,accutime,ton_coa_inb
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2784,7 +2791,7 @@ def qahome(request):
                         PractoMonForm, ScalaMonForm, GoldenEastMonForm, CitizenCapitalMonForm,
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
-                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,
+                        RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms
 
                         ]
 
@@ -6405,7 +6412,7 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
 
-        elif audit_form == 'Restaurant Solution Group' or audit_form =='QBIQ' or audit_form =='Accutime':
+        elif audit_form == 'Restaurant Solution Group' or audit_form =='QBIQ' or audit_form =='Accutime' or audit_form =='Tonn Coa - Inbound':
             agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
@@ -6716,6 +6723,10 @@ def exportAuditReport(request):
             response = exportAadyaseries(AccutimeMonForm)
             return response
 
+        elif campaign == 'Tonn Coa - Inbound':
+            response = exportAadyaseries(TonCoaInboundMonForms)
+            return response
+
 
 ########## other campaigns ##############
 
@@ -6881,7 +6892,7 @@ def exportAuditReport(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','ticket_no',
 
                        'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
                        'If the "You last checked in" user is not sent with respective message or sent twice with the response',
@@ -6907,7 +6918,7 @@ def exportAuditReport(request):
                                                               ).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','ticket_no',
 
                 'ce_1',
                 'ce_2',
@@ -6948,7 +6959,7 @@ def exportAuditReport(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','ticket_no',
 
                        'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
                        'If the "You last checked in" user is not sent with respective message or sent twice with the response',
@@ -6973,7 +6984,7 @@ def exportAuditReport(request):
             rows = ChatMonitoringFormEva.objects.filter(audit_date__range=[start_date, end_date], ).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','ticket_no',
 
                 'ce_1',
                 'ce_2',
@@ -8494,6 +8505,10 @@ def exportAuditReportQA(request):
             response = exportAadyaseries(AccutimeMonForm)
             return response
 
+        elif campaign == 'Tonn Coa - Inbound':
+            response = exportAadyaseries(TonCoaInboundMonForms)
+            return response
+
 
         ########## other campaigns ##############
 
@@ -8659,7 +8674,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','ticket_no',
 
                        'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
                        'If the "You last checked in" user is not sent with respective message or sent twice with the response',
@@ -8685,7 +8700,7 @@ def exportAuditReportQA(request):
                                                               ).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','ticket_no',
 
                 'ce_1',
                 'ce_2',
@@ -8726,7 +8741,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','ticket_no',
 
                        'If the user is missed to hit "finish" after sending the respective response. If the response is added with unwanted space and Punctuation. If the user name is miss-spelled/alphanumeric name on dashboard,we should use “Hey there!”.',
                        'If the "You last checked in" user is not sent with respective message or sent twice with the response',
@@ -8751,7 +8766,7 @@ def exportAuditReportQA(request):
             rows = ChatMonitoringFormEva.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','ticket_no',
 
                 'ce_1',
                 'ce_2',
@@ -10297,7 +10312,9 @@ def newSeriesMonForms(request):
             newseriesAddCoaching(AccutimeMonForm)
             return redirect('/employees/qahome')
 
-
+        elif campaign_name == 'Tonn Coa - Inbound':
+            newseriesAddCoaching(TonCoaInboundMonForms)
+            return redirect('/employees/qahome')
 
 
         else:
