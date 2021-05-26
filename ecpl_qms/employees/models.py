@@ -1,11 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-import pandas as pd
 
 
 # Create your models here.
 class Profile(models.Model):
-    team_list=(
+    team_list = (
         ('Noom','Noom'),('Aadya Solutions','Aadya Solutions'),('UPS CLP','UPS CLP'),('Gardening Express','Gardening Express'),
         ('Maxwell Properties','Maxwell Properties'),('Gubagoo','Gubagoo'),('Digital Swiss Gold','Digital Swiss Gold'),
         ('Digital Signage','Digital Signage'),('Success Systems','Success Systems'),('Advancement Consulting ','Advancement Consulting'),
@@ -4907,7 +4906,7 @@ class ClearViewMonform(models.Model):
         return self.associate_name
 
     def snippet(self):
-        return self.comments[:100] + '...'
+        return self.summary[:100] + '...'
 
 
 

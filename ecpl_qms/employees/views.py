@@ -9393,7 +9393,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
 
                        'Associate used the standard greeting format',
                        'Appropriate responses ( acknowledging at the right time)',
@@ -9428,7 +9428,7 @@ def exportAuditReportQA(request):
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','customer_name','customer_contact',
 
                 'ce_1',
                 'ce_2',
@@ -9478,7 +9478,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
 
                        'Associate used the standard greeting format',
                        'Appropriate responses ( acknowledging at the right time)',
@@ -9513,7 +9513,7 @@ def exportAuditReportQA(request):
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','customer_name','customer_contact',
 
                 'ce_1',
                 'ce_2',
@@ -9563,7 +9563,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
 
                        'Associate used the standard greeting format',
                        'Appropriate responses ( acknowledging at the right time)',
@@ -9598,7 +9598,7 @@ def exportAuditReportQA(request):
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','customer_name','customer_contact',
 
                 'ce_1',
                 'ce_2',
@@ -9648,7 +9648,7 @@ def exportAuditReportQA(request):
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
                        'Fatal Count',
-                       'qa', 'am', 'team_lead', 'manager',
+                       'qa', 'am', 'team_lead', 'manager','customer_name','customer_contact',
 
                        'Associate used the standard greeting format',
                        'Appropriate responses ( acknowledging at the right time)',
@@ -9683,7 +9683,7 @@ def exportAuditReportQA(request):
                 audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
                 'am',
-                'team_lead', 'manager',
+                'team_lead', 'manager','customer_name','customer_contact',
 
                 'ce_1',
                 'ce_2',
