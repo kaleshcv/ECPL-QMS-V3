@@ -797,7 +797,7 @@ def coachingViewQaDetailed(request,process,pk):
         return render(request, 'coaching-views/qa-coaching-view-eva-chat.html', data)
 
     if process_name == 'Noom-POD':
-        coaching = ChatMonitoringFormEva.objects.get(id=pk)
+        coaching = ChatMonitoringFormPodFather.objects.get(id=pk)
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-pod-chat.html', data)
 
