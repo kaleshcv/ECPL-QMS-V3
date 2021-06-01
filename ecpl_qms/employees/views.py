@@ -833,9 +833,9 @@ def coachingViewQaDetailed(request,process,pk):
     process_name = process
 
     if process_name == 'Fame House':
-        coaching = FameHouseMonitoringForm.objects.get(id=pk)
+        coaching = FameHouseNewMonForm.objects.get(id=pk)
         data = {'coaching': coaching}
-        return render(request, 'coaching-views/qa-coaching-view-fame-house.html', data)
+        return render(request, 'coaching-views/qa-coaching-view-fame-house-new.html', data)
 
     if process_name == 'Noom-EVA':
         coaching = ChatMonitoringFormEva.objects.get(id=pk)
@@ -1965,6 +1965,29 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(HealthyPlusMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Restaurant Solution Group':
+            data = campaignWiseCalculator(RestaurentSolMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'QBIQ':
+            data = campaignWiseCalculator(QBIQMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Accutime':
+            data = campaignWiseCalculator(AccutimeMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Tonn Coa - Inbound':
+            data = campaignWiseCalculator(TonCoaInboundMonForms)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Solar Campaign':
+            data = campaignWiseCalculator(SolarCampaignMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Yes Health Molina':
+            data = campaignWiseCalculator(YesHealthMolinaMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
 
 
         else:
@@ -2369,6 +2392,30 @@ def campaignwiseDetailedReport(request,cname):
             return render(request, 'campaign-report/detailed.html', data)
         if campaign == 'Healthy Plus':
             data = campaignWiseCalculator(HealthyPlusMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Restaurant Solution Group':
+            data = campaignWiseCalculator(RestaurentSolMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'QBIQ':
+            data = campaignWiseCalculator(QBIQMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Accutime':
+            data = campaignWiseCalculator(AccutimeMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Tonn Coa - Inbound':
+            data = campaignWiseCalculator(TonCoaInboundMonForms)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Solar Campaign':
+            data = campaignWiseCalculator(SolarCampaignMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Yes Health Molina':
+            data = campaignWiseCalculator(YesHealthMolinaMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
         else:
@@ -6799,7 +6846,7 @@ def exportAuditReport(request):
 
 ########## other campaigns ##############
 
-        elif campaign == 'Fame House':
+        elif campaign == 'Fame House old':
 
             response = HttpResponse(content_type='application/ms-excel')
             response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
@@ -6857,6 +6904,121 @@ def exportAuditReport(request):
                 'sh_3',
                 'sh_4',
                 'sh_5',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Fame House':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager',
+
+                       'Shipping product incorrectly-wrong item, no exchange just shipping product',
+                       'Responding to an escalated ticket/any ticket outside of agents skills/assignments',
+                       'Overly rude to customer',
+                       'Uses deragatory language or curse words',
+                       'Not escalating a situation/Not following proper escalation proceedure',
+                       'Double response-w/o addressing and apologizing, Sending same macro as last agent w/o edits',
+
+                       'Agent sent response as public reply:',
+                       'Agent greets customer by correct name',
+                       'Agent thanked the customer for emailing our team',
+
+                       'Agent addressed all questions asked:',
+                       'Agent did not deflect/Avoid any questions/Policy unnecessarily:',
+                       'Agent conveyed correct policy information to the customer:',
+                       'Agent conveyed correct product information to the customer:',
+                       'Agent established correct timeline to resolution :',
+
+                       'Agent chose correct macro:',
+                       "Agent tailored macro to fit the customer's question:",
+
+                       'Agent composed email with logical flow/Does the information contained make sense?',
+                       'Agent presented information with clear formatting: correct spelling and grammar throughout response',
+                       'All company processes and policies were followed',
+
+                       'Agent Correctly submitted ticket: Pending/On-Hold/Open/Solved',
+                       'Agent filled out left hand side of ticket Correctly:',
+                       'Agent merged tickets properly:',
+                       'Agent completed all SH process correctly:',
+
+                       'The agent was not rude, insulting, or discouraging:',
+                       "Agent validated the customer's concern / questions / reason for contacting us:",
+                       'Agent offered genuine, sympathetic statement for all loss or perceived loss of service at the first opportunity:',
+                       'Agent did not accuse or place blame on the customer:',
+
+                       'Agent asked the customer if they could be of additional help:',
+                       'Agent used an appropriate closing:',
+
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = FameHouseNewMonForm.objects.filter(audit_date__range=[start_date, end_date],).values_list(
+                'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am', 'team_lead', 'manager',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'opening_1',
+                'opening_2',
+                'opening_3',
+
+                'cir_1',
+                'cir_2',
+                'cir_3',
+                'cir_4',
+                'cir_5',
+
+                'macro_1',
+                'macro_2',
+
+                'formatting_1',
+                'formatting_2',
+                'formatting_3',
+
+                'doc_1',
+                'doc_2',
+                'doc_3',
+                'doc_4',
+
+                'et_1',
+                'et_2',
+                'et_3',
+                'et_4',
+
+                'closing_1',
+                'closing_2',
 
                 'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
 
@@ -8589,7 +8751,7 @@ def exportAuditReportQA(request):
 
         ########## other campaigns ##############
 
-        elif campaign == 'Fame House':
+        elif campaign == 'Fame House old':
 
             response = HttpResponse(content_type='application/ms-excel')
             response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
@@ -8662,6 +8824,122 @@ def exportAuditReportQA(request):
             wb.save(response)
 
             return response
+
+        elif campaign == 'Fame House':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager',
+
+                       'Shipping product incorrectly-wrong item, no exchange just shipping product',
+                       'Responding to an escalated ticket/any ticket outside of agents skills/assignments',
+                       'Overly rude to customer',
+                       'Uses deragatory language or curse words',
+                       'Not escalating a situation/Not following proper escalation proceedure',
+                       'Double response-w/o addressing and apologizing, Sending same macro as last agent w/o edits',
+
+                       'Agent sent response as public reply:',
+                       'Agent greets customer by correct name',
+                       'Agent thanked the customer for emailing our team',
+
+                       'Agent addressed all questions asked:',
+                       'Agent did not deflect/Avoid any questions/Policy unnecessarily:',
+                       'Agent conveyed correct policy information to the customer:',
+                       'Agent conveyed correct product information to the customer:',
+                       'Agent established correct timeline to resolution :',
+
+                       'Agent chose correct macro:',
+                       "Agent tailored macro to fit the customer's question:",
+
+                       'Agent composed email with logical flow/Does the information contained make sense?',
+                       'Agent presented information with clear formatting: correct spelling and grammar throughout response',
+                       'All company processes and policies were followed',
+
+                       'Agent Correctly submitted ticket: Pending/On-Hold/Open/Solved',
+                       'Agent filled out left hand side of ticket Correctly:',
+                       'Agent merged tickets properly:',
+                       'Agent completed all SH process correctly:',
+
+                       'The agent was not rude, insulting, or discouraging:',
+                       "Agent validated the customer's concern / questions / reason for contacting us:",
+                       'Agent offered genuine, sympathetic statement for all loss or perceived loss of service at the first opportunity:',
+                       'Agent did not accuse or place blame on the customer:',
+
+                       'Agent asked the customer if they could be of additional help:',
+                       'Agent used an appropriate closing:',
+
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = FameHouseNewMonForm.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am', 'team_lead', 'manager',
+
+                'compliance_1',
+                'compliance_2',
+                'compliance_3',
+                'compliance_4',
+                'compliance_5',
+                'compliance_6',
+
+                'opening_1',
+                'opening_2',
+                'opening_3',
+
+                'cir_1',
+                'cir_2',
+                'cir_3',
+                'cir_4',
+                'cir_5',
+
+                'macro_1',
+                'macro_2',
+
+                'formatting_1',
+                'formatting_2',
+                'formatting_3',
+
+                'doc_1',
+                'doc_2',
+                'doc_3',
+                'doc_4',
+
+                'et_1',
+                'et_2',
+                'et_3',
+                'et_4',
+
+                'closing_1',
+                'closing_2',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
 
         elif campaign == 'Clear View':
 

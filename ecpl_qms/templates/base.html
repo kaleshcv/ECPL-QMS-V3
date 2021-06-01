@@ -26,6 +26,10 @@
                     {% if user.profile.emp_desi == "QA" %}
                         <i class="fa fa-home" aria-hidden="true" style="color: antiquewhite;padding: 6px"></i>
                         <li class="nav_item"><a href="/employees/qahome" style="margin-right: 100px;font-size: 19px;color: antiquewhite;">Home</a></li>
+
+                    {% elif user.profile.emp_desi == "AM" or "Manager" or "Team Leader" or "Trainer" %}
+                        <i class="fa fa-home" aria-hidden="true" style="color: antiquewhite;padding: 6px"></i>
+                        <li class="nav_item"><a href="/employees/manager-home" style="margin-right: 100px;font-size: 19px;color: antiquewhite;">Home</a></li>
                     {% endif %}
 
                     <li class="nav-item" style="color: White;margin-right: 50px"><small style="margin-right: 1px;color: white;font-size: 10px;font-style: italic;">Welcome,</small>{{user.profile.emp_name}}</li>
