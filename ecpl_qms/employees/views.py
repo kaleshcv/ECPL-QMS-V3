@@ -1718,7 +1718,7 @@ def campaignwiseDetailedReport(request,cname):
             return data
 
         if campaign=='Fame House':
-            data=campaignWiseCalculator(FameHouseMonitoringForm)
+            data=campaignWiseCalculator(FameHouseNewMonForm)
             return render(request, 'campaign-report/detailed.html',data)
         if campaign=='Nucleus':
             data = campaignWiseCalculator(InboundMonitoringFormNucleusMedia)
