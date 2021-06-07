@@ -54,6 +54,8 @@ urlpatterns = [
     path('pluto-management',plutoManagement),
     path('sterling-strategies',sterlingStrategies),
 
+    path('amerisave-call',ameriSaveCall),
+
 
 #### Credentials
 

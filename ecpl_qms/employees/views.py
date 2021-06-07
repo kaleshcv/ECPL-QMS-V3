@@ -2861,6 +2861,9 @@ def qahome(request):
     solar = {'name':'Solar Campaign'}
     yeshealth = {'name':'Yes Health Molina'}
 
+    amerisave_call = {'name':'Amerisave - Call'}
+    amerisave_email = {'name':'Amerisave - Email'}
+
 
 
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
@@ -2870,7 +2873,8 @@ def qahome(request):
                  ibiz,aditya_birla,bagya,digiswisgold,nafa,daniel_inbound,dani_chat,proto,kappi,something,abh,
                  embassy,iib,terracio_lead,teraceo_chat,kalki,super_play,practo,
                  scala,citizen,golden_east,
-                 clearview,pix,pluto,sterling,ritbrain,healthy,rsg,qbiq,accutime,ton_coa_inb,solar,yeshealth
+                 clearview,pix,pluto,sterling,ritbrain,healthy,rsg,qbiq,accutime,ton_coa_inb,solar,yeshealth,
+                 amerisave_call,amerisave_email
                  ]
 
     list_of_monforms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -2901,6 +2905,7 @@ def qahome(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -3866,6 +3871,117 @@ def sterlingStrategies(request):
         users = User.objects.all()
         data = {'teams': teams, 'users': users}
         return render(request, 'mon-forms/sterling-strategies.html', data)
+
+
+def ameriSaveCall(request):
+
+    if request.method == 'POST':
+
+        category = 'leads'
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        borrower_name = request.POST['customer']
+        loan_number = request.POST['loan_number']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Customer Experience
+
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+        ce_6 = int(request.POST['ce_6'])
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6
+
+        # PP
+
+        pp_1 = int(request.POST['pp_1'])
+        pp_2 = int(request.POST['pp_2'])
+        pp_3 = int(request.POST['pp_3'])
+        pp_4 = int(request.POST['pp_4'])
+        pp_5 = int(request.POST['pp_5'])
+        pp_6 = int(request.POST['pp_6'])
+        pp_7 = int(request.POST['pp_7'])
+        pp_8 = int(request.POST['pp_8'])
+        pp_9 = int(request.POST['pp_9'])
+        pp_10 = int(request.POST['pp_10'])
+
+
+        pp_total = pp_1 +pp_2 +pp_3 +pp_4 +pp_5 +pp_6 +pp_7 +pp_8 +pp_9 +pp_10
+
+        #################################################
+
+        fatal_list = [pp_1,pp_2,pp_3,pp_4,pp_5,pp_6,pp_7,pp_8,pp_9,pp_10]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if pp_1 == 0 or pp_2 == 0 or pp_3 == 0 or pp_4 == 0 or pp_5 == 0 or pp_6 == 0 or pp_7 == 0 or pp_8 == 0 or pp_9 == 0 or pp_10 == 0:
+            overall_score = 0
+            fatal = True
+        else:
+            overall_score = ce_total + pp_total
+            fatal = False
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        ameri_call = AmerisaveCallsMonForm(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                            manager=manager_name, manager_id=manager_emp_id,
+
+                            call_date=call_date, audit_date=audit_date, borrower_name=borrower_name,
+                            loan_number=loan_number,
+
+                            campaign=campaign,
+
+                            ce_1=ce_1,ce_2=ce_2,ce_3=ce_3,ce_4=ce_4,ce_5=ce_5,ce_6=ce_6,ce_total=ce_total,
+
+                            pp_1=pp_1, pp_2=pp_2, pp_3=pp_3, pp_4=pp_4, pp_5=pp_5, pp_6=pp_6,pp_7=pp_7,pp_8=pp_8,
+                                           pp_9=pp_9,pp_10=pp_10,pp_total=pp_total,
+
+                            areas_improvement=areas_improvement,
+                            positives=positives, comments=comments,
+                            added_by=added_by,
+
+                            overall_score=overall_score, category=category,
+                            week=week, am=am, fatal_count=no_of_fatals, fatal=fatal
+                            )
+        ameri_call.save()
+
+        return redirect('/employees/qahome')
+
+    else:
+        pass
+
+
+
 
 
 def leadsandSalesMonForm(request):
@@ -6524,6 +6640,12 @@ def selectCoachingForm(request):
             agent = Profile.objects.get(emp_id=agent_id)
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/new-series-common.html', data)
+
+        elif audit_form == 'Amerisave - Call':
+            agent = Profile.objects.get(emp_id=agent_id)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/amerisave-calls.html', data)
+
 
 
     else:

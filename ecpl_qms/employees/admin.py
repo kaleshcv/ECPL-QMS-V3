@@ -97,7 +97,8 @@ admin.site.register(HealthyPlusMonForm)
 admin.site.register(RestaurentSolMonForm)
 admin.site.register(QBIQMonForm)
 admin.site.register(AccutimeMonForm)
-
+admin.site.register(AmerisaveCallsMonForm)
+admin.site.register(AmerisaveEmailsMonForms)
 
 
 
