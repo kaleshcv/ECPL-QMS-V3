@@ -7366,7 +7366,7 @@ def exportAuditReport(request):
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager','ticket_no','ticket_type',
 
                        'Shipping product incorrectly-wrong item, no exchange just shipping product',
                        'Responding to an escalated ticket/any ticket outside of agents skills/assignments',
@@ -7416,7 +7416,7 @@ def exportAuditReport(request):
             font_style = xlwt.XFStyle()
             rows = FameHouseNewMonForm.objects.filter(audit_date__range=[start_date, end_date],).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am', 'team_lead', 'manager',
+                'am', 'team_lead', 'manager','ticket_no','ticket_type',
 
                 'compliance_1',
                 'compliance_2',
@@ -9419,7 +9419,7 @@ def exportAuditReportQA(request):
             font_style = xlwt.XFStyle()
             font_style.font.bold = True
             columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
-                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager','ticket_no','ticket_type',
 
                        'Shipping product incorrectly-wrong item, no exchange just shipping product',
                        'Responding to an escalated ticket/any ticket outside of agents skills/assignments',
@@ -9469,7 +9469,7 @@ def exportAuditReportQA(request):
             font_style = xlwt.XFStyle()
             rows = FameHouseNewMonForm.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
                 'process', 'emp_id', 'associate_name', 'trans_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
-                'am', 'team_lead', 'manager',
+                'am', 'team_lead', 'manager','ticket_no','ticket_type',
 
                 'compliance_1',
                 'compliance_2',
