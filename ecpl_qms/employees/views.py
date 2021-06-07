@@ -190,6 +190,7 @@ def employeeWiseReport(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -273,6 +274,7 @@ def managerWiseReport(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -400,6 +402,9 @@ def qualityDashboardMgt(request):
     solar = {'name': 'Solar Campaign'}
     yeshealth = {'name': 'Yes Health Molina'}
 
+    amerisave_call = {'name': 'Amerisave - Call'}
+    amerisave_email = {'name': 'Amerisave - Email'}
+
     campaigns = [pod, eva, nucleus, famehouse, fla, mt, ton, mov, wit, pixchat, pixcall, aadya,
                  insalvage, medicare, cts, tfood, tpet, city, allen, system, louis, info, psecu,
                  getarates, advance, fur, max, upfront, micro, jj,
@@ -407,7 +412,8 @@ def qualityDashboardMgt(request):
                  ibiz, aditya_birla, bagya, digiswisgold, nafa, daniel_inbound, dani_chat, proto, kappi, something, abh,
                  embassy, iib, terracio_lead, teraceo_chat, kalki, super_play, practo,
                  scala, citizen, golden_east,
-                 clearview, pix, pluto, sterling, ritbrain, healthy, rsg, qbiq, accutime, ton_coa_inb, solar, yeshealth
+                 clearview, pix, pluto, sterling, ritbrain, healthy, rsg, qbiq, accutime, ton_coa_inb, solar, yeshealth,
+                 amerisave_call, amerisave_email
                  ]
 
     mon_forms = [ChatMonitoringFormEva, ChatMonitoringFormPodFather, InboundMonitoringFormNucleusMedia,
@@ -438,6 +444,7 @@ def qualityDashboardMgt(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -531,6 +538,7 @@ def agenthome(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -633,6 +641,7 @@ def agenthome(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -1207,6 +1216,16 @@ def coachingViewQaDetailed(request,process,pk):
         data = {'coaching': coaching}
         return render(request, 'coaching-views/qa-coaching-view-new-series.html', data)
 
+    if process_name == 'Amerisave - Call':
+        coaching = AmerisaveCallsMonForm.objects.get(id=pk)
+        data = {'coaching':coaching}
+        return render(request,'coaching-views/qa-coaching-view-amerisave-call.html',data)
+
+    if process_name == 'Amerisave - Email':
+        coaching = AmerisaveEmailsMonForms.objects.get(id=pk)
+        data = {'coaching': coaching}
+        return render(request, 'coaching-views/qa-coaching-view-amerisave-email.html', data)
+
 
     else:
         pass
@@ -1279,6 +1298,7 @@ def campaignwiseCoachings(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -1389,7 +1409,7 @@ def campaignwiseCoachingsQA(request):
                         ClearViewMonform,PrinterPixMonForm,PlutoManagementMonForm,SterlingMonForm,
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
-                        SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        SolarCampaignMonForm,YesHealthMolinaMonForm,AmerisaveCallsMonForm,AmerisaveEmailsMonForms
 
                         ]
 
@@ -1503,6 +1523,7 @@ def campaignwiseCoachingsAgent(request):
                         FameHouseNewMonForm,RitBrainMonForm,HealthyPlusMonForm,
                         RestaurentSolMonForm,QBIQMonForm,AccutimeMonForm,TonCoaInboundMonForms,
                         SolarCampaignMonForm,YesHealthMolinaMonForm,
+                        AmerisaveCallsMonForm,AmerisaveEmailsMonForms,
 
                         ]
 
@@ -1989,6 +2010,14 @@ def campaignwiseDetailedReport(request,cname):
             data = campaignWiseCalculator(YesHealthMolinaMonForm)
             return render(request, 'campaign-report/detailed.html', data)
 
+        if campaign == 'Amerisave - Call':
+            data = campaignWiseCalculator(AmerisaveCallsMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Amerisave - Email':
+            data = campaignWiseCalculator(AmerisaveEmailsMonForms)
+            return render(request, 'campaign-report/detailed.html', data)
+
 
         else:
             return render(request,'')
@@ -2416,6 +2445,14 @@ def campaignwiseDetailedReport(request,cname):
 
         if campaign == 'Yes Health Molina':
             data = campaignWiseCalculator(YesHealthMolinaMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Amerisave - Call':
+            data = campaignWiseCalculator(AmerisaveCallsMonForm)
+            return render(request, 'campaign-report/detailed.html', data)
+
+        if campaign == 'Amerisave - Email':
+            data = campaignWiseCalculator(AmerisaveEmailsMonForms)
             return render(request, 'campaign-report/detailed.html', data)
 
         else:
@@ -3565,57 +3602,71 @@ def fameHouseNew(request):
 
         compliance_total = compliance_1 + compliance_2 + compliance_3 + compliance_4 + compliance_5 + compliance_6
 
-        # Opening
-        opening_1 = int(request.POST['opening_1'])
-        opening_2 = int(request.POST['opening_2'])
-        opening_3 = int(request.POST['opening_3'])
 
-        opening_total = opening_1 + opening_2 + opening_3
+        na_list = []
+        sum_list = []
+        def scoreCalc(pk):
+
+            if pk == 'NA':
+                na_list.append(pk)
+                return pk
+            else:
+                sum_list.append(int(pk))
+                return int(pk)
+
+
+        # Opening
+
+        opening_1 = scoreCalc(request.POST['opening_1'])
+        opening_2 = scoreCalc(request.POST['opening_2'])
+        opening_3 = scoreCalc(request.POST['opening_3'])
+
+        #opening_total = opening_1+opening_2+opening_3
 
         # Customer Issue Resolution
 
-        cir_1 = int(request.POST['cir_1'])
-        cir_2 = int(request.POST['cir_2'])
-        cir_3 = int(request.POST['cir_3'])
-        cir_4 = int(request.POST['cir_4'])
-        cir_5 = int(request.POST['cir_5'])
+        cir_1 = scoreCalc(request.POST['cir_1'])
+        cir_2 = scoreCalc(request.POST['cir_2'])
+        cir_3 = scoreCalc(request.POST['cir_3'])
+        cir_4 = scoreCalc(request.POST['cir_4'])
+        cir_5 = scoreCalc(request.POST['cir_5'])
 
-        cir_total = cir_1 + cir_2 + cir_3 + cir_4 + cir_5
+        #cir_total = cir_1+cir_2+cir_3+cir_4+cir_5
 
         # Macro Usage
-        macro_1 = int(request.POST['macro_1'])
-        macro_2 = int(request.POST['macro_2'])
+        macro_1 = scoreCalc(request.POST['macro_1'])
+        macro_2 = scoreCalc(request.POST['macro_2'])
 
-        macro_total = macro_1 + macro_2
+        #macro_total = macro_1 + macro_2
 
         # Formatting
-        formatting_1 = int(request.POST['formatting_1'])
-        formatting_2 = int(request.POST['formatting_2'])
-        formatting_3 = int(request.POST['formatting_3'])
+        formatting_1 = scoreCalc(request.POST['formatting_1'])
+        formatting_2 = scoreCalc(request.POST['formatting_2'])
+        formatting_3 = scoreCalc(request.POST['formatting_3'])
 
-        formatting_total = formatting_1 + formatting_2 + formatting_3
+       # formatting_total = formatting_1 + formatting_2 + formatting_3
 
         # Documentation
-        doc_1 = int(request.POST['doc_1'])
-        doc_2 = int(request.POST['doc_2'])
-        doc_3 = int(request.POST['doc_3'])
-        doc_4 = int(request.POST['doc_4'])
+        doc_1 = scoreCalc(request.POST['doc_1'])
+        doc_2 = scoreCalc(request.POST['doc_2'])
+        doc_3 = scoreCalc(request.POST['doc_3'])
+        doc_4 = scoreCalc(request.POST['doc_4'])
 
-        doc_total= doc_1 + doc_2 + doc_3 + doc_4
+       # doc_total= doc_1 + doc_2 + doc_3 + doc_4
 
         # Etiquette
-        et_1 = int(request.POST['et_1'])
-        et_2 = int(request.POST['et_2'])
-        et_3 = int(request.POST['et_3'])
-        et_4 = int(request.POST['et_4'])
+        et_1 = scoreCalc(request.POST['et_1'])
+        et_2 = scoreCalc(request.POST['et_2'])
+        et_3 = scoreCalc(request.POST['et_3'])
+        et_4 = scoreCalc(request.POST['et_4'])
 
-        et_total = et_1 + et_2 + et_3 + et_4
+       # et_total = et_1 + et_2 + et_3 + et_4
 
         # Closing
-        closing_1 = int(request.POST['closing_1'])
-        closing_2 = int(request.POST['closing_2'])
+        closing_1 = scoreCalc(request.POST['closing_1'])
+        closing_2 = scoreCalc(request.POST['closing_2'])
 
-        closing_total = closing_1 + closing_2
+       # closing_total = closing_1 + closing_2
 
 
         fatal_list=[compliance_1,compliance_2,compliance_3,compliance_4,compliance_5,compliance_6]
@@ -3631,7 +3682,7 @@ def fameHouseNew(request):
             overall_score=0
             fatal=True
         else:
-            overall_score= (closing_total + et_total + doc_total + formatting_total + macro_total + cir_total + opening_total)/23*100
+            overall_score= (sum(sum_list)/len(sum_list))*100
             fatal=False
 
 
@@ -3650,13 +3701,13 @@ def fameHouseNew(request):
                                      trans_date=trans_date, audit_date=audit_date,ticket_no=ticket_no,
                                      campaign=campaign,
                                      compliance_1=compliance_1,compliance_2=compliance_2,compliance_3=compliance_3,compliance_4=compliance_4,compliance_5=compliance_5,compliance_6=compliance_6,compliance_total=compliance_total,
-                                     opening_1=opening_1,opening_2=opening_2,opening_3=opening_3,opening_total=opening_total,
-                                     cir_1=cir_1,cir_2=cir_2,cir_3=cir_3,cir_4=cir_4,cir_5=cir_5,cir_total=cir_total,
-                                     macro_1=macro_1,macro_2=macro_2,macro_total=macro_total,
-                                     formatting_1=formatting_1,formatting_2=formatting_2,formatting_3=formatting_3,formatting_total=formatting_total,
-                                     doc_1=doc_1,doc_2=doc_2,doc_3=doc_3,doc_4=doc_4,doc_total=doc_total,
-                                     et_1=et_1,et_2=et_2,et_3=et_3,et_4=et_4,et_total=et_total,
-                                     closing_1=closing_1,closing_2=closing_2,closing_total=closing_total,
+                                     opening_1=opening_1,opening_2=opening_2,opening_3=opening_3,
+                                     cir_1=cir_1,cir_2=cir_2,cir_3=cir_3,cir_4=cir_4,cir_5=cir_5,
+                                     macro_1=macro_1,macro_2=macro_2,
+                                     formatting_1=formatting_1,formatting_2=formatting_2,formatting_3=formatting_3,
+                                     doc_1=doc_1,doc_2=doc_2,doc_3=doc_3,doc_4=doc_4,
+                                     et_1=et_1,et_2=et_2,et_3=et_3,et_4=et_4,
+                                     closing_1=closing_1,closing_2=closing_2,
 
                                      areas_improvement=areas_improvement,
                                      positives=positives, comments=comments,
@@ -3941,9 +3992,11 @@ def ameriSaveCall(request):
         if pp_1 == 0 or pp_2 == 0 or pp_3 == 0 or pp_4 == 0 or pp_5 == 0 or pp_6 == 0 or pp_7 == 0 or pp_8 == 0 or pp_9 == 0 or pp_10 == 0:
             overall_score = 0
             fatal = True
+            pp_total = 0
         else:
             overall_score = ce_total + pp_total
             fatal = False
+            pp_total=pp_total
 
         areas_improvement = request.POST['areaimprovement']
         positives = request.POST['positives']
@@ -3981,6 +4034,113 @@ def ameriSaveCall(request):
         pass
 
 
+def ameriSaveEmail(request):
+
+    if request.method == 'POST':
+
+        category = 'email'
+
+        associate_name = request.POST['empname']
+        emp_id = request.POST['empid']
+        qa = request.POST['qa']
+        team_lead = request.POST['tl']
+        borrower_name = request.POST['customer']
+        loan_number = request.POST['loan_number']
+        call_date = request.POST['calldate']
+        audit_date = request.POST['auditdate']
+        campaign = request.POST['campaign']
+
+        #######################################
+        prof_obj = Profile.objects.get(emp_id=emp_id)
+        manager = prof_obj.manager
+
+        manager_emp_id_obj = Profile.objects.get(emp_name=manager)
+
+        manager_emp_id = manager_emp_id_obj.emp_id
+        manager_name = manager
+        #########################################
+
+        # Customer Experience
+
+        ce_1 = int(request.POST['ce_1'])
+        ce_2 = int(request.POST['ce_2'])
+        ce_3 = int(request.POST['ce_3'])
+        ce_4 = int(request.POST['ce_4'])
+        ce_5 = int(request.POST['ce_5'])
+        ce_6 = int(request.POST['ce_6'])
+
+        ce_total = ce_1 + ce_2 + ce_3 + ce_4 + ce_5 + ce_6
+
+        # PP
+
+        pp_1 = int(request.POST['pp_1'])
+        pp_2 = int(request.POST['pp_2'])
+        pp_3 = int(request.POST['pp_3'])
+        pp_4 = int(request.POST['pp_4'])
+        pp_5 = int(request.POST['pp_5'])
+        pp_6 = int(request.POST['pp_6'])
+        pp_7 = int(request.POST['pp_7'])
+        pp_8 = int(request.POST['pp_8'])
+
+
+
+        pp_total = pp_1 +pp_2 +pp_3 +pp_4 +pp_5 +pp_6 +pp_7 +pp_8
+
+        #################################################
+
+        fatal_list = [pp_1,pp_2,pp_3,pp_4,pp_5,pp_6,pp_7,pp_8]
+        fatal_list_count = []
+        for i in fatal_list:
+            if i == 0:
+                fatal_list_count.append(i)
+
+        no_of_fatals = len(fatal_list_count)
+
+        ####################################################
+
+        if pp_1 == 0 or pp_2 == 0 or pp_3 == 0 or pp_4 == 0 or pp_5 == 0 or pp_6 == 0 or pp_7 == 0 or pp_8 == 0:
+            overall_score = 0
+            fatal = True
+            pp_total = 0
+        else:
+            overall_score = ce_total + pp_total
+            fatal = False
+            pp_total=pp_total
+
+        areas_improvement = request.POST['areaimprovement']
+        positives = request.POST['positives']
+        comments = request.POST['comments']
+        added_by = request.user.profile.emp_name
+
+        week = request.POST['week']
+        am = request.POST['am']
+
+        ameri = AmerisaveEmailsMonForms(associate_name=associate_name, emp_id=emp_id, qa=qa, team_lead=team_lead,
+                            manager=manager_name, manager_id=manager_emp_id,
+
+                            call_date=call_date, audit_date=audit_date, borrower_name=borrower_name,
+                            loan_number=loan_number,
+
+                            campaign=campaign,
+
+                            ce_1=ce_1,ce_2=ce_2,ce_3=ce_3,ce_4=ce_4,ce_5=ce_5,ce_6=ce_6,ce_total=ce_total,
+
+                            pp_1=pp_1, pp_2=pp_2, pp_3=pp_3, pp_4=pp_4, pp_5=pp_5, pp_6=pp_6,pp_7=pp_7,pp_8=pp_8,
+                            pp_total=pp_total,
+
+                            areas_improvement=areas_improvement,
+                            positives=positives, comments=comments,
+                            added_by=added_by,
+
+                            overall_score=overall_score, category=category,
+                            week=week, am=am, fatal_count=no_of_fatals, fatal=fatal
+                            )
+        ameri.save()
+
+        return redirect('/employees/qahome')
+
+    else:
+        pass
 
 
 
@@ -6646,6 +6806,11 @@ def selectCoachingForm(request):
             data = {'agent': agent, 'team': team, 'date': new_today_date}
             return render(request, 'mon-forms/amerisave-calls.html', data)
 
+        elif audit_form == 'Amerisave - Email':
+            agent = Profile.objects.get(emp_id=agent_id)
+            data = {'agent': agent, 'team': team, 'date': new_today_date}
+            return render(request, 'mon-forms/amerisave-email.html', data)
+
 
 
     else:
@@ -6661,8 +6826,7 @@ def qualityDashboard(request):
 
 def exportAuditReport(request):
 
-    import pytz
-    from datetime import datetime
+
     if request.method == 'POST':
 
         start_date = request.POST['start_date']
@@ -6967,6 +7131,155 @@ def exportAuditReport(request):
 
 
 ########## other campaigns ##############
+
+        elif campaign == 'Amerisave - Call':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager','Borrower Name','Loan Number',
+
+                        'Call Opening & Introduction',
+                       'Speaking to the right person',
+                       'Alternative Options for VOE',
+                       'Communication Skill',
+                       'Tracker updated Accurately',
+                       'On Time Follow up Made',
+
+                       'Full VOE/DOD Documents Verification',
+                       'SSN Verified (Last 4 Digit No)',
+                       'DOJ asked or not',
+                       'Job Title confirmed',
+                       'If employee is currently employed/Last Working Day if Quit',
+                       'Full name of the Verifier confirmed/Job Title/Dept',
+                       'Name & Email Confirmation in Phonetics',
+                       'Uploaded 411',
+                       'VOE updated for the right Borrower',
+                       'CRM Documentation',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = AmerisaveCallsMonForm.objects.filter(audit_date__range=[start_date, end_date],).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am', 'team_lead', 'manager','borrower_name','loan_number',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+
+                'pp_1',
+                'pp_2',
+                'pp_3',
+                'pp_4',
+                'pp_5',
+                'pp_6',
+                'pp_7',
+                'pp_8',
+                'pp_9',
+                'pp_10',
+
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Amerisave - Email':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager','Borrower Name','Loan Number',
+
+                        'Appropriate Greeting format',
+                       'Sentence structure & Construction',
+                       'Punctuation (full stop, comma, and brackets, used in writing to separate sentences)',
+                       'Grammar (Tense, Noun,Spacing, etc.)',
+                       'On Time Follow up Made',
+                       'Tracker updated Accurately',
+
+                       'Full VOE/DOD Documents Verification',
+                       'Professional / Courtesy',
+                       'Subject Line Appropriately Used',
+                       'Email shared to the right stake holders',
+                       'Accurate information provided',
+                       'VOE updated for the right Borrower',
+                       'Uploaded 411',
+                       'CRM Documentation',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = AmerisaveEmailsMonForms.objects.filter(audit_date__range=[start_date, end_date],).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am', 'team_lead', 'manager','borrower_name','loan_number',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+
+                'pp_1',
+                'pp_2',
+                'pp_3',
+                'pp_4',
+                'pp_5',
+                'pp_6',
+                'pp_7',
+                'pp_8',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
 
         elif campaign == 'Fame House old':
 
@@ -8566,8 +8879,7 @@ def exportAuditReport(request):
 
 
 def exportAuditReportQA(request):
-    import pytz
-    from datetime import datetime
+
     if request.method == 'POST':
         start_date = request.POST['start_date']
         end_date = request.POST['end_date']
@@ -8872,6 +9184,155 @@ def exportAuditReportQA(request):
 
 
         ########## other campaigns ##############
+
+        elif campaign == 'Amerisave - Call':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager','Borrower Name','Loan Number',
+
+                        'Call Opening & Introduction',
+                       'Speaking to the right person',
+                       'Alternative Options for VOE',
+                       'Communication Skill',
+                       'Tracker updated Accurately',
+                       'On Time Follow up Made',
+
+                       'Full VOE/DOD Documents Verification',
+                       'SSN Verified (Last 4 Digit No)',
+                       'DOJ asked or not',
+                       'Job Title confirmed',
+                       'If employee is currently employed/Last Working Day if Quit',
+                       'Full name of the Verifier confirmed/Job Title/Dept',
+                       'Name & Email Confirmation in Phonetics',
+                       'Uploaded 411',
+                       'VOE updated for the right Borrower',
+                       'CRM Documentation',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = AmerisaveCallsMonForm.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am', 'team_lead', 'manager','borrower_name','loan_number',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+
+                'pp_1',
+                'pp_2',
+                'pp_3',
+                'pp_4',
+                'pp_5',
+                'pp_6',
+                'pp_7',
+                'pp_8',
+                'pp_9',
+                'pp_10',
+
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
+
+        elif campaign == 'Amerisave - Email':
+
+            response = HttpResponse(content_type='application/ms-excel')
+            response['Content-Disposition'] = 'attachment; filename="audit-report.xls"'
+            wb = xlwt.Workbook(encoding='utf-8')
+            ws = wb.add_sheet('Users Data')  # this will make a sheet named Users Data
+            # Sheet header, first row
+            row_num = 0
+            font_style = xlwt.XFStyle()
+            font_style.font.bold = True
+            columns = ['process', 'empID', 'Associate Name', 'transaction date', 'Audit Date', 'overall_score',
+                       'Fatal Count', 'qa', 'am', 'team_lead', 'manager','Borrower Name','Loan Number',
+
+                        'Appropriate Greeting format',
+                       'Sentence structure & Construction',
+                       'Punctuation (full stop, comma, and brackets, used in writing to separate sentences)',
+                       'Grammar (Tense, Noun,Spacing, etc.)',
+                       'On Time Follow up Made',
+                       'Tracker updated Accurately',
+
+                       'Full VOE/DOD Documents Verification',
+                       'Professional / Courtesy',
+                       'Subject Line Appropriately Used',
+                       'Email shared to the right stake holders',
+                       'Accurate information provided',
+                       'VOE updated for the right Borrower',
+                       'Uploaded 411',
+                       'CRM Documentation',
+
+                       'status',
+                       'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments']
+
+            for col_num in range(len(columns)):
+                ws.write(row_num, col_num, columns[col_num], font_style)  # at 0 row 0 column
+
+            # Sheet body, remaining rows
+            font_style = xlwt.XFStyle()
+            rows = AmerisaveEmailsMonForms.objects.filter(audit_date__range=[start_date, end_date], qa=qa).values_list(
+                'process', 'emp_id', 'associate_name', 'call_date', 'audit_date', 'overall_score', 'fatal_count', 'qa',
+                'am', 'team_lead', 'manager','borrower_name','loan_number',
+
+                'ce_1',
+                'ce_2',
+                'ce_3',
+                'ce_4',
+                'ce_5',
+                'ce_6',
+
+                'pp_1',
+                'pp_2',
+                'pp_3',
+                'pp_4',
+                'pp_5',
+                'pp_6',
+                'pp_7',
+                'pp_8',
+
+                'status', 'closed_date', 'fatal', 'areas_improvement', 'positives', 'comments')
+
+            import datetime
+            rows = [[x.strftime("%Y-%m-%d %H:%M") if isinstance(x, datetime.datetime) else x for x in row] for row in
+                    rows]
+
+            for row in rows:
+                row_num += 1
+                for col_num in range(len(row)):
+                    ws.write(row_num, col_num, row[col_num], font_style)
+
+            wb.save(response)
+
+            return response
 
         elif campaign == 'Fame House old':
 

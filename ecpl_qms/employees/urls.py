@@ -55,6 +55,7 @@ urlpatterns = [
     path('sterling-strategies',sterlingStrategies),
 
     path('amerisave-call',ameriSaveCall),
+    path('amerisave-email',ameriSaveEmail),
 
 
 #### Credentials

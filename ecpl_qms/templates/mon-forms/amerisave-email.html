@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+{% block main %}
+
+    <section id="outboundform">
+        <div class="container-lg">
+            <form action="/employees/amerisave-email" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <h2 class="text-center">Audit Form - {{team}}</h2>
+                <div class="basic">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="empname">Associate Name</label>
+                            <select class="form-control" id="empname" required="required" name="empname">
+
+                                <option value="{{agent.emp_name}}">{{agent.emp_name}}</option>
+
+                            </select>
+                            <label for="empid">Employee ID</label>
+                            <input type="number" class="form-control" id="empid" name="empid" required value="{{agent.emp_id}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="qa">Quality Analyst</label>
+                            <input type="text" class="form-control" id="qa" name="qa" value="{{user.profile.emp_name}}" required readonly>
+                            <label for="tl">Team Lead</label>
+                            <input type="text" class="form-control" id="tl" name="tl" required value="{{agent.team_lead}}">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="customer">Borrower Name</label>
+                            <input type="text" class="form-control" id="customer" name="customer" required>
+                            <label for="customercontact">Loan Number</label>
+                            <input type="text" class="form-control" id="customercontact" name="loan_number" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="calldate">Call Date</label>
+                            <input type="date" class="form-control" id="calldate" name="calldate" required>
+                            <label for="auditdate">Audit Date</label>
+                            <input type="text" class="form-control" id="auditdate" name="auditdate" value="{{date}}" readonly>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="am">AM</label>
+                            <input type="text" class="form-control" id="am" name="am" value="{{agent.am}}" required>
+                                <label for="week">Week</label>
+                                     <select class="form-control" name="week" id="week" required>
+                                         <option value="week1">Week1</option>
+                                         <option value="week2">Week2</option>
+                                         <option value="week3">Week3</option>
+                                         <option value="week4">Week4</option>
+                                         <option value="week5">Week5</option>
+                                     </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="customerexperience">
+                    <div>
+                        <h4>Customer Engagement</h4>
+                        <br>
+                        <label class="qn">Appropriate Greeting format</label>
+                        <input type="radio" name="ce_1" value="2" id="yes" required>
+                        <label for="yes">Yes</label>
+                        <input type="radio" name="ce_1" value="0" id="no">
+                        <label for="no">No</label>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label class="qn">Sentence structure & Construction</label>
+                        <input type="radio" name="ce_2" value="7" id="yes1" required>
+                        <label for="yes1">Yes</label>
+                        <input type="radio" name="ce_2" value="0" id="no1">
+                        <label for="no1">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Punctuation (full stop, comma, and brackets, used in writing to separate sentences)</label>
+                        <input type="radio" name="ce_3" value="4" id="yes2" required>
+                        <label for="yes2">Yes</label>
+                        <input type="radio" name="ce_3" value="0" id="no2">
+                        <label for="no2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Grammar (Tense, Noun,Spacing, etc.)</label>
+                        <input type="radio" name="ce_4" value="7" id="yes3" required>
+                        <label for="yes3">Yes</label>
+                        <input type="radio" name="ce_4" value="0" id="no3">
+                        <label for="no3">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">On Time Follow up Made</label>
+                        <input type="radio" name="ce_5" value="3" id="yes4" required>
+                        <label for="yes4">Yes</label>
+                        <input type="radio" name="ce_5" value="0" id="no4">
+                        <label for="no4">No</label>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label class="qn">Tracker updated Accurately</label>
+                        <input type="radio" name="ce_6" value="4" id="yes5" required>
+                        <label for="yes5">Yes</label>
+                        <input type="radio" name="ce_6" value="0" id="no5">
+                        <label for="no5">No</label>
+                    </div>
+                    <br>
+
+                </div>
+                <hr>
+                <div class="business">
+                    <div>
+                        <h4>Process & Policy</h4>
+                        <br>
+                        <label class="qn">Full VOE/DOD Documents Verification</label>
+                        <input type="radio" name="pp_1" value="9" id="b1" required>
+                        <label for="b1">Yes</label>
+                        <input type="radio" name="pp_1" value="0" id="b2">
+                        <label for="b2">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Professional / Courtesy</label>
+                        <input type="radio" name="pp_2" value="9" id="b3" required>
+                        <label for="b3">Yes</label>
+                        <input type="radio" name="pp_2" value="0" id="b4">
+                        <label for="b4">No</label>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label class="qn">Subject Line Appropriately Used</label>
+                        <input type="radio" name="pp_3" value="10" id="b5" required>
+                        <label for="b5">Yes</label>
+                        <input type="radio" name="pp_3" value="0" id="b6">
+                        <label for="b6">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Email shared to the right stake holders</label>
+                        <input type="radio" name="pp_4" value="9" id="b7" required>
+                        <label for="b7">Yes</label>
+                        <input type="radio" name="pp_4" value="0" id="b8">
+                        <label for="b8">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Accurate information provided</label>
+                        <input type="radio" name="pp_5" value="9" id="b9" required>
+                        <label for="b9">Yes</label>
+                        <input type="radio" name="pp_5" value="0" id="b10">
+                        <label for="b10">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">VOE updated for the right Borrower</label>
+                        <input type="radio" name="pp_6" value="9" id="c9" required>
+                        <label for="c9">Yes</label>
+                        <input type="radio" name="pp_6" value="0" id="c10">
+                        <label for="c10">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">Uploaded 411</label>
+                        <input type="radio" name="pp_7" value="9" id="d9" required>
+                        <label for="d9">Yes</label>
+                        <input type="radio" name="pp_7" value="0" id="d10">
+                        <label for="d10">No</label>
+                    </div>
+                    <br>
+                    <div>
+                        <label class="qn">CRM Documentation</label>
+                        <input type="radio" name="pp_8" value="9" id="e9" required>
+                        <label for="e9">Yes</label>
+                        <input type="radio" name="pp_8" value="0" id="e10">
+                        <label for="e10">No</label>
+                    </div>
+                    <br>
+
+                </div>
+
+                <hr>
+                <div class="other">
+
+                    <h4>Areas of improvement</h4>
+                    <textarea name="areaimprovement" id="areaimp" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Positives</h4>
+                    <textarea name="positives" id="positives" cols="30" rows="5" class="form-control" required></textarea>
+                    <br>
+                    <h4>Comments</h4>
+                    <textarea name="comments" id="cfeedback" cols="30" rows="5" class="form-control" required></textarea>
+                    <input type="hidden" name="campaign" value="{{team}}">
+                </div>
+                <div style="padding: 30px 30px">
+                    <button class="btn btn-info"> Submit </button>
+                </div>
+
+            </form>
+        </div>
+    </section>
+
+
+{% endblock %}

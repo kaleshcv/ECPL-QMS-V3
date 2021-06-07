@@ -421,42 +421,42 @@ class FameHouseNewMonForm(models.Model):
     compliance_6 = models.IntegerField(null=True)
 
     #Opening
-    opening_1 = models.IntegerField(null=True)
-    opening_2 = models.IntegerField(null=True)
-    opening_3 = models.IntegerField(null=True)
+    opening_1 = models.CharField(max_length=10,null=True)
+    opening_2 = models.CharField(max_length=10,null=True)
+    opening_3 = models.CharField(max_length=10,null=True)
 
     #Customer Issue Resolution
 
-    cir_1 = models.IntegerField(null=True)
-    cir_2 = models.IntegerField(null=True)
-    cir_3 = models.IntegerField(null=True)
-    cir_4 = models.IntegerField(null=True)
-    cir_5 = models.IntegerField(null=True)
+    cir_1 = models.CharField(max_length=10,null=True)
+    cir_2 = models.CharField(max_length=10,null=True)
+    cir_3 = models.CharField(max_length=10,null=True)
+    cir_4 = models.CharField(max_length=10,null=True)
+    cir_5 = models.CharField(max_length=10,null=True)
 
     #Macro Usage
-    macro_1 = models.IntegerField(null=True)
-    macro_2 = models.IntegerField(null=True)
+    macro_1 = models.CharField(max_length=10,null=True)
+    macro_2 = models.CharField(max_length=10,null=True)
 
     #Formatting
-    formatting_1 = models.IntegerField(null=True)
-    formatting_2 = models.IntegerField(null=True)
-    formatting_3 = models.IntegerField(null=True)
+    formatting_1 = models.CharField(max_length=10,null=True)
+    formatting_2 = models.CharField(max_length=10,null=True)
+    formatting_3 = models.CharField(max_length=10,null=True)
 
     #Documentation
-    doc_1 = models.IntegerField(null=True)
-    doc_2 = models.IntegerField(null=True)
-    doc_3 = models.IntegerField(null=True)
-    doc_4 = models.IntegerField(null=True)
+    doc_1 = models.CharField(max_length=10,null=True)
+    doc_2 = models.CharField(max_length=10,null=True)
+    doc_3 = models.CharField(max_length=10,null=True)
+    doc_4 = models.CharField(max_length=10,null=True)
 
     #Etiquette
-    et_1 = models.IntegerField(null=True)
-    et_2 = models.IntegerField(null=True)
-    et_3 = models.IntegerField(null=True)
-    et_4 = models.IntegerField(null=True)
+    et_1 = models.CharField(max_length=10,null=True)
+    et_2 = models.CharField(max_length=10,null=True)
+    et_3 = models.CharField(max_length=10,null=True)
+    et_4 = models.CharField(max_length=10,null=True)
 
     #Closing
-    closing_1 = models.IntegerField(null=True)
-    closing_2 = models.IntegerField(null=True)
+    closing_1 = models.CharField(max_length=10,null=True)
+    closing_2 = models.CharField(max_length=10,null=True)
 
     closing_total = models.IntegerField(null=True)
     et_total = models.IntegerField(null=True)
