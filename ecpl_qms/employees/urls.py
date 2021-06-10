@@ -115,4 +115,6 @@ urlpatterns = [
     path('process-change',processNameChanger),
 
     path('desi-changer',desiChanger),
+
+    path('change-password',changePassword),
 ]

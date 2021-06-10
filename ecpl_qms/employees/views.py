@@ -11751,3 +11751,10 @@ def checkProfile(request):
     profile.id=6043
     profile.save()
 
+def changePassword(request):
+
+    u = User.objects.get(username=1458)
+    u.set_password('1458testuser1')
+    u.save()
+    return redirect('/')
+
